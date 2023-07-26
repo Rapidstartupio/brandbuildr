@@ -129,6 +129,9 @@
                     }
                 }
             });
+            if(!document.querySelector("html").classList.contains("dark")){
+                themeToggleBtn.click();
+            }
         </script>
 
     </body>
