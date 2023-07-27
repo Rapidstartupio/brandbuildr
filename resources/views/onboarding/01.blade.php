@@ -7,6 +7,7 @@
        
        <div class="w-[1262px] h-[518px] relative bg-white bg-opacity-10 rounded-[15px]">
           <div class="w-[1262px] h-[0px] left-0 top-[56px] absolute border border-gray-600"></div>
+          <div class="w-[220px] h-[3px] left-0 top-[56px] absolute bg-wave-500"></div>
           <div class="w-[518px] h-[0px] left-[659px] top-0 absolute origin-top-left rotate-90 border border-gray-600"></div>
           <div class="left-[24px] top-[18px] absolute text-white text-base font-medium">Business Model</div>
           <div class="left-[683px] top-[18px] absolute justify-start items-start gap-12 inline-flex">
