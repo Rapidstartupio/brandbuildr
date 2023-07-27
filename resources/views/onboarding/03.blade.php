@@ -41,7 +41,7 @@
            
                <div class="flex">
                 <a href="{{route('register')}}">
-                  <div class="w-[99px] h-9 px-8 py-2 bg-violet-700 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                  <div class="w-[99px] h-9 px-8 py-2 bg-wave-500 rounded-lg justify-center items-center gap-2.5 inline-flex">
                     <div class="text-center text-white text-base font-medium leading-tight">Next</div>
                   </div>
                 </a>
@@ -59,7 +59,7 @@
 
                 <div class="flex w-screen">
                       <input type="text" placeholder="Send a Message..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-500">
-                      <button class="bg-blue-500 text-white py-2 px-4 ml-4 rounded-lg justify-end">Send</button>
+                      <button class="bg-wave-500 text-white py-2 px-4 ml-4 rounded-lg justify-end">Send</button>
                 </div>
                 <div class="w-6 h-6 relative"></div>
               </div>
@@ -70,7 +70,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M320 0c17.7 0 32 14.3 32 32V96H472c39.8 0 72 32.2 72 72V440c0 39.8-32.2 72-72 72H168c-39.8 0-72-32.2-72-72V168c0-39.8 32.2-72 72-72H288V32c0-17.7 14.3-32 32-32zM208 384c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H208zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H304zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H400zM264 256a40 40 0 1 0 -80 0 40 40 0 1 0 80 0zm152 40a40 40 0 1 0 0-80 40 40 0 1 0 0 80zM48 224H64V416H48c-26.5 0-48-21.5-48-48V272c0-26.5 21.5-48 48-48zm544 0c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H576V224h16z"/></svg>
             </div>
             <div class="w-[170px] h-9 px-8 py-2 left-0 top-[72px] absolute justify-center items-center gap-2.5 inline-flex">
-              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Suggest</button>
+              <button class="bg-wave-500 hover:bg-wave-700 text-white font-bold py-2 px-4 rounded">Suggest</button>
             </div>
           </div>
         </div>

@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "alpinejs": "^3.5.1",
+        "glob": "^10.3.3",
         "glob-all": "^3.2.1"
     }
 }
