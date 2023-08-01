@@ -4,7 +4,7 @@
 
 <div class="flex flex-col justify-center py-20 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 class="mt-6 text-3xl font-bold leading-none text-center text-gray-900 lg:text-5xl">
+        <h2 class="mt-6 text-3xl font-bold leading-none text-center text-gray-900 dark:text-white lg:text-5xl">
             Setup Your New Password
         </h2>
         <p class="mt-4 text-sm leading-5 text-center text-gray-600 max-w">
@@ -69,7 +69,7 @@
 
                 <div class="flex flex-col items-center justify-center text-sm leading-5">
                     <span class="block w-full mt-5 rounded-md shadow-sm">
-                        <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-wave-600 hover:bg-wave-500 focus:outline-none focus:border-wave-700 focus:shadow-outline-wave active:bg-wave-700">
+                        <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-wave active:bg-indigo-700">
                             Reset Password
                         </button>
                     </span>
