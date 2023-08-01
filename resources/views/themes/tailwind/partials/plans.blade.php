@@ -46,7 +46,7 @@
 
                 </div>
 
-                <div class="relative">
+                <div class="relative inline-flex">
                         <div data-plan="{{ $plan->plan_id }}" class="inline-flex items-center justify-center mx-auto w-3/4 px-4 py-4 text-base font-semibold text-white transition duration-150 ease-in-out @if($plan->default){{ ' bg-gradient-to-r from-wave-600 to-indigo-500 hover:from-wave-500 hover:to-indigo-400' }}@else{{ 'bg-none hover:bg-wave-600 active:bg-none border-indigo-700 focus:border-gray-900 focus:shadow-outline-gray' }}@endif border cursor-pointer rounded-md checkout focus:outline-none disabled:opacity-25">
                             @subscribed($plan->slug)
                                 You are subscribed to this plan
