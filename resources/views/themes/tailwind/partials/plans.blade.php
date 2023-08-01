@@ -16,7 +16,7 @@
                     <span class="plan-name font-mono dark:text-white text-md font-bold">{{ $plan->name }}</span>
                 </div>
 
-                <div class="px-4 mt-2 pb-7" style="min-height:80px">
+                <div class="px-4 mt-2 pb-7" style="min-height:110px">
                     <p class="plan-description text-sm leading-7 text-gray-500">{{ $plan->description }}</p>
                 </div>
 

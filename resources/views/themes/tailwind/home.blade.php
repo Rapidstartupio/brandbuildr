@@ -65,13 +65,13 @@
             <p class="mt-4 leading-6 sm:text-center text-wave-200">Wave has some cool features to help you rapidly build your Software as a Service.<br class="hidden md:block"> Here are a few awesome features you're going to love!</p>
 
             <div class="grid mt-16 gap-y-10 sm:grid-cols-2 sm:gap-x-8 md:gap-x-12 lg:grid-cols-3 xl:grid-cols-4 lg:gap-20">
-                @foreach(config('features') as $feature)
+                {{--@foreach(config('features') as $feature)
                     <div>
                         <img src="{{ $feature->image }}" class="w-16 rounded sm:mx-auto">
                         <h3 class="mt-6 text-sm font-semibold leading-6 sm:text-center text-wave-100">{{ $feature->title }}</h3>
                         <p class="mt-2 text-sm leading-5 sm:text-center text-wave-200">{{ $feature->description }}</p>
                     </div>
-                @endforeach
+                @endforeach --}}
             </div>
 
         </div>-->
@@ -197,7 +197,7 @@
                 <p class="w-full my-1 text-base text-left text-gray-900 opacity-75 sm:my-2 sm:text-center sm:text-xl">It's easy to customize the pricing of your Software as a Service</p>
             </div>
 
-            @include('theme::partials.plans')
+            {{-- @include('theme::partials.plans') --}}
 
             <p class="w-full my-8 text-left text-gray-500 sm:my-10 sm:text-center">All plans are fully configurable in the Admin Area.</p>
         </div>
