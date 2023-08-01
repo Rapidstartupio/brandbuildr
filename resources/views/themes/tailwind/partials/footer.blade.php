@@ -159,12 +159,12 @@
                                 </div>
                             @endif
 
-                            <div class="px-4 py-8 bg-white dark:bg-gray-800 border shadow border-gray-50 dark:border-gray-700 sm:rounded-lg sm:px-10">
+                            <div class="bg-white dark:bg-gray-800 border shadow border-gray-50 dark:border-gray-700 sm:rounded-lg sm:px-10">
                                 <form action="{{ route('password.email') }}" method="POST">
                                     @csrf
                                     <div class="flex">
                                     <div class="w-full flex-grow mr-4">
-                                        <div class="mt-3 rounded-md shadow-sm">
+                                        <div class="rounded-md shadow-sm">
                                         <input id="email" type="email" name="email" placeholder="Your Email" required class="w-full form-input dark:bg-gray-900">
                                         </div>
                                         @if ($errors->has('email'))
@@ -174,7 +174,7 @@
                                         @endif
                                     </div>
 
-                                    <div class="mt-6">
+                                    <div class="my-auto">
                                         <span class="block rounded-md shadow-sm">
                                         <button type="submit" class="flex justify-center px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-wave active:bg-indigo-700">
                                             Subscribe
