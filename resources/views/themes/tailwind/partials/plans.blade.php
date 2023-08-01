@@ -3,21 +3,25 @@
         @php $features = explode(',', $plan->features); @endphp
 
         <div class="w-full max-w-md px-0 mx-auto mb-6 lg:w-1/3 lg:px-3 lg:mb-0">
-            <div class="relative flex flex-col h-full mb-10 bg-white border border-gray-200 rounded-lg shadow-xl border-b-none sm:mb-0">
+            <div class="relative flex flex-col h-full mb-10 bg-white bg-opacity-15 border border-gray-200 rounded-lg shadow-xl border-b-none sm:mb-0">
                 <div class="px-10 pt-7">
                     <div class="absolute right-0 inline-block mr-6 transform">
-                        <h2 class="relative z-20 w-full h-full px-2 py-1 text-xs font-bold leading-tight tracking-wide text-center uppercase bg-white border-2 @if($plan->default){{ 'border-wave-400 text-wave-500' }}@else{{ 'border-gray-900 text-gray-800' }}@endif rounded">{{ $plan->name }}</h2>
+                        <h2 class="relative z-20 w-full h-full px-2 py-1 text-xs font-bold leading-tight tracking-wide text-center uppercase bg-white border-2 @if($plan->default){{ 'border-none text-white bg-indigo-400' }}@else{{ 'hidden border-gray-900 text-gray-800' }}@endif rounded transform rotate-45">Best value</h2>
 
                     </div>
                 </div>
 
-                <div class="px-10 mt-5">
-                    <span class="font-mono text-5xl font-bold">${{ $plan->price }}</span>
-                    <span class="text-lg font-bold text-gray-500">per month</span>
+                <div class="px-10 mt-2">
+                    <span class="font-mono text-white text-5xl font-bold">{{ $plan->name }}</span>
                 </div>
 
                 <div class="px-10 mt-6 pb-9">
                     <p class="text-lg leading-7 text-gray-500">{{ $plan->description }}</p>
+                </div>
+
+                <div class="px-10 mt-5">
+                    <span class="font-mono text-white text-5xl font-bold">${{ $plan->price }}</span>
+                    <span class="text-lg font-bold text-gray-500">per month</span>
                 </div>
 
                 <div class="relative px-10 pt-0 pb-12 mt-auto text-gray-700 rounded-b-lg">
@@ -42,7 +46,7 @@
                 </div>
 
                 <div class="relative">
-                        <div data-plan="{{ $plan->plan_id }}" class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition duration-150 ease-in-out @if($plan->default){{ ' bg-gradient-to-r from-wave-600 to-indigo-500 hover:from-wave-500 hover:to-indigo-400' }}@else{{ 'bg-gray-800 hover:bg-gray-700 active:bg-gray-900 focus:border-gray-900 focus:shadow-outline-gray' }}@endif border border-transparent cursor-pointer rounded-b-md checkout focus:outline-none disabled:opacity-25">
+                        <div data-plan="{{ $plan->plan_id }}" class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition duration-150 ease-in-out @if($plan->default){{ ' bg-gradient-to-r from-wave-600 to-indigo-500 hover:from-wave-500 hover:to-indigo-400' }}@else{{ 'bg-none hover:bg-wave-600 active:bg-none active:border-indigo-700 focus:border-gray-900 focus:shadow-outline-gray' }}@endif border border-transparent cursor-pointer rounded-b-md checkout focus:outline-none disabled:opacity-25">
                             @subscribed($plan->slug)
                                 You are subscribed to this plan
                             @notsubscribed

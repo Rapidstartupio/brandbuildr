@@ -4,7 +4,7 @@
 
 <div class="flex flex-col justify-center py-20 sm:px-6 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <h2 class="mt-6 text-3xl font-extrabold leading-9 text-center text-gray-900 lg:text-5xl">
+            <h2 class="mt-6 text-3xl font-bold leading-9 text-center text-gray-900 lg:text-5xl">
                 Reset Password
             </h2>
             <p class="mt-4 text-sm leading-5 text-center text-gray-600 max-w">
@@ -23,16 +23,16 @@
                 </div>
             @endif
 
-            <div class="px-4 py-8 bg-white border shadow border-gray-50 sm:rounded-lg sm:px-10">
+            <div class="px-4 py-8 bg-white dark:bg-gray-800 border shadow border-gray-50 dark:border-gray-700 sm:rounded-lg sm:px-10">
                 <form action="{{ route('password.email') }}" method="POST">
                     @csrf
 
                     <div>
-                        <label for="email" class="block text-sm font-medium leading-5 text-gray-700">
+                        <label for="email" class="block text-sm font-medium leading-5 text-gray-700 dark:text-white">
                             Email Address
                         </label>
                         <div class="mt-3 rounded-md shadow-sm">
-                            <input id="email" type="email" name="email" required class="w-full form-input">
+                            <input id="email" type="email" name="email" required class="w-full form-input dark:bg-gray-900">
                         </div>
                         @if ($errors->has('email'))
                             <div class="mt-1 text-red-500">

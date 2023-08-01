@@ -4,7 +4,7 @@
 
 <div class="flex flex-col justify-center py-20 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 class="mt-6 text-3xl font-extrabold leading-none text-center text-gray-900 lg:text-5xl">
+        <h2 class="mt-6 text-3xl font-bold leading-none text-center text-gray-900 lg:text-5xl">
             Setup Your New Password
         </h2>
         <p class="mt-4 text-sm leading-5 text-center text-gray-600 max-w">
@@ -21,16 +21,16 @@
                 {{ session('status') }}
             </div>
         @endif
-        <div class="px-4 py-8 bg-white border shadow border-gray-50 sm:rounded-lg sm:px-10">
+        <div class="px-4 py-8 bg-white dark:bg-gray-800 border shadow border-gray-50 dark:border-gray-700 sm:rounded-lg sm:px-10">
             <form action="{{ route('password.request') }}" method="POST">
                 @csrf
                 <input type="hidden" name="token" value="{{ $token }}">
                 <div class="mt-6">
-                    <label for="email" class="block text-sm font-medium leading-5 text-gray-700">
+                    <label for="email" class="block text-sm font-medium leading-5 text-gray-700 dark:text-white">
                         Email Address
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input id="email" type="email" name="email" required class="w-full form-input">
+                        <input id="email" type="email" name="email" required class="w-full form-input dark:bg-gray-900">
                     </div>
                     @if ($errors->has('email'))
                     <div class="mt-1 text-red-500">
@@ -40,11 +40,11 @@
                 </div>
 
                 <div class="mt-6">
-                    <label for="password" class="block text-sm font-medium leading-5 text-gray-700">
+                    <label for="password" class="block text-sm font-medium leading-5 text-gray-700 dark:text-white">
                         Password
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input id="password" type="password" name="password" required class="w-full form-input">
+                        <input id="password" type="password" name="password" required class="w-full form-input dark:bg-gray-900">
                     </div>
                     @if ($errors->has('password'))
                     <div class="mt-1 text-red-500">
@@ -54,11 +54,11 @@
                 </div>
 
                 <div class="mt-6">
-                    <label for="password_confirmation" class="block text-sm font-medium leading-5 text-gray-700">
+                    <label for="password_confirmation" class="block text-sm font-medium leading-5 text-gray-700 dark:text-white">
                         Confirm Password
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input id="password_confirmation" type="password" name="password_confirmation" required class="w-full form-input">
+                        <input id="password_confirmation" type="password" name="password_confirmation" required class="w-full form-input dark:bg-gray-900">
                     </div>
                     @if ($errors->has('password_confirmation'))
                     <div class="mt-1 text-red-500">

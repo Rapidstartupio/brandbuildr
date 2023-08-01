@@ -3,8 +3,8 @@
 @section('content')
 
     <div class="sm:mx-auto sm:w-full sm:max-w-md sm:pt-10">
-        <h2 class="text-3xl font-extrabold leading-9 text-center text-gray-900 dark:text-white sm:mt-6 lg:text-5xl">
-            Sign up Below
+        <h2 class="text-3xl font-bold leading-9 text-center text-gray-900 dark:text-white sm:mt-6 lg:text-5xl">
+            Sign Up
         </h2>
         <p class="mt-4 text-sm leading-5 text-center text-gray-600 dark:text-gray-400 max-w">
             or, you can
@@ -23,14 +23,14 @@
                     @csrf
                     <!-- If we want the user to purchase before they can create an account -->
 
-                    <div class="pb-3 sm:border-b sm:border-gray-200">
+                    <!--<div class="pb-3 sm:border-b sm:border-gray-200">
                         <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">
                             Profile
                         </h3>
                         <p class="max-w-2xl mt-1 text-sm leading-5 text-gray-500 dark:text-gray-400">
                             Information about your account.
                         </p>
-                    </div>
+                    </div>-->
 
                     @csrf
 
@@ -108,8 +108,8 @@
 
                     <div class="flex flex-col items-center justify-center text-sm leading-5">
                         <span class="block w-full mt-5 rounded-md shadow-sm">
-                            <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-wave-600 hover:bg-wave-500 focus:outline-none focus:border-wave-700 focus:shadow-outline-wave active:bg-wave-700">
-                                Register
+                            <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-indigo-600 hover:bg-wave-500 focus:outline-none focus:border-wave-700 focus:shadow-outline-wave active:bg-indigo-700">
+                                Sign Up
                             </button>
                         </span>
                         <a href="{{ route('login') }}" class="mt-3 font-medium transition duration-150 ease-in-out text-wave-600 hover:text-wave-500 focus:outline-none focus:underline">
