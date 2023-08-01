@@ -13,20 +13,20 @@
                 </div>
 
                 <div class="px-4 mt-1">
-                    <span class="font-mono dark:text-white text-md font-bold">{{ $plan->name }}</span>
+                    <span class="plan-name font-mono dark:text-white text-md font-bold">{{ $plan->name }}</span>
                 </div>
 
-                <div class="px-4 mt-2 pb-9">
-                    <p class="text-sm leading-7 text-gray-500">{{ $plan->description }}</p>
+                <div class="px-4 mt-2 pb-7" style="min-height:80px">
+                    <p class="plan-description text-sm leading-7 text-gray-500">{{ $plan->description }}</p>
                 </div>
 
                 <div class="px-4">
-                    <span class="font-mono dark:text-white text-3xl font-bold">${{ $plan->price }}</span>
-                    <span class="text-md font-bold text-gray-500">per month</span>
+                    <span class="plan-price font-mono dark:text-white text-3xl font-bold">${{ $plan->price }}</span>
+                    <span class="per-month text-md font-bold text-gray-500">per month</span>
                 </div>
 
                 <div class="relative inline-flex">
-                        <div data-plan="{{ $plan->plan_id }}" class="inline-flex items-center justify-center mx-auto w-3/4 px-4 py-2 text-base font-semibold text-white transition duration-150 ease-in-out @if($plan->default){{ ' bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400' }}@else{{ 'bg-none hover:bg-indigo-600 active:bg-none border-indigo-700 focus:border-none focus:shadow-outline-gray' }}@endif border cursor-pointer rounded-md checkout focus:outline-none disabled:opacity-25">
+                        <div data-plan="{{ $plan->plan_id }}" class="mt-6 inline-flex items-center justify-center mx-auto w-3/4 px-4 py-2 text-base font-semibold text-white transition duration-150 ease-in-out @if($plan->default){{ ' bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400' }}@else{{ 'bg-none hover:bg-indigo-600 active:bg-none border-indigo-700 focus:border-none focus:shadow-outline-gray' }}@endif border cursor-pointer rounded-md checkout focus:outline-none disabled:opacity-25">
                             @subscribed($plan->slug)
                                 You are subscribed to this plan
                             @notsubscribed
@@ -39,7 +39,7 @@
                         </div>
                 </div>
 
-                <div class="relative px-4 pt-0 pb-12 mt-auto text-gray-700 rounded-b-lg">
+                <div class="relative mt-6 px-4 pt-0 pb-12 text-gray-700 rounded-b-lg">
 
                     <ul class="flex flex-col space-y-2.5">
                         @foreach($features as $feature)
