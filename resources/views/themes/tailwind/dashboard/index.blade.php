@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	
-	<div id="filters" class="md:flex">
+	<div id="filters" class="md:flex space-y-2 md:space-y-0">
 		<div class="dates mr-4">
 			<div class="relative max-w-sm">
 				<div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
@@ -58,7 +58,7 @@
 	</div>
 
 	<div id="projects-list">
-		<div class="grid grid-cols-3  dark:text-white my-5 space-x-4">
+		<div class="grid md:grid-cols-3  dark:text-white my-5 md:space-x-4 space-y-2 md:space-y-0">
 			<div class="brandDark2 p-4 rounded">
 				RedBull Project
 			</div>
