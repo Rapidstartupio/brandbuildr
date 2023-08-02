@@ -59,14 +59,33 @@
 
 	<div id="projects-list">
 		<div class="grid md:grid-cols-3  dark:text-white my-5 md:space-x-4 space-y-2 md:space-y-0">
-			<div class="brandDark2 p-4 rounded">
-				RedBull Project
+			<div class="brandDark2 p-4 rounded space-y-5">
+				<div class="flex justify-between">
+					<div class="">RedBull Project</div>
+					<div class="dark:text-gray-400">Brand Strategy</div>
+				</div>
+        <div>
+          <p class="text-xs font-light">67% Completed</p>
+        </div>
+        <div class="w-full bg-[#838396] rounded-full h-1.5 dark:bg-[#838396]">
+          <div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: 67%"></div>
+        </div>
+				<div>
+					<p class="text-xs font-light">Lorem ipsum dolor sit amet consectetur. Nunc dictum justo vulputate vitae quis lacinia platea...</p>
+				</div>
+        <div class="flex">
+          <div>
+            <button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800">RedBull</button>
+          </div>
+          <div></div>
+        </div>
 			</div>
 			<div class="brandDark2 p-4 rounded">
-				RedBull Project
+			
+
 			</div>
 			<div class="brandDark2 p-4 rounded">
-				RedBull Project
+				
 			</div>
 		</div>
 	</div>
