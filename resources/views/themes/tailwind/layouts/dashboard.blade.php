@@ -1,5 +1,6 @@
     <!DOCTYPE html>
     <html lang="{{ app()->getLocale() }}  " class="dark">
+
     <head>
         <script>
             // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -10,9 +11,9 @@
             }
         </script>
         @if(isset($seo->title))
-            <title>{{ $seo->title }}</title>
+        <title>{{ $seo->title }}</title>
         @else
-            <title>{{ setting('site.title', 'Laravel Wave') . ' - ' . setting('site.description', 'The Software as a Service Starter Kit built on Laravel & Voyager') }}</title>
+        <title>{{ setting('site.title', 'Laravel Wave') . ' - ' . setting('site.description', 'The Software as a Service Starter Kit built on Laravel & Voyager') }}</title>
         @endif
 
         <meta charset="utf-8">
@@ -25,63 +26,112 @@
 
         {{-- Social Share Open Graph Meta Tags --}}
         @if(isset($seo->title) && isset($seo->description) && isset($seo->image))
-            <meta property="og:title" content="{{ $seo->title }}">
-            <meta property="og:url" content="{{ Request::url() }}">
-            <meta property="og:image" content="{{ $seo->image }}">
-            <meta property="og:type" content="@if(isset($seo->type)){{ $seo->type }}@else{{ 'article' }}@endif">
-            <meta property="og:description" content="{{ $seo->description }}">
-            <meta property="og:site_name" content="{{ setting('site.title') }}">
+        <meta property="og:title" content="{{ $seo->title }}">
+        <meta property="og:url" content="{{ Request::url() }}">
+        <meta property="og:image" content="{{ $seo->image }}">
+        <meta property="og:type" content="@if(isset($seo->type)){{ $seo->type }}@else{{ 'article' }}@endif">
+        <meta property="og:description" content="{{ $seo->description }}">
+        <meta property="og:site_name" content="{{ setting('site.title') }}">
 
-            <meta itemprop="name" content="{{ $seo->title }}">
-            <meta itemprop="description" content="{{ $seo->description }}">
-            <meta itemprop="image" content="{{ $seo->image }}">
+        <meta itemprop="name" content="{{ $seo->title }}">
+        <meta itemprop="description" content="{{ $seo->description }}">
+        <meta itemprop="image" content="{{ $seo->image }}">
 
-            @if(isset($seo->image_w) && isset($seo->image_h))
-                <meta property="og:image:width" content="{{ $seo->image_w }}">
-                <meta property="og:image:height" content="{{ $seo->image_h }}">
-            @endif
+        @if(isset($seo->image_w) && isset($seo->image_h))
+        <meta property="og:image:width" content="{{ $seo->image_w }}">
+        <meta property="og:image:height" content="{{ $seo->image_h }}">
+        @endif
         @endif
 
         <meta name="robots" content="index,follow">
         <meta name="googlebot" content="index,follow">
 
         @if(isset($seo->description))
-            <meta name="description" content="{{ $seo->description }}">
+        <meta name="description" content="{{ $seo->description }}">
         @endif
 
         <!-- Styles -->
         <link href="{{ asset('themes/' . $theme->folder . '/css/app.css') }}" rel="stylesheet">
-        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         @yield('custom_header_code')
         {!! str_replace(array('<p>','</p>'),'',html_entity_decode(setting('site.custom_header_code'))) !!}
         <style>
-            .dark .bg-black, .bg-black, :is(.dark .dark\:bg-black){
+            .dark .bg-black,
+            .bg-black,
+            :is(.dark .dark\:bg-black) {
                 background: #07072D !important;
             }
-            .brandDark2{
-                background: rgba(255, 255, 255, 0.15);
+
+            .brandDark2 {
+                /* background: rgba(255, 255, 255, 0.15) !important; */
+                background-color: #202043 !important;
             }
-            [type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus{
+
+            [type='text']:focus,
+            [type='email']:focus,
+            [type='url']:focus,
+            [type='password']:focus,
+            [type='number']:focus,
+            [type='date']:focus,
+            [type='datetime-local']:focus,
+            [type='month']:focus,
+            [type='search']:focus,
+            [type='tel']:focus,
+            [type='time']:focus,
+            [type='week']:focus,
+            [multiple]:focus,
+            textarea:focus,
+            select:focus {
                 --tw-ring-color: #570AFF;
+            }
+
+            .text-brandPrimary {
+                color: #570AFF;
+            }
+
+            .bg-brandPrimary,
+            :is(.dark\:bg-brandPrimary) {
+                background-color: #570AFF !important;
+            }
+
+            .border-brandPrimary,
+            .peer-checked\:border-brandPrimary {
+                border-color: #570AFF;
+            }
+
+            [modal-backdrop] {
+                background-color: rgba(4, 4, 27, 0.70);
+                backdrop-filter: blur(25px);
+                z-index: 35;
+
+            }
+
+            .brandDark3 {
+                background: #393957 !important;
+            }
+
+            .brandDark4 {
+                background: #4d4d68 !important;
             }
         </style>
     </head>
+
     <body class="flex flex-col min-h-screen @if(Request::is('/')){{ 'bg-white' }}@else{{ 'bg-gray-50' }}@endif @if(config('wave.dev_bar')){{ 'pb-10' }}@endif bg-white dark:bg-black">
         <style type="text/css">
-            .language-markup{
-                
+            .language-markup {
+
                 display: none;
             }
         </style>
         {!! html_entity_decode(setting('site.custom_css')) !!}
         @if(config('wave.demo') && Request::is('/'))
-            @include('theme::partials.demo-header')
+        @include('theme::partials.demo-header')
         @endif
 
         @include('theme::partials.dashboard-header')
-        
-        <div class="flex">
-            <div>
+
+        <div class="flex" id="app">
+            <div class="brandDark2">
                 @include('theme::partials.dashboard-nav')
             </div>
             <div class="w-full">
@@ -90,19 +140,19 @@
                 </main>
             </div>
         </div>
-        
+
 
 
 
         @include('theme::partials.dashboard-footer')
 
-       
+
 
         <!-- Full Screen Loader -->
         <div id="fullscreenLoader" class="fixed inset-0 top-0 left-0 z-50 flex flex-col items-center justify-center hidden w-full h-full bg-gray-900 opacity-50">
             <svg class="w-5 h-5 mr-3 -ml-1 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
             <p id="fullscreenLoaderMessage" class="mt-4 text-sm font-medium text-white uppercase"></p>
         </div>
@@ -111,15 +161,19 @@
 
         @include('theme::partials.toast')
         @if(session('message'))
-            <script>setTimeout(function(){ popToast("{{ session('message_type') }}", "{{ session('message') }}"); }, 10);</script>
+        <script>
+            setTimeout(function() {
+                popToast("{{ session('message_type') }}", "{{ session('message') }}");
+            }, 10);
+        </script>
         @endif
         @waveCheckout
         <!-- Scripts -->
         <script>
             //enable dark mode
-            tailwind.config = {
-                darkMode: 'class'
-            }
+            // tailwind.config = {
+            //     darkMode: 'class'
+            // }
 
             var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
             var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
@@ -143,7 +197,7 @@
                         document.documentElement.classList.remove('dark');
                         localStorage.setItem('color-theme', 'light');
                     }
-                // if NOT set via local storage previously
+                    // if NOT set via local storage previously
                 } else {
                     if (document.documentElement.classList.contains('dark')) {
                         document.documentElement.classList.remove('dark');
@@ -154,10 +208,27 @@
                     }
                 }
             });
-            if(!document.querySelector("html").classList.contains("dark")){
+            if (!document.querySelector("html").classList.contains("dark")) {
                 themeToggleBtn.click();
             }
         </script>
+        <script>
+            function hideAside() {
+                var defaultSidebar = document.getElementById('default-sidebar');
+                var displayAsideBtn = document.getElementById('displayAsideBtn');
+
+                defaultSidebar.classList.add('hidden');
+                displayAsideBtn.classList.remove('hidden');
+            }
+
+            function displayAside() {
+                var defaultSidebar = document.getElementById('default-sidebar');
+                var displayAsideBtn = document.getElementById('displayAsideBtn');
+
+                defaultSidebar.classList.remove('hidden');
+                displayAsideBtn.classList.add('hidden');
+            }
+        </script>
     </body>
+
     </html>
-     

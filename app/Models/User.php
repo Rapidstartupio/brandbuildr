@@ -42,4 +42,13 @@ class User extends Authenticatable
     protected $casts = [
         'trial_ends_at' => 'datetime',
     ];
+
+    public function projectTypes()
+    {
+        return $this->hasMany('\App\Models\ProjectType')->orderBy('created_at', 'DESC');
+    }
+    public function clients()
+    {
+        return $this->hasMany('\App\Models\Client')->orderBy('created_at', 'DESC');
+    }
 }

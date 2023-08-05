@@ -2,6 +2,7 @@
 
 
 @section('content')
+
 <h3 style="color: white; font-size: 24px; fontmy-family: Helvetica Neue; font-weight: 500; word-wrap: break-word">Dashboard</h3>
 <div class="dark:text-white my-6">
 	<div class="text-sm font-medium text-center text-gray-500 dark:text-gray-400 md:flex">
@@ -13,15 +14,20 @@
 				<a href="#" class="inline-block  py-2 text-blue-600 border-b-2 border-white rounded-t-lg active dark:text-white dark:border-white" aria-current="page">In Progress</a>
 			</li>
 			<li class="mr-10">
-				<a href="#" class="inline-block  py-2 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Completed</a>
+				<a href="#" class="inline-block  py-2 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Completed Projects</a>
 			</li>
 		</ul>
+		@if(true)
 		<div class="text-left md:flex-auto mt-5 md:mt-0">
-			<button type="button" class=" md:float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-[#570AFF] dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800"><span class="md:px-4 font-bold">+</span> New Project</button>
+			<a href="{{route('projects.create')}}">
+				<button type="button" class=" md:float-right text-white bg-blue-700  hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-[#570AFF] dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800"><span class="md:px-4 font-bold">+</span> New Project</button>
+			</a>
 		</div>
+		@endif
 	</div>
 </div>
 
+@if(true)
 <div id="filters" class="lg:flex space-y-2 lg:space-y-0">
 	<div class="dates mr-4">
 		<div class="relative max-w-sm">
@@ -206,6 +212,26 @@
 		</div>
 	</div>
 </div>
+@else
+<div class="flex justify-center text-white text-center md:mt-10">
+	<div class="max-w-xl space-y-2 md:space-y-8">
+		<div>
+			<div class="rounded-full bg-brandPrimary w-14 px-2 m-auto">
+				<svg xmlns="http://www.w3.org/2000/svg" class="bg-brandPrimary rounded-full" width="56" height="56" viewBox="0 0 56 56" fill="none">
+					<path d="M30.6367 51.777L26.8333 42.8403C30.4967 41.487 33.9267 39.667 37.1 37.5437L30.6367 51.777ZM13.16 29.167L4.22334 25.3637L18.4567 18.9003C16.3333 22.0737 14.5133 25.5037 13.16 29.167ZM44.8467 9.33366C45.5 9.33366 46.0833 9.33366 46.5733 9.45033C46.97 12.6937 46.5267 19.367 38.8733 27.0203C34.9067 31.0103 30.17 34.067 24.85 36.097L19.8333 31.197C21.98 25.807 25.0367 21.0703 28.98 17.127C35.42 10.687 41.16 9.33366 44.8467 9.33366ZM44.8467 4.66699C40.2267 4.66699 33.2267 6.27699 25.6667 13.837C20.5567 18.947 17.5 24.5703 15.5167 29.4937C14.8633 31.2437 15.3067 33.157 16.59 34.4637L21.56 39.4103C22.4467 40.297 23.6367 40.8337 24.8733 40.8337C25.41 40.8337 25.97 40.6937 26.5067 40.4837C32.3833 38.243 37.7191 34.7838 42.1633 30.3337C55.37 17.127 50.4233 5.57699 50.4233 5.57699C50.4233 5.57699 48.3 4.66699 44.8467 4.66699ZM33.9267 22.0737C32.1067 20.2537 32.1067 17.2903 33.9267 15.4703C35.7467 13.6503 38.71 13.6503 40.53 15.4703C42.3267 17.2903 42.35 20.2537 40.53 22.0737C38.71 23.8937 35.7467 23.8937 33.9267 22.0737ZM14.56 51.3337L23.0533 42.8403C22.26 42.6303 21.49 42.2803 20.79 41.7903L11.27 51.3337H14.56ZM4.66667 51.3337H7.95667L19.0867 40.227L15.7733 36.937L4.66667 48.0437V51.3337ZM4.66667 44.7303L14.21 35.2103C13.72 34.5103 13.37 33.7637 13.16 32.947L4.66667 41.4403V44.7303Z" fill="white" />
+				</svg>
+			</div>
+		</div>
+		<h3 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Let's create something impressive together!</h3>
 
+		<p class="mb-3 font-normal text-gray-500 dark:text-gray-400">To get started, simply click the button below. In just a few simple steps, you'll be able to create your first project and customize it to meet your needs.</p>
+		<div class="">
+			<a href="{{route('projects.create')}}">
+				<button type="button" class="text-white bg-blue-700 hover:bg-blue-800   font-medium rounded-lg text-lg px-10 py-4 dark:bg-brandPrimary dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800">Create New Project</button>
+			</a>
+		</div>
+	</div>
+</div>
+@endif
 
 @endsection

@@ -1,9 +1,9 @@
 <!-- <div class="text-white" style="background: rgba(255, 255, 255, 0.10) !important;">test</div> -->
-<aside id="default-sidebar" class="left-0  w-30 h-full 2xl:h-screen" aria-label="Sidebar">
-   <div class="h-full   bg-gray-50 dark:bg-gray-800" style="background: rgba(255, 255, 255, 0.10) !important;">
+<aside id="default-sidebar" class="left-0  w-30 h-full xl:h-screen" aria-label="Sidebar">
+   <div class="h-full">
       <ul class="font-medium text-center">
          <li class="border-[#570AFF] border-l-4 p-4">
-            <a href="#" class="items-center  text-gray-900 rounded-lg dark:text-white hover:text-white  group">
+            <a href="{{ route('wave.dashboard') }}" class="items-center  text-gray-900 rounded-lg dark:text-white hover:text-white  group">
                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
                   <path d="M19.5 5V7H15.5V5H19.5ZM9.5 5V11H5.5V5H9.5ZM19.5 13V19H15.5V13H19.5ZM9.5 17V19H5.5V17H9.5ZM21.5 3H13.5V9H21.5V3ZM11.5 3H3.5V13H11.5V3ZM21.5 11H13.5V21H21.5V11ZM11.5 15H3.5V21H11.5V15Z" fill="white" />
                </svg>
@@ -43,7 +43,7 @@
             </a>
          </li>
          <li class="p-4 hover:bg-white hover:scale-110 transition-all ease-in-out">
-            <a href="#" class="items-center   text-gray-500 rounded-lg dark:text-gray-400 hover:text-white  group">
+            <a href="javascript:;" onclick="hideAside()" class="items-center   text-gray-500 rounded-lg dark:text-gray-400 hover:text-white  group">
                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
                   <path d="M15.91 16.58L11.33 12L15.91 7.41L14.5 6L8.5 12L14.5 18L15.91 16.58Z" fill="#79798E" />
                </svg>
