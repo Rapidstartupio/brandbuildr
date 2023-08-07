@@ -32,7 +32,7 @@
                             Email Address
                         </label>
                         <div class="mt-3 rounded-md shadow-sm">
-                            <input id="email" type="email" name="email" required class="w-full form-input dark:bg-gray-900">
+                            <input id="email" type="email" name="email" required class="w-full form-input dark:text-white dark:bg-gray-900">
                         </div>
                         @if ($errors->has('email'))
                             <div class="mt-1 text-red-500">

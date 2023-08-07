@@ -39,7 +39,7 @@
                             Name
                         </label>
                         <div class="mt-1 rounded-md shadow-sm">
-                            <input id="name" type="text" name="name" required class="w-full form-input dark:bg-gray-900" value="{{ old('name') }}" @if(!setting('billing.card_upfront')){{ 'autofocus' }}@endif>
+                            <input id="name" type="text" name="name" required class="w-full form-input dark:text-white dark:bg-gray-900" value="{{ old('name') }}" @if(!setting('billing.card_upfront')){{ 'autofocus' }}@endif>
                         </div>
                         @if ($errors->has('name'))
                             <div class="mt-1 text-red-500">
@@ -54,7 +54,7 @@
                                 Username
                             </label>
                             <div class="mt-1 rounded-md shadow-sm">
-                                <input id="username" type="text" name="username" value="{{ old('username') }}" required class="w-full form-input dark:bg-gray-900">
+                                <input id="username" type="text" name="username" value="{{ old('username') }}" required class="w-full form-input dark:text-white dark:bg-gray-900">
                             </div>
                             @if ($errors->has('username'))
                                 <div class="mt-1 text-red-500">
@@ -69,7 +69,7 @@
                             Email Address
                         </label>
                         <div class="mt-1 rounded-md shadow-sm">
-                            <input id="email" type="email" name="email" value="{{ old('email') }}" required class="w-full form-input dark:bg-gray-900">
+                            <input id="email" type="email" name="email" value="{{ old('email') }}" required class="w-full form-input dark:text-white dark:bg-gray-900">
                         </div>
                         @if ($errors->has('email'))
                             <div class="mt-1 text-red-500">
@@ -83,7 +83,7 @@
                             Password
                         </label>
                         <div class="mt-1 rounded-md shadow-sm">
-                            <input id="password" type="password" name="password" required class="w-full form-input dark:bg-gray-900">
+                            <input id="password" type="password" name="password" required class="w-full form-input dark:text-white dark:bg-gray-900">
                         </div>
                         @if ($errors->has('password'))
                             <div class="mt-1 text-red-500">
@@ -97,7 +97,7 @@
                             Confirm Password
                         </label>
                         <div class="mt-1 rounded-md shadow-sm">
-                            <input id="password_confirmation" type="password" name="password_confirmation" required class="w-full form-input dark:bg-gray-900">
+                            <input id="password_confirmation" type="password" name="password_confirmation" required class="w-full form-input dark:text-white dark:bg-gray-900">
                         </div>
                         @if ($errors->has('password_confirmation'))
                             <div class="mt-1 text-red-500">

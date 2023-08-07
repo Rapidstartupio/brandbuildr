@@ -30,7 +30,7 @@
                         Email Address
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input id="email" type="email" name="email" required class="w-full form-input dark:bg-gray-900">
+                        <input id="email" type="email" name="email" required class="w-full form-input dark:text-white dark:bg-gray-900">
                     </div>
                     @if ($errors->has('email'))
                     <div class="mt-1 text-red-500">
@@ -44,7 +44,7 @@
                         Password
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input id="password" type="password" name="password" required class="w-full form-input dark:bg-gray-900">
+                        <input id="password" type="password" name="password" required class="w-full form-input dark:text-white dark:bg-gray-900">
                     </div>
                     @if ($errors->has('password'))
                     <div class="mt-1 text-red-500">
@@ -58,7 +58,7 @@
                         Confirm Password
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input id="password_confirmation" type="password" name="password_confirmation" required class="w-full form-input dark:bg-gray-900">
+                        <input id="password_confirmation" type="password" name="password_confirmation" required class="w-full form-input dark:text-white dark:bg-gray-900">
                     </div>
                     @if ($errors->has('password_confirmation'))
                     <div class="mt-1 text-red-500">

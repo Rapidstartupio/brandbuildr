@@ -24,7 +24,7 @@
                         @if(setting('auth.email_or_username') && setting('auth.email_or_username') == 'username')
                             <label for="username" class="block text-sm font-medium leading-5 text-gray-700 dark:text-white">Username</label>
                             <div class="mt-1 rounded-md shadow-sm">
-                                <input id="username" type="username" name="username" required class="w-full form-input dark:bg-gray-900" autofocus>
+                                <input id="username" type="username" name="username" required class="w-full form-input dark:text-white dark:bg-gray-900" autofocus>
                             </div>
 
                             @if ($errors->has('username'))
@@ -35,7 +35,7 @@
                         @else
                             <label for="email" class="block text-sm font-medium leading-5 text-gray-700 dark:text-white">Email address</label>
                             <div class="mt-1 rounded-md shadow-sm">
-                                <input id="email" type="email" name="email" required class="w-full form-input dark:bg-gray-900" autofocus>
+                                <input id="email" type="email" name="email" required class="w-full form-input dark:text-white dark:bg-gray-900" autofocus>
                             </div>
 
                             @if ($errors->has('email'))
@@ -53,7 +53,7 @@
                             Password
                         </label>
                         <div class="mt-1 rounded-md shadow-sm">
-                            <input id="password" type="password" name="password" required class="w-full form-input dark:bg-gray-900">
+                            <input id="password" type="password" name="password" required class="w-full form-input dark:text-white dark:bg-gray-900">
                         </div>
                         @if ($errors->has('password'))
                             <div class="mt-1 text-red-500">
