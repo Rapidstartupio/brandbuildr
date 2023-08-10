@@ -6,6 +6,8 @@ module.exports = {
         "./assets/**/*.scss",
         "./assets/**/*.js",
         "./node_modules/flowbite/**/*.js",
+        "./assets/js/components/*.vue",
+        "./assets/js/components/**/*.vue",
     ],
     theme: {
         extend: {
@@ -55,12 +57,13 @@ module.exports = {
                     800: "#4E09E6",
                     900: "#04041B",
                 },
-                brad: "#3f3cbb",
-                bermuda: "#78dcca",
+                brand: {
+                    600: "#4d4d68",
+                    700: "#393957",
+                    800: "#202043",
+                    900: "#07072D",
+                },
             },
-        },
-        colors: {
-            brad: "#3f3cbb",
         },
     },
     plugins: [

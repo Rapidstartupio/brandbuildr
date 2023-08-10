@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->text('icon_svg_path_d')->nullable();
             $table->boolean('active')->default(0);
             $table->string('status')->nullable();

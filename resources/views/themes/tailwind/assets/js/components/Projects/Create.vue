@@ -212,6 +212,7 @@
                         </button>
                         <button
                             type="submit"
+                            :disabled="projectFormSubmitted"
                             class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded hover:bg-primary-800 dark:bg-brandPrimary"
                         >
                             Create Project
@@ -340,6 +341,7 @@
                             </button>
                             <button
                                 type="submit"
+                                :disabled="clientFormSubmitted"
                                 class="w-full px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded hover:bg-primary-800 dark:bg-brandPrimary whitespace-nowrap"
                             >
                                 Add New Client
@@ -372,10 +374,13 @@ export default {
                 deadline: "",
             },
             project_types: this.getProjectTypes(),
+            projectFormSubmitted: false,
+            clientFormSubmitted: false,
         };
     },
     methods: {
         saveClient() {
+            this.clientFormSubmitted = true;
             axios
                 .post(this.saveClientRoute, this.client)
                 .then((response) => {
@@ -402,6 +407,7 @@ export default {
                             );
                         }, 10);
                     }
+                    this.clientFormSubmitted = false;
                 });
         },
         resetClient() {
@@ -436,18 +442,13 @@ export default {
                 .catch((err) => console.error(err));
         },
         saveProject() {
+            this.projectFormSubmitted = true;
             axios
                 .post("/projects/store", this.project)
                 .then((response) => {
                     setTimeout(function () {
-                        popToast(
-                            response.data.message_type,
-                            response.data.message
-                        );
-                    }, 10);
-                    setTimeout(function () {
                         window.location.href = "/dashboard";
-                    }, 2000);
+                    }, 10);
                 })
                 .catch((error) => {
                     console.log(error.response);
@@ -459,6 +460,7 @@ export default {
                             );
                         }, 10);
                     }
+                    this.projectFormSubmitted = false;
                 });
         },
     },

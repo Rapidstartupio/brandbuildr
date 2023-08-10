@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ProjectType;
 use App\Models\Client;
 use App\Models\Project;
+use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
 {
@@ -115,6 +116,8 @@ class ProjectController extends Controller
             ];
 
             $response = Project::create($data);
+            Session::flash('message', 'Project Created Successfully!');
+            Session::flash('message_type', 'success');
             return response()->json([
                 'status' => 'success',
                 'data' => $response,

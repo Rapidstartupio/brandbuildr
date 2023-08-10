@@ -20,3 +20,5 @@ mix.setPublicPath("../../../../public/themes/tailwind/")
     .js("assets/js/app.js", "js")
     .tailwind("./tailwind.config.js")
     .vue();
+
+mix.browserSync("127.0.0.1:8000");
