@@ -25045,12 +25045,14 @@ __webpack_require__.r(__webpack_exports__);
         }, 10);
       } else if (next) {
         this.step = next;
+        this.progressBar = "w-" + this.step + "/3";
       }
     },
     back: function back() {
       var back = this.steps[this.step].back;
       if (back) {
         this.step = back;
+        this.progressBar = "w-" + this.step + "/3";
       }
     }
   }
