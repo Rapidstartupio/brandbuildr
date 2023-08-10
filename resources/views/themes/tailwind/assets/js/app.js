@@ -273,7 +273,10 @@ window.switchPlans = function (plan_id, plan_name) {
 import { createApp } from "vue";
 
 import CreateProject from "./components/Projects/Create.vue";
+import Onboarding from "./components/Onboarding/Index.vue";
+
 const app = createApp({});
 
 app.component("create-project", CreateProject);
+app.component("onboarding", Onboarding);
 app.mount("#app");

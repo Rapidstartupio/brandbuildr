@@ -8,7 +8,7 @@ class RegisterController extends AuthRegisterController
 {
     // public function showRegistrationForm()
     // {
-    // 	return redirect()->route('dashboard-onboarding');
+    //     return redirect()->route('dashboard-onboarding');
     // }
 
     public function dashboardOnboarding($step = "01")
