@@ -1,3 +1,9 @@
+<style>
+button[aria-selected="true"] {
+    color: white !important;
+    border-color: white !important;
+}
+</style>
 <template>
     <div
         class="py-4 mx-auto px-2 md:px-12 xl:px-28 text-white max-w-screen-2xl"
@@ -36,6 +42,7 @@
                                 :placeholder="
                                     steps[step].answerInputPlaceHolder
                                 "
+                                :value="steps[step].answer"
                             />
                         </div>
                         <div v-if="steps[step].answerInputType == 'select'">
@@ -159,13 +166,32 @@
                                     />
                                 </svg>
                             </div>
-                            <div class="text-center mt-4">
+                            <div class="text-center mt-4" :class="isSuggest">
                                 <a
                                     href="javascript:;"
                                     class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-12 py-2 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
+                                    v-on:click="showSuggestion()"
                                 >
                                     Suggest
                                 </a>
+                            </div>
+                            <div :class="isHiddenSuggestResult">
+                                <p class="px-4 py-6 text-sm font-light">
+                                    {{ suggestResult }}
+                                </p>
+                                <div class="space-x-4 text-center">
+                                    <button
+                                        class="bg-wave-500 hover:bg-wave-700 text-white py-1 px-8 rounded-lg"
+                                        v-on:click="copySuggestionToAnswer()"
+                                    >
+                                        Copy to Answer
+                                    </button>
+                                    <button
+                                        class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
+                                    >
+                                        Suggest Again
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class=" ">
@@ -204,7 +230,40 @@
                         role="tabpanel"
                         aria-labelledby="examples-tab"
                     >
-                        test2
+                        <div class="space-y-8">
+                            <div
+                                class="text-center text-base font-medium leading-snug"
+                            >
+                                Example #1
+                            </div>
+
+                            <div
+                                class="text-center text-base font-normal leading-snug"
+                            >
+                                <span
+                                    class="bg-brand-700 p-2 rounded-2xl text-sm"
+                                    >Hospitality</span
+                                >
+                            </div>
+                            <div>
+                                <p class="px-12 py-6 text-sm font-light">
+                                    Lorem ipsum dolor sit amet consectetur.
+                                    Integer phasellus ac id dolor et libero
+                                    blandit enim. Consectetur in egestas
+                                    porttitor viverra sed pellentesque mauris
+                                    sed eget. Tristique et ornare netus iaculis
+                                    natoque risus turpis gravida. At lobortis
+                                    massa maecenas aliquam nibh dui viverra.
+                                </p>
+                                <div class="text-center py-6">
+                                    <button
+                                        class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
+                                    >
+                                        Copy to Answer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div
                         class="hidden p-4 rounded-lg group"
@@ -273,6 +332,10 @@ export default {
                     back: 2,
                 },
             },
+            isHiddenSuggestResult: "hidden",
+            isSuggest: "",
+            suggestResult:
+                "We mitigate event planning and logistical stress by offering reliable, diverse, and high-quality catering services, customized to client needs for varied dietary preferences.",
         };
     },
     methods: {
@@ -293,6 +356,13 @@ export default {
                 this.step = back;
                 this.progressBar = "w-" + this.step + "/3";
             }
+        },
+        showSuggestion() {
+            this.isSuggest = "hidden";
+            this.isHiddenSuggestResult = "";
+        },
+        copySuggestionToAnswer() {
+            this.steps[this.step].answer = this.suggestResult;
         },
     },
 };
