@@ -21,4 +21,19 @@ class OpenAiController extends Controller
             ], 500);
         }
     }
+
+    public function chat(Request $request)
+    {
+        try {
+            $url =  "https://api.openai.com/v1/chat/completions";
+            $response = Http::withToken(env('OPENAI_API_KEY'))->post($url, $request->all());
+            return response()->json($response->object(),  $response->status());
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'message_type' => 'danger'
+            ], 500);
+        }
+    }
 }

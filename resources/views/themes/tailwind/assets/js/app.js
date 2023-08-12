@@ -269,7 +269,7 @@ window.switchPlans = function (plan_id, plan_name) {
 
 /********** Switch Plans Button Click ***********/
 
-// vuejs code
+//vuejs code
 import { createApp } from "vue";
 
 import CreateProject from "./components/Projects/Create.vue";

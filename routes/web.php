@@ -44,5 +44,5 @@ Route::post('projects/store', 'App\Http\Controllers\ProjectController@saveProjec
 
 //openai Routes
 Route::post('openai/completions', '\App\Http\Controllers\OpenAiController@completions');
-
+Route::post('openai/chat', '\App\Http\Controllers\OpenAiController@chat');
 /***** End BrandBuilder Routes *****/
