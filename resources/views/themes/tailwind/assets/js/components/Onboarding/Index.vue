@@ -323,13 +323,13 @@ export default {
                 3: {
                     question: "Who typically has these challenges?",
                     subQuestion: "Your previous answers should act as the seed",
-                    answerInputType: "select",
-                    answerInputPlaceHolder: "Choose industry",
-                    answerOptions: [
-                        { text: "text1", value: "val1" },
-                        { text: "text2", value: "val2" },
-                        { text: "text3", value: "val3" },
-                    ],
+                    answerInputType: "text",
+                    answerInputPlaceHolder: "",
+                    // answerOptions: [
+                    //     { text: "text1", value: "val1" },
+                    //     { text: "text2", value: "val2" },
+                    //     { text: "text3", value: "val3" },
+                    // ],
                     next: "register",
                     back: 2,
                     answer: "",
