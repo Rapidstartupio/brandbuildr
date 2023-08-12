@@ -177,18 +177,20 @@ button[aria-selected="true"] {
                                 </a>
                             </div>
                             <div :class="isHiddenSuggestResult">
-                                <p class="px-4 py-6 text-sm font-light">
+                                <p
+                                    class="px-4 py-6 text-sm font-light text-center"
+                                >
                                     {{ suggestResult }}
                                 </p>
-                                <div class="md:space-x-4 text-center">
+                                <div class="text-center">
                                     <button
-                                        class="bg-wave-500 hover:bg-wave-700 text-white py-1 px-8 rounded-lg"
+                                        class="bg-wave-500 hover:bg-wave-700 text-white py-1 px-8 rounded-lg mr-2"
                                         v-on:click="copySuggestionToAnswer()"
                                     >
                                         Copy to Answer
                                     </button>
                                     <button
-                                        class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white"
+                                        class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white mr-2 mt-2"
                                         v-on:click="showSuggestion()"
                                     >
                                         Suggest Again

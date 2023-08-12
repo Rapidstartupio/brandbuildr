@@ -25366,10 +25366,10 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   fill: "white"
 })])], -1 /* HOISTED */);
 var _hoisted_22 = {
-  "class": "px-4 py-6 text-sm font-light"
+  "class": "px-4 py-6 text-sm font-light text-center"
 };
 var _hoisted_23 = {
-  "class": "md:space-x-4 text-center"
+  "class": "text-center"
 };
 var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"\"><form><div class=\"relative\"><input type=\"search\" id=\"search\" class=\"block w-full text-sm bg-brand-700 border-0 my-3 focus:ring-0 focus:border-wave-500 rounded-md placeholder:text-gray-500\" placeholder=\"Send a Message..\"><button type=\"button\" class=\"text-white absolute right-2.5 bottom-2\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M2 21L23 12L2 3V10L17 12L2 14V21Z\" fill=\"#E9F6FF\"></path></svg></button></div></form></div>", 1);
 var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -25442,12 +25442,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, " Suggest ")], 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($data.isHiddenSuggestResult)
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.suggestResult), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "bg-wave-500 hover:bg-wave-700 text-white py-1 px-8 rounded-lg",
+    "class": "bg-wave-500 hover:bg-wave-700 text-white py-1 px-8 rounded-lg mr-2",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.copySuggestionToAnswer();
     })
   }, " Copy to Answer "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "text-base font-medium leading-6 text-gray-500 whitespace-no-wrap border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white",
+    "class": "text-base font-medium leading-6 text-gray-500 whitespace-no-wrap border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white mr-2 mt-2",
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.showSuggestion();
     })
