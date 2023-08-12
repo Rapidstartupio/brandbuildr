@@ -24992,6 +24992,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -25003,7 +25006,7 @@ __webpack_require__.r(__webpack_exports__);
           question: "What specific industry does your business operate in?",
           subQuestion: "Briefly describe what type of business you're building a brand for",
           answerInputType: "text",
-          answerInputPlaceHolder: "We oprate in the food and beverage industry",
+          answerInputPlaceHolder: "We Operate in the food and beverage industry",
           next: 2,
           back: null
         },
@@ -25017,7 +25020,7 @@ __webpack_require__.r(__webpack_exports__);
         },
         3: {
           question: "Who typically has these challenges?",
-          subQuestion: "Your previous answers should act as the seedr",
+          subQuestion: "Your previous answers should act as the seed",
           answerInputType: "select",
           answerInputPlaceHolder: "Choose industry",
           answerOptions: [{
@@ -25031,12 +25034,13 @@ __webpack_require__.r(__webpack_exports__);
             value: "val3"
           }],
           next: "register",
-          back: 2
+          back: 2,
+          answer: ""
         }
       },
       isHiddenSuggestResult: "hidden",
       isSuggest: "",
-      suggestResult: "We mitigate event planning and logistical stress by offering reliable, diverse, and high-quality catering services, customized to client needs for varied dietary preferences."
+      suggestResult: ""
     };
   },
   methods: {
@@ -25049,6 +25053,9 @@ __webpack_require__.r(__webpack_exports__);
       } else if (next) {
         this.step = next;
         this.progressBar = "w-" + this.step + "/3";
+        this.suggestResult = "";
+        this.isSuggest = "";
+        this.isHiddenSuggestResult = "hidden";
       }
     },
     back: function back() {
@@ -25056,11 +25063,61 @@ __webpack_require__.r(__webpack_exports__);
       if (back) {
         this.step = back;
         this.progressBar = "w-" + this.step + "/3";
+        this.suggestResult = "";
+        this.isSuggest = "";
+        this.isHiddenSuggestResult = "hidden";
       }
     },
+    // suggestAgain() {
+    //     var promot =
+    //         "Please answer to this question : " +
+    //         this.steps[this.step].question;
+    //     axios]]]
+    //             model: "text-davinci-003",
+    //             prompt: promot,
+    //         })
+    //         .then((response) => {
+    //             if (response.data[0]["text"]) {
+    //                 this.suggestResult = response.data[0]["text"];
+    //             }
+    //             console.log(response);
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // },
     showSuggestion: function showSuggestion() {
-      this.isSuggest = "hidden";
-      this.isHiddenSuggestResult = "";
+      var _this = this;
+      var prompt = "";
+      if (this.steps[this.step].back) {
+        var prevStep = this.steps[this.step].back;
+        var prevAnswer = this.steps[prevStep].answer;
+        if (prevAnswer) {
+          prompt = "For a user who describe their business as ( " + prevAnswer + ") ";
+        }
+      }
+      if (this.steps[this.step].answerInputType == "select") {
+        prompt += ", Please choose one value of these option : (" + this.steps[this.step].answerOptions.map(function (entry) {
+          return entry.value;
+        }).join(", ") + ")";
+      } else {
+        prompt += ", Please answer to this question : " + this.steps[this.step].question;
+      }
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("openai/completions", {
+        model: "text-davinci-003",
+        prompt: prompt
+      }).then(function (response) {
+        if (response.data[0]["text"]) {
+          var suggestion = response.data[0]["text"];
+          suggestion = suggestion.replace(/(\r\n|\n|\r)/gm, "");
+          _this.suggestResult = suggestion;
+          _this.isSuggest = "hidden";
+          _this.isHiddenSuggestResult = "";
+        }
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
     copySuggestionToAnswer: function copySuggestionToAnswer() {
       this.steps[this.step].answer = this.suggestResult;
@@ -25232,11 +25289,10 @@ var _hoisted_12 = ["placeholder", "value"];
 var _hoisted_13 = {
   key: 1
 };
-var _hoisted_14 = {
-  "class": "block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 my-3 text-xs"
-};
+var _hoisted_14 = ["value"];
 var _hoisted_15 = {
-  selected: ""
+  selected: "",
+  value: ""
 };
 var _hoisted_16 = ["value"];
 var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -25318,13 +25374,10 @@ var _hoisted_22 = {
   "class": "px-4 py-6 text-sm font-light"
 };
 var _hoisted_23 = {
-  "class": "space-x-4 text-center"
+  "class": "md:space-x-4 text-center"
 };
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
-}, " Suggest Again ", -1 /* HOISTED */);
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"\"><form><div class=\"relative\"><input type=\"search\" id=\"search\" class=\"block w-full text-sm bg-brand-700 border-0 my-3 focus:ring-0 focus:border-wave-500 rounded-md placeholder:text-gray-500\" placeholder=\"Send a Message..\"><button type=\"button\" class=\"text-white absolute right-2.5 bottom-2\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M2 21L23 12L2 3V10L17 12L2 14V21Z\" fill=\"#E9F6FF\"></path></svg></button></div></form></div>", 1);
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"\"><form><div class=\"relative\"><input type=\"search\" id=\"search\" class=\"block w-full text-sm bg-brand-700 border-0 my-3 focus:ring-0 focus:border-wave-500 rounded-md placeholder:text-gray-500\" placeholder=\"Send a Message..\"><button type=\"button\" class=\"text-white absolute right-2.5 bottom-2\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M2 21L23 12L2 3V10L17 12L2 14V21Z\" fill=\"#E9F6FF\"></path></svg></button></div></form></div>", 1);
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "hidden p-4 rounded-lg group",
   id: "examples",
   role: "tabpanel",
@@ -25344,13 +25397,13 @@ var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
 }, " Copy to Answer ")])])])], -1 /* HOISTED */);
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "hidden p-4 rounded-lg group",
   id: "resources",
   role: "tabpanel",
   "aria-labelledby": "resources-tab"
 }, " test3 ", -1 /* HOISTED */);
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "hidden p-4 rounded-lg group",
   id: "notes",
   role: "tabpanel",
@@ -25365,11 +25418,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-xs",
     placeholder: $data.steps[$data.step].answerInputPlaceHolder,
     value: $data.steps[$data.step].answer
-  }, null, 8 /* PROPS */, _hoisted_12)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.steps[$data.step].answerInputType == 'select' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.steps[$data.step].answerInputPlaceHolder), 1 /* TEXT */), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.steps[$data.step].answerOptions, function (option, index) {
+  }, null, 8 /* PROPS */, _hoisted_12)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.steps[$data.step].answerInputType == 'select' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "class": "block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 my-3 text-xs",
+    value: $data.steps[$data.step].answer
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.steps[$data.step].answerInputPlaceHolder), 1 /* TEXT */), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.steps[$data.step].answerOptions, function (option, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
       value: option.value
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(option.text), 9 /* TEXT, PROPS */, _hoisted_16);
-  }), 256 /* UNKEYED_FRAGMENT */))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }), 256 /* UNKEYED_FRAGMENT */))], 8 /* PROPS */, _hoisted_14)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "bg-wave-500 hover:bg-wave-700 text-white py-2 px-8 rounded-lg",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.next();
@@ -25384,7 +25440,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-center mt-4", $data.isSuggest])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "javascript:;",
-    "class": "text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-12 py-2 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white",
+    "class": "text-base font-medium leading-6 text-gray-500 whitespace-no-wrap border border-white px-12 py-2 text-white rounded-lg hover:text-black hover:bg-white",
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.showSuggestion();
     })
@@ -25395,7 +25451,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.copySuggestionToAnswer();
     })
-  }, " Copy to Answer "), _hoisted_24])], 2 /* CLASS */)]), _hoisted_25]), _hoisted_26, _hoisted_27, _hoisted_28])])])]);
+  }, " Copy to Answer "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "text-base font-medium leading-6 text-gray-500 whitespace-no-wrap border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white",
+    onClick: _cache[4] || (_cache[4] = function ($event) {
+      return $options.showSuggestion();
+    })
+  }, " Suggest Again ")])], 2 /* CLASS */)]), _hoisted_24]), _hoisted_25, _hoisted_26, _hoisted_27])])])]);
 }
 
 /***/ }),

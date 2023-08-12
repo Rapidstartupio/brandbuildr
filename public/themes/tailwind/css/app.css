@@ -2168,9 +2168,6 @@ input:checked + .toggle-bg {
 .h-screen {
   height: 100vh;
 }
-.h-7 {
-  height: 1.75rem;
-}
 .max-h-full {
   max-height: 100%;
 }
@@ -2691,6 +2688,9 @@ input:checked + .toggle-bg {
 .rounded {
   border-radius: 0.25rem;
 }
+.rounded-2xl {
+  border-radius: 1rem;
+}
 .rounded-\[15px\] {
   border-radius: 15px;
 }
@@ -2708,9 +2708,6 @@ input:checked + .toggle-bg {
 }
 .rounded-xl {
   border-radius: 0.8rem;
-}
-.rounded-2xl {
-  border-radius: 1rem;
 }
 .rounded-b-lg {
   border-bottom-right-radius: 0.5rem;
@@ -3013,9 +3010,6 @@ input:checked + .toggle-bg {
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
 }
-.bg-opacity-20 {
-  --tw-bg-opacity: 0.2;
-}
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -3237,10 +3231,6 @@ input:checked + .toggle-bg {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-.px-2\.5 {
-  padding-left: 0.625rem;
-  padding-right: 0.625rem;
 }
 .pb-10 {
   padding-bottom: 2.5rem;
@@ -3464,11 +3454,11 @@ input:checked + .toggle-bg {
 .leading-normal {
   line-height: 1.5;
 }
-.leading-tight {
-  line-height: 1.25;
-}
 .leading-snug {
   line-height: 1.375;
+}
+.leading-tight {
+  line-height: 1.25;
 }
 .tracking-tight {
   letter-spacing: -0.025em;

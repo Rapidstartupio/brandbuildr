@@ -48,8 +48,9 @@ button[aria-selected="true"] {
                         <div v-if="steps[step].answerInputType == 'select'">
                             <select
                                 class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 my-3 text-xs"
+                                :value="steps[step].answer"
                             >
-                                <option selected>
+                                <option selected value="">
                                     {{ steps[step].answerInputPlaceHolder }}
                                 </option>
                                 <option
@@ -169,7 +170,7 @@ button[aria-selected="true"] {
                             <div class="text-center mt-4" :class="isSuggest">
                                 <a
                                     href="javascript:;"
-                                    class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-12 py-2 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
+                                    class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap border border-white px-12 py-2 text-white rounded-lg hover:text-black hover:bg-white"
                                     v-on:click="showSuggestion()"
                                 >
                                     Suggest
@@ -179,7 +180,7 @@ button[aria-selected="true"] {
                                 <p class="px-4 py-6 text-sm font-light">
                                     {{ suggestResult }}
                                 </p>
-                                <div class="space-x-4 text-center">
+                                <div class="md:space-x-4 text-center">
                                     <button
                                         class="bg-wave-500 hover:bg-wave-700 text-white py-1 px-8 rounded-lg"
                                         v-on:click="copySuggestionToAnswer()"
@@ -187,7 +188,8 @@ button[aria-selected="true"] {
                                         Copy to Answer
                                     </button>
                                     <button
-                                        class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
+                                        class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white"
+                                        v-on:click="showSuggestion()"
                                     >
                                         Suggest Again
                                     </button>
@@ -288,6 +290,7 @@ button[aria-selected="true"] {
 </template>
 
 <script>
+import axios from "axios";
 export default {
     data() {
         return {
@@ -302,7 +305,7 @@ export default {
                         "Briefly describe what type of business you're building a brand for",
                     answerInputType: "text",
                     answerInputPlaceHolder:
-                        "We oprate in the food and beverage industry",
+                        "We Operate in the food and beverage industry",
                     next: 2,
                     back: null,
                 },
@@ -319,8 +322,7 @@ export default {
                 },
                 3: {
                     question: "Who typically has these challenges?",
-                    subQuestion:
-                        "Your previous answers should act as the seedr",
+                    subQuestion: "Your previous answers should act as the seed",
                     answerInputType: "select",
                     answerInputPlaceHolder: "Choose industry",
                     answerOptions: [
@@ -330,12 +332,12 @@ export default {
                     ],
                     next: "register",
                     back: 2,
+                    answer: "",
                 },
             },
             isHiddenSuggestResult: "hidden",
             isSuggest: "",
-            suggestResult:
-                "We mitigate event planning and logistical stress by offering reliable, diverse, and high-quality catering services, customized to client needs for varied dietary preferences.",
+            suggestResult: "",
         };
     },
     methods: {
@@ -348,6 +350,9 @@ export default {
             } else if (next) {
                 this.step = next;
                 this.progressBar = "w-" + this.step + "/3";
+                this.suggestResult = "";
+                this.isSuggest = "";
+                this.isHiddenSuggestResult = "hidden";
             }
         },
         back() {
@@ -355,11 +360,72 @@ export default {
             if (back) {
                 this.step = back;
                 this.progressBar = "w-" + this.step + "/3";
+                this.suggestResult = "";
+                this.isSuggest = "";
+                this.isHiddenSuggestResult = "hidden";
             }
         },
+        // suggestAgain() {
+        //     var promot =
+        //         "Please answer to this question : " +
+        //         this.steps[this.step].question;
+        //     axios]]]
+        //             model: "text-davinci-003",
+        //             prompt: promot,
+        //         })
+        //         .then((response) => {
+        //             if (response.data[0]["text"]) {
+        //                 this.suggestResult = response.data[0]["text"];
+        //             }
+        //             console.log(response);
+        //         })
+        //         .catch((error) => {
+        //             console.log(error);
+        //         });
+        // },
         showSuggestion() {
-            this.isSuggest = "hidden";
-            this.isHiddenSuggestResult = "";
+            var prompt = "";
+            if (this.steps[this.step].back) {
+                var prevStep = this.steps[this.step].back;
+                var prevAnswer = this.steps[prevStep].answer;
+                if (prevAnswer) {
+                    prompt =
+                        "For a user who describe their business as ( " +
+                        prevAnswer +
+                        ") ";
+                }
+            }
+
+            if (this.steps[this.step].answerInputType == "select") {
+                prompt +=
+                    ", Please choose one value of these option : (" +
+                    this.steps[this.step].answerOptions
+                        .map((entry) => entry.value)
+                        .join(", ") +
+                    ")";
+            } else {
+                prompt +=
+                    ", Please answer to this question : " +
+                    this.steps[this.step].question;
+            }
+            axios
+                .post("openai/completions", {
+                    model: "text-davinci-003",
+                    prompt: prompt,
+                })
+                .then((response) => {
+                    if (response.data[0]["text"]) {
+                        var suggestion = response.data[0]["text"];
+                        suggestion = suggestion.replace(/(\r\n|\n|\r)/gm, "");
+                        this.suggestResult = suggestion;
+                        this.isSuggest = "hidden";
+                        this.isHiddenSuggestResult = "";
+                    }
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
         copySuggestionToAnswer() {
             this.steps[this.step].answer = this.suggestResult;

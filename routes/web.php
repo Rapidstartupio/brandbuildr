@@ -41,4 +41,8 @@ Route::post('projects/clients/store', 'App\Http\Controllers\ProjectController@sa
 Route::post('projects/clients/get', 'App\Http\Controllers\ProjectController@getUserClients')->name('projects.get-user-clients');
 Route::get('projects-types', 'App\Http\Controllers\ProjectController@getProjectTypes');
 Route::post('projects/store', 'App\Http\Controllers\ProjectController@saveProject')->name('projects.store');
+
+//openai Routes
+Route::post('openai/completions', '\App\Http\Controllers\OpenAiController@completions');
+
 /***** End BrandBuilder Routes *****/

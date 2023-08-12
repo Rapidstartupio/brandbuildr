@@ -17,9 +17,10 @@
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
         "lab404/laravel-impersonate": "^1.7",
-        "laravel/framework": "^9.11",
+        "laravel/framework": "9.46",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.4",
+        "openai-php/laravel": "^0.4.1",
         "tcg/voyager": "1.5.x-dev",
         "tymon/jwt-auth": "@dev"
     },
@@ -50,7 +51,7 @@
     "extra": {
         "laravel": {
             "dont-discover": [],
-            "providers" : [
+            "providers": [
                 "Wave\\WaveServiceProvider"
             ]
         }
@@ -73,7 +74,8 @@
         "sort-packages": true,
         "optimize-autoloader": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
     "repositories": {
