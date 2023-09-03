@@ -42,6 +42,7 @@ Route::post('projects/clients/get', 'App\Http\Controllers\ProjectController@getU
 Route::get('projects-types', 'App\Http\Controllers\ProjectController@getProjectTypes');
 Route::post('projects/store', 'App\Http\Controllers\ProjectController@saveProject')->name('projects.store');
 
+Route::get('project/{id}', 'App\Http\Controllers\ProjectController@project')->name('project.details');
 //openai Routes
 Route::post('openai/completions', '\App\Http\Controllers\OpenAiController@completions');
 Route::post('openai/chat', '\App\Http\Controllers\OpenAiController@chat');

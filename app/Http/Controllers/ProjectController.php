@@ -132,4 +132,11 @@ class ProjectController extends Controller
             ], 500);
         }
     }
+
+    public function project($id)
+    {
+        $user = auth()->user();
+        $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
+        return view('theme::projects.project-details', compact('project'));
+    }
 }

@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('\App\Models\Client')->orderBy('created_at', 'DESC');
     }
+
+    public function projects()
+    {
+        return $this->hasMany('\App\Models\Project')->orderBy('created_at', 'DESC');
+    }
 }

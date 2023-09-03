@@ -27,7 +27,7 @@
 	</div>
 </div>
 
-@if(true)
+@if($projects)
 <div id="filters" class="lg:flex space-y-2 lg:space-y-0">
 	<div class="dates mr-4">
 		<div class="relative max-w-sm">
@@ -65,7 +65,39 @@
 
 <div id="projects-list">
 	<div class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 dark:text-white my-5">
+		@foreach($projects as $project)
 		<div class="brandDark2 p-4 rounded space-y-5">
+			<div class="md:flex justify-between">
+				<div class="">{{$project->name}}</div>
+				<div class="dark:text-gray-400 text-sm">{{$project->type->name}}</div>
+			</div>
+			<div>
+				<p class="text-xs font-light">0% Completed</p>
+			</div>
+			<div class="w-full bg-[#838396] rounded-full h-1.5 dark:bg-[#838396]">
+				<div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: 0%"></div>
+			</div>
+			<div>
+				<p class="text-xs font-light">{{$project->description}}</p>
+			</div>
+			<div class="flex justify-between">
+				<div>
+					<button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800">RedBull</button>
+				</div>
+				<div class="dark:text-gray-400 flex items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+						<path d="M15.8333 2.49967H15V0.833008H13.3333V2.49967H6.66667V0.833008H5V2.49967H4.16667C3.72464 2.49967 3.30072 2.67527 2.98816 2.98783C2.67559 3.30039 2.5 3.72431 2.5 4.16634V15.833C2.5 16.275 2.67559 16.699 2.98816 17.0115C3.30072 17.3241 3.72464 17.4997 4.16667 17.4997H15.8333C16.7583 17.4997 17.5 16.758 17.5 15.833V4.16634C17.5 3.72431 17.3244 3.30039 17.0118 2.98783C16.6993 2.67527 16.2754 2.49967 15.8333 2.49967ZM15.8333 15.833H4.16667V7.49967H15.8333V15.833ZM15.8333 5.83301H4.16667V4.16634H15.8333V5.83301Z" fill="#838396" />
+					</svg>
+					<span>{{$project->created_at->format('d/m/Y')}}</span>
+				</div>
+			</div>
+			<div class="flex justify-end">
+				<a href="{{route('project.details',$project->id )}}" class=" md:float-right text-white bg-blue-700 hover:bg-blue-800    font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-[#570AFF] focus:outline-none dark:text-gray-300">Edit Project</a>
+			</div>
+		</div>
+		@endforeach
+
+		<!-- <div class="brandDark2 p-4 rounded space-y-5">
 			<div class="md:flex justify-between">
 				<div class="">RedBull Project</div>
 				<div class="dark:text-gray-400 text-sm">Brand Strategy</div>
@@ -93,123 +125,7 @@
 			<div class="flex justify-end">
 				<button type="button" class=" md:float-right text-white bg-blue-700 hover:bg-blue-800    font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-[#570AFF] focus:outline-none dark:text-gray-300">Edit Project</button>
 			</div>
-		</div>
-		<div class="brandDark2 p-4 rounded space-y-5">
-			<div class="md:flex justify-between">
-				<div class="">RedBull Project</div>
-				<div class="dark:text-gray-400 text-sm">Brand Strategy</div>
-			</div>
-			<div>
-				<p class="text-xs font-light">67% Completed</p>
-			</div>
-			<div class="w-full bg-[#838396] rounded-full h-1.5 dark:bg-[#838396]">
-				<div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: 67%"></div>
-			</div>
-			<div>
-				<p class="text-xs font-light">Lorem ipsum dolor sit amet consectetur. Nunc dictum justo vulputate vitae quis lacinia platea...</p>
-			</div>
-			<div class="flex justify-between">
-				<div>
-					<button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800">RedBull</button>
-				</div>
-				<div class="dark:text-gray-400 flex items-center">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-						<path d="M15.8333 2.49967H15V0.833008H13.3333V2.49967H6.66667V0.833008H5V2.49967H4.16667C3.72464 2.49967 3.30072 2.67527 2.98816 2.98783C2.67559 3.30039 2.5 3.72431 2.5 4.16634V15.833C2.5 16.275 2.67559 16.699 2.98816 17.0115C3.30072 17.3241 3.72464 17.4997 4.16667 17.4997H15.8333C16.7583 17.4997 17.5 16.758 17.5 15.833V4.16634C17.5 3.72431 17.3244 3.30039 17.0118 2.98783C16.6993 2.67527 16.2754 2.49967 15.8333 2.49967ZM15.8333 15.833H4.16667V7.49967H15.8333V15.833ZM15.8333 5.83301H4.16667V4.16634H15.8333V5.83301Z" fill="#838396" />
-					</svg>
-					<span>12/01/2023</span>
-				</div>
-			</div>
-			<div class="flex justify-end">
-				<button type="button" class=" md:float-right text-white bg-blue-700 hover:bg-blue-800    font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-[#570AFF] focus:outline-none dark:text-gray-300">Edit Project</button>
-			</div>
-		</div>
-		<div class="brandDark2 p-4 rounded space-y-5">
-			<div class="md:flex justify-between">
-				<div class="">RedBull Project</div>
-				<div class="dark:text-gray-400 text-sm">Brand Strategy</div>
-			</div>
-			<div>
-				<p class="text-xs font-light">67% Completed</p>
-			</div>
-			<div class="w-full bg-[#838396] rounded-full h-1.5 dark:bg-[#838396]">
-				<div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: 67%"></div>
-			</div>
-			<div>
-				<p class="text-xs font-light">Lorem ipsum dolor sit amet consectetur. Nunc dictum justo vulputate vitae quis lacinia platea...</p>
-			</div>
-			<div class="flex justify-between">
-				<div>
-					<button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800">RedBull</button>
-				</div>
-				<div class="dark:text-gray-400 flex items-center">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-						<path d="M15.8333 2.49967H15V0.833008H13.3333V2.49967H6.66667V0.833008H5V2.49967H4.16667C3.72464 2.49967 3.30072 2.67527 2.98816 2.98783C2.67559 3.30039 2.5 3.72431 2.5 4.16634V15.833C2.5 16.275 2.67559 16.699 2.98816 17.0115C3.30072 17.3241 3.72464 17.4997 4.16667 17.4997H15.8333C16.7583 17.4997 17.5 16.758 17.5 15.833V4.16634C17.5 3.72431 17.3244 3.30039 17.0118 2.98783C16.6993 2.67527 16.2754 2.49967 15.8333 2.49967ZM15.8333 15.833H4.16667V7.49967H15.8333V15.833ZM15.8333 5.83301H4.16667V4.16634H15.8333V5.83301Z" fill="#838396" />
-					</svg>
-					<span>12/01/2023</span>
-				</div>
-			</div>
-			<div class="flex justify-end">
-				<button type="button" class=" md:float-right text-white bg-blue-700 hover:bg-blue-800    font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-[#570AFF] focus:outline-none dark:text-gray-300">Edit Project</button>
-			</div>
-		</div>
-		<div class="brandDark2 p-4 rounded space-y-5">
-			<div class="md:flex justify-between">
-				<div class="">RedBull Project</div>
-				<div class="dark:text-gray-400 text-sm">Brand Strategy</div>
-			</div>
-			<div>
-				<p class="text-xs font-light">67% Completed</p>
-			</div>
-			<div class="w-full bg-[#838396] rounded-full h-1.5 dark:bg-[#838396]">
-				<div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: 67%"></div>
-			</div>
-			<div>
-				<p class="text-xs font-light">Lorem ipsum dolor sit amet consectetur. Nunc dictum justo vulputate vitae quis lacinia platea...</p>
-			</div>
-			<div class="flex justify-between">
-				<div>
-					<button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800">RedBull</button>
-				</div>
-				<div class="dark:text-gray-400 flex items-center">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-						<path d="M15.8333 2.49967H15V0.833008H13.3333V2.49967H6.66667V0.833008H5V2.49967H4.16667C3.72464 2.49967 3.30072 2.67527 2.98816 2.98783C2.67559 3.30039 2.5 3.72431 2.5 4.16634V15.833C2.5 16.275 2.67559 16.699 2.98816 17.0115C3.30072 17.3241 3.72464 17.4997 4.16667 17.4997H15.8333C16.7583 17.4997 17.5 16.758 17.5 15.833V4.16634C17.5 3.72431 17.3244 3.30039 17.0118 2.98783C16.6993 2.67527 16.2754 2.49967 15.8333 2.49967ZM15.8333 15.833H4.16667V7.49967H15.8333V15.833ZM15.8333 5.83301H4.16667V4.16634H15.8333V5.83301Z" fill="#838396" />
-					</svg>
-					<span>12/01/2023</span>
-				</div>
-			</div>
-			<div class="flex justify-end">
-				<button type="button" class=" md:float-right text-white bg-blue-700 hover:bg-blue-800    font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-[#570AFF] focus:outline-none dark:text-gray-300">Edit Project</button>
-			</div>
-		</div>
-		<div class="brandDark2 p-4 rounded space-y-5">
-			<div class="md:flex justify-between">
-				<div class="">RedBull Project</div>
-				<div class="dark:text-gray-400 text-sm">Brand Strategy</div>
-			</div>
-			<div>
-				<p class="text-xs font-light">67% Completed</p>
-			</div>
-			<div class="w-full bg-[#838396] rounded-full h-1.5 dark:bg-[#838396]">
-				<div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: 67%"></div>
-			</div>
-			<div>
-				<p class="text-xs font-light">Lorem ipsum dolor sit amet consectetur. Nunc dictum justo vulputate vitae quis lacinia platea...</p>
-			</div>
-			<div class="flex justify-between">
-				<div>
-					<button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800">RedBull</button>
-				</div>
-				<div class="dark:text-gray-400 flex items-center">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-						<path d="M15.8333 2.49967H15V0.833008H13.3333V2.49967H6.66667V0.833008H5V2.49967H4.16667C3.72464 2.49967 3.30072 2.67527 2.98816 2.98783C2.67559 3.30039 2.5 3.72431 2.5 4.16634V15.833C2.5 16.275 2.67559 16.699 2.98816 17.0115C3.30072 17.3241 3.72464 17.4997 4.16667 17.4997H15.8333C16.7583 17.4997 17.5 16.758 17.5 15.833V4.16634C17.5 3.72431 17.3244 3.30039 17.0118 2.98783C16.6993 2.67527 16.2754 2.49967 15.8333 2.49967ZM15.8333 15.833H4.16667V7.49967H15.8333V15.833ZM15.8333 5.83301H4.16667V4.16634H15.8333V5.83301Z" fill="#838396" />
-					</svg>
-					<span>12/01/2023</span>
-				</div>
-			</div>
-			<div class="flex justify-end">
-				<button type="button" class=" md:float-right text-white bg-blue-700 hover:bg-blue-800    font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-600 dark:hover:bg-[#570AFF] focus:outline-none dark:text-gray-300">Edit Project</button>
-			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 @else
