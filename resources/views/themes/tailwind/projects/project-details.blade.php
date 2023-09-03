@@ -31,7 +31,7 @@
 </div>
 
 <div class="text-center">
-    <a href="">
+    <a href="{{route('project.ai-assist',$project->id)}}">
         <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-lg px-16 py-3 dark:bg-brandPrimary dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800">Let`s Build</button>
     </a>
 </div>

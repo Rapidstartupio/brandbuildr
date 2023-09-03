@@ -139,4 +139,11 @@ class ProjectController extends Controller
         $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
         return view('theme::projects.project-details', compact('project'));
     }
+
+    public function projectAiAssist($id)
+    {
+        $user = auth()->user();
+        $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
+        return view('theme::projects.ai-assist', compact('project'));
+    }
 }
