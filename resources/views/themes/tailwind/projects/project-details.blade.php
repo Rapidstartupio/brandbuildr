@@ -12,20 +12,22 @@
 <div id="sections-list">
     <div class="grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 dark:text-white my-5">
         @foreach($project->type->sections as $section)
-        <div class="brandDark2 p-4 rounded space-y-5 section-item" data-section-id="{{$section->id}}">
-            <div class="md:flex justify-between">
-                <div class="">{{$section->order}}. {{$section->name}}</div>
+        <a @if(isset($section->currentBlock()->id)) href="{{route('project.ai-assist',[$project->id,$section->id,$section->currentBlock()->id])}}" @endif>
+            <div class="brandDark2 p-4 rounded space-y-5 section-item" data-section-id="{{$section->id}}">
+                <div class="md:flex justify-between">
+                    <div class="">{{$section->order}}. {{$section->name}}</div>
+                </div>
+                <div>
+                    <button type="button" class="focus:outline-none rounded-lg text-gray-300 bg-gray-600   focus:ring-4  font-medium rounded-lg text-sm px-2     dark:bg-gray-600 ">In Progress</button>
+                </div>
+                <div>
+                    <p class="text-xs font-light">0% Questions Completed</p>
+                </div>
+                <div class="w-full bg-[#838396] rounded-full h-1.5 dark:bg-[#838396]">
+                    <div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: 0%"></div>
+                </div>
             </div>
-            <div>
-                <button type="button" class="focus:outline-none rounded-lg text-gray-300 bg-gray-600   focus:ring-4  font-medium rounded-lg text-sm px-2     dark:bg-gray-600 ">In Progress</button>
-            </div>
-            <div>
-                <p class="text-xs font-light">0% Questions Completed</p>
-            </div>
-            <div class="w-full bg-[#838396] rounded-full h-1.5 dark:bg-[#838396]">
-                <div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: 0%"></div>
-            </div>
-        </div>
+        </a>
         @endforeach
     </div>
 </div>

@@ -13,4 +13,9 @@ class ProjectSection extends Model
     {
         return $this->hasMany(ProjectBlock::class)->orderBy('order', 'ASC');
     }
+
+    public function currentBlock()
+    {
+        return $this->blocks->first();
+    }
 }
