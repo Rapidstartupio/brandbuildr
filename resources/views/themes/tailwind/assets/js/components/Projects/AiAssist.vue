@@ -51,8 +51,10 @@ button[aria-selected="true"] {
                         "
                         v-for="(section, index) in this.project.type.sections"
                     >
-                        {{ section.name }}
-                        <span class="text-sm">></span>
+                        <div v-if="index < 5">
+                            {{ section.name }}
+                            <span class="text-sm">></span>
+                        </div>
                     </div>
                 </div>
                 <div
