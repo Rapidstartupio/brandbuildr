@@ -274,9 +274,10 @@ import { createApp } from "vue";
 
 import CreateProject from "./components/Projects/Create.vue";
 import Onboarding from "./components/Onboarding/Index.vue";
-
+import AiAssist from "./components/Projects/AiAssist.vue";
 const app = createApp({});
 
 app.component("create-project", CreateProject);
 app.component("onboarding", Onboarding);
+app.component("ai-assist", AiAssist);
 app.mount("#app");

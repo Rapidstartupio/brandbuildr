@@ -43,8 +43,9 @@ Route::get('projects-types', 'App\Http\Controllers\ProjectController@getProjectT
 Route::post('projects/store', 'App\Http\Controllers\ProjectController@saveProject')->name('projects.store');
 
 Route::get('project/{id}', 'App\Http\Controllers\ProjectController@project')->name('project.details');
-Route::get('project/{id}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssist')->name('project.ai-assist');
-
+Route::get('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssist')->name('project.ai-assist');
+Route::post('projects/{id}/get', 'App\Http\Controllers\ProjectController@getUserProject')->name('projects.get-user-project');
+Route::post('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssistData');
 //openai Routes
 Route::post('openai/completions', '\App\Http\Controllers\OpenAiController@completions');
 Route::post('openai/chat', '\App\Http\Controllers\OpenAiController@chat');

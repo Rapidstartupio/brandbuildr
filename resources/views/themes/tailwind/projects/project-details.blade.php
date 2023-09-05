@@ -12,7 +12,7 @@
 <div id="sections-list">
     <div class="grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 dark:text-white my-5">
         @foreach($project->type->sections as $section)
-        <div class="brandDark2 p-4 rounded space-y-5">
+        <div class="brandDark2 p-4 rounded space-y-5 section-item" data-section-id="{{$section->id}}">
             <div class="md:flex justify-between">
                 <div class="">{{$section->order}}. {{$section->name}}</div>
             </div>
@@ -31,7 +31,7 @@
 </div>
 
 <div class="text-center">
-    <a href="{{route('project.ai-assist',$project->id)}}">
+    <a href="{{route('project.ai-assist',[$project->id,$current_section->id,$current_block->id])}}">
         <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-lg px-16 py-3 dark:bg-brandPrimary dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800">Let`s Build</button>
     </a>
 </div>

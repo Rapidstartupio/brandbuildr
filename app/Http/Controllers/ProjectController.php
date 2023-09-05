@@ -137,13 +137,74 @@ class ProjectController extends Controller
     {
         $user = auth()->user();
         $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
-        return view('theme::projects.project-details', compact('project'));
+        $current_section = $project->type->sections->first();
+        $current_block = $current_section->blocks->first();
+        return view('theme::projects.project-details', compact('project', 'current_section', 'current_block'));
     }
 
-    public function projectAiAssist($id)
+    public function projectAiAssist($id, $sectionId, $blockId)
     {
         $user = auth()->user();
         $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
-        return view('theme::projects.ai-assist', compact('project'));
+        // $section = $project->type->sections->find($sectionId)->firstOrFail();
+        // $block = $section->blocks->find($blockId)->firstOrFail();
+        return view('theme::projects.ai-assist', compact('id', 'sectionId', 'blockId'));
+    }
+    public function projectAiAssistData($id, $sectionId, $blockId)
+    {
+        //question:
+        //             "What specific industry does your business operate in?",
+        //         subQuestion:
+        //             "Briefly describe what type of business you're building a brand for",
+        //         answerInputType: "text",
+        //         answerInputPlaceHolder:
+        //             "We Operate in the food and beverage industry",
+        //         next: 2,
+        //         back: null,
+        $user = auth()->user();
+        $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
+        $section = $project->type->sections->find($sectionId)->firstOrFail();
+        $block = $section->blocks->find($blockId)->firstOrFail();
+        $questions = array();
+        $questionsLength = count($block->questions);
+        foreach ($block->questions as $key => $question) {
+            $next = $key + 1;
+            $back = $key - 1;
+            if ($key > $questionsLength - 2) {
+                $next = null;
+            }
+            if ($key == 0) {
+                $back = null;
+            }
+            $questions[] = [
+                'question_ai' => $question->question_ai,
+                'question' => $question->question,
+                'answerInputType' => "text",
+                'answerInputPlaceHolder' => "Type your answer here...",
+                'next' => $next,
+                'back' => $back
+            ];
+        }
+        //dd($questions);
+        return response()->json([
+            'status' => 'success',
+            'project' => $project,
+            'section' => $section,
+            'block' => $block,
+            'questions' => $questions,
+            //'sections' => $project->type->sections
+        ], 200);
+    }
+    public function getUserProject($id)
+    {
+        $user = auth()->user();
+        $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
+
+        return response()->json([
+            'status' => 'success',
+            'project' => $project,
+            'type' => $project->type,
+            'sections' => $project->type->sections
+        ], 200);
     }
 }
