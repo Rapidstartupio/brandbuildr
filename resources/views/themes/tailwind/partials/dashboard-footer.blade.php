@@ -3,7 +3,7 @@
 @endif
 
 <!-- Scripts -->
-<script src="{{ asset('themes/' . $theme->folder . '/js/app.js?12') }}"></script>
+<script src="{{ asset('themes/' . $theme->folder . '/js/app.js?13') }}"></script>
 <script src="{{ asset('js/flowbite.min.js') }}"></script>
 
 @yield('javascript')
