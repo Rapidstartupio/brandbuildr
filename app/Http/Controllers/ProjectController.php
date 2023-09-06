@@ -35,7 +35,7 @@ class ProjectController extends Controller
     {
         $section = "project-type";
         $card_header = false;
-        $projectType = ProjectType::where('user_id', auth()->user()->id)->findOrFail($id);
+        $projectType = ProjectType::where('user_id', auth()->user()->id)->where('id', $id)->firstOrFail();
         //dd($projectType);
         return view('theme::settings.index', compact('section', 'card_header', 'projectType'));
     }
@@ -137,8 +137,11 @@ class ProjectController extends Controller
     {
         $user = auth()->user();
         $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
-        $current_section = $project->type->sections->first();
+        $current_section = $project->type->sections->firstOrFail();
         $current_block = $current_section->blocks->first();
+        if (!$project or !$current_block or !$current_section) {
+            return abort(404);
+        }
         return view('theme::projects.project-details', compact('project', 'current_section', 'current_block'));
     }
 
@@ -146,8 +149,11 @@ class ProjectController extends Controller
     {
         $user = auth()->user();
         $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
-        // $section = $project->type->sections->find($sectionId)->firstOrFail();
-        // $block = $section->blocks->find($blockId)->firstOrFail();
+        $section = $project->type->sections->where('id', $sectionId)->firstOrFail();
+        $block = $section->blocks->where('id', $blockId)->firstOrFail();
+        if (count($block->questions) == 0) {
+            return abort(404);
+        }
         return view('theme::projects.ai-assist', compact('id', 'sectionId', 'blockId'));
     }
     public function projectAiAssistData($id, $sectionId, $blockId)
@@ -163,8 +169,8 @@ class ProjectController extends Controller
         //         back: null,
         $user = auth()->user();
         $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
-        $section = $project->type->sections->find($sectionId)->firstOrFail();
-        $block = $section->blocks->find($blockId)->firstOrFail();
+        $section = $project->type->sections->where('id', $sectionId)->firstOrFail();
+        $block = $section->blocks->where('id', $blockId)->firstOrFail();
         $questions = array();
         $questionsLength = count($block->questions);
         foreach ($block->questions as $key => $question) {
@@ -185,7 +191,9 @@ class ProjectController extends Controller
                 'back' => $back
             ];
         }
-        //dd($questions);
+        if (empty($questions)) {
+            return false;
+        };
         return response()->json([
             'status' => 'success',
             'project' => $project,

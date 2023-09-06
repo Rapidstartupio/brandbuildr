@@ -12,7 +12,8 @@
 <div id="sections-list">
     <div class="grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 dark:text-white my-5">
         @foreach($project->type->sections as $section)
-        <a @if(isset($section->currentBlock()->id)) href="{{route('project.ai-assist',[$project->id,$section->id,$section->currentBlock()->id])}}" @endif>
+        @if(isset($section->currentBlock()->id) && count($section->currentBlock()->questions) > 0)
+        <a href="{{route('project.ai-assist',[$project->id,$section->id,$section->currentBlock()->id])}}">
             <div class="brandDark2 p-4 rounded space-y-5 section-item" data-section-id="{{$section->id}}">
                 <div class="md:flex justify-between">
                     <div class="">{{$section->order}}. {{$section->name}}</div>
@@ -28,6 +29,7 @@
                 </div>
             </div>
         </a>
+        @endif
         @endforeach
     </div>
 </div>
