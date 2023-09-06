@@ -481,7 +481,8 @@ export default {
                 }, 10);
             } else if (next) {
                 this.step = next;
-                this.progressBar = "w-" + (this.step + 1) + "/3";
+                this.progressBar =
+                    "w-" + (this.step + 1) + "/" + this.steps.length;
                 this.suggestResult = "";
                 this.isSuggest = "";
                 this.isHiddenSuggestResult = "hidden";
@@ -491,7 +492,8 @@ export default {
             var back = this.steps[this.step].back;
             if (back !== null) {
                 this.step = back;
-                this.progressBar = "w-" + (this.step + 1) + "/3";
+                this.progressBar =
+                    "w-" + (this.step + 1) + "/" + this.steps.length;
                 this.suggestResult = "";
                 this.isSuggest = "";
                 this.isHiddenSuggestResult = "hidden";
