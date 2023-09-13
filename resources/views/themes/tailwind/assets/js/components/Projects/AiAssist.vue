@@ -49,7 +49,7 @@ button[aria-selected="true"] {
     color: #82828d;
 }
 .block-item .title {
-    @apply w-16;
+    min-width: 4rem;
     color: #82828d;
 }
 .block-item.active-block .number {
