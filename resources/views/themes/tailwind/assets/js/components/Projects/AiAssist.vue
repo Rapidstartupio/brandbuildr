@@ -7,6 +7,101 @@ button[aria-selected="true"] {
     fill-rule: evenodd;
     clip-rule: evenodd;
 }
+.section-title,
+.active-section + .section-title + .section-title span {
+    display: none;
+}
+
+.active-section + .section-title,
+.active-section + .section-title + .section-title,
+.section-title:has(+ * + .active-section),
+.section-title:has(+ .active-section),
+.active-section {
+    display: block;
+}
+.active-section + .section-title + .section-title {
+    background: linear-gradient(
+        90deg,
+        #b6b6b8 0%,
+        rgba(182, 182, 184, 0) 119.02%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.section-title:has(+ * + .active-section) {
+    background: linear-gradient(
+        90deg,
+        rgba(182, 182, 184, 0) 0%,
+        #b6b6b8 119.02%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.block-item .number {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    /* @apply mx-2; */
+    border-radius: 4px;
+    border: 1px solid #82828d;
+    color: #82828d;
+}
+.block-item .title {
+    @apply w-16;
+    color: #82828d;
+}
+.block-item.active-block .number {
+    @apply bg-wave-500;
+    border: none;
+    color: white;
+}
+.block-item.active-block .title {
+    color: white;
+}
+div.block-item {
+    margin-right: 3em !important;
+    position: relative;
+}
+
+.block-item:before,
+.block-item:after {
+    content: "";
+    width: 3em; /* size of your margin */
+    border-bottom: 1px solid;
+    position: absolute;
+    top: 35%;
+    color: #82828d;
+}
+.block-item::after {
+    left: 100%;
+}
+.block-item::before {
+    right: 100%;
+    display: none;
+}
+.block-item:first-of-type:before {
+    display: none;
+}
+.project-blocks {
+    white-space: nowrap;
+    /* */
+    text-align: center;
+}
+
+.block-item {
+    display: none;
+}
+
+.active-block + .block-item,
+.active-block + .block-item + .block-item,
+.active-block + .block-item + .block-item + .block-item,
+.block-item:has(+ * + .active-block),
+.block-item:has(+ .active-block),
+.active-block {
+    display: block;
+}
 </style>
 <template>
     <div
@@ -50,16 +145,32 @@ button[aria-selected="true"] {
                             word-wrap: break-word;
                         "
                         v-for="(section, index) in this.project.type.sections"
+                        :data-section-id="section.id"
+                        :class="{
+                            'active-section text-white':
+                                section.id == this.sectionId,
+                        }"
                     >
-                        <div v-if="index < 5">
+                        <div>
                             {{ section.name }}
                             <span class="text-sm">></span>
                         </div>
                     </div>
                 </div>
                 <div
-                    class="project-blocks flex text-center space-x-4 items-center justify-center pt-6 whitespace-nowrap truncate"
-                ></div>
+                    class="project-blocks flex text-center items-center justify-center py-6 whitespace-nowrap truncate"
+                >
+                    <div
+                        class="block-item"
+                        v-for="(block, index) in this.section.blocks"
+                        :class="{
+                            'active-block': block.id == this.blockId,
+                        }"
+                    >
+                        <div class="number">{{ block.order }}</div>
+                        <div class="title">{{ block.name }}</div>
+                    </div>
+                </div>
             </div>
         </div>
 

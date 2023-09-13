@@ -147,14 +147,19 @@ class ProjectController extends Controller
 
     public function projectAiAssist($id, $sectionId, $blockId)
     {
-        $user = auth()->user();
-        $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
-        $section = $project->type->sections->where('id', $sectionId)->firstOrFail();
-        $block = $section->blocks->where('id', $blockId)->firstOrFail();
-        if (count($block->questions) == 0) {
+        try {
+            $user = auth()->user();
+            $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
+            $section = $project->type->sections->where('id', $sectionId)->firstOrFail();
+            $section = $project->type->sections->where('id', $sectionId)->firstOrFail();
+            $block = $section->blocks->where('id', $blockId)->firstOrFail();
+            if (count($block->questions) == 0) {
+                return abort(404);
+            }
+            return view('theme::projects.ai-assist', compact('id', 'sectionId', 'blockId'));
+        } catch (\Illuminate\Support\ItemNotFoundException $e) {
             return abort(404);
         }
-        return view('theme::projects.ai-assist', compact('id', 'sectionId', 'blockId'));
     }
     public function projectAiAssistData($id, $sectionId, $blockId)
     {
