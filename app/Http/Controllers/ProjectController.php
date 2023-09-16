@@ -137,9 +137,9 @@ class ProjectController extends Controller
     {
         $user = auth()->user();
         $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
-        $current_section = $project->type->sections->firstOrFail();
+        $current_section = $project->type->sections->first();
         $current_block = $current_section->blocks->first();
-        if (!$project or !$current_block or !$current_section) {
+        if (!$project->type) {
             return abort(404);
         }
         return view('theme::projects.project-details', compact('project', 'current_section', 'current_block'));
@@ -193,7 +193,8 @@ class ProjectController extends Controller
                 'answerInputType' => "text",
                 'answerInputPlaceHolder' => "Type your answer here...",
                 'next' => $next,
-                'back' => $back
+                'back' => $back,
+                'examples' => $question->examples
             ];
         }
         if (empty($questions)) {

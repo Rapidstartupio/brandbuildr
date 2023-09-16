@@ -188,7 +188,7 @@ div.block-item {
                 </div>
                 <div
                     class="progress-bar h-0.5 bg-wave-500"
-                    :class="progressBar"
+                    :style="{ width: progressBar + '%' }"
                 ></div>
                 <div class="p-4 md:p-10" v-if="steps">
                     <div class="text-center">
@@ -456,39 +456,128 @@ div.block-item {
                         role="tabpanel"
                         aria-labelledby="examples-tab"
                     >
-                        <div class="space-y-8">
+                        <div
+                            id="default-carousel"
+                            class="relative w-full"
+                            data-carousel="slide"
+                        >
+                            <!-- Carousel wrapper -->
                             <div
-                                class="text-center text-base font-medium leading-snug"
+                                class="relative h-56 overflow-hidden rounded-lg md:h-96"
                             >
-                                Example #1
-                            </div>
-
-                            <div
-                                class="text-center text-base font-normal leading-snug"
-                            >
-                                <span
-                                    class="bg-brand-700 p-2 rounded-2xl text-sm"
-                                    >Hospitality</span
+                                <div
+                                    class="hidden duration-700 ease-in-out"
+                                    data-carousel-item
+                                    v-for="(example, index) in steps[step]
+                                        .examples"
                                 >
-                            </div>
-                            <div>
-                                <p class="px-12 py-6 text-sm font-light">
-                                    Lorem ipsum dolor sit amet consectetur.
-                                    Integer phasellus ac id dolor et libero
-                                    blandit enim. Consectetur in egestas
-                                    porttitor viverra sed pellentesque mauris
-                                    sed eget. Tristique et ornare netus iaculis
-                                    natoque risus turpis gravida. At lobortis
-                                    massa maecenas aliquam nibh dui viverra.
-                                </p>
-                                <div class="text-center py-6">
-                                    <button
-                                        class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
+                                    <div
+                                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 px-16"
                                     >
-                                        Copy to Answer
-                                    </button>
+                                        <div
+                                            class="text-center text-base font-medium leading-snug pb-6"
+                                        >
+                                            Example # {{ index + 1 }}
+                                        </div>
+
+                                        <div
+                                            class="text-center text-base font-normal leading-snug"
+                                        >
+                                            <span
+                                                class="bg-brand-700 p-2 rounded-2xl text-sm"
+                                            >
+                                                {{ example.title }}</span
+                                            >
+                                        </div>
+                                        <div>
+                                            <p
+                                                class="px-12 py-6 text-sm font-light"
+                                            >
+                                                {{ example.content }}
+                                            </p>
+                                            <div class="text-center py-6">
+                                                <button
+                                                    class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
+                                                    v-on:click="
+                                                        copyExampleToAnswer(
+                                                            example.content
+                                                        )
+                                                    "
+                                                >
+                                                    Copy to Answer
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- Slider indicators -->
+                            <div
+                                class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2"
+                            >
+                                <button
+                                    v-for="(example, index) in steps[step]
+                                        .examples"
+                                    type="button"
+                                    class="w-3 h-3 rounded-full bg-white dark:bg-white"
+                                    aria-current="true"
+                                    aria-label="Slide 1"
+                                    :data-carousel-slide-to="index"
+                                ></button>
+                            </div>
+                            <!-- Slider controls -->
+                            <button
+                                type="button"
+                                class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                data-carousel-prev
+                            >
+                                <span
+                                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none"
+                                >
+                                    <svg
+                                        class="w-4 h-4 text-white dark:text-gray-800"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 6 10"
+                                    >
+                                        <path
+                                            stroke="currentColor"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M5 1 1 5l4 4"
+                                        />
+                                    </svg>
+                                    <span class="sr-only">Previous</span>
+                                </span>
+                            </button>
+                            <button
+                                type="button"
+                                class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                data-carousel-next
+                            >
+                                <span
+                                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none"
+                                >
+                                    <svg
+                                        class="w-4 h-4 text-white dark:text-gray-800"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 6 10"
+                                    >
+                                        <path
+                                            stroke="currentColor"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="m1 9 4-4-4-4"
+                                        />
+                                    </svg>
+                                    <span class="sr-only">Next</span>
+                                </span>
+                            </button>
                         </div>
                     </div>
                     <div
@@ -525,7 +614,7 @@ export default {
             project: null,
             section: null,
             block: null,
-            progressBar: "",
+            progressBar: 0,
             defaultStep: 0,
             step: 0,
             steps: null,
@@ -592,8 +681,7 @@ export default {
                 }, 10);
             } else if (next) {
                 this.step = next;
-                this.progressBar =
-                    "w-" + (this.step + 1) + "/" + this.steps.length;
+                this.progressBar = ((this.step + 1) / this.steps.length) * 100;
                 this.suggestResult = "";
                 this.isSuggest = "";
                 this.isHiddenSuggestResult = "hidden";
@@ -603,8 +691,7 @@ export default {
             var back = this.steps[this.step].back;
             if (back !== null) {
                 this.step = back;
-                this.progressBar =
-                    "w-" + (this.step + 1) + "/" + this.steps.length;
+                this.progressBar = ((this.step + 1) / this.steps.length) * 100;
                 this.suggestResult = "";
                 this.isSuggest = "";
                 this.isHiddenSuggestResult = "hidden";
@@ -623,18 +710,21 @@ export default {
                 }
             }
 
-            if (this.steps[this.step].answerInputType == "select") {
-                prompt +=
-                    "Please choose one value of these options : (" +
-                    this.steps[this.step].answerOptions
-                        .map((entry) => entry.value)
-                        .join(", ") +
-                    ")";
-            } else {
-                prompt +=
-                    "Please answer to this question : " +
-                    this.steps[this.step].question;
-            }
+            // if (this.steps[this.step].answerInputType == "select") {
+            //     prompt +=
+            //         "Please choose one value of these options : (" +
+            //         this.steps[this.step].answerOptions
+            //             .map((entry) => entry.value)
+            //             .join(", ") +
+            //         ")";
+            // } else {
+            //     prompt +=
+            //         "Please answer to this question : " +
+            //         this.steps[this.step].question;
+            // }
+            prompt +=
+                "Please answer to this question : " +
+                this.steps[this.step].question;
             axios
                 .post("/openai/completions", {
                     model: "text-davinci-003",
@@ -716,10 +806,13 @@ export default {
                         this.section = response.data.section;
                         this.steps = response.data.questions;
                         this.progressBar =
-                            "w-" + (this.step + 1) + "/" + this.steps.length;
+                            ((this.step + 1) / this.steps.length) * 100;
                     }
                 })
                 .catch((err) => console.error(err));
+        },
+        copyExampleToAnswer(content) {
+            this.steps[this.step].answer = content;
         },
     },
     props: ["projectId", "sectionId", "blockId"],
