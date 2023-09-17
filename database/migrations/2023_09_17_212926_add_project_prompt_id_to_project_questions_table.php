@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('project_questions', function (Blueprint $table) {
-            $table->integer('project_resource_id')->nullable();
+            $table->integer('project_prompt_id')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('project_questions', function (Blueprint $table) {
-            $table->dropColumn('project_resource_id');
+            $table->dropColumn('project_prompt_id');
         });
     }
 };
