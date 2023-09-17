@@ -13,4 +13,9 @@ class ProjectQuestion extends Model
     {
         return $this->belongsToMany(ProjectExample::class);
     }
+
+    public function resources(): BelongsToMany
+    {
+        return $this->belongsToMany(ProjectResource::class, 'project_resource_project_question');
+    }
 }

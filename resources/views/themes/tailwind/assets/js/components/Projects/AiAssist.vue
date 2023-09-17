@@ -456,128 +456,185 @@ div.block-item {
                         role="tabpanel"
                         aria-labelledby="examples-tab"
                     >
-                        <div
-                            id="default-carousel"
-                            class="relative w-full"
-                            data-carousel="slide"
-                        >
-                            <!-- Carousel wrapper -->
+                        <div v-for="(question, index0) in steps">
                             <div
-                                class="relative h-56 overflow-hidden rounded-lg md:h-96"
+                                v-if="question.examples.length == 1"
+                                :class="{
+                                    hidden: step != index0,
+                                }"
                             >
-                                <div
-                                    class="hidden duration-700 ease-in-out"
-                                    data-carousel-item
-                                    v-for="(example, index) in steps[step]
-                                        .examples"
-                                >
+                                <div class="">
                                     <div
-                                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 px-16"
+                                        class="text-center text-base font-medium leading-snug pb-6"
                                     >
-                                        <div
-                                            class="text-center text-base font-medium leading-snug pb-6"
-                                        >
-                                            Example # {{ index + 1 }}
-                                        </div>
+                                        Example # {{ 1 }}
+                                    </div>
 
-                                        <div
-                                            class="text-center text-base font-normal leading-snug"
+                                    <div
+                                        class="text-center text-base font-normal leading-snug"
+                                    >
+                                        <span
+                                            class="bg-brand-700 p-2 rounded-2xl text-sm"
                                         >
-                                            <span
-                                                class="bg-brand-700 p-2 rounded-2xl text-sm"
+                                            {{
+                                                question.examples[0].title
+                                            }}</span
+                                        >
+                                    </div>
+                                    <div>
+                                        <p
+                                            class="px-12 py-6 text-sm font-light"
+                                        >
+                                            {{ question.examples[0].content }}
+                                        </p>
+                                        <div class="text-center py-6">
+                                            <button
+                                                class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
+                                                v-on:click="
+                                                    copyExampleToAnswer(
+                                                        question.examples[0]
+                                                            .content
+                                                    )
+                                                "
                                             >
-                                                {{ example.title }}</span
-                                            >
-                                        </div>
-                                        <div>
-                                            <p
-                                                class="px-12 py-6 text-sm font-light"
-                                            >
-                                                {{ example.content }}
-                                            </p>
-                                            <div class="text-center py-6">
-                                                <button
-                                                    class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
-                                                    v-on:click="
-                                                        copyExampleToAnswer(
-                                                            example.content
-                                                        )
-                                                    "
-                                                >
-                                                    Copy to Answer
-                                                </button>
-                                            </div>
+                                                Copy to Answer
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Slider indicators -->
                             <div
-                                class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2"
+                                :id="'carsoul-' + index0"
+                                class="relative w-full"
+                                data-carousel="static"
+                                v-else-if="question.examples.length > 1"
+                                :class="{
+                                    hidden: step != index0,
+                                }"
                             >
+                                <!-- Carousel wrapper -->
+                                <div
+                                    class="relative h-56 overflow-hidden rounded-lg md:h-96"
+                                >
+                                    <!-- Item -->
+                                    <div
+                                        class="hidden duration-700 ease-in-out text-center"
+                                        v-for="(
+                                            example, index
+                                        ) in question.examples"
+                                        :data-carousel-item="
+                                            index == 0 ? 'active' : ''
+                                        "
+                                    >
+                                        <div
+                                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 px-16"
+                                        >
+                                            <div
+                                                class="text-center text-base font-medium leading-snug pb-6"
+                                            >
+                                                Example # {{ index + 1 }}
+                                            </div>
+
+                                            <div
+                                                class="text-center text-base font-normal leading-snug"
+                                            >
+                                                <span
+                                                    class="bg-brand-700 p-2 rounded-2xl text-sm"
+                                                >
+                                                    {{ example.title }}</span
+                                                >
+                                            </div>
+                                            <div>
+                                                <p
+                                                    class="px-12 py-6 text-sm font-light"
+                                                >
+                                                    {{ example.content }}
+                                                </p>
+                                                <div class="text-center py-6">
+                                                    <button
+                                                        class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap focus:outline-none focus:text-gray-900 border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white focus:text-black focus:bg-white"
+                                                        v-on:click="
+                                                            copyExampleToAnswer(
+                                                                example.content
+                                                            )
+                                                        "
+                                                    >
+                                                        Copy to Answer
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Slider indicators -->
+                                <div
+                                    class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2"
+                                >
+                                    <button
+                                        v-for="(
+                                            example, index
+                                        ) in question.examples"
+                                        type="button"
+                                        class="w-3 h-3 rounded-full dark:bg-white"
+                                        aria-current="true"
+                                        aria-label="Slide 1"
+                                        :data-carousel-slide-to="index"
+                                    ></button>
+                                </div>
+                                <!-- Slider controls -->
                                 <button
-                                    v-for="(example, index) in steps[step]
-                                        .examples"
                                     type="button"
-                                    class="w-3 h-3 rounded-full bg-white dark:bg-white"
-                                    aria-current="true"
-                                    aria-label="Slide 1"
-                                    :data-carousel-slide-to="index"
-                                ></button>
+                                    class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                    data-carousel-prev
+                                >
+                                    <span
+                                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none"
+                                    >
+                                        <svg
+                                            class="w-4 h-4 text-white dark:text-gray-800"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 6 10"
+                                        >
+                                            <path
+                                                stroke="currentColor"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M5 1 1 5l4 4"
+                                            />
+                                        </svg>
+                                        <span class="sr-only">Previous</span>
+                                    </span>
+                                </button>
+                                <button
+                                    type="button"
+                                    class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                    data-carousel-next
+                                >
+                                    <span
+                                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none"
+                                    >
+                                        <svg
+                                            class="w-4 h-4 text-white dark:text-gray-800"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 6 10"
+                                        >
+                                            <path
+                                                stroke="currentColor"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="m1 9 4-4-4-4"
+                                            />
+                                        </svg>
+                                        <span class="sr-only">Next</span>
+                                    </span>
+                                </button>
                             </div>
-                            <!-- Slider controls -->
-                            <button
-                                type="button"
-                                class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                                data-carousel-prev
-                            >
-                                <span
-                                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none"
-                                >
-                                    <svg
-                                        class="w-4 h-4 text-white dark:text-gray-800"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 6 10"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M5 1 1 5l4 4"
-                                        />
-                                    </svg>
-                                    <span class="sr-only">Previous</span>
-                                </span>
-                            </button>
-                            <button
-                                type="button"
-                                class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                                data-carousel-next
-                            >
-                                <span
-                                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none"
-                                >
-                                    <svg
-                                        class="w-4 h-4 text-white dark:text-gray-800"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 6 10"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="m1 9 4-4-4-4"
-                                        />
-                                    </svg>
-                                    <span class="sr-only">Next</span>
-                                </span>
-                            </button>
                         </div>
                     </div>
                     <div
@@ -586,7 +643,25 @@ div.block-item {
                         role="tabpanel"
                         aria-labelledby="resources-tab"
                     >
-                        test3
+                        <div v-for="(resource, index) in steps[step].resources">
+                            <div class="border-b border-gray-300 py-6">
+                                <div>{{ resource.title }}</div>
+                                <div>
+                                    <a
+                                        :href="
+                                            '/storage/' +
+                                            JSON.parse(resource.link)[0]
+                                                .download_link
+                                        "
+                                        download
+                                        >{{
+                                            JSON.parse(resource.link)[0]
+                                                .original_name
+                                        }}</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div
                         class="hidden p-4 rounded-lg group"
@@ -608,6 +683,7 @@ export default {
     mounted() {
         // Call your function or perform initialization here
         this.getProject();
+        //this.testf();
     },
     data() {
         return {
@@ -618,6 +694,7 @@ export default {
             defaultStep: 0,
             step: 0,
             steps: null,
+            //examples: [],
             // steps: {
             //     1: {
             //         question:
@@ -685,6 +762,7 @@ export default {
                 this.suggestResult = "";
                 this.isSuggest = "";
                 this.isHiddenSuggestResult = "hidden";
+                //this.examples = this.steps[this.step].examples;
             }
         },
         back() {
@@ -695,6 +773,7 @@ export default {
                 this.suggestResult = "";
                 this.isSuggest = "";
                 this.isHiddenSuggestResult = "hidden";
+                //this.examples = this.steps[this.step].examples;
             }
         },
         showSuggestion() {
@@ -807,6 +886,7 @@ export default {
                         this.steps = response.data.questions;
                         this.progressBar =
                             ((this.step + 1) / this.steps.length) * 100;
+                        //this.examples = this.steps[this.step].examples;
                     }
                 })
                 .catch((err) => console.error(err));

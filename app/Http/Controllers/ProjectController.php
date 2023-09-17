@@ -194,7 +194,8 @@ class ProjectController extends Controller
                 'answerInputPlaceHolder' => "Type your answer here...",
                 'next' => $next,
                 'back' => $back,
-                'examples' => $question->examples
+                'examples' => $question->examples,
+                'resources' => $question->resources
             ];
         }
         if (empty($questions)) {
