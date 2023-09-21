@@ -50,3 +50,11 @@ Route::post('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\H
 Route::post('openai/completions', '\App\Http\Controllers\OpenAiController@completions');
 Route::post('openai/chat', '\App\Http\Controllers\OpenAiController@chat');
 /***** End BrandBuilder Routes *****/
+
+//override media upload
+Route::post('admin/media/upload', function () {
+    abort(404);
+})->name('voyager.media.upload');
+Route::post('admin/media/rename_file', function () {
+    abort(404);
+})->name('voyager.media.rename');

@@ -188,6 +188,7 @@ class ProjectController extends Controller
                 $back = null;
             }
             $questions[] = [
+                'id' => $question->id,
                 'question_ai' => $question->question_ai,
                 'question' => $question->question,
                 'answerInputType' => "text",
@@ -195,7 +196,8 @@ class ProjectController extends Controller
                 'next' => $next,
                 'back' => $back,
                 'examples' => $question->examples,
-                'resources' => $question->resources
+                'resources' => $question->resources,
+                'prompt' => (isset($question->prompt->prompt)? $question->prompt->prompt : null)
             ];
         }
         if (empty($questions)) {

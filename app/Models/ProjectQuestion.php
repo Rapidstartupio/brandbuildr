@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\ProjectPrompt;
 
 class ProjectQuestion extends Model
 {
@@ -17,5 +18,10 @@ class ProjectQuestion extends Model
     public function resources(): BelongsToMany
     {
         return $this->belongsToMany(ProjectResource::class, 'project_resource_project_question');
+    }
+
+    public function prompt()
+    {
+        return $this->belongsTo(ProjectPrompt::class,'project_prompt_id');
     }
 }

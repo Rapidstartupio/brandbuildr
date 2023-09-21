@@ -207,7 +207,7 @@ div.block-item {
                                 :placeholder="
                                     steps[step].answerInputPlaceHolder
                                 "
-                                :value="steps[step].answer"
+                                v-model="steps[step].answer"
                             />
                         </div>
                         <div v-if="steps[step].answerInputType == 'select'">
@@ -644,7 +644,10 @@ div.block-item {
                         aria-labelledby="resources-tab"
                     >
                         <div v-for="(resource, index) in steps[step].resources">
-                            <div class="border-b border-gray-300 py-6">
+                            <div
+                                class="border-b border-gray-300 py-6"
+                                v-if="JSON.parse(resource.link).length > 0"
+                            >
                                 <div>{{ resource.title }}</div>
                                 <div>
                                     <a
@@ -777,17 +780,41 @@ export default {
             }
         },
         showSuggestion() {
-            var prompt = "";
-            if (this.steps[this.step].back) {
-                var prevStep = this.steps[this.step].back;
-                var prevAnswer = this.steps[prevStep].answer;
-                if (prevAnswer) {
-                    prompt =
-                        "For a user who describe their business as ( " +
-                        prevAnswer +
-                        "), ";
-                }
+            var prompt = this.steps[this.step].prompt;
+            
+            // Use regular expressions to replace {{question:X}} with the corresponding value in the $question array
+            if(prompt){
+                prompt = prompt.replace(/\{\{question:(\d+)\}\}/g, (match, questionNumber) => {
+                    var value = "";
+                    if(this.getStepById(parseInt(questionNumber))){
+                        value = this.getStepById(parseInt(questionNumber)).question;
+                    }
+                    return value; // Return the replacement value or the original match if not found in $question
+                });
+                prompt = prompt.replace(/\{\{answer:(\d+)\}\}/g, (match, questionNumber) => {
+                    var value = "";
+                    if(this.getStepById(parseInt(questionNumber))){
+                        value = this.getStepById(parseInt(questionNumber)).answer;
+                    }
+                    return value?? ""; // Return the replacement value or the original match if not found in $question
+                });
+                prompt = prompt.replace(/\{\{question\}\}/g, this.steps[this.step].question);
+            }else{
+                // prompt = "You are a helpful Brand Builder assistant from who helps companies and entreprenuers build their businesse.";
+                // prompt += " Please answer to this question : " + this.steps[this.step].question;
             }
+
+            // var prompt = "";
+            // if (this.steps[this.step].back !== null) {
+            //     var prevStep = this.steps[this.step].back;
+            //     var prevAnswer = this.steps[prevStep].answer;
+            //     if (prevAnswer) {
+            //         prompt =
+            //             "For a user who describe their business as ( " +
+            //             prevAnswer +
+            //             "), ";
+            //     }
+            // }
 
             // if (this.steps[this.step].answerInputType == "select") {
             //     prompt +=
@@ -801,9 +828,11 @@ export default {
             //         "Please answer to this question : " +
             //         this.steps[this.step].question;
             // }
-            prompt +=
-                "Please answer to this question : " +
-                this.steps[this.step].question;
+            // prompt +=
+            //     "Please answer to this question : " +
+            //     this.steps[this.step].question;
+            console.log(prompt);
+            return;
             axios
                 .post("/openai/completions", {
                     model: "text-davinci-003",
@@ -893,6 +922,9 @@ export default {
         },
         copyExampleToAnswer(content) {
             this.steps[this.step].answer = content;
+        },
+        getStepById(id) {
+            return this.steps.find(item => item.id === id);
         },
     },
     props: ["projectId", "sectionId", "blockId"],
