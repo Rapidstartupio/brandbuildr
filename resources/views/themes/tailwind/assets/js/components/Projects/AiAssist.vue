@@ -832,7 +832,6 @@ export default {
             //     "Please answer to this question : " +
             //     this.steps[this.step].question;
             console.log(prompt);
-            return;
             axios
                 .post("/openai/completions", {
                     model: "text-davinci-003",
