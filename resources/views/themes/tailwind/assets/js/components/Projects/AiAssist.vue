@@ -831,6 +831,7 @@ export default {
             // prompt +=
             //     "Please answer to this question : " +
             //     this.steps[this.step].question;
+            console.log(prompt);
             if(!prompt) return false;
             axios
                 .post("/openai/completions", {
