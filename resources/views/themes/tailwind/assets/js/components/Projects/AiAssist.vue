@@ -209,6 +209,15 @@ div.block-item {
                                 "
                                 v-model="steps[step].answer"
                             />
+                            <!-- <textarea  
+                                id="" cols="30" 
+                                rows="10" 
+                                class=""
+                                :placeholder="
+                                    steps[step].answerInputPlaceHolder
+                                ">
+                                {{  steps[step].answer }}
+                            </textarea> -->
                         </div>
                         <div v-if="steps[step].answerInputType == 'select'">
                             <select
@@ -833,24 +842,55 @@ export default {
             //     this.steps[this.step].question;
             console.log(prompt);
             if(!prompt) return false;
-            axios
-                .post("/openai/completions", {
-                    model: "text-davinci-003",
-                    prompt: prompt,
-                })
-                .then((response) => {
-                    if (response.data[0]["text"]) {
-                        var suggestion = response.data[0]["text"];
-                        suggestion = suggestion.replace(/(\r\n|\n|\r)/gm, "");
-                        this.suggestResult = suggestion;
-                        this.isSuggest = "hidden";
-                        this.isHiddenSuggestResult = "";
-                    }
-                    console.log(response);
-                })
-                .catch((error) => {
-                    console.log(error);
+            // switch from completions to chat
+                this.chatbot.previousMessages.push({
+                    role: "user",
+                    content: prompt,
                 });
+                axios
+                    .post("/openai/chat", {
+                        model: "gpt-3.5-turbo",
+                        messages: this.chatbot.previousMessages,
+                    })
+                    .then((response) => {
+                        const botResponse =
+                            response.data.choices[0].message.content;
+                        console.log(botResponse);
+                        if (botResponse) {
+                            this.chatbot.previousMessages.push({
+                                role: "assistant",
+                                content: botResponse,
+                            });
+                            var suggestion = botResponse;
+                            suggestion = suggestion.replace(/(\r\n|\n|\r)/gm, "");
+                            this.suggestResult = suggestion;
+                            this.isSuggest = "hidden";
+                            this.isHiddenSuggestResult = "";
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        console.error("Error fetching bot response:", error);
+                    });
+            // end switch
+            // axios
+            //     .post("/openai/completions", {
+            //         model: "text-davinci-003",
+            //         prompt: prompt,
+            //     })
+            //     .then((response) => {
+            //         if (response.data[0]["text"]) {
+            //             var suggestion = response.data[0]["text"];
+            //             suggestion = suggestion.replace(/(\r\n|\n|\r)/gm, "");
+            //             this.suggestResult = suggestion;
+            //             this.isSuggest = "hidden";
+            //             this.isHiddenSuggestResult = "";
+            //         }
+            //         console.log(response);
+            //     })
+            //     .catch((error) => {
+            //         console.log(error);
+            //     });
         },
         copySuggestionToAnswer() {
             this.steps[this.step].answer = this.suggestResult;
