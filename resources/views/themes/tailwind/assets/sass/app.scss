@@ -73,3 +73,21 @@ svg {
     padding: 0.5rem 2.5rem 0.5rem 0.75rem;
     background-repeat: no-repeat;
 }
+.active-dash-nav-item{
+    @apply border-[#570AFF] border-l-4 p-4;
+}
+.active-dash-nav-item a{
+    @apply text-gray-900  dark:text-white hover:text-white
+}
+.active-dash-nav-item path{
+    fill: white;
+}
+.dash-nav-item{
+    @apply p-4 p-4 hover:bg-white hover:scale-110 transition-all ease-in-out
+}
+.dash-nav-item a{
+    @apply dark:text-gray-400
+}
+.dash-nav-item path{
+    fill: #79798E;
+}

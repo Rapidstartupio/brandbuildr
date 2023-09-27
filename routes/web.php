@@ -25,8 +25,7 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
-// Wave routes
-Wave::routes();
+
 
 /***** Start BrandBuilder Routes *****/
 //Dashboard Onboarding
@@ -58,3 +57,13 @@ Route::post('admin/media/upload', function () {
 Route::post('admin/media/rename_file', function () {
     abort(404);
 })->name('voyager.media.rename');
+
+
+//Brandbuilder settings
+Route::group(['prefix' => 'settings'], function () {
+    Route::get('/white-label', '\App\Http\Controllers\SettingsController@whiteLabel')->name('settings.white-label');
+    Route::post('/white-label', '\App\Http\Controllers\SettingsController@saveWhiteLabel');
+});
+
+// Wave routes
+Wave::routes();

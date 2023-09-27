@@ -18,6 +18,10 @@ class SettingsController extends Controller
         $card_header = true;
         if(empty($section)){
             return redirect(route('wave.settings', 'profile'));
+        }else{
+            if (!\View::exists('theme::settings.partials.' . $section)) {  
+                abort(404);
+             }
         }
         if ($section == 'project-types') {
             $card_header = false;
