@@ -22,6 +22,11 @@ class User extends Authenticatable
         'verification_code',
         'verified',
         'trial_ends_at',
+        'theme',
+        'theme_dark_logo',
+        'theme_light_logo',
+        'theme_text_color',
+        'theme_line_color'
     ];
 
     /**

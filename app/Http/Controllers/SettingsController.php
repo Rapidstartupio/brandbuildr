@@ -19,7 +19,23 @@ class SettingsController extends Controller
     public function saveWhiteLabel(Request $request)
     {
         try {
+            $request->validate([
+                'dark_logo' => 'image',
+                'light_logo' => 'image',
+            ]);
             $user = auth()->user();
+            if (!empty($request->hasFile('dark_logo'))) {
+                $logoName = time() . '-dark.' . $request->dark_logo->getClientOriginalExtension();
+                $request->dark_logo->storeAs('logos', $logoName, 'public');
+                $user->theme_dark_logo = $logoName;
+            }
+            if (!empty($request->hasFile('light_logo'))) {
+                $logoName = time() . '-light.' . $request->light_logo->getClientOriginalExtension();
+                $request->light_logo->storeAs('logos', $logoName, 'public');
+                $user->theme_light_logo = $logoName;
+            }
+
+
             $user->theme = $request->user_theme;
             $user->theme_button_color = $request->button_color;
             $user->theme_text_color = $request->text_color;

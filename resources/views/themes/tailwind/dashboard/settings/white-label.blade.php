@@ -8,7 +8,7 @@
         @include('theme::dashboard.settings.nav')
     </div>
     <div class="settings-content col-span-2 dark:text-white">
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <h3 class="my-5" style="
                 color: white;
@@ -33,11 +33,30 @@
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                 <div class="w-full">
                     <label for="dark-logo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dark Version</label>
-                    <input type="file" name="dark_logo" id="dark-logo" class="" />
+                    <div class="grid grid-cols-3 gap-2">
+                        @if(Auth::user()->theme_dark_logo)
+                        <div>
+                            <img src="{{asset('/storage/logos/'.Auth::user()->theme_dark_logo)}}" alt="user_dark_logo" class="w-40" />
+                        </div>
+                        @endif
+                        <div class="col-span-2">
+                            <input type="file" name="dark_logo" id="dark-logo" class="" />
+                        </div>
+                    </div>
+
                 </div>
                 <div class="w-full">
                     <label for="light-logo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Light Version</label>
-                    <input type="file" name="light_logo" id="light-logo" class="" />
+                    <div class="grid grid-cols-3 gap-2">
+                        @if(Auth::user()->theme_light_logo)
+                        <div>
+                            <img src="{{asset('/storage/logos/'.Auth::user()->theme_light_logo)}}" alt="user_dark_logo" class="w-40" />
+                        </div>
+                        @endif
+                        <div class="col-span-2">
+                            <input type="file" name="light_logo" id="light-logo" class="" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <hr class="my-6 h-0.5 border-t-0 bg-[#504A6A] opacity-100 dark:opacity-50" />
@@ -54,13 +73,13 @@
             <div class="themes text-white">
                 <ul class="grid gap-6 grid-cols-1 sm:grid-cols-3">
                     <li class="">
-                        <input type="radio" id="dark-theme" name="user_theme" checked value="dark" class="opacity-0 absolute peer" />
+                        <input type="radio" id="dark-theme" name="user_theme" @if(auth()->user()->theme == 'dark') checked @endif value="dark" class="opacity-0 absolute peer" />
                         <label for="dark-theme" class="block cursor-pointer peer-checked:border-2 peer-checked:border-blue-500">
                             <img src="{{ Storage::url('themes/dark-theme.png') }}" class="w-full" alt="dark-theme">
                         </label>
                     </li>
                     <li class="">
-                        <input type="radio" id="light-theme" name="user_theme" value="light" class="opacity-0 absolute peer" />
+                        <input type="radio" id="light-theme" name="user_theme" @if(auth()->user()->theme == 'light') checked @endif value="light" class="opacity-0 absolute peer" />
                         <label for="light-theme" class="block cursor-pointer peer-checked:border-2 peer-checked:border-blue-500">
                             <img src="{{ Storage::url('themes/light-theme.png') }}" class="w-full" alt="dark-theme">
                         </label>
