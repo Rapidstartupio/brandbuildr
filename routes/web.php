@@ -45,18 +45,20 @@ Route::get('project/{id}', 'App\Http\Controllers\ProjectController@project')->na
 Route::get('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssist')->name('project.ai-assist');
 Route::post('projects/{id}/get', 'App\Http\Controllers\ProjectController@getUserProject')->name('projects.get-user-project');
 Route::post('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssistData');
+Route::post('submit-project-answers', 'App\Http\Controllers\ProjectController@submitProjectAnswers');
+
 //openai Routes
 Route::post('openai/completions', '\App\Http\Controllers\OpenAiController@completions');
 Route::post('openai/chat', '\App\Http\Controllers\OpenAiController@chat');
 /***** End BrandBuilder Routes *****/
 
 //override media upload
-Route::post('admin/media/upload', function () {
-    abort(404);
-})->name('voyager.media.upload');
-Route::post('admin/media/rename_file', function () {
-    abort(404);
-})->name('voyager.media.rename');
+// Route::post('admin/media/upload', function () {
+//     abort(404);
+// })->name('voyager.media.upload');
+// Route::post('admin/media/rename_file', function () {
+//     abort(404);
+// })->name('voyager.media.rename');
 
 
 //Brandbuilder settings

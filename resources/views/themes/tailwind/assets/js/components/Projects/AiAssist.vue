@@ -177,7 +177,26 @@ div.block-item {
         <div
             class="grid md:grid-cols-2 bg-gradient-to-r from-[#1E1E34] via-[#241E44] to-[#1E1E34] rounded-lg"
         >
-            <div class="md:border-r md:border-gray-700">
+            <div class="col-span-2" v-if="step == 'review'">
+                <div
+                    class="h-16 pl-6 border-b border-gray-700 text-base font-medium flex items-center"
+                >
+                    <div class="flex-auto">{{ this.section.name }} Review</div>
+                </div>
+                <div  class="">
+                    <ul>
+                        <li class="p-4 md:px-10 md-py-8 border-b border-gray-700"  v-for="(question, index) in steps">
+                            <div class="font-medium">{{ question.question }}</div>
+                            <div class="text-sm font-light text-gray-300">{{ question.answer }}</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="p-4 md:px-10 md-py-8 text-end"> 
+                    <button class="py-2 px-8 rounded-lg underline text-gray-300" v-on:click="unreview()">Back</button>
+                    <button class="bg-wave-500 hover:bg-wave-700 text-white py-2 px-8 rounded-lg" v-on:click="submit()">Submit</button>
+                </div>
+            </div>
+            <div class="md:border-r md:border-gray-700" v-if="step != 'review'">
                 <div
                     class="h-16 pl-6 border-b border-gray-700 text-base font-medium flex items-center"
                 >
@@ -253,7 +272,7 @@ div.block-item {
                     </div>
                 </div>
             </div>
-            <div>
+            <div v-if="step != 'review'">
                 <div
                     class="h-16 pl-6 border-b border-gray-700 text-base font-medium flex items-center"
                 >
@@ -768,7 +787,10 @@ export default {
                 setTimeout(function () {
                     window.location.href = "/register";
                 }, 10);
-            } else if (next) {
+            } else if (next == "review") {
+                this.step =  "review";
+            }
+            else if (next) {
                 this.step = next;
                 this.progressBar = ((this.step + 1) / this.steps.length) * 100;
                 this.suggestResult = "";
@@ -787,6 +809,35 @@ export default {
                 this.isHiddenSuggestResult = "hidden";
                 //this.examples = this.steps[this.step].examples;
             }
+        },
+        unreview(){
+            this.step =  this.steps.length -1;
+        },
+        submit(){
+            axios
+                .post("/submit-project-answers",{data:this.steps}) //project/{id}/section/{sectionId}/block/{blockId}/ai-assist
+                .then((response) => {
+                    console.log(response);
+                    if (response.data.message) {
+                        setTimeout(function () {
+                            popToast(
+                                response.data.message_type,
+                                response.data.message
+                            );
+                        }, 10);
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                    if (error.response.data.message) {
+                        setTimeout(function () {
+                            popToast(
+                                error.response.data.message_type,
+                                error.response.data.message
+                            );
+                        }, 10);
+                    }
+                });
         },
         showSuggestion() {
             var prompt = this.steps[this.step].prompt;

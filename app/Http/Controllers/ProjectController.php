@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ProjectType;
 use App\Models\Client;
 use App\Models\Project;
+use App\Models\ProjectAnswer;
 use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
@@ -182,7 +183,7 @@ class ProjectController extends Controller
             $next = $key + 1;
             $back = $key - 1;
             if ($key > $questionsLength - 2) {
-                $next = null;
+                $next = "review";
             }
             if ($key == 0) {
                 $back = null;
@@ -197,7 +198,7 @@ class ProjectController extends Controller
                 'back' => $back,
                 'examples' => $question->examples,
                 'resources' => $question->resources,
-                'prompt' => (isset($question->prompt->prompt)? $question->prompt->prompt : null)
+                'prompt' => (isset($question->prompt->prompt) ? $question->prompt->prompt : null)
             ];
         }
         if (empty($questions)) {
@@ -223,5 +224,48 @@ class ProjectController extends Controller
             'type' => $project->type,
             'sections' => $project->type->sections
         ], 200);
+    }
+    public function submitProjectAnswers(Request $request)
+    {
+        try {
+            $user = auth()->user();
+            $updated = false;
+            if ($request->data && !empty($request->data)) {
+                foreach ($request->data as $key => $question) {
+                    if ($question['question'] && isset($question['answer']) &&  $question['answer']) {
+                        $projectAnswer = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $question['id'])->first();
+                        if (!$projectAnswer) {
+                            $projectAnswer = new ProjectAnswer();
+                        }
+                        $projectAnswer->project_question_id = $question['id'];
+                        $projectAnswer->answer = $question['answer'];
+                        $projectAnswer->user_id = $user->id;
+                        $projectAnswer->save();
+                        $updated = true;
+                    }
+                }
+            }
+            if ($updated) {
+                return response()->json([
+                    'status' => 'success',
+                    'data' => true,
+                    'message' => 'Successfully Submitted!',
+                    'message_type' => 'success'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'success',
+                    'data' => true,
+                    'message' => 'Answers data is empty!',
+                    'message_type' => 'warning'
+                ], 200);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error!',
+                'message_type' => 'danger'
+            ], 500);
+        }
     }
 }
