@@ -198,7 +198,8 @@ class ProjectController extends Controller
                 'back' => $back,
                 'examples' => $question->examples,
                 'resources' => $question->resources,
-                'prompt' => (isset($question->prompt->prompt) ? $question->prompt->prompt : null)
+                'prompt' => (isset($question->prompt->prompt) ? $question->prompt->prompt : null),
+                'required' => true
             ];
         }
         if (empty($questions)) {

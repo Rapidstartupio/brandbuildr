@@ -227,7 +227,8 @@ div.block-item {
                                     steps[step].answerInputPlaceHolder
                                 "
                                 v-model="steps[step].answer"
-                            />
+                                required
+                                />
                             <!-- <textarea  
                                 id="" cols="30" 
                                 rows="10" 
@@ -783,6 +784,14 @@ export default {
     methods: {
         next() {
             var next = this.steps[this.step].next;
+            if(!this.steps[this.step].answer && this.steps[this.step].required){
+                popToast(
+                    'warning',
+                    'Please type your answer!'
+                );
+                return false;
+            }
+            
             if (next == "register") {
                 setTimeout(function () {
                     window.location.href = "/register";
