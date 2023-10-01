@@ -25,6 +25,13 @@ class ProjectQuestion extends Model
     {
         return $this->belongsTo(ProjectPrompt::class, 'project_prompt_id');
     }
+    public function finalPrompt()
+    {
+        if (isset($this->prompt->prompt)) {
+            $prompt = $this->prompt->prompt;
+        }
+        return null;
+    }
 
     public function answer($user_id)
     {

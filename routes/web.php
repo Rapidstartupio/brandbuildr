@@ -46,6 +46,7 @@ Route::get('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Ht
 Route::post('projects/{id}/get', 'App\Http\Controllers\ProjectController@getUserProject')->name('projects.get-user-project');
 Route::post('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssistData');
 Route::post('submit-project-answers', 'App\Http\Controllers\ProjectController@submitProjectAnswers');
+//Route::get('question-by-id/{id}', 'App\Http\Controllers\ProjectController@questionById');
 
 //openai Routes
 Route::post('openai/completions', '\App\Http\Controllers\OpenAiController@completions');

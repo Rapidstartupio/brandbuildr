@@ -7,6 +7,7 @@ use App\Models\ProjectType;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\ProjectAnswer;
+use App\Models\ProjectQuestion;
 use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
@@ -189,6 +190,32 @@ class ProjectController extends Controller
                 $back = null;
             }
             $answer = $question->answer($user->id);
+            $prompt = null;
+            if (isset($question->prompt->prompt)) {
+                $prompt = $question->prompt->prompt;
+                $updatedPrompt = preg_replace_callback('/\{\{g-question:(\d+)\}\}/', function ($matches) {
+                    $questionId = $matches[1];
+                    $res = ProjectQuestion::find($questionId);
+                    // Check if  exists 
+                    if (isset($res->question)) {
+                        return $res->question;
+                    } else {
+                        return '';
+                    }
+                }, $prompt);
+                $prompt = $updatedPrompt;
+                $updatedPrompt = preg_replace_callback('/\{\{g-answer:(\d+)\}\}/', function ($matches) use ($user) {
+                    $questionId = $matches[1];
+                    $res = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $questionId);
+                    // Check if exists
+                    if (isset($res->answer)) {
+                        return $res->answer;
+                    } else {
+                        return '';
+                    }
+                }, $prompt);
+                $prompt = $updatedPrompt;
+            }
             $questions[] = [
                 'id' => $question->id,
                 'question_ai' => $question->question_ai,
@@ -199,7 +226,7 @@ class ProjectController extends Controller
                 'back' => $back,
                 'examples' => $question->examples,
                 'resources' => $question->resources,
-                'prompt' => (isset($question->prompt->prompt) ? $question->prompt->prompt : null),
+                'prompt' => $prompt,
                 'required' => true,
                 'suggest_logs' => [],
                 'answer' => (isset($answer->answer) ? $answer->answer : null)
@@ -267,6 +294,26 @@ class ProjectController extends Controller
                     'message_type' => 'warning'
                 ], 200);
             }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error!',
+                'message_type' => 'danger'
+            ], 500);
+        }
+    }
+
+    public function questionById(Request $request)
+    {
+        try {
+            $question = null;
+            if (isset($request->id)) {
+                $question = ProjectQuestion::find($request->id);
+            }
+            return response()->json([
+                'status' => 'success',
+                'question' => $question
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
