@@ -828,12 +828,13 @@ export default {
                 .then((response) => {
                     console.log(response);
                     if (response.data.message) {
-                        setTimeout(function () {
-                            popToast(
-                                response.data.message_type,
-                                response.data.message
-                            );
-                        }, 10);
+                        // setTimeout(function () {
+                        //     popToast(
+                        //         response.data.message_type,
+                        //         response.data.message
+                        //     );
+                        // }, 10);
+                        window.location.replace("/project/" +this.projectId);
                     }
                 })
                 .catch((error) => {
@@ -926,6 +927,8 @@ export default {
                             this.suggestResult = suggestion;
                             this.isSuggest = "hidden";
                             this.isHiddenSuggestResult = "";
+                            this.steps[this.step].suggest_logs.push(suggestion);
+                            //console.log(this.steps[this.step].suggest_logs);
                         }
                     })
                     .catch((error) => {

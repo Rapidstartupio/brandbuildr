@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\ProjectPrompt;
+use App\Models\ProjectAnswer;
 
 class ProjectQuestion extends Model
 {
@@ -22,6 +23,11 @@ class ProjectQuestion extends Model
 
     public function prompt()
     {
-        return $this->belongsTo(ProjectPrompt::class,'project_prompt_id');
+        return $this->belongsTo(ProjectPrompt::class, 'project_prompt_id');
+    }
+
+    public function answer($user_id)
+    {
+        return ProjectAnswer::where('user_id', $user_id)->where('project_question_id', $this->id)->first();
     }
 }

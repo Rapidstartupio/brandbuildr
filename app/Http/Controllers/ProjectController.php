@@ -188,6 +188,7 @@ class ProjectController extends Controller
             if ($key == 0) {
                 $back = null;
             }
+            $answer = $question->answer($user->id);
             $questions[] = [
                 'id' => $question->id,
                 'question_ai' => $question->question_ai,
@@ -199,7 +200,9 @@ class ProjectController extends Controller
                 'examples' => $question->examples,
                 'resources' => $question->resources,
                 'prompt' => (isset($question->prompt->prompt) ? $question->prompt->prompt : null),
-                'required' => true
+                'required' => true,
+                'suggest_logs' => [],
+                'answer' => (isset($answer->answer) ? $answer->answer : null)
             ];
         }
         if (empty($questions)) {
@@ -241,12 +244,15 @@ class ProjectController extends Controller
                         $projectAnswer->project_question_id = $question['id'];
                         $projectAnswer->answer = $question['answer'];
                         $projectAnswer->user_id = $user->id;
+                        $projectAnswer->logs = serialize($question['suggest_logs']);
                         $projectAnswer->save();
                         $updated = true;
                     }
                 }
             }
             if ($updated) {
+                Session::flash('message', 'Successfully Submitted!');
+                Session::flash('message_type', 'success');
                 return response()->json([
                     'status' => 'success',
                     'data' => true,
