@@ -120,7 +120,7 @@ div.block-item {
                         word-wrap: break-word;
                     "
                 >
-                    {{ this.project.name }} | {{ this.project.type.name }}
+                    {{ this.project.name }} | {{ this.project.type }}
                 </h3>
             </div>
             <div>
@@ -144,7 +144,7 @@ div.block-item {
                             font-weight: 500;
                             word-wrap: break-word;
                         "
-                        v-for="(section, index) in this.project.type.sections"
+                        v-for="(section, index) in this.project.sections"
                         :data-section-id="section.id"
                         :class="{
                             'active-section text-white':
@@ -167,6 +167,7 @@ div.block-item {
                             'active-block': block.id == this.blockId,
                         }"
                     >
+                     
                         <div class="number">{{ block.order }}</div>
                         <div class="title">{{ block.name }}</div>
                     </div>
@@ -721,6 +722,7 @@ export default {
         return {
             project: null,
             section: null,
+            sections:null,
             block: null,
             progressBar: 0,
             defaultStep: 0,
@@ -780,7 +782,7 @@ export default {
                 ],
             },
         };
-    }, //v-if="index !== this.project.type.sections - 1"
+    }, 
     methods: {
         next() {
             var next = this.steps[this.step].next;
@@ -824,7 +826,7 @@ export default {
         },
         submit(){
             axios
-                .post("/submit-project-answers",{data:this.steps}) //project/{id}/section/{sectionId}/block/{blockId}/ai-assist
+                .post("/submit-project-answers",{data:this.steps,blockId:this.blockId}) //project/{id}/section/{sectionId}/block/{blockId}/ai-assist
                 .then((response) => {
                     console.log(response);
                     if (response.data.message) {
@@ -1013,7 +1015,7 @@ export default {
                 .then((response) => {
                     if (response.data.project) {
                         this.project = response.data.project;
-                        this.block = response.data.block;
+                        //this.block = response.data.block;
                         this.section = response.data.section;
                         this.steps = response.data.questions;
                         this.progressBar =

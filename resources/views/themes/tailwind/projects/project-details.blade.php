@@ -7,35 +7,37 @@
         <button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800">RedBull</button>
     </div>
 </div>
-<h3 class="text-white text-xl">{{$project->type->name}}</h3>
+<h3 class="text-white text-xl">{{$project->type}}</h3>
 
 <div id="sections-list">
     <div class="grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 dark:text-white my-5">
-        @foreach($project->type->sections as $section)
-        @if(isset($section->currentBlock()->id) && count($section->currentBlock()->questions) > 0)
-        <a href="{{route('project.ai-assist',[$project->id,$section->id,$section->currentBlock()->id])}}">
-            <div class="brandDark2 p-4 rounded space-y-5 section-item" data-section-id="{{$section->id}}">
+        @foreach($project->sections as $section)
+        <a href="{{route('project.ai-assist',[$project->id,$section->id,$section->cBlock])}}">
+            <div class="p-4 rounded space-y-5 section-item @if($section->progress == 100) bg-card-completed done @else brandDark2 @endif" data-section-id="{{$section->id}}">
                 <div class="md:flex justify-between">
                     <div class="">{{$section->order}}. {{$section->name}}</div>
                 </div>
                 <div>
+                    @if($section->progress == 100)
+                    <button type="button" class="focus:outline-none rounded-lg text-white   focus:ring-4  font-medium rounded-lg text-sm px-2   dark:bg-brandPrimary ">Done</button>
+                    @else
                     <button type="button" class="focus:outline-none rounded-lg text-gray-300 bg-gray-600   focus:ring-4  font-medium rounded-lg text-sm px-2     dark:bg-gray-600 ">In Progress</button>
+                    @endif
                 </div>
                 <div>
-                    <p class="text-xs font-light">0% Questions Completed</p>
+                    <p class="text-xs font-light">{{$section->progress}}% Questions Completed</p>
                 </div>
-                <div class="w-full bg-[#838396] rounded-full h-1.5 dark:bg-[#838396]">
-                    <div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: 0%"></div>
+                <div class="w-full  rounded-full h-1.5  @if($section->progress == 100) dark:bg-brandPrimary @else bg-[#838396] dark:bg-[#838396] @endif">
+                    <div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: {{$section->progress}}%"></div>
                 </div>
             </div>
         </a>
-        @endif
         @endforeach
     </div>
 </div>
-@if(isset($current_section->id) && isset($current_block->id))
+@if($project->cSection && $project->cBlock)
 <div class="text-center">
-    <a href="{{route('project.ai-assist',[$project->id,$current_section->id,$current_block->id])}}">
+    <a href="{{route('project.ai-assist',[$project->id,$project->cSection,$project->cBlock])}}">
         <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-lg px-16 py-3 dark:bg-brandPrimary dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800">Let`s Build</button>
     </a>
 </div>

@@ -8,7 +8,9 @@ use App\Models\Client;
 use App\Models\Project;
 use App\Models\ProjectAnswer;
 use App\Models\ProjectQuestion;
+use App\Models\UserProjectProgess;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -138,13 +140,60 @@ class ProjectController extends Controller
     public function project($id)
     {
         $user = auth()->user();
-        $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
-        $current_section = $project->type->sections->first();
-        $current_block = $current_section->blocks->first();
-        if (!$project->type) {
-            return abort(404);
-        }
-        return view('theme::projects.project-details', compact('project', 'current_section', 'current_block'));
+        $project = $user->getProject($id);
+        if (!$project) return abort(404);
+        //dd($project);
+        return view('theme::projects.project-details', compact('project'));
+
+        // $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
+        // if (!$project->type) {
+        //     return abort(404);
+        // }
+        // $sections = [];
+        // $cSection = null;
+        // $cBlock = null;
+
+        // if (isset($project->type->sections)) {
+        //     foreach ($project->type->sections as $key => $section) {
+        //         if (isset($section->blocks)) {
+        //             $blocks = [];
+        //             $nb_done = 0;
+        //             $cBlock = null;
+        //             $lBlock = null;
+        //             foreach ($section->blocks as $block) {
+        //                 if (isset($block->questions) && count($block->questions) > 0) {
+        //                     $sections[] = $section;
+        //                     $blocks[] = $block;
+        //                     if ($block->done()) {
+        //                         $nb_done++;
+        //                     } else {
+        //                         if (!$cBlock) {
+        //                             $cBlock = $block->id;
+        //                         }
+        //                         //$cSection = $section;
+        //                         //$cBlock = $block;
+        //                         //return view('theme::projects.project-details', compact('project', 'cSection', 'cBlock'));
+        //                     }
+        //                     $lBlock = $block->id;
+        //                 }
+        //             }
+        //             $section->blocks = $blocks;
+        //             if ($nb_done > 0) {
+        //                 $section->blockProgress =  $nb_done / count($section->blocks) * 100;
+        //             } else {
+        //                 $section->blockProgress = 0;
+        //             }
+        //             if ($cBlock) {
+        //                 $section->cBlock = $cBlock;
+        //             } else {
+        //                 $section->cBlock = $lBlock;
+        //             }
+        //         }
+        //     }
+        //     $project->type->sections = $sections;
+        //     return view('theme::projects.project-details', compact('project', 'cSection', 'cBlock'));
+        // }
+        // return abort(404);
     }
 
     public function projectAiAssist($id, $sectionId, $blockId)
@@ -176,8 +225,22 @@ class ProjectController extends Controller
         //         back: null,
         $user = auth()->user();
         $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
+        $userProject = $user->getProjectDetails($id, $sectionId, $blockId);
         $section = $project->type->sections->where('id', $sectionId)->firstOrFail();
         $block = $section->blocks->where('id', $blockId)->firstOrFail();
+        // $sections = [];
+        // $blocks = [];
+
+        // if (isset($section->blocks)) 
+        //     foreach ($section->blocks as $block) {
+        //         if (isset($block->questions) && count($block->questions) > 0) {
+        //             $sections[] = $section;
+        //             $blocks[] = $block;
+        //         }
+        //     }
+        //     $section->blocks = $blocks;
+        // }
+        //$project->type->sections = $sections;
         $questions = array();
         $questionsLength = count($block->questions);
         foreach ($block->questions as $key => $question) {
@@ -237,11 +300,10 @@ class ProjectController extends Controller
         };
         return response()->json([
             'status' => 'success',
-            'project' => $project,
-            'section' => $section,
+            'project' => $userProject->project,
+            'section' => $userProject->section,
             'block' => $block,
-            'questions' => $questions,
-            //'sections' => $project->type->sections
+            'questions' => $questions
         ], 200);
     }
     public function getUserProject($id)
@@ -256,7 +318,8 @@ class ProjectController extends Controller
             'sections' => $project->type->sections
         ], 200);
     }
-    public function submitProjectAnswers(Request $request)
+
+    public function submitBlock(Request $request)
     {
         try {
             $user = auth()->user();
@@ -278,6 +341,23 @@ class ProjectController extends Controller
                 }
             }
             if ($updated) {
+
+                $progress = UserProjectProgess::where([
+                    'user_id' => $user->id,
+                    'category' => 'block',
+                    'id_of_category' => $request->blockId
+                ])->first();
+
+                if (!$progress) {
+                    $progress = new UserProjectProgess();
+                    $progress->user_id = $user->id;
+                    $progress->category = 'block';
+                    $progress->id_of_category = $request->blockId;
+                }
+                $progress->done = 1;
+                $progress->validate_at = now()->toDateTimeString();
+                $progress->save();
+
                 Session::flash('message', 'Successfully Submitted!');
                 Session::flash('message_type', 'success');
                 return response()->json([
@@ -295,6 +375,7 @@ class ProjectController extends Controller
                 ], 200);
             }
         } catch (\Exception $e) {
+            log::info($e->getMessage());
             return response()->json([
                 'status' => 'error',
                 'message' => 'Internal server error!',
