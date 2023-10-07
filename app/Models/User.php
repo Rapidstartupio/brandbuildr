@@ -125,7 +125,7 @@ class User extends Authenticatable
                     if (!empty($b)) {
                         $progress = 0;
                         if ($b_done > 0) {
-                            $progress = $b_done / count($b) * 100;
+                            $progress = number_format($b_done / count($b) * 100);
                         }
                         $sections[] = (object)[
                             'id' => $section->id,
@@ -218,7 +218,7 @@ class User extends Authenticatable
                     if (!empty($b)) {
                         $progress = 0;
                         if ($b_done > 0) {
-                            $progress = $b_done / count($b) * 100;
+                            number_format($progress = $b_done / count($b) * 100);
                         }
                         $tmp = (object)[
                             'id' => $section->id,
