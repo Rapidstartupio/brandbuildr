@@ -33,8 +33,12 @@ class ProjectQuestion extends Model
         return null;
     }
 
-    public function answer($user_id)
+    public function answer($user_id, $project_id)
     {
-        return ProjectAnswer::where('user_id', $user_id)->where('project_question_id', $this->id)->first();
+        return ProjectAnswer::where([
+            'user_id' => $user_id,
+            'project_question_id' => $this->id,
+            'project_id' => $project_id
+        ])->first();
     }
 }

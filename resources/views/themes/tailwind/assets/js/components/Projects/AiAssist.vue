@@ -166,6 +166,7 @@ div.block-item {
                         :class="{
                             'active-block': block.id == this.blockId,
                         }"
+                        :data-block-id="block.id"
                     >
                      
                         <div class="number">{{ block.order }}</div>
@@ -826,17 +827,17 @@ export default {
         },
         submit(){
             axios
-                .post("/submit-project-answers",{data:this.steps,blockId:this.blockId}) //project/{id}/section/{sectionId}/block/{blockId}/ai-assist
+                .post("/submit-project-answers",{data:this.steps,blockId:this.blockId,projectId:this.projectId}) //project/{id}/section/{sectionId}/block/{blockId}/ai-assist
                 .then((response) => {
                     console.log(response);
                     if (response.data.message) {
-                        // setTimeout(function () {
-                        //     popToast(
-                        //         response.data.message_type,
-                        //         response.data.message
-                        //     );
-                        // }, 10);
-                        window.location.replace("/project/" +this.projectId);
+                        var nextBlock = (document.querySelector('.active-block').nextSibling.dataset != undefined) ? document.querySelector('.active-block').nextSibling.dataset.blockId : null;
+            
+                        if(nextBlock){
+                            window.location.replace("/project/" +this.projectId+'/section/'+this.sectionId+'/block/'+nextBlock+'/ai-assist');
+                        }else{
+                            window.location.replace("/project/" +this.projectId);
+                        }
                     }
                 })
                 .catch((error) => {

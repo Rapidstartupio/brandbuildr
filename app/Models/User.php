@@ -104,7 +104,7 @@ class User extends Authenticatable
                         //     ];
                         // }
                         if (count($block->questions) > 0) {
-                            $done = $block->done();
+                            $done = $block->done($id);
                             if ($done) {
                                 $b_done++;
                             } else if (!$cBlock) {
@@ -192,7 +192,7 @@ class User extends Authenticatable
                         //     ];
                         // }
                         if (count($block->questions) > 0) {
-                            $done = $block->done();
+                            $done = $block->done($id);
                             if ($done) {
                                 $b_done++;
                             } else if (!$cBlock) {

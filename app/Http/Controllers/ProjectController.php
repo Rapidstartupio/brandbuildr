@@ -252,7 +252,7 @@ class ProjectController extends Controller
             if ($key == 0) {
                 $back = null;
             }
-            $answer = $question->answer($user->id);
+            $answer = $question->answer($user->id, $id);
             $prompt = null;
             if (isset($question->prompt->prompt)) {
                 $prompt = $question->prompt->prompt;
@@ -267,9 +267,9 @@ class ProjectController extends Controller
                     }
                 }, $prompt);
                 $prompt = $updatedPrompt;
-                $updatedPrompt = preg_replace_callback('/\{\{g-answer:(\d+)\}\}/', function ($matches) use ($user) {
+                $updatedPrompt = preg_replace_callback('/\{\{g-answer:(\d+)\}\}/', function ($matches) use ($user, $id) {
                     $questionId = $matches[1];
-                    $res = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $questionId);
+                    $res = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $questionId)->where('project_id', $id);
                     // Check if exists
                     if (isset($res->answer)) {
                         return $res->answer;
@@ -323,6 +323,7 @@ class ProjectController extends Controller
     {
         try {
             $user = auth()->user();
+            $projectId = $request->projectId;
             $updated = false;
             if ($request->data && !empty($request->data)) {
                 foreach ($request->data as $key => $question) {
@@ -335,6 +336,7 @@ class ProjectController extends Controller
                         $projectAnswer->answer = $question['answer'];
                         $projectAnswer->user_id = $user->id;
                         $projectAnswer->logs = serialize($question['suggest_logs']);
+                        $projectAnswer->project_id = $projectId;
                         $projectAnswer->save();
                         $updated = true;
                     }
@@ -345,7 +347,8 @@ class ProjectController extends Controller
                 $progress = UserProjectProgess::where([
                     'user_id' => $user->id,
                     'category' => 'block',
-                    'id_of_category' => $request->blockId
+                    'id_of_category' => $request->blockId,
+                    'project_id' => $projectId
                 ])->first();
 
                 if (!$progress) {
@@ -353,6 +356,7 @@ class ProjectController extends Controller
                     $progress->user_id = $user->id;
                     $progress->category = 'block';
                     $progress->id_of_category = $request->blockId;
+                    $progress->project_id = $projectId;
                 }
                 $progress->done = 1;
                 $progress->validate_at = now()->toDateTimeString();
@@ -374,7 +378,7 @@ class ProjectController extends Controller
                     'message_type' => 'warning'
                 ], 200);
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             log::info($e->getMessage());
             return response()->json([
                 'status' => 'error',

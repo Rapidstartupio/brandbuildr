@@ -15,14 +15,16 @@ class ProjectBlock extends Model
         return $this->hasMany(ProjectQuestion::class)->orderBy('order', 'ASC');
     }
 
-    public function done()
+    public function done($projectId)
     {
         $user = auth()->user();
         $progress = UserProjectProgess::where([
             'user_id' => $user->id,
             'done' => 1,
             'category' => 'block',
-            'id_of_category' => $this->id
+            'id_of_category' => $this->id,
+            'project_id' => $projectId
+
         ])->first();
         if (isset($progress->done)) {
             return true;
