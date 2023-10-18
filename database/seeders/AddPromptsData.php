@@ -35,7 +35,7 @@ class AddPromptsData extends Seeder
             \DB::table('project_prompts')->insert(array(
                 array(
                     'name' => 'Competitors 1 - Analysis ' . $ref,
-                    'prompt' => "{{g-question:3.1.01}}:{{g-answer:$ref}}",
+                    'prompt' => "{{g-question:$ref}}:{{g-answer:$ref}}",
                     'created_at' => '2023-10-18 00:00:00',
                     'updated_at' => '2023-10-18 00:00:00',
                 )
