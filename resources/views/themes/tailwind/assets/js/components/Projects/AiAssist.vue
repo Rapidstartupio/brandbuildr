@@ -864,10 +864,10 @@ export default {
                     }
                     return value; // Return the replacement value or the original match if not found in $question
                 });
-                prompt = prompt.replace(/\{\{answer:(\d+)\}\}/g, (match, questionNumber) => {
+                prompt = prompt.replace(/\{\{answer:(\d+)\}\}/g, (match, ref) => {
                     var value = "";
-                    if(this.getStepById(parseInt(questionNumber))){
-                        value = this.getStepById(parseInt(questionNumber)).answer;
+                    if(this.getStepByRef(ref)){
+                        value = this.getStepByRef(ref).answer;
                     }
                     return value?? ""; // Return the replacement value or the original match if not found in $question
                 });
@@ -1032,6 +1032,9 @@ export default {
         getStepById(id) {
             return this.steps.find(item => item.id === id);
         },
+        getStepByRef(ref){
+            return this.steps.find(item => item.ref === ref);
+        }
     },
     props: ["projectId", "sectionId", "blockId"],
 };

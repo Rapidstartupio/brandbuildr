@@ -257,8 +257,8 @@ class ProjectController extends Controller
             if (isset($question->prompt->prompt)) {
                 $prompt = $question->prompt->prompt;
                 $updatedPrompt = preg_replace_callback('/\{\{g-question:(\d+)\}\}/', function ($matches) {
-                    $questionId = $matches[1];
-                    $res = ProjectQuestion::find($questionId);
+                    $questionRef = $matches[1];
+                    $res = ProjectQuestion::where('ref', $questionRef)->first();
                     // Check if  exists 
                     if (isset($res->question)) {
                         return $res->question;
@@ -268,19 +268,22 @@ class ProjectController extends Controller
                 }, $prompt);
                 $prompt = $updatedPrompt;
                 $updatedPrompt = preg_replace_callback('/\{\{g-answer:(\d+)\}\}/', function ($matches) use ($user, $id) {
-                    $questionId = $matches[1];
-                    $res = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $questionId)->where('project_id', $id);
-                    // Check if exists
-                    if (isset($res->answer)) {
-                        return $res->answer;
-                    } else {
-                        return '';
+                    $questionRef = $matches[1];
+                    $q = ProjectQuestion::where('ref', $questionRef)->first();
+                    if (isset($q->id)) {
+                        $res = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $q->id)->where('project_id', $id);
+                        // Check if exists
+                        if (isset($res->answer)) {
+                            return $res->answer;
+                        }
                     }
+                    return "{{answer:$questionRef}}";
                 }, $prompt);
                 $prompt = $updatedPrompt;
             }
             $questions[] = [
                 'id' => $question->id,
+                'ref' => $question->ref,
                 'question_ai' => $question->question_ai,
                 'question' => $question->question,
                 'answerInputType' => "text",
