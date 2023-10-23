@@ -256,7 +256,7 @@ class ProjectController extends Controller
             $prompt = null;
             if (isset($question->prompt->prompt)) {
                 $prompt = $question->prompt->prompt;
-                $updatedPrompt = preg_replace_callback('/\{\{g-question:(\d+)\}\}/', function ($matches) {
+                $updatedPrompt = preg_replace_callback('/\{\{g-question:([\d.]+)\}\}/', function ($matches) {
                     $questionRef = $matches[1];
                     $res = ProjectQuestion::where('ref', $questionRef)->first();
                     // Check if  exists 
@@ -267,7 +267,7 @@ class ProjectController extends Controller
                     }
                 }, $prompt);
                 $prompt = $updatedPrompt;
-                $updatedPrompt = preg_replace_callback('/\{\{g-answer:(\d+)\}\}/', function ($matches) use ($user, $id) {
+                $updatedPrompt = preg_replace_callback('/\{\{g-answer:([\d.]+)\}\}/', function ($matches) use ($user, $id) {
                     $questionRef = $matches[1];
                     $q = ProjectQuestion::where('ref', $questionRef)->first();
                     if (isset($q->id)) {

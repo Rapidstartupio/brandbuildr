@@ -857,14 +857,14 @@ export default {
             
             // Use regular expressions to replace {{question:X}} with the corresponding value in the $question array
             if(prompt){
-                prompt = prompt.replace(/\{\{question:(\d+)\}\}/g, (match, questionNumber) => {
+                prompt = prompt.replace(/\{\{question:([\d.]+)\}\}/g, (match, questionNumber) => {
                     var value = "";
                     if(this.getStepById(parseInt(questionNumber))){
                         value = this.getStepById(parseInt(questionNumber)).question;
                     }
                     return value; // Return the replacement value or the original match if not found in $question
                 });
-                prompt = prompt.replace(/\{\{answer:(\d+)\}\}/g, (match, ref) => {
+                prompt = prompt.replace(/\{\{answer:([\d.]+)\}\}/g, (match, ref) => {
                     var value = "";
                     if(this.getStepByRef(ref)){
                         value = this.getStepByRef(ref).answer;
@@ -913,7 +913,7 @@ export default {
                 });
                 axios
                     .post("/openai/chat", {
-                        model: "gpt-3.5-turbo",
+                        model: "gpt-4",
                         messages: this.chatbot.previousMessages,
                     })
                     .then((response) => {
@@ -977,7 +977,7 @@ export default {
                 this.chatbot.userInput = "";
                 axios
                     .post("/openai/chat", {
-                        model: "gpt-3.5-turbo",
+                        model: "gpt-4",
                         messages: this.chatbot.previousMessages,
                     })
                     .then((response) => {
