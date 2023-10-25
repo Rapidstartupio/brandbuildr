@@ -222,7 +222,11 @@ div.block-item {
                     </div>
                     <div class="pt-12 md:px-6">
                         <div v-if="steps[step].answerInputType == 'text'">
-                            <input
+                            <textarea name="" class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-xs"
+                                 id="" cols="30" :rows="answerRows" :placeholder="
+                                    steps[step].answerInputPlaceHolder
+                                " required>{{ steps[step].answer }}</textarea>
+                             <!--<input
                                 type="text"
                                 class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-xs"
                                 :placeholder="
@@ -231,7 +235,7 @@ div.block-item {
                                 v-model="steps[step].answer"
                                 required
                                 />
-                            <!-- <textarea  
+                            <textarea  
                                 id="" cols="30" 
                                 rows="10" 
                                 class=""
@@ -376,7 +380,7 @@ div.block-item {
                                 <p
                                     class="px-4 py-6 text-sm font-light text-center"
                                 >
-                                    {{ suggestResult }}
+                                <div style="white-space: pre-line;" v-html="suggestResult"></div>
                                 </p>
                                 <div class="text-center">
                                     <button
@@ -443,7 +447,7 @@ div.block-item {
                                         </svg>
                                     </div>
                                     <div class="content col-span-5">
-                                        {{ msg.text }}
+                                         <div  style="white-space: pre-line;" v-html="msg.text"></div>
                                     </div>
                                 </div>
                             </div>
@@ -729,6 +733,7 @@ export default {
             defaultStep: 0,
             step: 0,
             steps: null,
+            answerRows:"2",
             //examples: [],
             // steps: {
             //     1: {
@@ -926,7 +931,7 @@ export default {
                                 content: botResponse,
                             });
                             var suggestion = botResponse;
-                            suggestion = suggestion.replace(/(\r\n|\n|\r)/gm, "");
+                            //suggestion = suggestion.replace(/(\r\n|\n|\r)/gm, "");
                             this.suggestResult = suggestion;
                             this.isSuggest = "hidden";
                             this.isHiddenSuggestResult = "";
@@ -1034,6 +1039,21 @@ export default {
         },
         getStepByRef(ref){
             return this.steps.find(item => item.ref === ref);
+        },
+        do_resize(){
+            console.log("do_resize");
+            var maxrows=5; 
+            var txt=this.steps[this.step].answer;
+            var cols=this.answerRows;
+
+            var arraytxt=txt.split('\n');
+            var rows=arraytxt.length; 
+
+            for (i=0;i<arraytxt.length;i++) 
+            rows+=parseInt(arraytxt[i].length/cols);
+
+            if (rows>maxrows) this.answerRows=maxrows;
+            else this.answerRows=rows;
         }
     },
     props: ["projectId", "sectionId", "blockId"],
