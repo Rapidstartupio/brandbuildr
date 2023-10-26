@@ -222,10 +222,12 @@ div.block-item {
                     </div>
                     <div class="pt-12 md:px-6">
                         <div v-if="steps[step].answerInputType == 'text'">
-                            <textarea name="" class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-xs"
-                                 id="" cols="30" :rows="answerRows" :placeholder="
-                                    steps[step].answerInputPlaceHolder
-                                " required>{{ steps[step].answer }}</textarea>
+                            <textarea
+                                class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-xs"
+                                cols="30" :rows="answerRows"
+                                :placeholder="steps[step].answerInputPlaceHolder"
+                                v-model="steps[step].answer"
+                                required></textarea>
                              <!--<input
                                 type="text"
                                 class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-xs"
