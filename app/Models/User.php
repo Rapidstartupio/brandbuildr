@@ -61,11 +61,27 @@ class User extends Authenticatable
     {
         return $this->hasMany('\App\Models\Project')->orderBy('created_at', 'DESC');
     }
+    public function getProjects()
+    {
+        $projects = $this->projects->all();
+        $p = [];
+        if ($projects) {
+            foreach ($projects as $project) {
+                $tmp = $this->getProject($project->id);
+                if ($tmp) {
+                    $p[] = $tmp;
+                }
+            }
+        }
+        return (object)$p;
+    }
 
     public function getProject($id)
     {
         $p =  [];
         $project = Project::where(['user_id' => $this->id, 'id' => $id])->first();
+        $projectProgress = 0;
+        $s_done = 0;
         if ($project) {
             //dd($project->type);
             $p['id'] = $project->id;
@@ -74,6 +90,7 @@ class User extends Authenticatable
             $p['client_id'] = $project->client_id;
             $p['description'] = $project->description;
             $p['user_id'] = $project->user_id;
+            $p['created_at'] = $project->created_at;
             //Add Sections
             //$p['sections'] = [];
             $sections = [];
@@ -141,11 +158,18 @@ class User extends Authenticatable
                             $_cSection = $section->id;
                             $_cBlock = $cBlock;
                         }
+                        if ($progress == 100) {
+                            $s_done++;
+                        }
                     }
                 }
                 $p['sections'] = (object)$sections;
                 $p['cSection'] = $_cSection;
                 $p['cBlock'] = $_cBlock;
+                if ($s_done > 0) {
+                    $projectProgress = number_format($s_done / count($sections) * 100);
+                }
+                $p['progress'] = $projectProgress;
             }
         }
         return (object)$p;

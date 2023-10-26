@@ -69,13 +69,13 @@
 		<div class="brandDark2 p-4 rounded space-y-5">
 			<div class="md:flex justify-between">
 				<div class="">{{$project->name}}</div>
-				<div class="dark:text-gray-400 text-sm">{{$project->type->name}}</div>
+				<div class="dark:text-gray-400 text-sm">{{$project->type}}</div>
 			</div>
 			<div>
-				<p class="text-xs font-light">0% Completed</p>
+				<p class="text-xs font-light">{{$project->progress}}% Completed</p>
 			</div>
 			<div class="w-full bg-[#838396] rounded-full h-1.5 dark:bg-[#838396]">
-				<div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: 0%"></div>
+				<div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: {{$project->progress}}%"></div>
 			</div>
 			<div>
 				<p class="text-xs font-light">{{$project->description}}</p>

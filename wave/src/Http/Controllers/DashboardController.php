@@ -24,7 +24,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $projects = $user->projects->all();
+        $projects = $user->getProjects();
         return view('theme::dashboard.index', compact('projects'));
     }
 }
