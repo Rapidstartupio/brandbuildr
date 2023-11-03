@@ -271,7 +271,7 @@ class ProjectController extends Controller
                     $questionRef = $matches[1];
                     $q = ProjectQuestion::where('ref', $questionRef)->first();
                     if (isset($q->id)) {
-                        $res = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $q->id)->where('project_id', $id);
+                        $res = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $q->id)->where('project_id', $id)->first();
                         // Check if exists
                         if (isset($res->answer)) {
                             return $res->answer;
@@ -331,15 +331,20 @@ class ProjectController extends Controller
             if ($request->data && !empty($request->data)) {
                 foreach ($request->data as $key => $question) {
                     if ($question['question'] && isset($question['answer']) &&  $question['answer']) {
-                        $projectAnswer = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $question['id'])->first();
+                        $projectAnswer = ProjectAnswer::where([
+                            'user_id' => $user->id,
+                            'project_question_id' => $question['id'],
+                            'project_id' => $projectId
+                        ])->first();
                         if (!$projectAnswer) {
                             $projectAnswer = new ProjectAnswer();
+                            $projectAnswer->project_question_id = $question['id'];
+                            $projectAnswer->user_id = $user->id;
+                            $projectAnswer->project_id = $projectId;
                         }
-                        $projectAnswer->project_question_id = $question['id'];
+
                         $projectAnswer->answer = $question['answer'];
-                        $projectAnswer->user_id = $user->id;
                         $projectAnswer->logs = serialize($question['suggest_logs']);
-                        $projectAnswer->project_id = $projectId;
                         $projectAnswer->save();
                         $updated = true;
                     }
