@@ -448,11 +448,11 @@ class ProjectController extends Controller
                     'message' => 'error'
                 ], 500);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             log::info($e->getMessage());
             return response()->json([
                 'status' => 'error',
-                'message' => 'Internal server error!',
+                'message' => $e->getMessage(),
                 'message_type' => 'danger'
             ], 500);
         }
