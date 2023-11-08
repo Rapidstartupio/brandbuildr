@@ -1,0 +1,470 @@
+body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
+	margin:0;
+	padding:0;
+	border-width:0;
+}
+body {
+	-epub-hyphens:auto;
+}
+div.Basic-Graphics-Frame {
+	border-color:#000000;
+	border-width:1px;
+	border-style:solid;
+}
+div.Basic-Text-Frame {
+	border-style:solid;
+}
+p.Body---Statement {
+	-epub-hyphens:none;
+	color:#000000;
+	font-family:"Wix Madefor Display Regular", sans-serif;
+	font-size:13px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.615;
+	margin-bottom:6px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.Body-12-- {
+	color:#000000;
+	font-family:"Wix Madefor Display Regular", sans-serif;
+	font-size:12px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.333;
+	margin-bottom:9px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.H1---White {
+	-epub-hyphens:none;
+	color:#f1f2f2;
+	font-family:"Wix Madefor Display ExtraBold", sans-serif;
+	font-size:20px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.286;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.H2---White {
+	-epub-hyphens:none;
+	color:#ffffff;
+	font-family:"Wix Madefor Display ExtraBold", sans-serif;
+	font-size:16px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.2;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.H3---Statement {
+	-epub-hyphens:none;
+	color:#000000;
+	font-family:"Wix Madefor Display Bold", sans-serif;
+	font-size:20px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.1;
+	margin-bottom:9px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.H3---White {
+	color:#ffffff;
+	font-family:"Wix Madefor Display ExtraBold", sans-serif;
+	font-size:10px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.2;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:right;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.H4-Descriptor {
+	-epub-hyphens:none;
+	color:#000000;
+	font-family:"Wix Madefor Display Medium", sans-serif;
+	font-size:11px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.364;
+	margin-bottom:9px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.H4-New {
+	-epub-hyphens:none;
+	color:#000000;
+	font-family:"Wix Madefor Display Bold", sans-serif;
+	font-size:13px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.154;
+	margin-bottom:9px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.H4-TOC {
+	-epub-hyphens:none;
+	color:#5157a6;
+	font-family:"Wix Madefor Display Bold", sans-serif;
+	font-size:12px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.25;
+	margin-bottom:9px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:14px;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.H5-TOC {
+	-epub-hyphens:none;
+	color:#000000;
+	font-family:"Wix Madefor Display Bold", sans-serif;
+	font-size:10px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.5;
+	margin-bottom:3px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.Basic-Paragraph {
+	color:#000000;
+	font-family:"Minion Pro", serif;
+	font-size:12px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.2;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.h4 {
+	-epub-hyphens:none;
+	color:#5157a6;
+	font-family:"Wix Madefor Display Bold", sans-serif;
+	font-size:15px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1;
+	margin-bottom:9px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.ParaOverride-1 {
+	-epub-hyphens:none;
+}
+p.ParaOverride-2 {
+	text-align:center;
+}
+p.ParaOverride-3 {
+	-epub-hyphens:none;
+	text-align:right;
+}
+span.CharOverride-1 {
+	color:#f1f2f2;
+	font-family:"Wix Madefor Display ExtraBold", sans-serif;
+	font-size:28px;
+	font-style:normal;
+	font-weight:normal;
+}
+span.CharOverride-2 {
+	color:#f1f2f2;
+	font-family:"Wix Madefor Display Bold", sans-serif;
+	font-size:19px;
+	font-style:normal;
+	font-weight:normal;
+}
+span.CharOverride-3 {
+	color:#414042;
+	font-family:"Wix Madefor Display ExtraBold", sans-serif;
+	font-size:8px;
+	font-style:normal;
+	font-weight:normal;
+}
+span.CharOverride-4 {
+	font-style:normal;
+	font-weight:bold;
+}
+span.CharOverride-5 {
+	color:#939598;
+	font-style:normal;
+	font-weight:bold;
+}
+span.CharOverride-6 {
+	font-size:11px;
+}
+#_idContainer001 {
+	-ms-transform:translate(-0.001px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-ms-transform-origin:0% 0%;
+	-webkit-transform:translate(-0.001px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-webkit-transform-origin:0% 0%;
+	height:34.64px;
+	left:0px;
+	position:absolute;
+	top:0px;
+	transform:translate(-0.001px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform:translate(-0.001px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform-origin:0% 0%;
+	transform-origin:0% 0%;
+	width:34.64px;
+	z-index:0;
+}
+#_idContainer002 {
+	-ms-transform:translate(0.000px,10.020px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-ms-transform-origin:0% 0%;
+	-webkit-transform:translate(0.000px,10.020px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-webkit-transform-origin:0% 0%;
+	height:14.60px;
+	left:0px;
+	overflow:hidden;
+	position:absolute;
+	top:0px;
+	transform:translate(0.000px,10.020px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform:translate(0.000px,10.020px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform-origin:0% 0%;
+	transform-origin:0% 0%;
+	width:34.64px;
+	z-index:1;
+}
+#_idContainer003 {
+	display:inline-block;
+	height:35px;
+	position:relative;
+	width:35px;
+}
+#_idContainer009 {
+	display:inline-block;
+	height:100px;
+	position:relative;
+	width:100px;
+}
+#_idContainer026, #_idContainer028, #_idContainer030, #_idContainer032, #_idContainer048, #_idContainer088, #_idContainer090, #_idContainer092, #_idContainer094, #_idContainer096, #_idContainer098, #_idContainer100, #_idContainer144, #_idContainer146, #_idContainer148, #_idContainer150, #_idContainer159, #_idContainer161, #_idContainer163, #_idContainer165, #_idContainer167, #_idContainer169, #_idContainer196, #_idContainer198, #_idContainer200, #_idContainer202, #_idContainer204, #_idContainer217, #_idContainer219, #_idContainer221, #_idContainer229, #_idContainer231, #_idContainer245, #_idContainer247, #_idContainer249, #_idContainer257, #_idContainer281, #_idContainer284, #_idContainer295, #_idContainer298, #_idContainer315, #_idContainer319 {
+	display:inline-block;
+	height:0px;
+	position:relative;
+	width:481px;
+}
+#_idContainer114, #_idContainer119, #_idContainer124, #_idContainer129, #_idContainer134, #_idContainer139 {
+	-ms-transform:translate(0.000px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-ms-transform-origin:0% 0%;
+	-webkit-transform:translate(0.000px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-webkit-transform-origin:0% 0%;
+	height:14.11px;
+	left:0px;
+	overflow:hidden;
+	position:absolute;
+	top:0px;
+	transform:translate(0.000px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform:translate(0.000px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform-origin:0% 0%;
+	transform-origin:0% 0%;
+	width:81.50px;
+	z-index:1;
+}
+#_idContainer115, #_idContainer120, #_idContainer125, #_idContainer130, #_idContainer135, #_idContainer140 {
+	-ms-transform:translate(85.039px,5.818px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-ms-transform-origin:0% 0%;
+	-webkit-transform:translate(85.039px,5.818px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-webkit-transform-origin:0% 0%;
+	height:2.50px;
+	left:0px;
+	position:absolute;
+	top:0px;
+	transform:translate(85.039px,5.818px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform:translate(85.039px,5.818px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform-origin:0% 0%;
+	transform-origin:0% 0%;
+	width:309.81px;
+	z-index:0;
+}
+#_idContainer116, #_idContainer121, #_idContainer126, #_idContainer131, #_idContainer136, #_idContainer141 {
+	-ms-transform:translate(233.888px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-ms-transform-origin:0% 0%;
+	-webkit-transform:translate(233.888px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-webkit-transform-origin:0% 0%;
+	height:14.11px;
+	left:0px;
+	position:absolute;
+	top:0px;
+	transform:translate(233.888px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform:translate(233.888px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform-origin:0% 0%;
+	transform-origin:0% 0%;
+	width:14.11px;
+	z-index:3;
+}
+#_idContainer117, #_idContainer122, #_idContainer127, #_idContainer132, #_idContainer137, #_idContainer142 {
+	-ms-transform:translate(400.393px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-ms-transform-origin:0% 0%;
+	-webkit-transform:translate(400.393px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	-webkit-transform-origin:0% 0%;
+	height:14.11px;
+	left:0px;
+	overflow:hidden;
+	position:absolute;
+	top:0px;
+	transform:translate(400.393px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform:translate(400.393px,0.000px) rotate(0.000deg) skew(0.000deg) scale(1.000,1.000);
+	transform-origin:0% 0%;
+	transform-origin:0% 0%;
+	width:81.50px;
+	z-index:2;
+}
+#_idContainer118, #_idContainer123, #_idContainer128, #_idContainer133, #_idContainer138, #_idContainer143 {
+	display:inline-block;
+	height:14px;
+	position:relative;
+	width:482px;
+}
+div._idGenObjectStyleOverride-1 {
+	background-color:#939598;
+	border-width:0px;
+}
+div._idGenObjectStyleOverride-2 {
+	border-width:0px;
+}
+div._idGenObjectStyleOverride-3 {
+	background-color:#c7c8ca;
+	border-width:0px;
+}
+div._idGenObjectStyleOverride-4 {
+	background-color:#c7c8ca;
+	border-color:#939598;
+	border-width:1px;
+}
+div._idGenObjectStyleOverride-5 {
+	background-color:#c7c8ca;
+	border-color:#939598;
+}
+div._idGenObjectStyleOverride-6 {
+	background-color:#000000;
+	border-width:0px;
+}
+div._idGenObjectLayout-1 {
+	text-align:center;
+}

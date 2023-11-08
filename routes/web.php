@@ -47,6 +47,7 @@ Route::post('projects/{id}/get', 'App\Http\Controllers\ProjectController@getUser
 Route::post('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssistData');
 Route::post('submit-project-answers', 'App\Http\Controllers\ProjectController@submitBlock');
 //Route::get('question-by-id/{id}', 'App\Http\Controllers\ProjectController@questionById');
+Route::post('download-project-document', 'App\Http\Controllers\ProjectController@downloadProjectDocument')->name('download-project-document');
 
 //openai Routes
 Route::post('openai/completions', '\App\Http\Controllers\OpenAiController@completions');

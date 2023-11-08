@@ -11,6 +11,8 @@ use App\Models\ProjectQuestion;
 use App\Models\UserProjectProgess;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\ProjectDocument;
 
 class ProjectController extends Controller
 {
@@ -408,6 +410,46 @@ class ProjectController extends Controller
                 'question' => $question
             ], 200);
         } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error!',
+                'message_type' => 'danger'
+            ], 500);
+        }
+    }
+
+    public function downloadProjectDocument(Request $request)
+    {
+        try {
+            $user = auth()->user();
+            $projectId = $request->projectId;
+            $project = Project::where(['user_id' => $user->id, 'id' => $projectId])->firstOrFail();
+            $data = [
+                'user' => $user
+            ];
+            $pdf = Pdf::loadView('templates.project-document', ['user' => $user]);
+            $name = uniqid() . "_$projectId";
+            $path =  public_path("storage/project-documents/") . "$name.pdf";
+            $pdf->save($path);
+            $projectDocument = ProjectDocument::create([
+                'user_id' => $user->id,
+                'project_id' => $projectId,
+                'name' => $name,
+                'path' => $path
+            ]);
+            if ($projectDocument) {
+                return response()->json([
+                    'status' => 'success',
+                    'file' => "/project-documents/$name.pdf"
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'error'
+                ], 500);
+            }
+        } catch (Exception $e) {
+            log::info($e->getMessage());
             return response()->json([
                 'status' => 'error',
                 'message' => 'Internal server error!',
