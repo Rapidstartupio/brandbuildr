@@ -91,3 +91,13 @@ svg {
 .dash-nav-item path{
     fill: #79798E;
 }
+.loading-card{
+    @apply relative items-center block contrast-50 cursor-not-allowed;
+}
+.isDisabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+    pointer-events: none;
+}
