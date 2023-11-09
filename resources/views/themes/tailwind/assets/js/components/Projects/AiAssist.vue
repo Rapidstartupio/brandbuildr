@@ -920,7 +920,7 @@ export default {
                 });
                 axios
                     .post("/openai/chat", {
-                        model: "gpt-4",
+                        model: "gpt-4-1106-preview",
                         messages: this.chatbot.previousMessages,
                     })
                     .then((response) => {
@@ -984,7 +984,7 @@ export default {
                 this.chatbot.userInput = "";
                 axios
                     .post("/openai/chat", {
-                        model: "gpt-4",
+                        model: "gpt-4-1106-preview",
                         messages: this.chatbot.previousMessages,
                     })
                     .then((response) => {
