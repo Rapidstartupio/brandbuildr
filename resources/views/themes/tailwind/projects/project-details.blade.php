@@ -71,7 +71,6 @@
             <!-- <form class="px-6 py-10 lg:px-8" method="POST" action="{{route('download-project-document')}}">
                 @csrf -->
             <div class="px-6 py-10 lg:px-8">
-                <input type="hidden" name="projectId" value="{{$project->id}}">
                 <div class="space-y-6">
                     @if($project->progress == 100)
                     <div class="dark:text-white text-center">
@@ -94,15 +93,21 @@
                         <p class="text-gray-400">We recommend reviewing your project and completing every section before downloading your project document</p>
                     </div>
                     @endif
-                    <div class="flex space-x-3">
-                        <button type="button" data-modal-hide="download-document-modal" class="w-full px-8 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400">
-                            Go Back
-                        </button>
-                        <button type="submit" onclick="downloadDocument()" class="w-full px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded hover:bg-primary-800 dark:bg-brandPrimary whitespace-nowrap">
-                            Download
-                        </button>
-                        <!--  -->
-                    </div>
+                    <!--  -->
+                    <form id="project-document-form" method="post" action="{{ route('download-project-document') }}">
+                        @csrf
+                        <input type="hidden" name="projectId" value="{{$project->id}}">
+                        <div class="flex space-x-3">
+                            <button type="button" data-modal-hide="download-document-modal" class="w-full px-8 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400">
+                                Go Back
+                            </button>
+                            <!-- onclick="downloadDocument()"  -->
+                            <button type="button" onclick="downloadDocument()" class="w-full px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded hover:bg-primary-800 dark:bg-brandPrimary whitespace-nowrap">
+                                Download
+                            </button>
+                            <!--  -->
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -114,6 +119,7 @@
 @section('javascript')
 <script>
     function downloadDocument() {
+        //e.preventDefault();
         var id = "{{$project->id}}";
         axios.post('/download-project-document', {
                 projectId: id
@@ -122,7 +128,7 @@
 
                 if (response.data.status == "success") {
                     console.log(response.data.file);
-                    window.location.href = "/storage/" + response.data.file;
+                    window.location.href = "/storage" + response.data.file;
                 }
                 console.log(response.data);
             })

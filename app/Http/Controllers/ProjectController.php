@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\ProjectDocument;
+use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
@@ -421,13 +422,42 @@ class ProjectController extends Controller
     public function downloadProjectDocument(Request $request)
     {
         try {
+
             $user = auth()->user();
             $projectId = $request->projectId;
-            $project = Project::where(['user_id' => $user->id, 'id' => $projectId])->firstOrFail();
+            $currentDate = Carbon::now();
+            $documentDate = $currentDate->format('m/Y');
+            //$project = Project::where(['user_id' => $user->id, 'id' => $projectId])->firstOrFail();
+            $project = $user->getProject($projectId, true);
+            $tableOfContents = [];
+            foreach ($project->sections as $section) {
+                if ($section->strategy_output) {
+                    $tableOfContents[] = (object)[
+                        'title' => $section->name,
+                        'class' => 'section-title'
+                    ];
+                    foreach ($section->blocks as $block) {
+                        if ($block->strategy_output) {
+                            $tableOfContents[] = (object)[
+                                'title' => $block->name,
+                                'class' => ''
+                            ];
+                        }
+                    }
+                }
+            }
+            //$tableOfContents = array_chunk($tableOfContents, 15);
+            //dd($tableOfContents);
+
             $data = [
-                'user' => $user
+                'user' => $user,
+                'project' => $project,
+                'documentDate' => $documentDate,
+                'tableOfContents' => $tableOfContents
             ];
-            $pdf = Pdf::loadView('templates.project-document', ['user' => $user]);
+            //dd($project);
+            //return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents'));
+            $pdf = Pdf::loadView('templates.project-document', $data);
             $name = uniqid() . "_$projectId";
             $path =  public_path("storage/project-documents/") . "$name.pdf";
             $pdf->save($path);
@@ -437,6 +467,7 @@ class ProjectController extends Controller
                 'name' => $name,
                 'path' => $path
             ]);
+            //return redirect("/storage/project-documents/$name.pdf");
             if ($projectDocument) {
                 return response()->json([
                     'status' => 'success',

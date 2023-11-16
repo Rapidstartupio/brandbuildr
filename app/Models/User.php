@@ -76,7 +76,7 @@ class User extends Authenticatable
         return (object)$p;
     }
 
-    public function getProject($id)
+    public function getProject($id, $returnQuestions = false)
     {
         $p =  [];
         $project = Project::where(['user_id' => $this->id, 'id' => $id])->first();
@@ -104,22 +104,32 @@ class User extends Authenticatable
                     $b = [];
                     $b_done = 0;
                     $cBlock = null;
+                    $strategyOutputSection = false;
                     foreach ($section->blocks as $block) {
-                        //$q = [];
-                        // foreach ($block->questions as $question) {
-                        //     $answer = null;
-                        //     $a = $question->answer($this->id);
-                        //     if (isset($a->answer)) {
-                        //         $answer = $a->answer;
-                        //     }
-                        //     $q[] = (object)[
-                        //         'id' => $question->id,
-                        //         'question_ai' => $question->question_ai,
-                        //         'question' => $question->question,
-                        //         'order' => $question->order,
-                        //         '$answer' => $answer,
-                        //     ];
-                        // }
+                        $q = [];
+                        $strategyOutput = false;
+                        if ($returnQuestions) {
+                            foreach ($block->questions as $question) {
+                                $answer = null;
+                                $a = $question->answer($this->id, $id);
+                                if (isset($a->answer)) {
+                                    $answer = $a->answer;
+                                }
+                                $q[] = (object)[
+                                    'id' => $question->id,
+                                    'question_ai' => $question->question_ai,
+                                    'question' => $question->question,
+                                    'order' => $question->order,
+                                    'answer' => $answer,
+                                    'strategy_document_output' => $question->strategy_document_output
+                                ];
+                                if ($question->strategy_document_output) {
+                                    $strategyOutput = true;
+                                }
+                            }
+                        }
+
+
                         if (count($block->questions) > 0) {
                             $done = $block->done($id);
                             if ($done) {
@@ -131,9 +141,13 @@ class User extends Authenticatable
                                 'id' => $block->id,
                                 'name' => $block->name,
                                 'order' => $block->order,
-                                //'questions' => (object)$q,
-                                'done' => $done
+                                'questions' => (object)$q,
+                                'done' => $done,
+                                'strategy_output' => $strategyOutput
                             ];
+                            if ($strategyOutput) {
+                                $strategyOutputSection = true;
+                            }
                         }
                     }
                     if (!$cBlock && end($b) && end($b)) {
@@ -152,7 +166,8 @@ class User extends Authenticatable
                             'blocks' => (object)$b,
                             'progress' => $progress,
                             'done' => $b_done,
-                            'cBlock' => $cBlock
+                            'cBlock' => $cBlock,
+                            'strategy_output' => $strategyOutputSection
                         ];
                         if (!$_cSection && $progress != 100) {
                             $_cSection = $section->id;
