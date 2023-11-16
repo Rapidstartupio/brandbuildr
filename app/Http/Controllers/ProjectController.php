@@ -446,6 +446,7 @@ class ProjectController extends Controller
                     }
                 }
             }
+
             //$tableOfContents = array_chunk($tableOfContents, 15);
             //dd($tableOfContents);
 
@@ -456,6 +457,7 @@ class ProjectController extends Controller
                 'tableOfContents' => $tableOfContents
             ];
             //dd($project);
+            // dd(array_chunk(array_chunk($tableOfContents, 15), 2));
             //return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents'));
             $pdf = Pdf::loadView('templates.project-document', $data);
             $name = uniqid() . "_$projectId";

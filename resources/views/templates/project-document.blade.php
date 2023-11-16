@@ -221,7 +221,7 @@
 
 <body style="background-color: #f1f2f2;">
     <div>
-        <div class="p1 ">
+        <div class="p1">
             <div class="container">
                 <div class="title">
                     <h1>{{$project->type}}<br>Document</h1>
@@ -246,6 +246,7 @@
             </div>
 
         </div>
+        @foreach(array_chunk(array_chunk($tableOfContents,15),2) as $pageContent)
         <div class="page-break"></div>
         <div class="p">
             <div class="head">
@@ -253,10 +254,10 @@
             </div>
             <div class="container clearfix">
                 <div class="content summary">
-                    @foreach(array_chunk($tableOfContents,15) as $tablecolumn)
+                    @foreach($pageContent as $columnContent)
                     <div class="column">
                         <ul>
-                            @foreach($tablecolumn as $item)
+                            @foreach($columnContent as $item)
                             <li class="{{$item->class}}">
                                 <a href="#">
                                     <span class="title">{{$item->title}}<span class="leaders" aria-hidden="true"></span></span>
@@ -314,6 +315,7 @@
                 </table>
             </div>
         </div>
+        @endforeach
     </div>
 
 </body>
