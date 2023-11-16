@@ -260,7 +260,7 @@
                             <li class="{{$item->class}}">
                                 <a href="#">
                                     <span class="title">{{$item->title}}<span class="leaders" aria-hidden="true"></span></span>
-                                    <span class="page"><span class="visually-hidden">Page</span>1</span>
+                                    <span class="page"><span></span><span class="visually-hidden">Page</span></span>
                                 </a>
                             </li>
                             @endforeach
