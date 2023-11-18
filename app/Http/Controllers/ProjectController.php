@@ -446,7 +446,6 @@ class ProjectController extends Controller
                     }
                 }
             }
-
             //$tableOfContents = array_chunk($tableOfContents, 15);
             //dd($tableOfContents);
 
@@ -458,8 +457,11 @@ class ProjectController extends Controller
             ];
             //dd($project);
             // dd(array_chunk(array_chunk($tableOfContents, 15), 2));
-            //return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents'));
+            // if (isset($request->view)) {
+            //     return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents'));
+            // }
             $pdf = Pdf::loadView('templates.project-document', $data);
+            //return $pdf->stream();
             $name = uniqid() . "_$projectId";
             $path =  public_path("storage/project-documents/") . "$name.pdf";
             $pdf->save($path);
@@ -469,7 +471,7 @@ class ProjectController extends Controller
                 'name' => $name,
                 'path' => $path
             ]);
-            //return redirect("/storage/project-documents/$name.pdf");
+            return redirect("/storage/project-documents/$name.pdf");
             if ($projectDocument) {
                 return response()->json([
                     'status' => 'success',

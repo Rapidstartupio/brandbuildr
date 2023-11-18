@@ -102,7 +102,7 @@
                                 Go Back
                             </button>
                             <!-- onclick="downloadDocument()"  -->
-                            <button type="button" onclick="downloadDocument()" class="w-full px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded hover:bg-primary-800 dark:bg-brandPrimary whitespace-nowrap">
+                            <button type="submit" onclick="downloadDocument()" class="w-full px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded hover:bg-primary-800 dark:bg-brandPrimary whitespace-nowrap">
                                 Download
                             </button>
                             <!--  -->
