@@ -471,7 +471,7 @@ class ProjectController extends Controller
                 'name' => $name,
                 'path' => $path
             ]);
-            return redirect("/storage/project-documents/$name.pdf");
+            //return redirect("/storage/project-documents/$name.pdf");
             if ($projectDocument) {
                 return response()->json([
                     'status' => 'success',

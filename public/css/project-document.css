@@ -294,6 +294,7 @@ li.section-title {
     .content table{
         width: 100%;
         border-collapse: collapse;
+        white-space: pre-line;
     }
     .content table td{
         width: 50%;
