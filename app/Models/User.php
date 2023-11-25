@@ -97,9 +97,13 @@ class User extends Authenticatable
             $_cSection = null;
             $_cBlock = null;
             //$cBlock = null;
+            if (isset($project->client)) {
+                $p['client'] = $project->client;
+            }
             if (isset($project->type)) {
                 //Add Type attributes
                 $p['type'] = $project->type->name;
+                $p['type_icon_svg_path_d'] = $project->type->icon_svg_path_d;
                 foreach ($project->type->sections as $section) {
                     $b = [];
                     $b_done = 0;

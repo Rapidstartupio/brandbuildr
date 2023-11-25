@@ -22,6 +22,13 @@ class ProjectController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $user = auth()->user();
+        $projects = $user->getProjects();
+        return view('theme::projects.index', compact('projects'));
+    }
+
     public function storeType(Request $request)
     {
         $validatedDate = $request->validate([
@@ -129,7 +136,8 @@ class ProjectController extends Controller
                 'status' => 'success',
                 'data' => $response,
                 'message' => 'Project Created Successfully!',
-                'message_type' => 'success'
+                'message_type' => 'success',
+                'project_id' => $response->id
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -425,6 +433,7 @@ class ProjectController extends Controller
 
             $user = auth()->user();
             $projectId = $request->projectId;
+            $projectId = 15;
             $currentDate = Carbon::now();
             $documentDate = $currentDate->format('m/Y');
             //$project = Project::where(['user_id' => $user->id, 'id' => $projectId])->firstOrFail();
@@ -457,11 +466,11 @@ class ProjectController extends Controller
             ];
             //dd($project);
             // dd(array_chunk(array_chunk($tableOfContents, 15), 2));
-            // if (isset($request->view)) {
-            //     return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents'));
-            // }
+            if (isset($request->view)) {
+                return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents'));
+            }
             $pdf = Pdf::loadView('templates.project-document', $data);
-            //return $pdf->stream();
+            return $pdf->stream();
             $name = uniqid() . "_$projectId";
             $path =  public_path("storage/project-documents/") . "$name.pdf";
             $pdf->save($path);

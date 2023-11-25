@@ -447,7 +447,11 @@ export default {
                 .post("/projects/store", this.project)
                 .then((response) => {
                     setTimeout(function () {
-                        window.location.href = "/dashboard";
+                        if (typeof response.data.project_id !== 'undefined') {
+                            window.location.href = "/project/"+response.data.project_id;
+                        }else{
+                            window.location.href = "/projects";
+                        }
                     }, 10);
                 })
                 .catch((error) => {

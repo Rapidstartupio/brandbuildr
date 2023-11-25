@@ -32,6 +32,12 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('onboarding/{step?}', '\App\Http\Controllers\Auth\RegisterController@dashboardOnboarding')->name('dashboard-onboarding');
 
 //Projects Routes
+
+//Brandbuilder Project routes
+Route::group(['prefix' => 'projects'], function () {
+    Route::get('/', '\App\Http\Controllers\ProjectController@index')->name('projects.index');
+});
+
 Route::post('settings/project-types', '\App\Http\Controllers\ProjectController@storeType');
 Route::get('settings/project-types/{id}', '\App\Http\Controllers\ProjectController@projectType');
 
@@ -48,6 +54,7 @@ Route::post('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\H
 Route::post('submit-project-answers', 'App\Http\Controllers\ProjectController@submitBlock');
 //Route::get('question-by-id/{id}', 'App\Http\Controllers\ProjectController@questionById');
 Route::post('download-project-document', 'App\Http\Controllers\ProjectController@downloadProjectDocument')->name('download-project-document');
+//Route::get('download-project-document', 'App\Http\Controllers\ProjectController@downloadProjectDocument');
 
 //openai Routes
 Route::post('openai/completions', '\App\Http\Controllers\OpenAiController@completions');
