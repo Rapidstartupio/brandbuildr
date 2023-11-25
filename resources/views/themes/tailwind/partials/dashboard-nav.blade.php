@@ -9,7 +9,7 @@
                <span class="">Dashboard</span>
             </a>
          </li>
-         <li class="@if(Request::is('projects')) active-dash-nav-item @else dash-nav-item @endif">
+         <li class="@if(Request::is('project*')) active-dash-nav-item @else dash-nav-item @endif">
             <a href="{{ route('projects.index') }}" class="items-center  rounded-lg   group">
                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
                   <path d="M5.5 3C4.39 3 3.5 3.89 3.5 5V19C3.5 20.11 4.39 21 5.5 21H19.5C20.61 21 21.5 20.11 21.5 19V5C21.5 3.89 20.61 3 19.5 3H5.5ZM5.5 5H19.5V19H5.5V5ZM7.5 7V9H17.5V7H7.5ZM7.5 11V13H17.5V11H7.5ZM7.5 15V17H14.5V15H7.5Z" fill="" />
