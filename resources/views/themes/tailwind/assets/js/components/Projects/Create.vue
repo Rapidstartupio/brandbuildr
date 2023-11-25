@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex">
-            <a :href="this.dashboardRoute">
+            <a href="/projects">
                 <svg
                     class="w-min"
                     xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +19,7 @@
                     />
                 </svg>
             </a>
-            <div class="dark:text-gray-400 text-sm">Dashboard</div>
+            <div class="dark:text-gray-400 text-sm">Projects</div>
         </div>
         <h3
             class="my-5"
