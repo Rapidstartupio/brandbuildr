@@ -67,7 +67,14 @@ class ProjectController extends Controller
                 'key_contact' => 'required',
                 'phone_number' => 'required',
                 'email' => 'required|email',
+                'company_logo' => 'image|mimes:svg,png,gif|max:800',
             ]);
+            $imageName = null;
+            if ($request->file('company_logo')) {
+                $image = $request->file('company_logo');
+                $imageName = time() . '.' . $image->extension();
+                $image->move(public_path('storage/upload/projects/clients'), $imageName);
+            }
             $data = [
                 'company_name' => $request->get('company_name'),
                 'key_contact' => $request->get('key_contact'),
@@ -76,6 +83,7 @@ class ProjectController extends Controller
                 'tag' => $request->get('tag'),
                 'tag_color' => $request->get('tag_color') ?? '#000000',
                 'tag_bg_color' => $request->get('tag_bg_color') ?? '#9BDAB4',
+                'company_logo' => $imageName,
                 'user_id' => auth()->user()->id
             ];
 

@@ -60,7 +60,9 @@
                     </div>
                 </div>
                 <div class="">
-
+                    @if($client->company_logo)
+                    <img src="{{asset('storage/upload/projects/clients/'.$client->company_logo)}}" alt="{{$client->company_name}}" class="w-16 h-16">
+                    @endif
                 </div>
             </div>
             <div class="flex justify-between text-sm">

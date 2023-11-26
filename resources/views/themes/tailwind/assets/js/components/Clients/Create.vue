@@ -64,7 +64,7 @@
                                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG or GIF (MAX. 800x400px)</p>
                             </div>
-                            <input id="company_logo" type="file" class="hidden" name="company_logo" />
+                            <input id="company_logo" type="file" class="hidden" name="company_logo" @change="onFileChange" />
                         </label>
                     </div> 
                 </div>
@@ -174,8 +174,19 @@ export default {
     methods: {
         saveClient() {
             this.clientFormSubmitted = true;
+            let formData = new FormData();
+            
+            formData.append('company_name', this.client.company_name);
+            formData.append('key_contact', this.client.key_contact);
+            formData.append('phone_number', this.client.phone_number);
+            formData.append('email', this.client.email);
+            formData.append('company_logo', this.client.company_logo);
+            formData.append('tag', this.client.tag);
+            formData.append('tag_color', this.client.tag_color);
+            formData.append('tag_bg_color', this.client.tag_bg_color);
+
             axios
-                .post("/projects/clients/store", this.client)
+                .post("/projects/clients/store", formData)
                 .then((response) => {
                     setTimeout(function () {
                         if (false && typeof response.data.client_id !== 'undefined') {
@@ -197,6 +208,10 @@ export default {
                     }
                     this.clientFormSubmitted = false;
                 });
+        },
+        onFileChange(event){
+            this.client.company_logo = event.target.files[0];
+            console.log(this.client.company_logo);
         },
     },
     props: [],
