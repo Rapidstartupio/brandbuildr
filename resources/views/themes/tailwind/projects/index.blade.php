@@ -6,24 +6,12 @@
 <h3 style="color: white; font-size: 24px; fontmy-family: Helvetica Neue; font-weight: 500; word-wrap: break-word">Projects</h3>
 <div class="dark:text-white my-6">
     <div class="text-sm font-medium text-center text-gray-500 dark:text-gray-400 md:flex">
-        <ul class="flex flex-wrap -mb-px text-lg">
-            <li class="mr-10">
-                <a href="#" class="inline-block py-2 border-b-2 rounded-t-lg @if(Request::is('projects')) border-white active dark:text-white dark:border-white @else border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 @endif" aria-current="page">Projects</a>
-            </li>
-            <li class="mr-10">
-                <a href="#" class="inline-block py-2 border-b-2 rounded-t-lg @if(Request::is('clients')) border-white active dark:text-white dark:border-white @else border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 @endif">Clients</a>
-            </li>
-            <li class="mr-10">
-                <a href="#" class="inline-block py-2 border-b-2 rounded-t-lg @if(Request::is('project-types')) border-white active dark:text-white dark:border-white @else border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 @endif">Project Types</a>
-            </li>
-        </ul>
-        @if(true)
+        @include('theme::projects.partials.projects-menu')
         <div class="text-left md:flex-auto mt-5 md:mt-0">
             <a href="{{route('projects.create')}}">
                 <button type="button" class=" md:float-right text-white bg-blue-700  hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-[#570AFF] dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800"><span class="md:px-4 font-bold">+</span> New Project</button>
             </a>
         </div>
-        @endif
     </div>
 </div>
 

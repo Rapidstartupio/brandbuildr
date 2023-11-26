@@ -36,16 +36,18 @@ Route::get('onboarding/{step?}', '\App\Http\Controllers\Auth\RegisterController@
 //Brandbuilder Project routes
 Route::group(['prefix' => 'projects'], function () {
     Route::get('/', '\App\Http\Controllers\ProjectController@index')->name('projects.index');
+    Route::get('/create', 'App\Http\Controllers\ProjectController@create')->name('projects.create');
+    Route::post('/clients/store', 'App\Http\Controllers\ProjectController@saveClient')->name('projects.clients.store');
+    Route::post('/clients/get', 'App\Http\Controllers\ProjectController@getUserClients')->name('projects.get-user-clients');
+    Route::post('/store', 'App\Http\Controllers\ProjectController@saveProject')->name('projects.store');
+    Route::get('/clients', 'App\Http\Controllers\ClientController@index')->name('clients.index');
+    Route::get('/clients/create', 'App\Http\Controllers\ClientController@create')->name('clients.create');
 });
 
 Route::post('settings/project-types', '\App\Http\Controllers\ProjectController@storeType');
 Route::get('settings/project-types/{id}', '\App\Http\Controllers\ProjectController@projectType');
 
-Route::get('projects/create', 'App\Http\Controllers\ProjectController@create')->name('projects.create');
-Route::post('projects/clients/store', 'App\Http\Controllers\ProjectController@saveClient')->name('projects.clients.store');
-Route::post('projects/clients/get', 'App\Http\Controllers\ProjectController@getUserClients')->name('projects.get-user-clients');
 Route::get('projects-types', 'App\Http\Controllers\ProjectController@getProjectTypes');
-Route::post('projects/store', 'App\Http\Controllers\ProjectController@saveProject')->name('projects.store');
 
 Route::get('project/{id}', 'App\Http\Controllers\ProjectController@project')->name('project.details');
 Route::get('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssist')->name('project.ai-assist');

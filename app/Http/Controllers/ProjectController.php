@@ -68,19 +68,24 @@ class ProjectController extends Controller
                 'phone_number' => 'required',
                 'email' => 'required|email',
             ]);
-
             $data = [
                 'company_name' => $request->get('company_name'),
                 'key_contact' => $request->get('key_contact'),
                 'phone_number' => $request->get('phone_number'),
                 'email' => $request->get('email'),
+                'tag' => $request->get('tag'),
+                'tag_color' => $request->get('tag_color') ?? '#000000',
+                'tag_bg_color' => $request->get('tag_bg_color') ?? '#9BDAB4',
                 'user_id' => auth()->user()->id
             ];
 
             $response = Client::create($data);
+            Session::flash('message', 'Client Created Successfully!');
+            Session::flash('message_type', 'success');
             return response()->json([
                 'status' => 'success',
                 'data' => $response,
+                'client_id' => $response->id,
                 'message' => 'Client Created Successfully!',
                 'message_type' => 'success'
             ], 200);
@@ -433,7 +438,7 @@ class ProjectController extends Controller
 
             $user = auth()->user();
             $projectId = $request->projectId;
-            $projectId = 15;
+            //$projectId = 15;
             $currentDate = Carbon::now();
             $documentDate = $currentDate->format('m/Y');
             //$project = Project::where(['user_id' => $user->id, 'id' => $projectId])->firstOrFail();
@@ -466,11 +471,11 @@ class ProjectController extends Controller
             ];
             //dd($project);
             // dd(array_chunk(array_chunk($tableOfContents, 15), 2));
-            if (isset($request->view)) {
-                return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents'));
-            }
+            // if (isset($request->view)) {
+            //     return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents'));
+            // }
             $pdf = Pdf::loadView('templates.project-document', $data);
-            return $pdf->stream();
+            //return $pdf->stream();
             $name = uniqid() . "_$projectId";
             $path =  public_path("storage/project-documents/") . "$name.pdf";
             $pdf->save($path);
