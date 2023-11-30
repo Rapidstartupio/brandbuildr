@@ -21,10 +21,10 @@
     <div class="mb-12">
         @include('theme::dashboard.strategy-hub-nav')
     </div>
-    <div class="md:col-span-3 md:border-l border-gray-400 pl-6 md:pl-12">
-        <div class="grid grid-cols-3 gap-4  dark:text-white my-5 h-64">
+    <div class="md:col-span-3 md:border-l border-gray-400 md:pl-6 md:pl-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  dark:text-white my-5">
             @foreach($projectType as $type)
-            <div class="brandDark2 p-4 rounded relative @if($type->status == 'disable') contrast-50 cursor-not-allowed @endif">
+            <div class="brandDark2 p-4 rounded relative h-64 @if($type->status == 'disable') contrast-50 cursor-not-allowed @endif">
                 <div class="text-xl capitalize w-min">{{$type->name}}</div>
                 <div class="dark:text-gray-400 text-sm absolute bottom-2 right-2">
                     <svg class="w-auto" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
