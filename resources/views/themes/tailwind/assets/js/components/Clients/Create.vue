@@ -55,18 +55,26 @@
             <div class="space-y-6">
                 <div class="border-t border-gray-600 ">
                     <label for="" class="block text-lg font-medium dark:text-white my-5">Company Logo</label>
-                    <div class="flex items-center justify-center md:w-1/2">
-                        <label for="company_logo" class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-transparent rounded-lg cursor-pointer bg-brand-700 dark:hover:bg-brand-800 dark:bg-brand-700 hover:bg-brand-800 dark:hover:bg-brand-800">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                                </svg>
-                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG or GIF (MAX. 800x400px)</p>
-                            </div>
-                            <input id="company_logo" type="file" class="hidden" name="company_logo" @change="onFileChange" />
-                        </label>
-                    </div> 
+                    <div class="grid md:grid-cols-2 gap-2">
+                        <div class="flex items-center justify-center">
+                            <label for="company_logo" class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-transparent rounded-lg cursor-pointer bg-brand-700 dark:hover:bg-brand-800 dark:bg-brand-700 hover:bg-brand-800 dark:hover:bg-brand-800">
+                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                    </svg>
+                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG or GIF (MAX. 800x400px)</p>
+                                </div>
+                                <input id="company_logo" type="file" class="hidden" name="company_logo" @change="onFileChange" />
+                            </label>
+                            
+                        </div>
+                        <div class="">
+                            <img id='preview_img' class="h-auto w-auto object-cover" :src="company_logo_preview" alt="preview" :class="{'hidden': !company_logo_preview}" />
+                        </div>
+                    </div>
+                     
+                    
                 </div>
                 <div class="border-t border-gray-600 ">
                     <label for="client_information" class="block text-lg font-medium dark:text-white my-5">Client Information</label>
@@ -168,6 +176,7 @@ export default {
                 tag_color:"#000000",
                 tag_bg_color:"#9BDAB4"
             },
+            company_logo_preview: null,
             clientFormSubmitted:false,
         };
     },
@@ -211,7 +220,7 @@ export default {
         },
         onFileChange(event){
             this.client.company_logo = event.target.files[0];
-            console.log(this.client.company_logo);
+            this.company_logo_preview = URL.createObjectURL(event.target.files[0]);
         },
     },
     props: [],

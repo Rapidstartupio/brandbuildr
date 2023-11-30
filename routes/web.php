@@ -43,6 +43,11 @@ Route::group(['prefix' => 'projects'], function () {
     Route::get('/clients', 'App\Http\Controllers\ClientController@index')->name('clients.index');
     Route::get('/clients/create', 'App\Http\Controllers\ClientController@create')->name('clients.create');
 });
+//Brandbuilder Dashboard routes
+Route::group(['prefix' => 'dashboard'], function () {
+    Route::get('/strategy-hub/explore-strategies', '\App\Http\Controllers\DashboardController@exploreStrategies')->name('dashboard.strategy-hub.explore-strategies');
+});
+
 
 Route::post('settings/project-types', '\App\Http\Controllers\ProjectController@storeType');
 Route::get('settings/project-types/{id}', '\App\Http\Controllers\ProjectController@projectType');

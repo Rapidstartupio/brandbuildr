@@ -101,3 +101,10 @@ svg {
     text-decoration: none;
     pointer-events: none;
 }
+
+.strategy-hun-nav .active{
+    @apply text-white;
+}
+.strategy-hun-nav .active svg{
+    @apply bg-wave-500;
+}

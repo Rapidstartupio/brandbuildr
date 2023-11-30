@@ -19,24 +19,7 @@
 
 <div class="grid md:grid-cols-4 md:gap-6 mt-12">
 	<div class="mb-12">
-		<ul class="dark:text-gray-400 text-xl">
-			<a href="#" class="border-b border-gray-400 py-3 flex justify-between text-white">
-				<span>Get Started</span>
-				<span>
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 bg-wave-500 p-1">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-					</svg>
-				</span>
-			</a>
-			<a href="#" class="border-b border-gray-400 py-3 flex justify-between">
-				<span>Explore Strategies</span>
-				<span>
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 p-1">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-					</svg>
-				</span>
-			</a>
-		</ul>
+		@include('theme::dashboard.strategy-hub-nav')
 	</div>
 	<div class="md:col-span-3 md:border-l border-gray-400 pl-6 md:pl-12">
 		<ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400">
