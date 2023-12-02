@@ -67,7 +67,7 @@ class ProjectController extends Controller
                 'key_contact' => 'required',
                 'phone_number' => 'required',
                 'email' => 'required|email',
-                'company_logo' => 'image|mimes:svg,png,gif|max:800',
+                'company_logo' => 'required|image|mimes:svg,png,gif|max:800',
             ]);
             $imageName = null;
             if ($request->file('company_logo')) {

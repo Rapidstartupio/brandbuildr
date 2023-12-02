@@ -51,34 +51,36 @@
 <div id="clients-list">
     <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 dark:text-white my-5">
         @foreach($clients as $client)
-        <div class="brandDark2 p-4 rounded space-y-6 h-64">
-            <div class="md:flex justify-between items-center ">
-                <div class="space-y-2">
-                    <div class="text-lg capitalize">{{$client->company_name}}</div>
-                    <div>
-                        <button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-light rounded-lg text-base px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800" style="color: {{$client->tag_color}};background-color: {{$client->tag_bg_color}}">{{$client->tag}}</button>
+        <a href="{{route('clients.page',$client->id)}}">
+            <div class="brandDark2 p-4 rounded space-y-6 h-64">
+                <div class="md:flex justify-between items-center ">
+                    <div class="space-y-2">
+                        <div class="text-lg capitalize">{{$client->company_name}}</div>
+                        <div>
+                            <button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-light rounded-lg text-base px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800" style="color: {{$client->tag_color}};background-color: {{$client->tag_bg_color}}">{{$client->tag}}</button>
+                        </div>
+                    </div>
+                    <div class="">
+                        @if($client->company_logo)
+                        <img src="{{asset('storage/upload/projects/clients/'.$client->company_logo)}}" alt="{{$client->company_name}}" class="w-16 h-16">
+                        @endif
                     </div>
                 </div>
-                <div class="">
-                    @if($client->company_logo)
-                    <img src="{{asset('storage/upload/projects/clients/'.$client->company_logo)}}" alt="{{$client->company_name}}" class="w-16 h-16">
-                    @endif
+                <div class="flex justify-between text-sm">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                        <div>Projects: <span>{{$client->nbProjects()}}</span></div>
+                    </div>
+                    <div class="">
+                        <button type="button" class="rounded-lg px-2 inline-flex items-center text-sm font-light text-center text-white rounded dark:border-2 dark:border-white">
+                            Active
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="flex justify-between text-sm">
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                    </svg>
-                    <div>Projects: <span>{{$client->nbProjects()}}</span></div>
-                </div>
-                <div class="">
-                    <button type="button" class="rounded-lg px-2 inline-flex items-center text-sm font-light text-center text-white rounded dark:border-2 dark:border-white">
-                        Active
-                    </button>
-                </div>
-            </div>
-        </div>
+        </a>
         @endforeach
     </div>
 </div>

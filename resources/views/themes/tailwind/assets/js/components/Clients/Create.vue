@@ -198,7 +198,7 @@ export default {
                 .post("/projects/clients/store", formData)
                 .then((response) => {
                     setTimeout(function () {
-                        if (false && typeof response.data.client_id !== 'undefined') {
+                        if (typeof response.data.client_id !== 'undefined') {
                             window.location.href = "/projects/clients/"+response.data.client_id;
                         }else{
                             window.location.href = "/projects/clients";

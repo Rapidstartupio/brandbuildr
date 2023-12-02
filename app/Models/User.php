@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Wave\User as Authenticatable;
+use App\Models\Project;
 
 class User extends Authenticatable
 {
@@ -61,9 +62,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('\App\Models\Project')->orderBy('created_at', 'DESC');
     }
-    public function getProjects()
+    public function getProjects($clientId = null)
     {
-        $projects = $this->projects->all();
+        if ($clientId) {
+            $projects = Project::where('user_id', $this->id)->where('client_id', $clientId)->get();
+        } else {
+            $projects = $this->projects->all();
+        }
+
         $p = [];
         if ($projects) {
             foreach ($projects as $project) {
