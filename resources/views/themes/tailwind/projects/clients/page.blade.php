@@ -64,7 +64,7 @@
                             <div class="text-[#B6B6B8]">
                                 Total
                             </div>
-                            <div>0</div>
+                            <div>{{$client->nbProjects()}}</div>
                         </div>
                     </li>
                     <li>
