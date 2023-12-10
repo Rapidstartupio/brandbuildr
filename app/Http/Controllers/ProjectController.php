@@ -280,12 +280,17 @@ class ProjectController extends Controller
             $prompt = null;
             if (isset($question->prompt->prompt)) {
                 $prompt = $question->prompt->prompt;
-                $updatedPrompt = preg_replace_callback('/\{\{g-question:([\d.]+)\}\}/', function ($matches) {
+                $updatedPrompt = preg_replace_callback('/\{\{g-question:([\d.]+)\}\}/', function ($matches) use ($user, $id) {
                     $questionRef = $matches[1];
                     $res = ProjectQuestion::where('ref', $questionRef)->first();
                     // Check if  exists 
                     if (isset($res->question)) {
-                        return $res->question;
+                        $answer = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $res->id)->where('project_id', $id)->first();
+                        if (isset($answer->answer)) {
+                            return $res->question;
+                        } else {
+                            return "{{question:$questionRef}}";
+                        }
                     } else {
                         return '';
                     }

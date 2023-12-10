@@ -875,26 +875,30 @@ export default {
             
             // Use regular expressions to replace {{question:X}} with the corresponding value in the $question array
             if(prompt){
-                prompt = prompt.replace(/\{\{question:([\d.]+)\}\}/g, (match, questionNumber) => {
+                prompt = prompt.replace(/\{\{question:([\d.]+)\}\}/g, (match, ref) => {
                     var value = "";
-                    if(this.getStepById(parseInt(questionNumber))){
-                        value = this.getStepById(parseInt(questionNumber)).question;
+                    var step = this.getStepByRef(ref);
+                    if(step){
+                        if(step.question && step.answer){
+                            value = step.question;
+                        }
+                        //value = this.getStepById(parseInt(questionNumber)).question;
                     }
                     return value; // Return the replacement value or the original match if not found in $question
                 });
                 prompt = prompt.replace(/\{\{answer:([\d.]+)\}\}/g, (match, ref) => {
-                    var value = "";
+                    var value = "na";
                     if(this.getStepByRef(ref)){
                         value = this.getStepByRef(ref).answer;
                     }
                     return value?? ""; // Return the replacement value or the original match if not found in $question
                 });
                 prompt = prompt.replace(/\{\{question\}\}/g, this.steps[this.step].question);
+                prompt = prompt.replace(/:na/g, '');
             }else{
                 // prompt = "You are a helpful Brand Builder assistant from who helps companies and entreprenuers build their businesse.";
                 // prompt += " Please answer to this question : " + this.steps[this.step].question;
             }
-
             // var prompt = "";
             // if (this.steps[this.step].back !== null) {
             //     var prevStep = this.steps[this.step].back;
