@@ -10,6 +10,7 @@ use App\Models\UserProjectProgess;
 class ProjectBlock extends Model
 {
     use HasFactory;
+    public $additional_attributes = ['full_admin_name'];
     public function questions()
     {
         return $this->hasMany(ProjectQuestion::class)->orderBy('order', 'ASC');
@@ -30,5 +31,10 @@ class ProjectBlock extends Model
             return true;
         }
         return false;
+    }
+
+    public function getFullAdminNameAttribute()
+    {
+        return "{$this->admin_name} - {$this->name}";
     }
 }
