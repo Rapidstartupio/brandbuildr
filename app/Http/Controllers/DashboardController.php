@@ -14,7 +14,7 @@ class DashboardController extends Controller
 
     public function exploreStrategies()
     {
-        $projectType = ProjectType::where('active', 1)->whereIn('status', array('free', 'disable'))->get();
+        $projectType = ProjectType::where('active', 1)->whereIn('status', array('free', 'disable'))->orderBy('order', 'ASC')->get();
         return view('theme::dashboard.explore-strategies', compact('projectType'));
     }
 }
