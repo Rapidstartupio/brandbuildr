@@ -32,7 +32,7 @@
                         <path d="{{$type->icon_svg_path_d}}" fill="white" />
                     </svg>
                 </div>
-                <div class="description brandDark2 contrast-50 hidden">
+                <div class="description brandDark2 contrast-50 hidden absolute bottom-0 left-0">
                     <p class="p-2 text-sm">
                         {{$type->description}}
                     </p>
