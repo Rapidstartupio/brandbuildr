@@ -51,7 +51,7 @@
         @endif
 
         <!-- Styles -->
-        <link href="{{ asset('themes/' . $theme->folder . '/css/app.css') }}?31" rel="stylesheet">
+        <link href="{{ asset('themes/' . $theme->folder . '/css/app.css') }}?32" rel="stylesheet">
         <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         @yield('custom_header_code')
         {!! str_replace(array('<p>','</p>'),'',html_entity_decode(setting('site.custom_header_code'))) !!}
