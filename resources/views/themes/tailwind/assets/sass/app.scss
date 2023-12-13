@@ -108,3 +108,83 @@ svg {
 .strategy-hun-nav .active svg{
     @apply bg-wave-500;
 }
+//step progress bar by css
+  
+  .progressbar {
+    counter-reset: step;
+    @apply space-y-6;
+  }
+  .progressbar li {
+    list-style: none;
+    //display: inline-block;
+    //width: 30.33%;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    @apply text-gray-400  sm:inline-block;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 30px;
+    height: 30px;
+    line-height : 30px;
+    border: 1px solid gray;
+    border-radius: 10%;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    //color: #fff;
+    @apply text-gray-400;
+    background: #07072D;
+  }
+  .progressbar li:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    //background-color: gray;
+    @apply sm:bg-gray-500;
+    top: 15px;
+    left: -50%;
+    z-index : -1;
+  }
+  .progressbar li:first-child:after {
+    content: none;
+  }
+  .progressbar li.active {
+    color: #ffffff;
+  }
+  .progressbar li.active:before {
+    //border-color: green;
+    @apply border-wave-500 bg-wave-500 text-white;
+  } 
+  .progressbar li.active:after {
+    @apply border-wave-500 bg-wave-500;
+  }
+  .progressbar li.active + li:after {
+    //background-color: green;
+    //@apply bg-wave-500;
+  }
+
+    @layer utilities{
+        .hover-type{
+            @apply overflow-hidden border-wave-500;
+        }
+        .hover-type .icon{
+            @apply top-2;
+        }
+        .hover-type .description{
+            @apply block;
+        }
+        .hover-type .comming-soon{
+            @apply hidden;
+        }
+    }
+
+    .disable-type .comming-soon{
+        @apply block;
+    }
+  

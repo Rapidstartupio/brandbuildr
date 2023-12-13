@@ -24,12 +24,21 @@
     <div class="md:col-span-3 md:border-l border-gray-400 md:pl-6 md:pl-12">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  dark:text-white my-5">
             @foreach($projectType as $type)
-            <div class="brandDark2 p-4 rounded relative h-60 @if($type->status == 'disable') contrast-50 cursor-not-allowed @endif">
+            <div class="p-4 rounded relative h-60 @if($type->status == 'disable') bg-brand-500 disable-type  cursor-not-allowed  @else brandDark2  @endif hover:hover-type  border-2  border-transparent">
+                <!-- cursor-not-allowed  -->
                 <div class="text-xl capitalize w-min">{{$type->name}}</div>
-                <div class="dark:text-gray-400 text-sm absolute bottom-2 right-2">
+                <div class="icon dark:text-gray-400 text-sm absolute bottom-2 right-2">
                     <svg class="w-auto" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
                         <path d="{{$type->icon_svg_path_d}}" fill="white" />
                     </svg>
+                </div>
+                <div class="description brandDark2 contrast-50 hidden">
+                    <p class="p-2 text-sm">
+                        {{$type->description}}
+                    </p>
+                </div>
+                <div class="comming-soon absolute bottom-2 left-2 hidden">
+                    <p>Coming Soon...</p>
                 </div>
             </div>
             @endforeach
