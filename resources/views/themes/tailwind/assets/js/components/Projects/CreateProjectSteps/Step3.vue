@@ -5,7 +5,7 @@
             >Project Deadlines</div
         >
         <div class="space-y-8 deadline-step">
-            <div class="grid grid-cols-2 gap-6">
+            <div class="grid md:grid-cols-2 md:gap-6">
                 
                 <div>
                     <label
