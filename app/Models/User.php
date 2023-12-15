@@ -97,6 +97,8 @@ class User extends Authenticatable
             $p['description'] = $project->description;
             $p['user_id'] = $project->user_id;
             $p['created_at'] = $project->created_at;
+            $p['start_date'] = $project->start_date ? date('d-m-Y', strtotime($project->start_date)) : "";
+            $p['end_date'] = $project->end_date ? date('d-m-Y', strtotime($project->end_date)) : "";
             //Add Sections
             //$p['sections'] = [];
             $sections = [];

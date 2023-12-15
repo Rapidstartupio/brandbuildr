@@ -187,4 +187,16 @@ svg {
     .disable-type .comming-soon{
         @apply block;
     }
-  
+    .dashboard-nav .active{
+        @apply text-blue-600 dark:text-white dark:border-white  border-white;
+    }
+
+    .deadlines-table{
+        @apply rounded-lg;
+    }
+    .deadlines-table th{
+        @apply font-light;
+    }
+    .deadlines-table th, .deadlines-table td{
+        @apply p-4 border-b border-brand-600;
+    }

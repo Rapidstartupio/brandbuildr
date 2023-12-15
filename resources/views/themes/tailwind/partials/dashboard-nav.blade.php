@@ -1,7 +1,7 @@
 <aside id="default-sidebar" class="left-0  w-30 h-full xl:h-screen" aria-label="Sidebar">
    <div class="h-full">
       <ul class="font-medium text-center">
-         <li class="@if(Request::is('dashboard')) active-dash-nav-item @else dash-nav-item @endif">
+         <li class="@if(Request::is('dashboard*')) active-dash-nav-item @else dash-nav-item @endif">
             <a href="{{ route('wave.dashboard') }}" class="items-center  rounded-lg   group">
                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
                   <path d="M19.5 5V7H15.5V5H19.5ZM9.5 5V11H5.5V5H9.5ZM19.5 13V19H15.5V13H19.5ZM9.5 17V19H5.5V17H9.5ZM21.5 3H13.5V9H21.5V3ZM11.5 3H3.5V13H11.5V3ZM21.5 11H13.5V21H21.5V11ZM11.5 15H3.5V21H11.5V15Z" fill="" />

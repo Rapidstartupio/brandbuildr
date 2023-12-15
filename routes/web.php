@@ -47,6 +47,7 @@ Route::group(['prefix' => 'projects'], function () {
 //Brandbuilder Dashboard routes
 Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/strategy-hub/explore-strategies', '\App\Http\Controllers\DashboardController@exploreStrategies')->name('dashboard.strategy-hub.explore-strategies');
+    Route::get('/deadlines', '\App\Http\Controllers\DashboardController@deadlines')->name('dashboard.deadlines');
 });
 
 

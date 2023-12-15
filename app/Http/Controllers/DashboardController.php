@@ -17,4 +17,11 @@ class DashboardController extends Controller
         $projectType = ProjectType::where('active', 1)->whereIn('status', array('free', 'disable'))->orderBy('order', 'ASC')->get();
         return view('theme::dashboard.explore-strategies', compact('projectType'));
     }
+
+    public function deadlines()
+    {
+        $user = auth()->user();
+        $projects = $user->getProjects();
+        return view('theme::dashboard.deadlines', compact('projects'));
+    }
 }
