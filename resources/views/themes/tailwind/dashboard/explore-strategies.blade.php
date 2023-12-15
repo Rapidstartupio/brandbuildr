@@ -24,7 +24,7 @@
     <div class="md:col-span-3 md:border-l border-gray-400 md:pl-6 md:pl-12">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  dark:text-white my-5">
             @foreach($projectType as $type)
-            <div class="p-4 rounded relative h-60 @if($type->status == 'disable') bg-brand-500 disable-type  cursor-not-allowed  @else brandDark2  @endif hover:hover-type  border-2  border-transparent">
+            <div class="p-4 rounded relative h-60 @if($type->status == 'disable') bg-brand-500 disable-type  cursor-not-allowed  @else brandDark3  @endif hover:hover-type  border-2  border-transparent">
                 <!-- cursor-not-allowed  -->
                 <div class="text-xl capitalize w-min">{{$type->name}}</div>
                 <div class="icon dark:text-gray-400 text-sm absolute bottom-2 right-2">
@@ -37,9 +37,11 @@
                         {{$type->description}}
                     </p>
                 </div>
-                <div class="comming-soon absolute bottom-2 left-2 hidden">
+                @if($type->status == 'disable')
+                <div class="comming-soon absolute bottom-2 left-2">
                     <p>Coming Soon...</p>
                 </div>
+                @endif
             </div>
             @endforeach
         </div>

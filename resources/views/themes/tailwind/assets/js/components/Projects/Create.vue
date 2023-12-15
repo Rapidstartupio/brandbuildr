@@ -95,6 +95,8 @@ export default {
                 client_id: "",
                 description: "",
                 deadline: "",
+                start_date:"",
+                end_date:"",
             },
             //project_types: this.getProjectTypes(),
             

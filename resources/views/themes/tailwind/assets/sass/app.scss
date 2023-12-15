@@ -162,7 +162,7 @@ svg {
     @apply border-wave-500 bg-wave-500 text-white;
   } 
   .progressbar li.active:after {
-    @apply border-wave-500 bg-wave-500;
+    @apply border-wave-500 sm:bg-wave-500;
   }
   .progressbar li.active + li:after {
     //background-color: green;

@@ -1,29 +1,51 @@
 <template>
     <form action="#" @submit.prevent="nextStep()">
-        <div class="project-details-step">
-            <div class="w-full">
-                <label
-                    for="name"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >Project Name</label
-                >
-                <input
-                    type="text"
-                    name="name"
-                    v-model="project.name"
-                    id="brand"
-                    class="bg-gray-50 border-0 text-gray-900 text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3"
-                    placeholder="Project Name"
-                    required=""
-                />
+        <div
+            class="block text-xl font-medium text-gray-900 dark:text-white my-5"
+            >Project Details</div
+        >
+        <div class="project-details-step grid md:grid-cols-2 gap-6">
+            <div class="space-y-8">
+                <div class="">
+                    <!-- <label
+                        for="name"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Project Name</label
+                    > -->
+                    <input
+                        type="text"
+                        name="name"
+                        v-model="project.name"
+                        id="brand"
+                        class="bg-gray-50 border-0 text-gray-900 text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3"
+                        placeholder="Project Name"
+                        required=""
+                    />
+                </div>
+                <div class="">
+                    <!-- <label
+                        for="description"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Project Description</label
+                    > -->
+                    <textarea
+                        id="description"
+                        name="description"
+                        v-model="project.description"
+                        rows="6"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border-0 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3"
+                        placeholder="Project Description"
+                        required=""
+                    ></textarea>
+                </div>
             </div>
-            <div>
-                <label
+            <div class="space-y-8">
+                <!-- <label
                     for="client_id"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >Client</label
-                >
-                <div class="md:flex md:space-x-4">
+                > -->
+                <div class="flex space-x-4">
                     <select
                     required=""
                         id="client_id"
@@ -32,7 +54,7 @@
                         class="bg-gray-50 text-gray-900 text-sm rounded focus:ring-primary-500 border-0 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3"
                     >
                         <option selected="" value="">
-                            Choose Client
+                            Client
                         </option>
                         <option
                             v-for="(client, index) in this.clients"
@@ -46,32 +68,29 @@
                             type="button"
                             data-modal-target="new-client-modal"
                             data-modal-toggle="new-client-modal"
-                            class="inline-flex items-center px-8 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400 whitespace-nowrap h-full"
+                            class="inline-flex items-center px-4 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400 whitespace-nowrap h-full"
                             >
-                            New Client
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
                         </button>
                     </div>
                 </div>
-            </div>
-            <div class="">
-                <label
-                    for="description"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >Project Description</label
-                >
-                <textarea
-                    id="description"
-                    name="description"
-                    v-model="project.description"
-                    rows="6"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border-0 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3"
-                    placeholder="Project Description"
-                    required=""
-                ></textarea>
+                <div>
+                    <button
+                        type="button"
+                        class="inline-flex items-center px-8 py-2.5 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 dark:bg-brandPrimary"
+                        >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                        Document
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="flex justify-end space-x-3 lg:fixed lg:right-6 lg:bottom-6">
+        <div class="flex justify-end space-x-3">
             <button
                 type="button"
                 class="inline-flex items-center px-8 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400"

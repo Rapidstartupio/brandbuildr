@@ -10,7 +10,7 @@ use App\Models\Client;
 class Project extends Model
 {
     use HasFactory;
-    protected $fillable = ['type_id', 'name', 'client_id', 'description', 'deadline', 'user_id'];
+    protected $fillable = ['type_id', 'name', 'client_id', 'description', 'deadline', 'user_id', 'start_date', 'end_date'];
 
     public function type()
     {

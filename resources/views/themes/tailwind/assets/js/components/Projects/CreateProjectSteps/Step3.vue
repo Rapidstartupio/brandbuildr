@@ -1,21 +1,44 @@
 <template>
     <form action="#" @submit.prevent="saveProject()">
+        <div
+            class="block text-xl font-medium text-gray-900 dark:text-white my-5"
+            >Project Deadlines</div
+        >
         <div class="space-y-8 deadline-step">
-            <div class="w-full">
-                <label
-                    for="deadline"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >Deadline</label
-                >
-                <input
+            <div class="grid grid-cols-2 gap-6">
+                
+                <div>
+                    <label
+                        for="start_date"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Start Date</label
+                    >
+                    <input
+                        type="date"
+                        id="start_date"
+                        name="start_date"
+                        v-model="project.start_date"
+                        class="bg-gray-50 border-0 text-gray-900 text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3"
+                        placeholder="Start Date"
+                        required=""
+                    />
+                </div>
+                <div>
+                    <label
+                        for="end_date"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >End Date</label
+                    >
+                    <input
                     type="date"
-                    id="deadline"
-                    name="deadline"
-                    v-model="project.deadline"
+                    id="start_date"
+                    name="start_date"
+                    v-model="project.end_date"
                     class="bg-gray-50 border-0 text-gray-900 text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3"
-                    placeholder="Select Deadline"
+                    placeholder="End Date"
                     required=""
                 />
+                </div>
             </div>
             <div class="w-full">
                 <label
@@ -33,7 +56,7 @@
                 />
             </div>
         </div>
-        <div class="flex justify-end space-x-3 lg:fixed lg:right-6 lg:bottom-6">
+        <div class="flex justify-end space-x-3">
             <button
                 type="button"
                 class="inline-flex items-center px-8 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400"
