@@ -43,6 +43,7 @@ Route::group(['prefix' => 'projects'], function () {
     Route::get('/clients', 'App\Http\Controllers\ClientController@index')->name('clients.index');
     Route::get('/clients/create', 'App\Http\Controllers\ClientController@create')->name('clients.create');
     Route::get('/clients/{id}', 'App\Http\Controllers\ClientController@client')->name('clients.page');
+    Route::get('/project-types', 'App\Http\Controllers\ProjectController@projectTypes')->name('projects.project-types');
 });
 //Brandbuilder Dashboard routes
 Route::group(['prefix' => 'dashboard'], function () {

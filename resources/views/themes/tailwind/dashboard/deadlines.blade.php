@@ -32,7 +32,7 @@
                     {{$project->type}}
                 </td>
                 <td>
-                    {{$project->end_date}}
+                    {{ $project->end_date ? date('d-m-Y', strtotime($project->end_date)) : '' }}
                 </td>
                 <td>
                     <a href="/project/{{$project->id}}">

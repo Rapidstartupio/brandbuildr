@@ -114,6 +114,13 @@ class ProjectController extends Controller
             'clients' => $clients
         ], 200);
     }
+
+    public function projectTypes()
+    {
+        $projectTypes = ProjectType::where('active', 1)->whereIn('status', array('free', 'disable'))->get();
+        return view('theme::projects.project-types', compact('projectTypes'));
+    }
+
     public function getProjectTypes()
     {
         $projectTypes = ProjectType::where('active', 1)->whereIn('status', array('free', 'disable'))->get();

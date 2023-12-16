@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Wave\User as Authenticatable;
 use App\Models\Project;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -82,6 +83,31 @@ class User extends Authenticatable
         return (object)$p;
     }
 
+    function formatDeadline($start_date, $end_date)
+    {
+        if (!$start_date) {
+            if ($end_date) {
+                $end = Carbon::parse($end_date);
+                $formattedDeadline = $end->format('d M');
+            } else {
+                $formattedDeadline = "";
+            }
+            return $formattedDeadline;
+        }
+        $start = Carbon::parse($start_date);
+        $end = Carbon::parse($end_date);
+
+        if ($start->month == $end->month) {
+            // Same month
+            $formattedDeadline = $start->format('d') . '-' . $end->format('d M');
+        } else {
+            // Different months
+            $formattedDeadline = $start->format('d M') . ' - ' . $end->format('d M');
+        }
+
+        return $formattedDeadline;
+    }
+
     public function getProject($id, $returnQuestions = false)
     {
         $p =  [];
@@ -97,8 +123,11 @@ class User extends Authenticatable
             $p['description'] = $project->description;
             $p['user_id'] = $project->user_id;
             $p['created_at'] = $project->created_at;
-            $p['start_date'] = $project->start_date ? date('d-m-Y', strtotime($project->start_date)) : "";
-            $p['end_date'] = $project->end_date ? date('d-m-Y', strtotime($project->end_date)) : "";
+            //$p['start_date'] = $project->start_date ? date('d-m-Y', strtotime($project->start_date)) : "";
+            //$p['end_date'] = $project->end_date ? date('d-m-Y', strtotime($project->end_date)) : "";
+            $p['start_date'] = $project->start_date;
+            $p['end_date'] = $project->end_date;
+            $p['formattedDeadline'] = $this->formatDeadline($p['start_date'], $p['end_date']);
             //Add Sections
             //$p['sections'] = [];
             $sections = [];
