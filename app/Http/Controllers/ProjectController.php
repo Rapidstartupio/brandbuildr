@@ -249,33 +249,11 @@ class ProjectController extends Controller
     }
     public function projectAiAssistData($id, $sectionId, $blockId)
     {
-        //question:
-        //             "What specific industry does your business operate in?",
-        //         subQuestion:
-        //             "Briefly describe what type of business you're building a brand for",
-        //         answerInputType: "text",
-        //         answerInputPlaceHolder:
-        //             "We Operate in the food and beverage industry",
-        //         next: 2,
-        //         back: null,
         $user = auth()->user();
         $project = Project::where(['user_id' => $user->id, 'id' => $id])->firstOrFail();
         $userProject = $user->getProjectDetails($id, $sectionId, $blockId);
         $section = $project->type->sections->where('id', $sectionId)->firstOrFail();
         $block = $section->blocks->where('id', $blockId)->firstOrFail();
-        // $sections = [];
-        // $blocks = [];
-
-        // if (isset($section->blocks)) 
-        //     foreach ($section->blocks as $block) {
-        //         if (isset($block->questions) && count($block->questions) > 0) {
-        //             $sections[] = $section;
-        //             $blocks[] = $block;
-        //         }
-        //     }
-        //     $section->blocks = $blocks;
-        // }
-        //$project->type->sections = $sections;
         $questions = array();
         $questionsLength = count($block->questions);
         foreach ($block->questions as $key => $question) {
@@ -341,12 +319,38 @@ class ProjectController extends Controller
         if (empty($questions)) {
             return false;
         };
+        $chatbot_system_message = setting('openai.chatbot_system_message', 'You are a helpful Brand Builder assistant from who helps companies and entreprenuers build their businesse.');
+        $chatbot_initial_user_message = "";
+        if ($project->type->ref_project_type_output && $project->client_id) {
+            $refProject = Project::where([
+                'user_id' => $user->id,
+                'client_id' => $project->client_id,
+                'type_id' => $project->type->ref_project_type_output
+            ])->first();
+            $refProjectType = ProjectType::where([
+                'id' => $project->type->ref_project_type_output
+            ])->first();
+            if ($refProject && $refProjectType) {
+                $projectDocument = ProjectDocument::where(['user_id' => $user->id, 'project_id' => $refProject->id, ['outputs', '!=', null]])->first();
+                if ($projectDocument && !empty($projectDocument->outputs)) {
+                    $chatbot_initial_user_message = "Here is the output from the $refProjectType->name for your reference: \n";
+                    foreach ($projectDocument->outputs as $output) {
+                        if ($output['answer']) {
+                            $chatbot_initial_user_message .=  $output['question'] . " : " . $output['answer'] . "\n";
+                        }
+                    }
+                }
+            }
+        }
+
         return response()->json([
             'status' => 'success',
             'project' => $userProject->project,
             'section' => $userProject->section,
             'block' => $block,
-            'questions' => $questions
+            'questions' => $questions,
+            'chatbot_system_message' => $chatbot_system_message,
+            'chatbot_initial_user_message' => $chatbot_initial_user_message
         ], 200);
     }
     public function getUserProject($id)
@@ -461,6 +465,7 @@ class ProjectController extends Controller
         try {
 
             $user = auth()->user();
+            $outputs = [];
             $projectId = $request->projectId;
             //$projectId = 15;
             $currentDate = Carbon::now();
@@ -480,6 +485,17 @@ class ProjectController extends Controller
                                 'title' => $block->name,
                                 'class' => ''
                             ];
+                            foreach ($block->questions as $question) {
+                                if ($question->strategy_document_output) {
+                                    $outputs[] = [
+                                        'question_ai' => $question->question_ai,
+                                        'question' => $question->question,
+                                        'answer' => $question->answer,
+                                        'block' => $block->name,
+                                        'section' => $section->name,
+                                    ];
+                                }
+                            }
                         }
                     }
                 }
@@ -507,7 +523,8 @@ class ProjectController extends Controller
                 'user_id' => $user->id,
                 'project_id' => $projectId,
                 'name' => $name,
-                'path' => $path
+                'path' => $path,
+                'outputs' => $outputs,
             ]);
             //return redirect("/storage/project-documents/$name.pdf");
             if ($projectDocument) {

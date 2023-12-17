@@ -12,6 +12,11 @@ class ProjectDocument extends Model
         'user_id',
         'project_id',
         'name',
-        'path'
+        'path',
+        'outputs'
+    ];
+
+    protected $casts = [
+        'outputs' => 'array',
     ];
 }

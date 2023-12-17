@@ -732,7 +732,6 @@ export default {
     mounted() {
         // Call your function or perform initialization here
         this.getProject();
-        //this.testf();
     },
     data() {
         return {
@@ -745,45 +744,6 @@ export default {
             step: 0,
             steps: null,
             answerRows:"2",
-            //examples: [],
-            // steps: {
-            //     1: {
-            //         question:
-            //             "What specific industry does your business operate in?",
-            //         subQuestion:
-            //             "Briefly describe what type of business you're building a brand for",
-            //         answerInputType: "text",
-            //         answerInputPlaceHolder:
-            //             "We Operate in the food and beverage industry",
-            //         next: 2,
-            //         back: null,
-            //     },
-            //     2: {
-            //         question:
-            //             "What problems / challenges do you help to solve?",
-            //         subQuestion:
-            //             "Briefly describe what type of business you're building a brand for",
-            //         answerInputType: "text",
-            //         answerInputPlaceHolder:
-            //             "Being able to feed large groups without the associated problems",
-            //         next: 3,
-            //         back: 1,
-            //     },
-            //     3: {
-            //         question: "Who typically has these challenges?",
-            //         subQuestion: "Your previous answers should act as the seed",
-            //         answerInputType: "text",
-            //         answerInputPlaceHolder: "",
-            //         // answerOptions: [
-            //         //     { text: "text1", value: "val1" },
-            //         //     { text: "text2", value: "val2" },
-            //         //     { text: "text3", value: "val3" },
-            //         // ],
-            //         next: "register",
-            //         back: 2,
-            //         answer: "",
-            //     },
-            // },
             isHiddenSuggestResult: "hidden",
             isSuggest: "",
             isLoading:false,
@@ -791,13 +751,11 @@ export default {
             chatbot: {
                 userInput: "",
                 messages: [],
-                previousMessages: [
-                    {
-                        role: "system",
-                        content:
-                            "You are a helpful Brand Builder assistant from who helps companies and entreprenuers build their businesse.",
-                    },
-                ],
+                previousMessages: [],
+                // {
+                //     role: "system",
+                //      content: chatbot_system_message,
+                //  },
             },
         };
     }, 
@@ -895,37 +853,8 @@ export default {
                 });
                 prompt = prompt.replace(/\{\{question\}\}/g, this.steps[this.step].question);
                 prompt = prompt.replace(/:na/g, '');
-            }else{
-                // prompt = "You are a helpful Brand Builder assistant from who helps companies and entreprenuers build their businesse.";
-                // prompt += " Please answer to this question : " + this.steps[this.step].question;
             }
-            // var prompt = "";
-            // if (this.steps[this.step].back !== null) {
-            //     var prevStep = this.steps[this.step].back;
-            //     var prevAnswer = this.steps[prevStep].answer;
-            //     if (prevAnswer) {
-            //         prompt =
-            //             "For a user who describe their business as ( " +
-            //             prevAnswer +
-            //             "), ";
-            //     }
-            // }
 
-            // if (this.steps[this.step].answerInputType == "select") {
-            //     prompt +=
-            //         "Please choose one value of these options : (" +
-            //         this.steps[this.step].answerOptions
-            //             .map((entry) => entry.value)
-            //             .join(", ") +
-            //         ")";
-            // } else {
-            //     prompt +=
-            //         "Please answer to this question : " +
-            //         this.steps[this.step].question;
-            // }
-            // prompt +=
-            //     "Please answer to this question : " +
-            //     this.steps[this.step].question;
             console.log(prompt);
             if(!prompt) {
                 this.isLoading = false;
@@ -966,24 +895,6 @@ export default {
                         console.error("Error fetching bot response:", error);
                     });
             // end switch
-            // axios
-            //     .post("/openai/completions", {
-            //         model: "text-davinci-003",
-            //         prompt: prompt,
-            //     })
-            //     .then((response) => {
-            //         if (response.data[0]["text"]) {
-            //             var suggestion = response.data[0]["text"];
-            //             suggestion = suggestion.replace(/(\r\n|\n|\r)/gm, "");
-            //             this.suggestResult = suggestion;
-            //             this.isSuggest = "hidden";
-            //             this.isHiddenSuggestResult = "";
-            //         }
-            //         console.log(response);
-            //     })
-            //     .catch((error) => {
-            //         console.log(error);
-            //     });
         },
         copySuggestionToAnswer() {
             this.steps[this.step].answer = this.suggestResult;
@@ -1049,6 +960,16 @@ export default {
                         this.progressBar =
                             ((this.step + 1) / this.steps.length) * 100;
                         //this.examples = this.steps[this.step].examples;
+                        this.chatbot.previousMessages.push({
+                            role: "system",
+                            content: response.data.chatbot_system_message,
+                        });
+                        if(response.data.chatbot_initial_user_message){
+                            this.chatbot.previousMessages.push({
+                                role: "user",
+                                content: response.data.chatbot_initial_user_message,
+                            });
+                        }
                     }
                 })
                 .catch((err) => console.error(err));
