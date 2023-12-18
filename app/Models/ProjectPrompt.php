@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectPrompt extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'prompt'];
 }

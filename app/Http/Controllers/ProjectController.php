@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Log;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\ProjectDocument;
 use Carbon\Carbon;
+use App\Traits\Upload;
+use App\Models\ProjectImporterLog;
+use App\Imports\ProjectImporter;
+use App\Models\ProjectBlock;
+use App\Models\ProjectPrompt;
+use App\Models\ProjectSection;
+use Excel;
 
 class ProjectController extends Controller
 {
+    use Upload;
     public function __construct()
     {
         $this->middleware('auth');
@@ -546,5 +554,103 @@ class ProjectController extends Controller
                 'message_type' => 'danger'
             ], 500);
         }
+    }
+
+    public function importer()
+    {
+        $projectImporterLog = ProjectImporterLog::orderBy('created_at', 'DESC')->get();
+        return view('vendor.voyager.importer.index', compact('projectImporterLog'));
+    }
+
+    public function uploadImporter(Request $request)
+    {
+        $validatedDate = $request->validate([
+            'project_file' => 'required'
+        ]);
+
+        if ($request->hasFile('project_file')) {
+            $path = $this->UploadFile($request->file('project_file'), 'projects-files', 'local');
+            $log = ProjectImporterLog::create([
+                'path' => $path,
+                'name' => $request->file('project_file')->getClientOriginalName(),
+            ]);
+            $array = Excel::toArray(new ProjectImporter, storage_path('app/' . $path));
+            ProjectImporterLog::where('id', $log->id)->update([
+                'data' => $array
+            ]);
+            foreach ($array[0] as $row) {
+                //Project Type
+                $projectType = ProjectType::where('name', $row['admin_name'])->first();
+                if (!$projectType) {
+                    $projectType = ProjectType::create([
+                        'name' => $row['admin_name'],
+                        'slug' => $row['project_slug'],
+                        'description' => $row['project_description'],
+                        'status' => 'Disable'
+                    ]);
+                }
+                $projectSection = ProjectSection::where([
+                    'name' => $row['block_name'],
+                    'project_type_id' => $projectType->id
+                ])->first();
+
+                if (!$projectSection) {
+                    $projectSection = ProjectSection::create([
+                        'name' => $row['block_name'],
+                        'project_type_id' => $projectType->id,
+                        'slug' => $row['block_slug'],
+                        'order' => $row['block_order'],
+                    ]);
+                }
+
+                $projectBlock = ProjectBlock::where([
+                    'name' => $row['section_name'],
+                    'project_section_id' => $projectSection->id
+                ])->first();
+
+                if (!$projectBlock) {
+                    $projectBlock = ProjectBlock::create([
+                        'name' => $row['section_name'],
+                        'admin_name' => $row['admin_name'],
+                        'project_section_id' => $projectSection->id,
+                        'slug' => $row['section_slug'],
+                        'order' => $row['section_order'],
+                    ]);
+                }
+
+                $projectPrompt = ProjectPrompt::where([
+                    'name' => $row['prompt_name']
+                ])->first();
+
+                if (!$projectPrompt) {
+                    $projectPrompt = ProjectPrompt::create([
+                        'name' => $row['prompt_name'],
+                        'prompt' => $row['prompt'],
+                    ]);
+                }
+
+
+                $projectQuestion = ProjectQuestion::where([
+                    'question' => $row['question_user_facing'],
+                    'project_block_id' => $projectBlock->id
+                ])->first();
+
+                if (!$projectQuestion) {
+                    $projectQuestion = ProjectQuestion::create([
+                        'question_ai' => $row['question_ai'],
+                        'question' => $row['question_user_facing'],
+                        'project_block_id'  => $projectBlock->id,
+                        'order' => $row['question_order'],
+                        'project_prompt_id' => $projectPrompt->id,
+                        'ref' => $row['item'],
+                        'strategy_document_output' => ($row['strategy_document_output'] == 'Yes' ? 1 : 0),
+                    ]);
+                }
+            }
+            ProjectImporterLog::where('id', $log->id)->update([
+                'done' => 1
+            ]);
+        }
+        return redirect()->route('admin.project-importer')->with(['message' => "'File Uploaded Successfully'", 'alert-type' => 'success']);
     }
 }

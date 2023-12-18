@@ -23,6 +23,8 @@ Auth::routes();
 // Voyager Admin routes
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+    Route::get('project-importer', 'App\Http\Controllers\ProjectController@importer')->middleware('admin.user')->name('admin.project-importer');
+    Route::post('project-importer', 'App\Http\Controllers\ProjectController@uploadImporter')->middleware('admin.user');
 });
 
 

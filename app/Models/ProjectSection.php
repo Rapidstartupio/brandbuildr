@@ -10,6 +10,7 @@ use App\Models\UserProjectProgess;
 class ProjectSection extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'slug', 'project_type_id', 'order'];
     public function blocks()
     {
         return $this->hasMany(ProjectBlock::class)->orderBy('order', 'ASC');

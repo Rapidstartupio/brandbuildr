@@ -10,6 +10,7 @@ use App\Models\UserProjectProgess;
 class ProjectBlock extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'admin_name', 'slug', 'project_section_id', 'order'];
     public $additional_attributes = ['full_admin_name'];
     public function questions()
     {

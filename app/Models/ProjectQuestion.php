@@ -11,6 +11,7 @@ use App\Models\ProjectAnswer;
 class ProjectQuestion extends Model
 {
     use HasFactory;
+    protected $fillable = ['question_ai', 'question', 'project_block_id', 'order', 'project_prompt_id', 'ref', 'strategy_document_output'];
     public function examples(): BelongsToMany
     {
         return $this->belongsToMany(ProjectExample::class);
