@@ -575,9 +575,9 @@ class ProjectController extends Controller
                 'name' => $request->file('project_file')->getClientOriginalName(),
             ]);
             $array = Excel::toArray(new ProjectImporter, storage_path('app/' . $path));
-            ProjectImporterLog::where('id', $log->id)->update([
-                'data' => $array
-            ]);
+            // ProjectImporterLog::where('id', $log->id)->update([
+            //     'data' => $array
+            // ]);
             foreach ($array[0] as $row) {
                 //Project Type
                 $projectType = ProjectType::where('name', $row['admin_name'])->first();
