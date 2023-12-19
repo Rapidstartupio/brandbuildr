@@ -214,19 +214,19 @@
             <ul class="flex flex-wrap space-x-5 text-xs">
                 <li class="mb-6 text-center flex-full lg:flex-none lg:mb-0"> {{ setting('site.title', 'Laravel Wave') }} &copy; {{ date('Y') }}. All rights reserved.</li>
                 <li class="lg:ml-6">
-                    <a href="#_" class="relative inline-block text-black dark:text-white group">
+                    <a href="https://brandbuildr.ai/privacy-policy/" target="_blank" class="relative inline-block text-black dark:text-white group">
                         <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-0"></span>
                         <span>Privacy Policy</span>
                     </a>
                 </li>
                 <li class="ml-auto mr-auto text-center lg:ml-6 lg:mr-0">
-                    <a href="#_" class="relative inline-block text-black dark:text-white group">
+                    <a href="https://brandbuildr.ai/beta-nda/" target="_blank" class="relative inline-block text-black dark:text-white group">
                         <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-0"></span>
-                        <span>Disclaimers</span>
+                        <span>Non-Disclosure Agreement</span>
                     </a>
                 </li>
                 <li class="lg:ml-6">
-                    <a href="#_" class="relative inline-block text-black dark:text-white group">
+                    <a href="https://brandbuildr.ai/terms-conditions/" target="_blank" class="relative inline-block text-black dark:text-white group">
                         <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-0"></span>
                         <span>Terms and Conditions</span>
                     </a>
