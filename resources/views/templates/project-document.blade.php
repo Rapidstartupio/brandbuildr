@@ -68,7 +68,7 @@
     @endforeach
 
     @foreach($project->sections as $section)
-    @if($section->strategy_output)
+    @if($documentType == 'summary' || $section->strategy_output)
     <div class="page-break"></div>
     <div class="page section-gard-page">
         <div class="">
@@ -86,7 +86,7 @@
         </div>
     </div>
     @foreach($section->blocks as $block)
-    @if($block->strategy_output)
+    @if($documentType == 'summary' || $block->strategy_output)
     <div class="page-break"></div>
     <div class="page block-page">
         <div class="top-page">
@@ -105,7 +105,7 @@
                 <h1 class="title">{{$block->name}}</h1>
                 <table>
                     @foreach($block->questions as $question)
-                    @if($question->strategy_document_output)
+                    @if($question->answer && ($documentType == 'summary' || $question->strategy_document_output) )
                     <tr>
                         <td><b>{{$question->question_ai}}</b></td>
                         <td>{{$question->answer}}</td>

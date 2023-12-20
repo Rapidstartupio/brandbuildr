@@ -104,48 +104,26 @@
                         <p class="text-gray-400">We recommend reviewing your project and completing every section before downloading your project document</p>
                     </div>
                     @endif
+                    <div class="flex space-x-3">
+                        <button type="button" data-modal-hide="download-document-modal" class="w-full px-8 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400">
+                            Review Project
+                        </button>
+                        <!-- onclick="downloadDocument()"  -->
+                        <a href="/project/{{$project->id}}/documents" class="w-full px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded hover:bg-primary-800 dark:bg-brandPrimary whitespace-nowrap">
+                            Download
+                        </a>
+                        <!--  -->
+                    </div>
                     <!--  -->
-                    <form id="project-document-form" method="post" action="{{ route('download-project-document') }}">
+                    <!-- <form id="project-document-form" method="post" action="{{ route('download-project-document') }}">
                         @csrf
-                        <input type="hidden" name="projectId" value="{{$project->id}}">
-                        <div class="flex space-x-3">
-                            <button type="button" data-modal-hide="download-document-modal" class="w-full px-8 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400">
-                                Review Project
-                            </button>
-                            <!-- onclick="downloadDocument()"  -->
-                            <button type="button" onclick="downloadDocument()" class="w-full px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded hover:bg-primary-800 dark:bg-brandPrimary whitespace-nowrap">
-                                Download
-                            </button>
-                            <!--  -->
-                        </div>
-                    </form>
+                        <input type="hidden" name="projectId" value="{}}">
+                        
+                    </form> -->
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-@endsection
-
-@section('javascript')
-<script>
-    function downloadDocument() {
-        //e.preventDefault();
-        var id = "{{$project->id}}";
-        axios.post('/download-project-document', {
-                projectId: id
-            })
-            .then(response => {
-
-                if (response.data.status == "success") {
-                    console.log(response.data.file);
-                    window.location.href = "/storage" + response.data.file;
-                }
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-</script>
 @endsection

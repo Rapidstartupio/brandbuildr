@@ -13,7 +13,8 @@ class ProjectDocument extends Model
         'project_id',
         'name',
         'path',
-        'outputs'
+        'outputs',
+        'type'
     ];
 
     protected $casts = [

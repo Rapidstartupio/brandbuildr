@@ -339,7 +339,7 @@ class ProjectController extends Controller
                 'id' => $project->type->ref_project_type_output
             ])->first();
             if ($refProject && $refProjectType) {
-                $projectDocument = ProjectDocument::where(['user_id' => $user->id, 'project_id' => $refProject->id, ['outputs', '!=', null]])->first();
+                $projectDocument = ProjectDocument::where(['user_id' => $user->id, 'project_id' => $refProject->id, ['outputs', '!=', null]])->orderByRaw('FIELD(type,"summary") DESC')->first();
                 if ($projectDocument && !empty($projectDocument->outputs)) {
                     $chatbot_initial_user_message = "Here is the output from the $refProjectType->name for your reference: \n";
                     foreach ($projectDocument->outputs as $output) {
@@ -475,6 +475,7 @@ class ProjectController extends Controller
             $user = auth()->user();
             $outputs = [];
             $projectId = $request->projectId;
+            $documentType = $request->documentType;
             //$projectId = 15;
             $currentDate = Carbon::now();
             $documentDate = $currentDate->format('m/Y');
@@ -482,26 +483,28 @@ class ProjectController extends Controller
             $project = $user->getProject($projectId, true);
             $tableOfContents = [];
             foreach ($project->sections as $section) {
-                if ($section->strategy_output) {
+                if ($documentType == 'summary' || $section->strategy_output) {
                     $tableOfContents[] = (object)[
                         'title' => $section->name,
                         'class' => 'section-title'
                     ];
                     foreach ($section->blocks as $block) {
-                        if ($block->strategy_output) {
+                        if ($documentType == 'summary' || $block->strategy_output) {
                             $tableOfContents[] = (object)[
                                 'title' => $block->name,
                                 'class' => ''
                             ];
                             foreach ($block->questions as $question) {
-                                if ($question->strategy_document_output) {
-                                    $outputs[] = [
-                                        'question_ai' => $question->question_ai,
-                                        'question' => $question->question,
-                                        'answer' => $question->answer,
-                                        'block' => $block->name,
-                                        'section' => $section->name,
-                                    ];
+                                if ($documentType == 'summary' || $question->strategy_document_output) {
+                                    if ($question->answer) {
+                                        $outputs[] = [
+                                            'question_ai' => $question->question_ai,
+                                            'question' => $question->question,
+                                            'answer' => $question->answer,
+                                            'block' => $block->name,
+                                            'section' => $section->name,
+                                        ];
+                                    }
                                 }
                             }
                         }
@@ -515,7 +518,8 @@ class ProjectController extends Controller
                 'user' => $user,
                 'project' => $project,
                 'documentDate' => $documentDate,
-                'tableOfContents' => $tableOfContents
+                'tableOfContents' => $tableOfContents,
+                'documentType' => $documentType
             ];
             //dd($project);
             // dd(array_chunk(array_chunk($tableOfContents, 15), 2));
@@ -524,7 +528,7 @@ class ProjectController extends Controller
             // }
             $pdf = Pdf::loadView('templates.project-document', $data);
             //return $pdf->stream();
-            $name = uniqid() . "_$projectId";
+            $name = uniqid() . "_" . $projectId . "_" . $documentType;
             $path =  public_path("storage/project-documents/") . "$name.pdf";
             $pdf->save($path);
             $projectDocument = ProjectDocument::create([
@@ -533,6 +537,7 @@ class ProjectController extends Controller
                 'name' => $name,
                 'path' => $path,
                 'outputs' => $outputs,
+                'type' => $documentType
             ]);
             //return redirect("/storage/project-documents/$name.pdf");
             if ($projectDocument) {
@@ -652,5 +657,10 @@ class ProjectController extends Controller
             ]);
         }
         return redirect()->route('admin.project-importer')->with(['message' => "'File Uploaded Successfully'", 'alert-type' => 'success']);
+    }
+
+    public function projectDocuments($projectId)
+    {
+        return view('theme::projects.project-documents', compact('projectId'));
     }
 }

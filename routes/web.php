@@ -46,6 +46,14 @@ Route::group(['prefix' => 'projects'], function () {
     Route::get('/clients/create', 'App\Http\Controllers\ClientController@create')->name('clients.create');
     Route::get('/clients/{id}', 'App\Http\Controllers\ClientController@client')->name('clients.page');
     Route::get('/project-types', 'App\Http\Controllers\ProjectController@projectTypes')->name('projects.project-types');
+    Route::post('/{id}/get', 'App\Http\Controllers\ProjectController@getUserProject')->name('projects.get-user-project');
+});
+
+Route::group(['prefix' => 'project'], function () {
+    Route::get('/{id}', 'App\Http\Controllers\ProjectController@project')->name('project.details');
+    Route::get('/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssist')->name('project.ai-assist');
+    Route::post('/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssistData');
+    Route::get('/{id}/documents', 'App\Http\Controllers\ProjectController@projectDocuments')->name('project.documents');
 });
 //Brandbuilder Dashboard routes
 Route::group(['prefix' => 'dashboard'], function () {
@@ -59,10 +67,6 @@ Route::get('settings/project-types/{id}', '\App\Http\Controllers\ProjectControll
 
 Route::get('projects-types', 'App\Http\Controllers\ProjectController@getProjectTypes');
 
-Route::get('project/{id}', 'App\Http\Controllers\ProjectController@project')->name('project.details');
-Route::get('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssist')->name('project.ai-assist');
-Route::post('projects/{id}/get', 'App\Http\Controllers\ProjectController@getUserProject')->name('projects.get-user-project');
-Route::post('project/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssistData');
 Route::post('submit-project-answers', 'App\Http\Controllers\ProjectController@submitBlock');
 //Route::get('question-by-id/{id}', 'App\Http\Controllers\ProjectController@questionById');
 Route::post('download-project-document', 'App\Http\Controllers\ProjectController@downloadProjectDocument')->name('download-project-document');
