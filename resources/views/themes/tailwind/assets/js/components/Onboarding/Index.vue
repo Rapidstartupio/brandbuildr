@@ -10,7 +10,7 @@ button[aria-selected="true"] {
 </style>
 <template>
     <div
-        class="py-4 mx-auto px-2 md:px-12 xl:px-28 text-white max-w-screen-2xl"
+        class="py-4 mx-auto px-2 md:px-12 xl:px-28 text-white max-w-screen-2xl onboard-page"
     >
         <div class="text-center text-white text-2xl font-medium my-8">
             Create Your Brand Strategy
