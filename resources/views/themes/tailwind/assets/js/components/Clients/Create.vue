@@ -63,18 +63,18 @@
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                                     </svg>
                                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG or GIF (MAX. 800x400px)</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG or GIF (BEST. 1000x1000px)</p>
                                 </div>
                                 <input id="company_logo" type="file" class="hidden" name="company_logo" @change="onFileChange" />
                             </label>
-                            
+
                         </div>
                         <div class="">
                             <img id='preview_img' class="h-auto w-auto object-cover" :src="company_logo_preview" alt="preview" :class="{'hidden': !company_logo_preview}" />
                         </div>
                     </div>
-                     
-                    
+
+
                 </div>
                 <div class="border-t border-gray-600 ">
                     <label for="client_information" class="block text-lg font-medium dark:text-white my-5">Client Information</label>
@@ -137,7 +137,7 @@
                                 class="bg-gray-50 border-0 text-gray-900 text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3"
                                 placeholder="Tag Name"
                             />
-                            <div class="space-x-2"> 
+                            <div class="space-x-2">
                                 <input type="color" name="tag_color" id="tag_color" v-model="client.tag_color" >
                                 <label for="tag_color" class="text-white">Text Color</label>
                             </div>
@@ -146,18 +146,18 @@
                                 <label for="tag_bg_color" class="text-white">Backgroud Color</label>
                             </div>
                             <button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-light rounded-lg text-base px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800" v-bind:style="{color:client.tag_color, background:client.tag_bg_color}">{{ client.tag }}</button>
-                            
+
                         </div>
                         <div>
                             <label for="" class="block text-lg font-medium dark:text-white my-5">Upload Documents</label>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
         </form>
 
-        
+
     </div>
 </template>
 <script>
@@ -184,7 +184,7 @@ export default {
         saveClient() {
             this.clientFormSubmitted = true;
             let formData = new FormData();
-            
+
             formData.append('company_name', this.client.company_name);
             formData.append('key_contact', this.client.key_contact);
             formData.append('phone_number', this.client.phone_number);
