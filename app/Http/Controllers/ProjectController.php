@@ -482,6 +482,9 @@ class ProjectController extends Controller
             //$project = Project::where(['user_id' => $user->id, 'id' => $projectId])->firstOrFail();
             $project = $user->getProject($projectId, true);
             $tableOfContents = [];
+            if (!count((array)$project)) {
+                abort(404);
+            }
             foreach ($project->sections as $section) {
                 if ($documentType == 'summary' || $section->strategy_output) {
                     $tableOfContents[] = (object)[
@@ -661,6 +664,8 @@ class ProjectController extends Controller
 
     public function projectDocuments($projectId)
     {
+        $user = auth()->user();
+        $project = Project::where(['user_id' => $user->id, 'id' => $projectId])->firstorFail();
         return view('theme::projects.project-documents', compact('projectId'));
     }
 }
