@@ -597,7 +597,8 @@ class ProjectController extends Controller
                         'name' => $row['admin_name'],
                         'slug' => $row['project_slug'],
                         'description' => $row['project_description'],
-                        'status' => 'Disable'
+                        'status' => 'Disable',
+                        'user_id' => 0
                     ]);
                 }
                 $projectSection = ProjectSection::where([
