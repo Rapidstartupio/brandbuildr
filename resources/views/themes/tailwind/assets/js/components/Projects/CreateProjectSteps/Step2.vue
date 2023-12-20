@@ -216,7 +216,6 @@
                                     id="key_contact"
                                     placeholder="Key Contact"
                                     class="text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-white brandDark4 border-0"
-                                    required
                                 />
                             </div>
                             <div>
@@ -232,7 +231,6 @@
                                     id="phone_number"
                                     placeholder="Phone Number"
                                     class="text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-white brandDark4 border-0"
-                                    required
                                 />
                             </div>
                             <div>
@@ -248,7 +246,7 @@
                                     id="email"
                                     placeholder="Email"
                                     class="text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-white brandDark4 border-0"
-                                    required
+                                    
                                 />
                             </div>
                             <div class="flex space-x-3">
@@ -326,6 +324,7 @@ export default {
                             );
                         }, 10);
                     }
+                    this.clientFormSubmitted = false;
                 })
                 .catch((error) => {
                     console.log(error.response);

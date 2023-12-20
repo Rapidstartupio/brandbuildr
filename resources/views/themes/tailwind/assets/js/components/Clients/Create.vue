@@ -98,7 +98,6 @@
                                 id="key_contact"
                                 class="bg-gray-50 border-0 text-gray-900 text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3"
                                 placeholder="Key Contact"
-                                required="required"
                             />
                         </div>
                         <div>
@@ -109,7 +108,6 @@
                                 id="phone_number"
                                 class="bg-gray-50 border-0 text-gray-900 text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3"
                                 placeholder="Phone Number"
-                                required="required"
                             />
                         </div>
                         <div>
@@ -120,7 +118,6 @@
                                 id="email"
                                 class="bg-gray-50 border-0 text-gray-900 text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3"
                                 placeholder="Email"
-                                required="required"
                             />
                         </div>
                     </div>

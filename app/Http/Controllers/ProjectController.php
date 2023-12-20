@@ -72,13 +72,16 @@ class ProjectController extends Controller
         try {
             $validatedDate = $request->validate([
                 'company_name' => 'required',
-                'key_contact' => 'required',
-                'phone_number' => 'required',
-                'email' => 'required|email',
-                'company_logo' => 'required|image|mimes:svg,png,gif|max:800',
+                // 'key_contact' => 'required',
+                // 'phone_number' => 'required',
+                // 'email' => 'required|email',
+                // 'company_logo' => 'required|image|mimes:svg,png,gif|max:800',
             ]);
             $imageName = null;
             if ($request->file('company_logo')) {
+                $request->validate([
+                    'company_logo' => 'required|image|mimes:svg,png,gif|max:800',
+                ]);
                 $image = $request->file('company_logo');
                 $imageName = time() . '.' . $image->extension();
                 $image->move(public_path('storage/upload/projects/clients'), $imageName);
