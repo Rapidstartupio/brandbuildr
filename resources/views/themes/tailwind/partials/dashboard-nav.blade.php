@@ -50,7 +50,7 @@
             </a>
          </li>
          <li class="dash-nav-item">
-            <a href="#" class="items-center   text-gray-500 rounded-lg dark:text-gray-400 hover:text-white  group">
+            <a href="/logout" class="items-center   text-gray-500 rounded-lg dark:text-gray-400 hover:text-white  group">
                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
                   <path d="M17.5 8L16.1 9.4L17.7 11H9.5V13H17.7L16.1 14.6L17.5 16L21.5 12L17.5 8ZM5.5 5H12.5V3H5.5C4.4 3 3.5 3.9 3.5 5V19C3.5 20.1 4.4 21 5.5 21H12.5V19H5.5V5Z" fill="#79798E" />
                </svg>
