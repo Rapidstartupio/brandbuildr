@@ -46,6 +46,7 @@ button[aria-selected="true"] {
                                 :placeholder="
                                     steps[step].answerInputPlaceHolder
                                 "
+                                @input="autoResize"
                                 :value="steps[step].answer"
                             />
                         </div>
@@ -132,7 +133,7 @@ button[aria-selected="true"] {
                                 Resources
                             </button>
                         </li>
-                        <li class="mr-2 hidden" role="presentation">
+                        <li class="mr-2" role="presentation">
                             <button
                                 class="inline-block p-1 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                                 id="notes-tab"
@@ -439,6 +440,11 @@ export default {
                 this.isHiddenSuggestResult = "hidden";
             }
         },
+        autoResize(event) {
+            const textarea = event.target;
+            textarea.style.height = 'auto'; // Reset height to recalculate
+            textarea.style.height = textarea.scrollHeight + 'px';
+        },
         showSuggestion() {
             var prompt = "";
             if (this.steps[this.step].back) {
@@ -477,7 +483,7 @@ export default {
                         this.isSuggest = "hidden";
                         this.isHiddenSuggestResult = "";
                     }
-                    console.log(response);
+                    //console.log(response);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -489,7 +495,7 @@ export default {
         sendChatbotMessage() {
             const userMessage = this.chatbot.userInput.trim();
             if (userMessage) {
-                console.log(userMessage);
+                //console.log(userMessage);
                 this.chatbot.messages.push({
                     id: Date.now(),
                     text: userMessage,
@@ -508,7 +514,7 @@ export default {
                     .then((response) => {
                         const botResponse =
                             response.data.choices[0].message.content;
-                        console.log(botResponse);
+                        //console.log(botResponse);
                         if (botResponse) {
                             this.chatbot.messages.push({
                                 id: Date.now(),
