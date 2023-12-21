@@ -110,7 +110,7 @@
                 <div class="mt-6 text-white">
                     <p>
                         <input type="checkbox" id="terms_checkbox" class="terms_checkbox" name="terms_checkbox" value="">
-                        <label for="terms_checkbox" aria-describedby="label"><span class="ui"></span>By signing up you also accept all listed Terms and the Non-Disclosure-Agreement (NDA) found here: <a href="{{setting('admin.terms_checkbox_on_checkout_url')}}" target="_blank">Terms and NDA</a></label>
+                        <label for="terms_checkbox" aria-describedby="label"><span class="ui"></span>By signing up you also accept all listed Terms and the Non-Disclosure-Agreement (NDA) found here: <a href="{{setting('admin.terms_checkbox_on_checkout_url')}}" target="_blank">NDA</a> and <a href="https://brandbuildr.ai/terms-conditions" target="_blank">Terms</a></label>
                     </p>
                 </div>
                 @endif
