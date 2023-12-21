@@ -22,7 +22,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="url" content="{{ url('/') }}">
 
-        <link rel="icon" href="{{ setting('site.favicon', '/wave/favicon.png') }}" type="image/x-icon">
+        @if(empty(setting('site.favicon')))
+        <link rel="icon" href="/wave/favicon.png" type="image/x-icon">
+        @else
+        <link rel="icon" href="{{ Voyager::image(setting('site.favicon')) }}" type="image/x-icon">
+        @endif
 
         {{-- Social Share Open Graph Meta Tags --}}
         @if(isset($seo->title) && isset($seo->description) && isset($seo->image))
