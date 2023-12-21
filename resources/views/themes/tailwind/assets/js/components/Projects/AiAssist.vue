@@ -7,7 +7,7 @@ button[aria-selected="true"] {
     fill-rule: evenodd;
     clip-rule: evenodd;
 }
-.section-title,
+/* .section-title,
 .active-section + .section-title + .section-title span {
     display: none;
 }
@@ -18,7 +18,7 @@ button[aria-selected="true"] {
 .section-title:has(+ .active-section),
 .active-section {
     display: block;
-}
+} 
 .active-section + .section-title + .section-title {
     background: linear-gradient(
         90deg,
@@ -38,7 +38,7 @@ button[aria-selected="true"] {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}
+}*/
 .block-item .number {
     padding: 10px;
     border-radius: 4px;
@@ -102,16 +102,32 @@ div.block-item {
 .active-block {
     display: block;
 }
+
+
+.progressbar li:before {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+}
+.progressbar li:after {
+    top: 25px;
+}
+/* .progressbar li {
+    padding-right: 40px;
+    padding-left: 40px;
+} */
+
+
 </style>
 <template>
     <div
-        class="py-4 mx-auto px-2 md:px-12 xl:px-28 text-white max-w-screen-2xl"
+        class="py-4 mx-auto px-2 text-white max-w-screen-2xl"
         v-if="this.project"
     >
         <div class="dark:text-white">
             <div>
-                <h3
-                    class="pr-5"
+                <div
+                    class="space-x-5"
                     style="
                         color: white;
                         font-size: 24px;
@@ -120,58 +136,21 @@ div.block-item {
                         word-wrap: break-word;
                     "
                 >
-                    {{ this.project.name }} | {{ this.project.type }}
-                </h3>
+                    <a :href="'/project/'+this.project.id" class="capitalize">{{ this.project.name }}</a>
+                    <span>|</span> 
+                    <span class="capitalize">{{ this.project.type }}</span>
+                    <span>|</span>
+                    <span>
+                        <button type="button" class="focus:outline-none rounded-lg focus:ring-4  font-medium rounded-lg text-base px-2" :style="{color: this.project.client.tag_color,'background-color': this.project.client.tag_bg_color}">{{this.project.client.tag ?  this.project.client.tag :this.project.client.company_name}}</button>
+                    </span>
             </div>
-            <div>
-                <button
-                    type="button"
-                    class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2 dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800"
-                >
-                    RedBull
-                </button>
             </div>
+            
             <div class="w-full">
-                <div
-                    class="project-sections flex text-center space-x-4 items-center justify-center pt-6 whitespace-nowrap truncate"
-                    style="color: #b6b6b8"
-                >
-                    <div
-                        class="section-title"
-                        style="
-                            font-size: 20px;
-                            font-family: Helvetica Neue;
-                            font-weight: 500;
-                            word-wrap: break-word;
-                        "
-                        v-for="(section, index) in this.project.sections"
-                        :data-section-id="section.id"
-                        :class="{
-                            'active-section text-white':
-                                section.id == this.sectionId,
-                        }"
-                    >
-                        <div>
-                            {{ section.name }}
-                            <span class="text-sm">></span>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="project-blocks flex text-center items-center justify-center py-6 whitespace-nowrap truncate"
-                >
-                    <div
-                        class="block-item"
-                        v-for="(block, index) in this.section.blocks"
-                        :class="{
-                            'active-block': block.id == this.blockId,
-                        }"
-                        :data-block-id="block.id"
-                    >
-
-                        <div class="number">{{ block.order }}</div>
-                        <div class="title">{{ block.name }}</div>
-                    </div>
+                <div class="w-full text-white pt-10 overflow-auto">
+                    <ul class="progressbar flex items-baseline">
+                        <li  v-for="(section, index) in this.project.sections" class="text-xl capitalize  h-44 w-44" :class="[ section.order <= this.section.order ? 'active' : '']">{{ section.name }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -179,6 +158,27 @@ div.block-item {
         <div
             class="grid md:grid-cols-2 bg-gradient-to-r from-[#1E1E34] via-[#241E44] to-[#1E1E34] rounded-lg"
         >
+            <div class="col-span-2 p-4 border-b border-gray-700">
+                <div
+                    class="flex space-x-3"
+                >
+                    <div
+                        class="flex items-center space-x-2"
+                        v-for="(block, index) in this.section.blocks"
+                        :class="{
+                            'active': block.id == this.blockId,
+                        }"
+                        :data-block-id="block.id"
+                    >
+                        <div class=" p-2 rounded" :class="{'bg-wave-500': block.order <= this.block.order}" >{{ this.section.order + '-'+ block.order +' '+ block.name }}</div> 
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-3 h-3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-span-2" v-if="step == 'review'">
                 <div
                     class="h-16 pl-6 border-b border-gray-700 text-base font-medium flex items-center"
@@ -361,7 +361,7 @@ div.block-item {
                                 <span class="sr-only">Loading...</span>
                             </div>
 
-                            <div>
+                            <div class="pt-10">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="44"
@@ -954,7 +954,7 @@ export default {
                 .then((response) => {
                     if (response.data.project) {
                         this.project = response.data.project;
-                        //this.block = response.data.block;
+                        this.block = response.data.block;
                         this.section = response.data.section;
                         this.steps = response.data.questions;
                         this.progressBar =

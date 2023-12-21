@@ -245,6 +245,9 @@ class User extends Authenticatable
             $p['client_id'] = $project->client_id;
             $p['description'] = $project->description;
             $p['user_id'] = $project->user_id;
+            if (isset($project->client)) {
+                $p['client'] = $project->client;
+            }
             //Add Sections
             //$p['sections'] = [];
             $sections = [];
