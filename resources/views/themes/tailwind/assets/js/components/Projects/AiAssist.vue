@@ -166,7 +166,7 @@ div.block-item {
                         class="flex items-center space-x-2"
                         v-for="(block, index) in this.section.blocks"
                         :class="{
-                            'active': block.id == this.blockId,
+                            'active-block': block.id == this.blockId,
                         }"
                         :data-block-id="block.id"
                     >
