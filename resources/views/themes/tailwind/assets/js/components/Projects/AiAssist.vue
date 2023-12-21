@@ -94,14 +94,14 @@ div.block-item {
     display: none;
 }
 
-.active-block + .block-item,
+/* .active-block + .block-item,
 .active-block + .block-item + .block-item,
 .active-block + .block-item + .block-item + .block-item,
 .block-item:has(+ * + .active-block),
 .block-item:has(+ .active-block),
 .active-block {
     display: block;
-}
+} */
 
 
 .progressbar li:before {
