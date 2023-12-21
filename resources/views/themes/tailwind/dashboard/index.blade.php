@@ -11,7 +11,7 @@
 		@include('theme::dashboard.strategy-hub-nav')
 	</div>
 	<div class="md:col-span-3 md:border-l border-gray-400 pl-6 md:pl-12">
-		<ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400">
+		<ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 hidden">
 			<li class="pb-10 border-l border-wave-500 text-white">
 				<div class="ms-6 md:ms-10">
 					<span class="absolute flex items-center justify-center w-8 h-8 bg-wave-500 -start-4 ring-white dark:ring-wave-600 dark:bg-wave-500">
