@@ -114,7 +114,7 @@
 				</div>
 			</li>
 		</ol>
-		<div class="text-end py-4">
+		<div class="text-end py-4 hidden">
 			<button type="button" class="inline-flex items-center p-2 px-4 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400 whitespace-nowrap h-full">
 				Skip Launch
 			</button>
