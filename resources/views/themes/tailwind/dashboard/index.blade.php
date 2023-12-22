@@ -11,7 +11,41 @@
 		@include('theme::dashboard.strategy-hub-nav')
 	</div>
 	<div class="md:col-span-3 md:border-l border-gray-400 pl-6 md:pl-12">
-		<ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 hidden">
+		<div class="grid sm:grid-cols-2 gap-8">
+			<div class="text-white border-dashed border border-wave-500 py-12 text-center rounded-xl">
+				<div class="">
+					<a href="/projects/create" class="">
+						<div class="bg-wave-500 w-min p-3  rounded-lg inline-flex flex-col items-center">
+
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
+								<path stroke-linecap=" round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+							</svg>
+
+						</div>
+					</a>
+				</div>
+				<div>
+					<span class="text-xl">Strategy</span>
+				</div>
+			</div>
+			<div class="text-white border-dashed border border-gray-500 py-12 text-center rounded-xl	">
+				<div class="">
+					<a href="/projects/clients/create" class="">
+						<div class="bg-gray-500 w-min p-3  rounded-lg inline-flex flex-col items-center">
+
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
+								<path stroke-linecap=" round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+							</svg>
+
+						</div>
+					</a>
+				</div>
+				<div>
+					<span class="text-xl">Client</span>
+				</div>
+			</div>
+		</div>
+		<!-- <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400">
 			<li class="pb-10 border-l border-wave-500 text-white">
 				<div class="ms-6 md:ms-10">
 					<span class="absolute flex items-center justify-center w-8 h-8 bg-wave-500 -start-4 ring-white dark:ring-wave-600 dark:bg-wave-500">
@@ -113,12 +147,13 @@
 					</div>
 				</div>
 			</li>
-		</ol>
+		</ol> 
 		<div class="text-end py-4 hidden">
 			<button type="button" class="inline-flex items-center p-2 px-4 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400 whitespace-nowrap h-full">
 				Skip Launch
 			</button>
 		</div>
+		-->
 	</div>
 </div>
 
