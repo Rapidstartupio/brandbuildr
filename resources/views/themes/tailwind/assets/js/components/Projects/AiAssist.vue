@@ -417,7 +417,7 @@ div.block-item {
                             </div>
                             <div class="mt-4 max-h-96 overflow-auto">
                                 <div
-                                    v-for="(msg, index) in chatbot.messages"
+                                    v-for="(msg, index) in this.steps[this.step].chatbot_messages"
                                     class="grid grid-cols-6 py-2 border-t border-gray-600"
                                 >
                                     <div
@@ -755,7 +755,10 @@ export default {
             isSuggest: "",
             isLoading:false,
             suggestResult: "",
-            chatbot: {
+            chatbot_system_message:"",
+            chatbot_initial_user_message:"",
+            chatbot: 
+            {
                 userInput: "",
                 messages: [],
                 previousMessages: [],
@@ -868,21 +871,21 @@ export default {
                 return false
             };
             // switch from completions to chat
-                this.chatbot.previousMessages.push({
+                this.steps[this.step].chatbot_previousMessages.push({
                     role: "user",
                     content: prompt,
                 });
                 axios
                     .post("/openai/chat", {
                         model: "gpt-4-1106-preview",
-                        messages: this.chatbot.previousMessages,
+                        messages: this.steps[this.step].chatbot_previousMessages,
                     })
                     .then((response) => {
                         const botResponse =
                             response.data.choices[0].message.content;
                         //console.log(botResponse);
                         if (botResponse) {
-                            this.chatbot.previousMessages.push({
+                            this.steps[this.step].chatbot_previousMessages.push({
                                 role: "assistant",
                                 content: botResponse,
                             });
@@ -910,12 +913,12 @@ export default {
             const userMessage = this.chatbot.userInput.trim();
             if (userMessage) {
                 //console.log(userMessage);
-                this.chatbot.messages.push({
+                this.steps[this.step].chatbot_messages.push({
                     id: Date.now(),
                     text: userMessage,
                     isBot: false,
                 });
-                this.chatbot.previousMessages.push({
+                this.steps[this.step].chatbot_previousMessages.push({
                     role: "user",
                     content: userMessage,
                 });
@@ -923,19 +926,19 @@ export default {
                 axios
                     .post("/openai/chat", {
                         model: "gpt-4-1106-preview",
-                        messages: this.chatbot.previousMessages,
+                        messages: this.steps[this.step].chatbot_previousMessages,
                     })
                     .then((response) => {
                         const botResponse =
                             response.data.choices[0].message.content;
                         //console.log(botResponse);
                         if (botResponse) {
-                            this.chatbot.messages.push({
+                            this.steps[this.step].chatbot_messages.push({
                                 id: Date.now(),
                                 text: botResponse,
                                 isBot: true,
                             });
-                            this.chatbot.previousMessages.push({
+                            this.steps[this.step].chatbot_previousMessages.push({
                                 role: "assistant",
                                 content: botResponse,
                             });
@@ -966,17 +969,6 @@ export default {
                         this.steps = response.data.questions;
                         this.progressBar =
                             ((this.step + 1) / this.steps.length) * 100;
-                        //this.examples = this.steps[this.step].examples;
-                        this.chatbot.previousMessages.push({
-                            role: "system",
-                            content: response.data.chatbot_system_message,
-                        });
-                        if(response.data.chatbot_initial_user_message){
-                            this.chatbot.previousMessages.push({
-                                role: "user",
-                                content: response.data.chatbot_initial_user_message,
-                            });
-                        }
                     }
                 })
                 .catch((err) => console.error(err));
