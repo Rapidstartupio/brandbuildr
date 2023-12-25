@@ -167,7 +167,7 @@ div.block-item {
         >
             <div class="  p-4 border-b border-gray-700">
                 <div
-                    class="flex space-x-3"
+                    class="sm:flex sm:space-x-3"
                 >
                     <div
                         class="flex items-center space-x-2"
