@@ -156,7 +156,8 @@
             <div class="brandDark2">
                 @include('theme::partials.dashboard-nav')
             </div>
-            <div class="w-full">
+            <div class="flex-1 overflow-auto">
+                <!--  w-full -->
                 <main class="flex-grow overflow-x-hidden m-3 md:m-6">
                     @yield('content')
                 </main>
