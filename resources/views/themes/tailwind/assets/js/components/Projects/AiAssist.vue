@@ -737,6 +737,7 @@ div.block-item {
 
 <script>
 import axios from "axios";
+import { Tabs } from 'flowbite';
 export default {
     mounted() {
         // Call your function or perform initialization here
