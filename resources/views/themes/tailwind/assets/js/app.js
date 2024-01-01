@@ -209,30 +209,46 @@ window.popToast = function (type, message) {
 
 /***** Payment Success Functionality */
 
-window.checkoutComplete = function (data) {
-    var checkoutId = data.checkout.id;
-
-    Paddle.Order.details(checkoutId, function (data) {
-        // Order data, downloads, receipts etc... available within 'data' variable.
-        document.getElementById("fullscreenLoaderMessage").innerText =
-            "Finishing Up Your Order";
-        document.getElementById("fullscreenLoader").classList.remove("hidden");
-        axios
-            .post("/checkout", {
-                _token: csrf,
-                checkout_id: data.checkout.checkout_id,
-            })
-            .then(function (response) {
-                console.log(response);
-                if (parseInt(response.data.status) == 1) {
-                    let queryParams = "";
-                    if (parseInt(response.data.guest) == 1) {
-                        queryParams = "?complete=true";
-                    }
-                    window.location = "/checkout/welcome" + queryParams;
+window.checkoutComplete = function (res) {
+    console.log(res);
+    axios
+        .post("/checkout", {
+            _token: csrf,
+            transaction_id: res.data.transaction_id,
+        })
+        .then(function (response) {
+            console.log(response);
+            if (parseInt(response.data.status) == 1) {
+                let queryParams = "";
+                if (parseInt(response.data.guest) == 1) {
+                    queryParams = "?complete=true";
                 }
-            });
-    });
+                window.location = "/checkout/welcome" + queryParams;
+            }
+        });
+    // var checkoutId = data.checkout.id;
+
+    // Paddle.Order.details(checkoutId, function (data) {
+    //     // Order data, downloads, receipts etc... available within 'data' variable.
+    //     document.getElementById("fullscreenLoaderMessage").innerText =
+    //         "Finishing Up Your Order";
+    //     document.getElementById("fullscreenLoader").classList.remove("hidden");
+    //     axios
+    //         .post("/checkout", {
+    //             _token: csrf,
+    //             checkout_id: data.checkout.checkout_id,
+    //         })
+    //         .then(function (response) {
+    //             console.log(response);
+    //             if (parseInt(response.data.status) == 1) {
+    //                 let queryParams = "";
+    //                 if (parseInt(response.data.guest) == 1) {
+    //                     queryParams = "?complete=true";
+    //                 }
+    //                 window.location = "/checkout/welcome" + queryParams;
+    //             }
+    //         });
+    // });
 };
 
 window.checkoutUpdate = function (data) {
