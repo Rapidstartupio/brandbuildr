@@ -719,11 +719,13 @@ export default {
                 });
                 prompt = prompt.replace(/\{\{question\}\}/g, this.steps[this.step].question);
                 prompt = prompt.replace(/:na/g, '');
-                prompt = prompt.replace(/\r\n\r\n/g, '');
+                //prompt = prompt.replace(/\r\n\r\n/g, '');
             }
 
             //console.log(prompt);
-            if(!prompt) {
+            var tmp  = prompt.replace(/\r/g, '');
+            var tmp  = tmp.replace(/\n/g, '');
+            if(!tmp) {
                 this.isLoading = false;
                 return false
             };
