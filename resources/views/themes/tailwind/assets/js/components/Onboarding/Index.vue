@@ -775,7 +775,9 @@ export default {
         },
         copySuggestionToAnswer() {
             this.steps[this.step].answer = this.suggestResult;
-            this.adjustTextareaHeight();
+            this.$nextTick(() => {
+                this.adjustTextareaHeight();
+            });
         },
         sendChatbotMessage() {
             const userMessage = this.chatbot.userInput.trim();
