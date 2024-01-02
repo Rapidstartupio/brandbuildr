@@ -91,7 +91,7 @@ div.block-item {
                     <ul>
                         <li class="p-4 md:px-10 md-py-8 border-b border-gray-700"  v-for="(question, index) in steps">
                             <div class="font-medium">{{ question.question }}</div>
-                            <div class="text-sm font-light text-gray-300">{{ question.answer }}</div>
+                            <div class="text-sm font-light text-gray-300 whitespace-pre-line" v-html="question.answer"></div>
                         </li>
                     </ul>
                 </div>
