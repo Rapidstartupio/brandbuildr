@@ -723,8 +723,13 @@ export default {
             }
 
             //console.log(prompt);
-            var tmp  = prompt.replace(/\r/g, '');
-            var tmp  = tmp.replace(/\n/g, '');
+            var tmp  = prompt;
+            if(tmp){
+                tmp  = prompt.replace(/\r/g, '');
+                if(tmp){
+                    tmp  = tmp.replace(/\n/g, '');
+                }
+            }
             if(!tmp) {
                 this.isLoading = false;
                 return false
