@@ -68,7 +68,7 @@
         })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
     </script>
     <!-- Styles -->
-    <link href="{{ asset('themes/' . $theme->folder . '/css/app.css') }}?9" rel="stylesheet">
+    <link href="{{ asset('themes/' . $theme->folder . '/css/app.css') }}?48" rel="stylesheet">
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     @yield('custom_header_code')
     {!! str_replace(array('<p>','</p>'),'',html_entity_decode(setting('site.custom_header_code'))) !!}
@@ -86,8 +86,9 @@
     @include('theme::partials.demo-header')
     @endif
 
+    {{--
     @include('theme::partials.base-header')
-
+    --}}
     <main class="flex-grow overflow-x-hidden" id="app">
         @yield('content')
     </main>

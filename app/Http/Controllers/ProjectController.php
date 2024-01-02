@@ -27,7 +27,7 @@ class ProjectController extends Controller
     use Upload;
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['initOnboarding']]);
     }
 
     public function index()
@@ -687,5 +687,79 @@ class ProjectController extends Controller
         $user = auth()->user();
         $project = Project::where(['user_id' => $user->id, 'id' => $projectId])->firstorFail();
         return view('theme::projects.project-documents', compact('projectId'));
+    }
+    public function initOnboarding()
+    {
+        $projectType = ProjectType::where(['slug' => 'brand-strategy'])->firstOrFail();
+        $section = $projectType->sections->where('order', 1)->firstOrFail();
+        $block = $section->blocks->where('order', 1)->firstOrFail();
+
+        $questions = array();
+        $questionsLength = count($block->questions);
+
+
+        $chatbot_system_message = setting('openai.chatbot_system_message', 'You are a helpful Brand Builder assistant from who helps companies and entreprenuers build their businesse.');
+
+        foreach ($block->questions as $key => $question) {
+            $next = $key + 1;
+            $back = $key - 1;
+            if ($key > $questionsLength - 2) {
+                $next = "review";
+            }
+            if ($key == 0) {
+                $back = null;
+            }
+            //$answer = $question->answer($user->id, $id);
+            $prompt = null;
+            if (isset($question->prompt->prompt)) {
+                $prompt = $question->prompt->prompt;
+                $updatedPrompt = preg_replace_callback('/\{\{g-question:([\d.]+)\}\}/', function ($matches) {
+                    $questionRef = $matches[1];
+                    return "{{question:$questionRef}}";
+                }, $prompt);
+                $prompt = $updatedPrompt;
+                $updatedPrompt = preg_replace_callback('/\{\{g-answer:([\d.]+)\}\}/', function ($matches) {
+                    $questionRef = $matches[1];
+                    return "{{answer:$questionRef}}";
+                }, $prompt);
+                $prompt = $updatedPrompt;
+            }
+            $chatbot_previousMessages = [];
+            if ($chatbot_system_message) {
+                $chatbot_previousMessages[] = ['role' => 'system', 'content' => $chatbot_system_message];
+            }
+
+
+            $questions[] = [
+                'id' => $question->id,
+                'ref' => $question->ref,
+                'question_ai' => $question->question_ai,
+                'question' => $question->question,
+                'answerInputType' => "text",
+                'answerInputPlaceHolder' => "Type your answer here...",
+                'next' => $next,
+                'back' => $back,
+                'examples' => $question->examples,
+                'resources' => $question->resources,
+                'prompt' => $prompt,
+                'required' => true,
+                'suggest_logs' => [],
+                'answer' => null,
+                'chatbot_previousMessages' => $chatbot_previousMessages,
+                'chatbot_messages' => [],
+            ];
+        }
+        if (empty($questions)) {
+            return false;
+        };
+
+
+        return response()->json([
+            'status' => 'success',
+            'section' => $section,
+            'block' => $block,
+            'questions' => $questions,
+            'chatbot_system_message' => $chatbot_system_message
+        ], 200);
     }
 }

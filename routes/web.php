@@ -60,7 +60,8 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/strategy-hub/explore-strategies', '\App\Http\Controllers\DashboardController@exploreStrategies')->name('dashboard.strategy-hub.explore-strategies');
     Route::get('/deadlines', '\App\Http\Controllers\DashboardController@deadlines')->name('dashboard.deadlines');
 });
-
+//Onboarding Route
+Route::get('/init-onboarding', 'App\Http\Controllers\ProjectController@initOnboarding')->name('init-onboarding');
 
 Route::post('settings/project-types', '\App\Http\Controllers\ProjectController@storeType');
 Route::get('settings/project-types/{id}', '\App\Http\Controllers\ProjectController@projectType');
