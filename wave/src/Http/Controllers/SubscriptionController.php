@@ -84,7 +84,7 @@ class SubscriptionController extends Controller
 
     public function checkout(Request $request)
     {
-
+        sleep(3);
         //PaddleSubscriptions
         $transaction_id = $request->get('transaction_id');
 
@@ -195,18 +195,23 @@ class SubscriptionController extends Controller
         $plan = Plan::where('plan_id', $request->plan_id)->first();
 
         if (isset($plan->id)) {
+            $subscription_id = $request->user()->subscription->subscription_id;
+            $url = $this->paddle_api_base_url . "subscriptions/" . $subscription_id;
             // Update the user plan with Paddle
-            $response = Http::post($this->paddle_vendors_url . '/2.0/subscription/users/update', [
-                'vendor_id' => $this->vendor_id,
-                'vendor_auth_code' => $this->vendor_auth_code,
-                'subscription_id' => $request->user()->subscription->subscription_id,
-                'plan_id' => $request->plan_id
+            $response = Http::withToken($this->vendor_auth_code)->patch($url, [
+                'proration_billing_mode' => 'prorated_immediately',
+                'items' => [
+                    [
+                        'price_id' => $request->plan_id,
+                        'quantity' => 1
+                    ]
+                ]
             ]);
 
             if ($response->successful()) {
                 $body = $response->json();
 
-                if ($body['success']) {
+                if ($body['data']) {
                     // Next, update the user role associated with the updated plan
                     $request->user()->forceFill([
                         'role_id' => $plan->role_id

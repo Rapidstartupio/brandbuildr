@@ -68,7 +68,8 @@
                     theme: "dark",
                     locale: "en"
                 },
-                items: itemsList
+                items: itemsList,
+                customer: '@if(!auth()->guest()){{ auth()->user()->email }}@endif'
             });
             // Paddle.Checkout.open({
             //     product: product,
