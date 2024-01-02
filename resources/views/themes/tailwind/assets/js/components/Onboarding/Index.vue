@@ -620,19 +620,26 @@ export default {
     },
     data() {
         return {
+            project: null,
             section: null,
-            block:null,
+            sections:null,
+            block: null,
             progressBar: 0,
-            defaultStep: 1,
+            defaultStep: 0,
             step: 0,
             steps: null,
+            answerRows:"2",
             isHiddenSuggestResult: "hidden",
             isSuggest: "",
+            isLoading:false,
             suggestResult: "",
-            chatbot: {
+            chatbot_system_message:"",
+            chatbot_initial_user_message:"",
+            chatbot: 
+            {
                 userInput: "",
                 messages: [],
-                previousMessages: [],
+                previousMessages: []
             },
         };
     },
@@ -804,7 +811,6 @@ export default {
             axios
                 .get( "/init-onboarding") 
                 .then((response) => {
-                    console.log(response);
                     if (response.data) {
                         this.block = response.data.block;
                         this.section = response.data.section;
