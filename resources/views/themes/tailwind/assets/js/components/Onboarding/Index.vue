@@ -719,7 +719,7 @@ export default {
                 });
                 prompt = prompt.replace(/\{\{question\}\}/g, this.steps[this.step].question);
                 prompt = prompt.replace(/:na/g, '');
-                prompt = prompt.replace(/\r\n/g, '');
+                prompt = prompt.replace(/\r\n\r\n/g, '');
             }
 
             //console.log(prompt);
