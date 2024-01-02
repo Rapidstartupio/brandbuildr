@@ -68,7 +68,7 @@
         })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
     </script>
     <!-- Styles -->
-    <link href="{{ asset('themes/' . $theme->folder . '/css/app.css') }}?49" rel="stylesheet">
+    <link href="{{ asset('themes/' . $theme->folder . '/css/app.css') }}?50" rel="stylesheet">
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     @yield('custom_header_code')
     {!! str_replace(array('<p>','</p>'),'',html_entity_decode(setting('site.custom_header_code'))) !!}

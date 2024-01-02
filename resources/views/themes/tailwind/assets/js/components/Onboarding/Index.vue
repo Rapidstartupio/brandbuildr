@@ -130,7 +130,10 @@ div.block-item {
                                     cols="30" :rows="answerRows"
                                     :placeholder="steps[step].answerInputPlaceHolder"
                                     v-model="steps[step].answer"
-                                    required></textarea>
+                                    required
+                                    @input="adjustTextareaHeight"
+                                    ref="textareaRef"
+                                    ></textarea>
                             </div>
                             <div v-if="steps[step].answerInputType == 'select'">
                                 <select
@@ -772,6 +775,7 @@ export default {
         },
         copySuggestionToAnswer() {
             this.steps[this.step].answer = this.suggestResult;
+            this.adjustTextareaHeight();
         },
         sendChatbotMessage() {
             const userMessage = this.chatbot.userInput.trim();
@@ -851,6 +855,11 @@ export default {
 
             if (rows>maxrows) this.answerRows=maxrows;
             else this.answerRows=rows;
+        },
+        adjustTextareaHeight() {
+            const textarea = this.$refs.textareaRef;
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + "px";
         }
     },
 };
