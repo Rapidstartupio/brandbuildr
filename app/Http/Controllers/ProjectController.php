@@ -606,7 +606,7 @@ class ProjectController extends Controller
             //     'data' => $array
             // ]);
             foreach ($array[0] as $row) {
-log::info($row);
+if(!$row["item"]){ break;}
                 //Project Type
                 $projectType = ProjectType::where('name', $row['admin_name'])->first();
                 if (!$projectType) {
