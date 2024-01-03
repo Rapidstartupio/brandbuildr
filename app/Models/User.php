@@ -127,7 +127,10 @@ class User extends Authenticatable
             //$p['end_date'] = $project->end_date ? date('d-m-Y', strtotime($project->end_date)) : "";
             $p['start_date'] = $project->start_date;
             $p['end_date'] = $project->end_date;
-            $p['formattedDeadline'] = $this->formatDeadline($p['start_date'], $p['end_date']);
+
+            $end = Carbon::parse($project->end_date);
+            $p['formattedDeadline'] = $end->format('d-M-y');
+            //$p['formattedDeadline'] = $this->formatDeadline($p['start_date'], $p['end_date']);
             //Add Sections
             //$p['sections'] = [];
             $sections = [];

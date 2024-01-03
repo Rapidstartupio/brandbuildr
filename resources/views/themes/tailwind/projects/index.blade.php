@@ -64,48 +64,98 @@
         @foreach($projects as $project)
         <div class="brandDark2 p-4 rounded space-y-3">
             <div class="md:flex justify-between items-center ">
-                <div class="text-xl capitalize">{{$project->name}}</div>
-                <div class="dark:text-gray-400 text-sm border-2 border-white rounded-lg w-min">
+                <div class="text-xl capitalize h-16">{{$project->name}} | {{$project->type}}</div>
+                <div class="dark:text-wave-500  border-4 border-wave-500 rounded-lg w-min">
+                    <a class="bg-wave-500" href="{{route('project.details',$project->id )}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 m-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                        </svg>
+                    </a>
+                </div>
+                <!-- <div class="dark:text-gray-400 text-sm border-2 border-white rounded-lg w-min">
                     <svg class="w-auto" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
                         <path d="{{$project->type_icon_svg_path_d}}" fill="white" />
                     </svg>
-                </div>
+                </div> -->
             </div>
             <div class="space-y-4">
-                <div class="space-x-2">
+                <ol class="space-y-2">
                     @if(isset($project->client))
-                    <button type="button" class="focus:outline-none rounded-lg    focus:ring-4   font-light rounded-lg text-base px-2" style="color: {{$project->client->tag_color}};background-color: {{$project->client->tag_bg_color}}">{{$project->client->company_name}}</button>
+                    <li>
+                        <div class="dark:text-gray-400 flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
+                            </svg>
+                            <button type="button" class="focus:outline-none rounded-lg    focus:ring-4   font-light rounded-lg text-base px-2" style="color: {{$project->client->tag_color}};background-color: {{$project->client->tag_bg_color}}">{{$project->client->company_name}}</button>
+                        </div>
+                    </li>
                     @endif
-                    <button type="button" class="focus:outline-none rounded-lg text-white bg-wave-500 hover:bg-wave-700 focus:ring-4 focus:ring-wave-700 font-light rounded-lg text-base px-2  dark:hover:bg-wave-700 dark:focus:ring-wave-700">{{$project->type}}</button>
-                </div>
+                    <li>
+                        <div class="dark:text-gray-400 flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M4.5 2A1.5 1.5 0 0 0 3 3.5v13A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5V7.621a1.5 1.5 0 0 0-.44-1.06l-4.12-4.122A1.5 1.5 0 0 0 11.378 2H4.5Zm2.25 8.5a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Zm0 3a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Z" clip-rule="evenodd" />
+                            </svg>
+                            <button type="button" class="focus:outline-none rounded-lg text-white bg-wave-500 hover:bg-wave-700 focus:ring-4 focus:ring-wave-700 font-light rounded-lg text-base px-2  dark:hover:bg-wave-700 dark:focus:ring-wave-700">{{$project->type}}</button>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dark:text-gray-400  flex items-center space-x-2">
+                            @if($project->formattedDeadline)
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-white bg-gray-600 font-light rounded-lg text-base px-2">{{$project->formattedDeadline}}</span>
+                            @endif
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dark:text-gray-400  flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                <path d="M10 3.75a2 2 0 1 0-4 0 2 2 0 0 0 4 0ZM17.25 4.5a.75.75 0 0 0 0-1.5h-5.5a.75.75 0 0 0 0 1.5h5.5ZM5 3.75a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 .75.75ZM4.25 17a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5h1.5ZM17.25 17a.75.75 0 0 0 0-1.5h-5.5a.75.75 0 0 0 0 1.5h5.5ZM9 10a.75.75 0 0 1-.75.75h-5.5a.75.75 0 0 1 0-1.5h5.5A.75.75 0 0 1 9 10ZM17.25 10.75a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5h1.5ZM14 10a2 2 0 1 0-4 0 2 2 0 0 0 4 0ZM10 16.25a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z" />
+                            </svg>
+                            <span class="text-white bg-gray-600 font-light rounded-lg text-base px-2">{{($project->progress==100) ? 'Completed' : 'Active'}}</span>
+                        </div>
+                    </li>
+                </ol>
 
-                <div class="dark:text-white flex items-center space-x-1">
-                    @if($project->formattedDeadline)
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class=" w-fit" viewBox="0 0 20 20" fill="none">
-                        <path d="M15.8333 2.49967H15V0.833008H13.3333V2.49967H6.66667V0.833008H5V2.49967H4.16667C3.72464 2.49967 3.30072 2.67527 2.98816 2.98783C2.67559 3.30039 2.5 3.72431 2.5 4.16634V15.833C2.5 16.275 2.67559 16.699 2.98816 17.0115C3.30072 17.3241 3.72464 17.4997 4.16667 17.4997H15.8333C16.7583 17.4997 17.5 16.758 17.5 15.833V4.16634C17.5 3.72431 17.3244 3.30039 17.0118 2.98783C16.6993 2.67527 16.2754 2.49967 15.8333 2.49967ZM15.8333 15.833H4.16667V7.49967H15.8333V15.833ZM15.8333 5.83301H4.16667V4.16634H15.8333V5.83301Z" fill="#ffffff" />
-                    </svg>
-                    <span>{{$project->formattedDeadline}}</span>
-                    @endif
-                </div>
 
             </div>
             <div class="space-y-2 pt-20">
-                <div class="flex justify-between">
+                <!-- <div class="flex justify-between">
                     <div>
-                        <p class="dark:text-gray-400">{{$project->progress}}%</p>
+
                     </div>
                     <a class="bg-wave-500" href="{{route('project.details',$project->id )}}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 m-1">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
                         </svg>
                     </a>
-                </div>
-                <div class="w-full bg-[#838396] rounded-full h-2 dark:bg-[#838396]">
-                    <div class="bg-wave-500 h-2 rounded-full" style="width: {{$project->progress}}%"></div>
+                </div> -->
+                <div class="w-full bg-[#838396] rounded-full h-5 dark:bg-gray-600 relative text-center">
+                    <p class="dark:text-white absolute w-full">{{$project->progress}}%</p>
+                    <div class="bg-wave-500 h-5 rounded-full" style="width: {{$project->progress}}%"></div>
                 </div>
             </div>
         </div>
         @endforeach
+        <div class=" p-4 rounded space-y-3 border-2 border-wave-500 border-dashed flex text-center justify-center items-center">
+            <div>
+                <div class="">
+                    <a href="/projects/create" class="">
+                        <div class="bg-wave-500 w-min p-3  rounded-lg inline-flex flex-col items-center">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
+                                <path stroke-linecap=" round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <span class="text-xl">Strategy</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @else
