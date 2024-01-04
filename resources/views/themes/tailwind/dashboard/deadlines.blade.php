@@ -3,6 +3,8 @@
 
 @section('content')
 
+<link href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
+
 <h3 style="color: white; font-size: 24px; fontmy-family: Helvetica Neue; font-weight: 500; word-wrap: break-word">Projects</h3>
 <div class="dark:text-white my-6">
     <div class="text-sm font-medium text-center text-gray-500 dark:text-gray-400 md:flex">
@@ -11,7 +13,7 @@
 </div>
 @if($projects)
 <div class="mt-12 relative overflow-x-auto">
-    <table class="table-auto w-full dark:text-white text-left bg-brand-800 deadlines-table">
+    <table class="table-auto w-full dark:text-white text-left bg-brand-800 deadlines-table" id="deadlines">
         <thead class="bg-brand-700">
             <tr>
                 <th>Client</th>
@@ -52,4 +54,23 @@
 </div>
 @endif
 
+@endsection
+
+
+@section('javascript')
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#deadlines').DataTable({
+            "paging": false,
+            "searching": false,
+            "columnDefs": [{
+                    "orderable": false,
+                    "targets": -1
+                } // -1 refers to the last column
+            ]
+        });
+    });
+</script>
 @endsection
