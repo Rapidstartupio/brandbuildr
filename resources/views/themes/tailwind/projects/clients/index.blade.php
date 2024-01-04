@@ -52,51 +52,92 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 dark:text-white my-5">
         @foreach($clients as $client)
         <a href="{{route('clients.page',$client->id)}}">
-            <div class="brandDark2 p-4 rounded space-y-6 h-64">
+            <div class="brandDark2 p-4 rounded-2xl space-y-6 h-64  border-4 border-transparent" @if($client->tag) style="border-color:{{$client->tag_bg_color}}" @endif >
                 <div class="md:flex justify-between items-center ">
-                    <div class="space-y-2">
+                    <div class="flex items-center">
                         <div class="text-lg capitalize">{{$client->company_name}}</div>
-                        <div>
-                            <button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-light rounded-lg text-base px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800" style="color: {{$client->tag_color}};background-color: {{$client->tag_bg_color}}">{{$client->tag}}</button>
-                        </div>
                     </div>
-                    <div class="">
+                    <div class="flex items-center">
                         @if($client->company_logo)
-                        <img src="{{asset('storage/upload/projects/clients/'.$client->company_logo)}}" alt="{{$client->company_name}}" class="w-16 h-16">
+                        <img src="{{asset('storage/upload/projects/clients/'.$client->company_logo)}}" alt="{{$client->company_name}}" class="w-14 h-14">
+                        @else
+                        <div class="w-14 h-14 rounded-lg bg-brand-700  flex items-center justify-center" @if($client->tag) style="background:{{$client->tag_bg_color}}50" @endif>
+                            <div class="w-8 h-8 rounded-full bg-gray-500 " @if($client->tag) style="background:{{$client->tag_bg_color}}" @endif></div>
+                        </div>
                         @endif
                     </div>
                 </div>
-                <div class="flex justify-between text-sm">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                        </svg>
-                        <div>Projects: <span>{{$client->nbProjects()}}</span></div>
-                    </div>
-                    <div class="">
-                        <button type="button" class="rounded-lg px-2 inline-flex items-center text-sm font-light text-center text-white rounded dark:border-2 dark:border-white">
-                            Active
-                        </button>
-                    </div>
+                <div>
+                    <ol class="space-y-2">
+                        <li>
+                            <div class="dark:text-gray-400 flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                    <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
+                                </svg>
+                                <button type="button" class="focus:outline-none rounded-lg    focus:ring-4   font-light rounded-lg text-base px-2" style="color: {{$client->tag_color}};background-color: {{$client->tag_bg_color}}">{{$client->tag}}</button>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dark:text-gray-400 flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                    <path fill-rule="evenodd" d="M4.5 2A1.5 1.5 0 0 0 3 3.5v13A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5V7.621a1.5 1.5 0 0 0-.44-1.06l-4.12-4.122A1.5 1.5 0 0 0 11.378 2H4.5Zm2.25 8.5a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Zm0 3a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-white bg-gray-600 font-light rounded-lg text-base px-2">{{$client->nbProjects()}}</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dark:text-gray-400  flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-white bg-gray-600 font-light rounded-lg text-base px-2">---</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dark:text-gray-400  flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                    <path d="M10 3.75a2 2 0 1 0-4 0 2 2 0 0 0 4 0ZM17.25 4.5a.75.75 0 0 0 0-1.5h-5.5a.75.75 0 0 0 0 1.5h5.5ZM5 3.75a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 .75.75ZM4.25 17a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5h1.5ZM17.25 17a.75.75 0 0 0 0-1.5h-5.5a.75.75 0 0 0 0 1.5h5.5ZM9 10a.75.75 0 0 1-.75.75h-5.5a.75.75 0 0 1 0-1.5h5.5A.75.75 0 0 1 9 10ZM17.25 10.75a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5h1.5ZM14 10a2 2 0 1 0-4 0 2 2 0 0 0 4 0ZM10 16.25a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z" />
+                                </svg>
+                                <span class="text-white bg-gray-600 font-light rounded-lg text-base px-2">Active</span>
+                            </div>
+                        </li>
+                    </ol>
                 </div>
             </div>
         </a>
         @endforeach
-    </div>
-</div>
-@else
+        <div class="p-4 rounded-2xl space-y-6 h-64  border-2 border-gray-500 border-dashed flex text-center justify-center items-center">
+            <div>
+                <div class="">
+                    <a href="/projects/clients/create" class="">
+                        <div class="bg-gray-500 w-min p-3  rounded-lg inline-flex flex-col items-center">
 
-<div class="flex justify-center text-white text-center md:mt-10">
-    <div class="max-w-xl space-y-2 md:space-y-8">
-        <div class="">
-            <a href="{{route('clients.create')}}">
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800   font-medium rounded-lg text-lg px-10 py-4 dark:bg-brandPrimary dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800">Create New Client</button>
-            </a>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
+                                <path stroke-linecap=" round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <span class="text-xl">Client</span>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    @else
 
-@endif
+    <div class="flex justify-center text-white text-center md:mt-10">
+        <div class="max-w-xl space-y-2 md:space-y-8">
+            <div class="">
+                <a href="{{route('clients.create')}}">
+                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800   font-medium rounded-lg text-lg px-10 py-4 dark:bg-brandPrimary dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800">Create New Client</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    @endif
 
 
-@endsection
+    @endsection
