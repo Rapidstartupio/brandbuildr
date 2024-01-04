@@ -145,7 +145,7 @@ class ProjectController extends Controller
         try {
             $validatedDate = $request->validate([
                 'type_id' => 'required',
-                'name' => 'required',
+                'name' => 'required|max:40',
                 'client_id' => 'required',
                 'description' => 'required',
                 //'deadline' => 'required',
@@ -546,7 +546,7 @@ class ProjectController extends Controller
             //dd($project);
             // dd(array_chunk(array_chunk($tableOfContents, 15), 2));
             // if (isset($request->view)) {
-            //     return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents'));
+            //     return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents', 'documentType'));
             // }
             $pdf = Pdf::loadView('templates.project-document', $data);
             //return $pdf->stream();
@@ -606,7 +606,9 @@ class ProjectController extends Controller
             //     'data' => $array
             // ]);
             foreach ($array[0] as $row) {
-if(!$row["item"]){ break;}
+                if (!$row["item"]) {
+                    break;
+                }
                 //Project Type
                 $projectType = ProjectType::where('name', $row['admin_name'])->first();
                 if (!$projectType) {

@@ -10,7 +10,24 @@
     </a>
     <div class="dark:text-gray-400 text-base">Project</div>
 </div>
-
+<!-- <form action="{{route('download-project-document')}}" method="POST">
+    @csrf
+    <input type="hidden" name="projectId" value="{{$projectId}}">
+    <input type="hidden" name="type" value="summary">
+    <input type="hidden" name="view" value="true">
+    <button type="submit" class="flex justify-center px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-wave-600 hover:bg-wave-500 focus:outline-none focus:border-wave-700 focus:shadow-outline-wave active:bg-wave-700">
+        Template
+    </button>
+</form>
+<br>
+<form action="{{route('download-project-document')}}" method="POST">
+    @csrf
+    <input type="hidden" name="projectId" value="{{$projectId}}">
+    <input type="hidden" name="type" value="summary">
+    <button type="submit" class="flex justify-center px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-wave-600 hover:bg-wave-500 focus:outline-none focus:border-wave-700 focus:shadow-outline-wave active:bg-wave-700">
+        Pdf
+    </button>
+</form> -->
 <div class="pt-4">
     <ul class="dark:text-white text-xl">
         <div class="border-b border-gray-600 py-6 flex justify-between">
