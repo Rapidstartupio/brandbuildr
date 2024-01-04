@@ -24,4 +24,9 @@ class DashboardController extends Controller
         $projects = $user->getProjects();
         return view('theme::dashboard.deadlines', compact('projects'));
     }
+
+    public function getStarted()
+    {
+        return view('theme::dashboard.get-started');
+    }
 }

@@ -4,7 +4,6 @@
 @section('content')
 
 <h3 style="color: white; font-size: 24px; fontmy-family: Helvetica Neue; font-weight: 500; word-wrap: break-word">Dashboard</h3>
-@include('theme::dashboard.nav')
 <div class="grid md:grid-cols-4 md:gap-6 mt-12">
     <div class="mb-12">
         @include('theme::dashboard.strategy-hub-nav')

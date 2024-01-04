@@ -47,6 +47,7 @@ Route::group(['prefix' => 'projects'], function () {
     Route::get('/clients/{id}', 'App\Http\Controllers\ClientController@client')->name('clients.page');
     Route::get('/project-types', 'App\Http\Controllers\ProjectController@projectTypes')->name('projects.project-types');
     Route::post('/{id}/get', 'App\Http\Controllers\ProjectController@getUserProject')->name('projects.get-user-project');
+    Route::get('/deadlines', '\App\Http\Controllers\DashboardController@deadlines')->name('projects.deadlines');
 });
 
 Route::group(['prefix' => 'project'], function () {
@@ -58,7 +59,7 @@ Route::group(['prefix' => 'project'], function () {
 //Brandbuilder Dashboard routes
 Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/strategy-hub/explore-strategies', '\App\Http\Controllers\DashboardController@exploreStrategies')->name('dashboard.strategy-hub.explore-strategies');
-    Route::get('/deadlines', '\App\Http\Controllers\DashboardController@deadlines')->name('dashboard.deadlines');
+    Route::get('/get-started', '\App\Http\Controllers\DashboardController@getStarted')->name('dashboard.get-started');
 });
 //Onboarding Route
 Route::get('/init-onboarding', 'App\Http\Controllers\ProjectController@initOnboarding')->name('init-onboarding');

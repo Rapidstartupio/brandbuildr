@@ -3,12 +3,16 @@
 
 @section('content')
 
-<h3 style="color: white; font-size: 24px; fontmy-family: Helvetica Neue; font-weight: 500; word-wrap: break-word">Dashboard</h3>
-@include('theme::dashboard.nav')
-
+<h3 style="color: white; font-size: 24px; fontmy-family: Helvetica Neue; font-weight: 500; word-wrap: break-word">Projects</h3>
+<div class="dark:text-white my-6">
+    <div class="text-sm font-medium text-center text-gray-500 dark:text-gray-400 md:flex">
+        @include('theme::projects.partials.projects-menu')
+    </div>
+</div>
+@if($projects)
 <div class="mt-12 relative overflow-x-auto">
-    <table class="table-auto w-full dark:text-white text-left bg-brand-700 deadlines-table">
-        <thead>
+    <table class="table-auto w-full dark:text-white text-left bg-brand-800 deadlines-table">
+        <thead class="bg-brand-700">
             <tr>
                 <th>Client</th>
                 <th>Project Name</th>
@@ -46,5 +50,6 @@
         </tbody>
     </table>
 </div>
+@endif
 
 @endsection
