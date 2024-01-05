@@ -97,6 +97,12 @@ export default {
                 deadline: "",
                 start_date:"",
                 end_date:"",
+                deadlines: [
+                    {
+                        end_date:"",
+                        milestone:""
+                    }
+                ],
             },
             //project_types: this.getProjectTypes(),
             

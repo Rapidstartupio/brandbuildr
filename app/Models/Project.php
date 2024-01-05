@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProjectType;
 use App\Models\Client;
+use App\Models\ProjectDeadline;
 
 class Project extends Model
 {
@@ -19,5 +20,10 @@ class Project extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function deadlines()
+    {
+        return $this->hasMany(ProjectDeadline::class)->orderBy('end_date', 'DESC');
     }
 }

@@ -904,8 +904,12 @@ export default {
                     })
                     .catch((error) => {
                         this.isLoading = false;
-                        console.log(error);
-                        console.error("Error fetching bot response:", error);
+                        popToast(
+                            'danger',
+                            'Too many requests at once, please wait 30 seconds and try again'
+                        );
+                        //console.log(error);
+                        //console.error("Error fetching bot response:", error);
                     });
             // end switch
         },

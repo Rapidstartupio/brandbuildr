@@ -3,8 +3,9 @@
 @endif
 
 <!-- Scripts -->
-<script src="{{ asset('themes/' . $theme->folder . '/js/app.js?60') }}"></script>
+<script src="{{ asset('themes/' . $theme->folder . '/js/app.js?61') }}"></script>
 <script src="{{ asset('js/flowbite.min.js') }}"></script>
+<script src="{{ asset('js/flowbite-datepicker.min.js') }}"></script>
 
 @yield('javascript')
 {!! html_entity_decode(setting('site.custom_footer_code')) !!}

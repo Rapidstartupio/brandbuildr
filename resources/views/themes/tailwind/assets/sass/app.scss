@@ -200,3 +200,9 @@ svg {
     .deadlines-table th, .deadlines-table td{
         @apply p-4 border-b border-brand-600;
     }
+    .datepicker-picker, .datepicker-picker button{
+        background-color: #393957 !important ;
+    }
+    .datepicker-picker .focused{
+       background-color: #570AFF !important ;
+    }
