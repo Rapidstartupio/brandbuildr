@@ -530,12 +530,48 @@ class ProjectController extends Controller
                                     if ($question->answer) {
                                         $question->answer = str_replace('-', '&bull;', $question->answer);
 
+                                        $left_text = $question->question_ai;
+                                        $right_text = $question->answer;
+                                        $sub_left_text = "";
+                                        $settings = $question->strategy_document_settings;
+                                        $settings = json_decode($settings);
+                                        if ($settings) {
+                                            if (isset($settings->skip) && $settings->skip) {
+                                                continue;
+                                            }
+                                            if (isset($settings->override_left_section) && $settings->override_left_section) {
+                                                $left_text = $question->{$settings->override_left_section};
+                                            }
+                                            if (isset($settings->override_right_section) && $settings->override_right_section) {
+                                                $right_text = "";
+                                                $refQuestion = \App\Models\ProjectQuestion::where('ref', $settings->override_right_section)->first();
+                                                if ($refQuestion) {
+                                                    $refAnswer = $refQuestion->answer($user->id, $project->id);
+                                                    if ($refAnswer && isset($refAnswer->answer)) {
+                                                        $right_text = $refAnswer->answer;
+                                                    }
+                                                }
+                                            }
+                                            if (isset($settings->sub_left_section) && $settings->sub_left_section) {
+                                                $refQuestion = \App\Models\ProjectQuestion::where('ref', $settings->sub_left_section)->first();
+                                                if ($refQuestion) {
+                                                    $refAnswer = $refQuestion->answer($user->id, $project->id);
+                                                    if ($refAnswer && isset($refAnswer->answer)) {
+                                                        $sub_left_text = $refAnswer->answer;
+                                                    }
+                                                }
+                                            }
+                                        }
+
                                         $outputs[] = [
                                             'question_ai' => $question->question_ai,
                                             'question' => $question->question,
                                             'answer' => $question->answer,
                                             'block' => $block->name,
                                             'section' => $section->name,
+                                            'strategy_document_settings' => $question->strategy_document_settings,
+                                            'left_text' => $left_text,
+                                            'right_text' => $right_text,
                                         ];
                                     }
                                 }

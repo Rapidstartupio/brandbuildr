@@ -173,7 +173,8 @@ class User extends Authenticatable
                                     'question' => $question->question,
                                     'order' => $question->order,
                                     'answer' => $answer,
-                                    'strategy_document_output' => $question->strategy_document_output
+                                    'strategy_document_output' => $question->strategy_document_output,
+                                    'strategy_document_settings' => $question->strategy_document_settings
                                 ];
                                 if ($question->strategy_document_output) {
                                     $strategyOutput = true;

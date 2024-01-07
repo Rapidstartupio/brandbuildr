@@ -28,10 +28,10 @@
         </div>
         <div class="footer">
             <div class="footer-left">
-                <b>{{$project->type}} Document</b> Prepared by <b>&lt;YOUR COMPANY&gt;</b><br>
+                <b>{{$project->type}} Document</b> @if($user->company_name)Prepared by <b>{{$user->company_name}}</b>@endif<br>
                 <b>DATE</b>: {{$documentDate}}
             </div>
-            <div class="footer-right"><b>&lt;Website&gt;</b></div>
+            <div class="footer-right"><b>{{$user->website}}</b></div>
             <div class="clearfix"></div>
         </div>
     </div>
@@ -65,7 +65,7 @@
                 <div class="clearfix"></div>
                 <div class="footer">
                     <div class="">
-                        <b>{{$project->type}} Document</b> Prepared by <b>&lt;YOUR COMPANY&gt;</b>
+                        <b>{{$project->type}} Document</b> @if($user->company_name)Prepared by <b>{{$user->company_name}}</b>@endif
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -85,51 +85,96 @@
         </div>
         <div class="footer">
             <div class="footer-left">
-                <b>{{$project->type}} Document</b> Prepared by <b>&lt;YOUR COMPANY&gt;</b><br>
+                <b>{{$project->type}} Document</b> @if($user->company_name)Prepared by <b>{{$user->company_name}}</b>@endif<br>
                 <b>DATE</b>: {{$documentDate}}
             </div>
-            <div class="footer-right"><b>&lt;Website&gt;</b></div>
+            <div class="footer-right"><b>{{$user->website}}</b></div>
             <div class="clearfix"></div>
         </div>
     </div>
     @foreach($section->blocks as $block)
     @if($documentType == 'summary' || $block->strategy_output)
     <div class="page-break"></div>
-    <div class="page block-page">
-        <div style="padding: 2%;height:97%">
-            <div class="inner" style="height:100%">
-                <div class="top-page">
-                    <div class="head">
-                        <div class="head-left">
-                            <h3>{{$section->name}}</h3>
+    <div style="page-break-inside: avoid">
+        <div class="page block-page">
+            <div style="padding: 2%;height:97%">
+                <div class="inner" style="height:100%">
+                    <div class="top-page">
+                        <div class="head">
+                            <div class="head-left">
+                                <h3>{{$section->name}}</h3>
+                            </div>
+                            <div class="head-right">
+                                <h5>{{$project->type}}</h5>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="head-right">
-                            <h5>{{$project->type}}</h5>
+                    </div>
+                    <div class="container">
+                        <div class="content">
+                            <h3 class="title" style="font-size: larger;">{{$block->name}}</h3>
+                            <table>
+                                @foreach($block->questions as $question)
+                                @if($question->answer && ($documentType == 'summary' || $question->strategy_document_output) )
+
+                                @php
+
+                                $left_text = $question->question_ai;
+                                $right_text = $question->answer;
+                                $sub_left_text = "";
+                                $settings = $question->strategy_document_settings;
+                                $settings = json_decode($settings);
+                                if ($settings) {
+                                if (isset($settings->skip) && $settings->skip) {
+                                continue;
+                                }
+                                if (isset($settings->override_left_section) && $settings->override_left_section) {
+                                $left_text = $question->{$settings->override_left_section};
+                                }
+                                if (isset($settings->override_right_section) && $settings->override_right_section) {
+                                $right_text = "";
+                                $refQuestion = \App\Models\ProjectQuestion::where('ref', $settings->override_right_section)->first();
+                                if ($refQuestion) {
+                                $refAnswer = $refQuestion->answer($user->id, $project->id);
+                                if ($refAnswer && isset($refAnswer->answer)) {
+                                $right_text = $refAnswer->answer;
+                                }
+                                }
+                                }
+                                if (isset($settings->sub_left_section) && $settings->sub_left_section) {
+                                $refQuestion = \App\Models\ProjectQuestion::where('ref', $settings->sub_left_section)->first();
+                                if ($refQuestion) {
+                                $refAnswer = $refQuestion->answer($user->id, $project->id);
+                                if ($refAnswer && isset($refAnswer->answer)) {
+                                $sub_left_text = $refAnswer->answer;
+                                }
+                                }
+                                }
+                                }
+
+                                @endphp
+
+                                <tr>
+                                    <td class="" style="font-weight: bolder;font-size: large;vertical-align: top;">
+                                        <span class="left_text" style="">{{$left_text}}</span>
+                                        @if($sub_left_text)
+                                        <span>{{$sub_left_text}}</span>
+                                        @endif
+                                    </td>
+                                    <td style="font-size: small;">{!!$right_text!!}</td>
+                                </tr>
+                                @endif
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="footer">
+                        <div class="">
+                            <b>{{$project->type}} Document</b> @if($user->company_name)Prepared by <b>{{$user->company_name}}</b>@endif
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                </div>
-                <div class="container">
-                    <div class="content">
-                        <h3 class="title" style="font-size: larger;">{{$block->name}}</h3>
-                        <table>
-                            @foreach($block->questions as $question)
-                            @if($question->answer && ($documentType == 'summary' || $question->strategy_document_output) )
-                            <tr>
-                                <td style="font-weight: bolder;font-size: large;">{{$question->question_ai}}</td>
-                                <td style="font-size: small;">{!!$question->answer!!}</td>
-                            </tr>
-                            @endif
-                            @endforeach
-                        </table>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="footer">
-                    <div class="">
-                        <b>{{$project->type}} Document</b> Prepared by <b>&lt;YOUR COMPANY&gt;</b>
-                    </div>
-                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
