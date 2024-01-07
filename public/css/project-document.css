@@ -7,6 +7,7 @@
         height: 100%;
         margin: 0;
         padding: 0;
+        font-family: 'Wix Madefor Display', sans-serif;
     }
   .page{
         height: 100%;
@@ -15,10 +16,10 @@
         position: relative;
     }
     .head{
-        padding-top: 100px;
+        padding-top: 70px;
         /* padding-left: 100px;
         padding-right: 100px; */
-        width: 80%;
+        width: 82%;
         margin: 0 auto;
     }
 .p1 {
@@ -144,18 +145,27 @@ li {
 }
 
 .content {
-    margin-top: 10%;
+    margin-top: 9%;
 }
 
-
+.block-page .content {
+    margin-top:6%;
+}
 .summary li {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 4px 0;
+    overflow: hidden;
 }
 
 li.section-title {
     color: #3145A2;
-    font-size: 18px;
+    font-size: 16px;
+    padding: 10px 0;
+    //font-weight: bold;
+}
+li.section-title:first-child{
+    padding-top: 0;
 }
 
 .footer-text {
@@ -234,22 +244,37 @@ li.section-title {
 }
 .page1 .head .title{
     float: left;
+    font-size: larger;
+    font-weight: 800;
 }
+.page1 .head .title h1{
+    margin: 0;
+    line-height: 1;
+}
+.page1 .head .title h2{
+    margin: 0;
+ }
 .page1 .head .logo{
     float: right;
 }
 
+
 .footer{
     position: absolute;
-    bottom: 10px;
-    width: 90%;
+    bottom: 40px;
+    width: 82%;
     margin-left: 5%;
     padding-top: 15px;
-    font-size: 10px;
+    font-size: 9px;
     //margin: 0 auto;
   }
+  .page1 .footer{
+        bottom: 50px;
+        font-size: 10px;
+        font-weight: lighter;
+    }
   .page1 .footer, .section-gard-page .footer{
-        border-top: 0.3px solid gray;
+        border-top: 0.3px solid white;
         font-size: 12px;
     }
   .footer .footer-left{
@@ -261,15 +286,19 @@ li.section-title {
 
   /*  table-of-contents */
   .table-of-contents{
-    background-color: #f1f2f2;
+    //background-color: #f1f2f2;
+    background-color: #ffffff;
     //margin: 1%;
+  }
+  .table-of-contents .inner{
+    background-color: #F1F1F2;
   }
   .top-page{
     background-color:#1C1B1C;
     color: white;
   }
   .top-page .head{
-    padding: inherit;
+    padding: 10px 0;
   }
     .container {
         width: 80%;
@@ -289,21 +318,57 @@ li.section-title {
         float: right;
     }
     .block-page{
-        background-color: #f1f2f2;
+        background-color: #ffffff;
     }
+    .block-page .inner{
+        background-color: #F1F1F2;
+      }
     .content table{
         width: 100%;
         border-collapse: collapse;
         white-space: pre-line;
     }
     .content table td{
-        width: 50%;
         padding-top: 1em;
         padding-bottom: 1em;
     }
+    .content table td:first-child{
+        width: 35%;
+    }
     .content table tr{
-        border-bottom: 1px solid #000000;
+        border-bottom: 1px solid #ccc;
     }
     .block-page .title{
         color: #3145A2;
+    }
+
+    /* dots summary */
+   ul.leaders {
+    max-width: 40em;
+    padding: 0;
+    overflow-x: hidden;
+    list-style: none
+    }
+
+    ul.leaders li:before {
+    display:inline-block;
+    width: 0;
+    white-space: nowrap;
+    content:
+    ". . . . . . . . . . . . . . . . . . . . "
+    ". . . . . . . . . . . . . . . . . . . . "
+    ". . . . . . . . . . . . . . . . . . . . "
+    ". . . . . . . . . . . . . . . . . . . . ";
+    }
+
+    ul.leaders .leader-title {
+    padding-right: 0.33em;
+    background-color: #f1f2f2;
+    
+    }
+
+    ul.leaders span + span {
+    float: right;
+    padding-left: 0.33em;
+    background-color: #f1f2f2;
     }

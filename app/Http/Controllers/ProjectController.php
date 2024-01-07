@@ -500,7 +500,6 @@ class ProjectController extends Controller
     public function downloadProjectDocument(Request $request)
     {
         try {
-
             $user = auth()->user();
             $outputs = [];
             $projectId = $request->projectId;
@@ -529,6 +528,8 @@ class ProjectController extends Controller
                             foreach ($block->questions as $question) {
                                 if ($documentType == 'summary' || $question->strategy_document_output) {
                                     if ($question->answer) {
+                                        $question->answer = str_replace('-', '&bull;', $question->answer);
+
                                         $outputs[] = [
                                             'question_ai' => $question->question_ai,
                                             'question' => $question->question,
@@ -559,6 +560,7 @@ class ProjectController extends Controller
             //     return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents', 'documentType'));
             // }
             $pdf = Pdf::loadView('templates.project-document', $data);
+
             //return $pdf->stream();
             $name = uniqid() . "_" . $projectId . "_" . $documentType;
             $path =  public_path("storage/project-documents/") . "$name.pdf";
@@ -601,6 +603,7 @@ class ProjectController extends Controller
 
     public function uploadImporter(Request $request)
     {
+        ini_set('memory_limit', '1024M');
         $validatedDate = $request->validate([
             'project_file' => 'required'
         ]);
@@ -619,6 +622,7 @@ class ProjectController extends Controller
                 if (!$row["item"]) {
                     break;
                 }
+
                 //Project Type
                 $projectType = ProjectType::where('name', $row['admin_name'])->first();
                 if (!$projectType) {
@@ -658,17 +662,19 @@ class ProjectController extends Controller
                         'order' => $row['section_order'],
                     ]);
                 }
+                if ($row['prompt']) {
+                    $projectPrompt = ProjectPrompt::where([
+                        'name' => $row['prompt_name']
+                    ])->first();
 
-                $projectPrompt = ProjectPrompt::where([
-                    'name' => $row['prompt_name']
-                ])->first();
-
-                if (!$projectPrompt) {
-                    $projectPrompt = ProjectPrompt::create([
-                        'name' => $row['prompt_name'],
-                        'prompt' => $row['prompt'],
-                    ]);
+                    if (!$projectPrompt) {
+                        $projectPrompt = ProjectPrompt::create([
+                            'name' => $row['prompt_name'],
+                            'prompt' => $row['prompt'],
+                        ]);
+                    }
                 }
+
 
 
                 $projectQuestion = ProjectQuestion::where([
@@ -682,7 +688,7 @@ class ProjectController extends Controller
                         'question' => $row['question_user_facing'],
                         'project_block_id'  => $projectBlock->id,
                         'order' => $row['question_order'],
-                        'project_prompt_id' => $projectPrompt->id,
+                        'project_prompt_id' => isset($projectPrompt->id) ? $projectPrompt->id : null,
                         'ref' => $row['item'],
                         'strategy_document_output' => ($row['strategy_document_output'] == 'Yes' ? 1 : 0),
                     ]);
