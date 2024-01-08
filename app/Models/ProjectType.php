@@ -9,7 +9,7 @@ use App\Models\ProjectSection;
 class ProjectType extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug', 'description', 'icon_svg_path_d', 'active', 'status', 'user_id'];
+    protected $fillable = ['name', 'slug', 'description', 'icon_svg_path_d', 'active', 'status', 'user_id','svg'];
 
     public function sections()
     {
