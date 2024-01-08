@@ -37,10 +37,12 @@
                                 <div
                                     class="type-name text-xl capitalize w-min"
                                 >
-                                    {{ type.name }}
+                                    {{ type.name }}  
                                 </div>
                                 <div class="icon dark:text-gray-400 text-sm absolute bottom-2 right-2">
+                                    <span v-if="type.svg" v-html="type.svg"></span>
                                     <svg
+                                        v-else 
                                         class="w-auto"
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="48"
@@ -108,6 +110,7 @@ export default {
                 .then((response) => {
                     if (response.data.projectTypes) {
                         this.project_types = response.data.projectTypes;
+                        console.log(this.project_types);
                     }
                 })
                 .catch((err) => console.error(err));
