@@ -156,7 +156,7 @@ div.block-item {
             <div class="w-full">
                 <div class="w-full text-white pt-10 overflow-auto">
                     <ul class="progressbar flex items-baseline">
-                        <li  v-for="(section, index) in this.project.sections" class="text-xl capitalize  h-44 w-44" :class="[ section.order <= this.section.order ? 'active' : '']">{{ section.name }}</li>
+                        <li  v-for="(section, index) in this.project.sections" class="text-xl capitalize  h-44 w-44" :class="[ section.order <= this.section.order ? 'active' : '']"><a :href="'/project/'+this.project.id+'/section/'+section.id+'/block/'+section.blocks[0].id+'/ai-assist'">{{ section.name }} </a></li>
                     </ul>
                 </div>
             </div>
@@ -176,8 +176,10 @@ div.block-item {
                             'active-block': block.id == this.blockId,
                         }"
                         :data-block-id="block.id"
-                    >
-                        <div class=" p-2 rounded" :class="{'bg-wave-500': block.order <= this.block.order}" >{{ this.section.order + '-'+ block.order +' '+ block.name }}</div> 
+                    >   
+                        <a :href="'/project/'+this.project.id+'/section/'+this.section.id+'/block/'+block.id+'/ai-assist'">
+                            <div class=" p-2 rounded" :class="{'bg-wave-500': block.order <= this.block.order}" >{{ this.section.order + '-'+ block.order +' '+ block.name }}</div> 
+                        </a>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-3 h-3">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
