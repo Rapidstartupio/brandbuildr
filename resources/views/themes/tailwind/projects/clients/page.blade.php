@@ -139,10 +139,14 @@
                     <div class="brandDark2 p-4 rounded space-y-3">
                         <div class="md:flex justify-between items-center ">
                             <div class="text-lg capitalize">{{$project->name}}</div>
-                            <div class="dark:text-gray-400 text-sm">
+                            <div class="dark:text-gray-400 text-sm" style="width: 48px;height: 48px;">
+                                @if({{$project->svg}})
+                                {!! $project->svg !!}
+                                @else
                                 <svg class="w-auto" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
                                     <path d="{{$project->type_icon_svg_path_d}}" fill="white" />
                                 </svg>
+                                @endif
                             </div>
                         </div>
                         <div class="space-y-2">

@@ -152,6 +152,7 @@ class User extends Authenticatable
                 //Add Type attributes
                 $p['type'] = $project->type->name;
                 $p['type_icon_svg_path_d'] = $project->type->icon_svg_path_d;
+                $p['type_svg'] = $project->type->svg;
                 foreach ($project->type->sections as $section) {
                     $b = [];
                     $b_done = 0;
