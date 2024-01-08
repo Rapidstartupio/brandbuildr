@@ -39,7 +39,7 @@
                                 >
                                     {{ type.name }}  
                                 </div>
-                                <div class="icon dark:text-gray-400 text-sm absolute bottom-2 right-2" width="48" hidden="48">
+                                <div class="icon dark:text-gray-400 text-sm absolute bottom-2 right-2" width="48" height="48">
                                     <span v-if="type.svg" v-html="type.svg"></span>
                                     <svg
                                         v-else 
