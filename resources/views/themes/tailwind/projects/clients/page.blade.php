@@ -140,8 +140,8 @@
                         <div class="md:flex justify-between items-center ">
                             <div class="text-lg capitalize">{{$project->name}}</div>
                             <div class="dark:text-gray-400 text-sm" style="width: 48px;height: 48px;">
-                                @if({{$project->svg}})
-                                {!! $project->svg !!}
+                                @if($project->type_svg)
+                                {!! $project->type_svg !!}
                                 @else
                                 <svg class="w-auto" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
                                     <path d="{{$project->type_icon_svg_path_d}}" fill="white" />
