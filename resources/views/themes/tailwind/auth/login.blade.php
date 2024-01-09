@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <div class="flex flex-col justify-center py-20 sm:px-6 lg:px-8">
+    <div class="flex flex-col justify-center py-20 sm:px-6 lg:px-8 login-blade">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <h2 class="mt-6 text-3xl font-bold leading-9 text-center text-gray-900 dark:text-white lg:text-5xl">
-                Sign In
+            <h2 class="mt-6 text-3xl font-md leading-9 text-center text-gray-900 dark:text-white lg:text-5xl">
+                Login
             </h2>
             <p class="mt-4 text-sm leading-5 text-center text-gray-600 dark:text-gray-400 max-w">
                 or, you can

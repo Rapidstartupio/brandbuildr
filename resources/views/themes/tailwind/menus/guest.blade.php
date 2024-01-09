@@ -1,4 +1,4 @@
-<nav class="flex items-center justify-end flex-1 hidden w-full h-full space-x-6 lg:space-x-10 md:flex">
+<nav class="flex items-center justify-end flex-1 hidden w-full h-full space-x-6 lg:space-x-10 md:flex home-nav">
     <!--<div @mouseenter="dropdown = true" @mouseleave="dropdown=false" @click.away="dropdown=false" x-data="{ dropdown: false }" class="relative h-full select-none">
         <div :class="{ 'text-wave-600': dropdown, 'text-gray-500': !dropdown }" class="inline-flex items-center h-full space-x-2 text-base font-medium leading-6 text-gray-500 transition duration-150 ease-in-out cursor-pointer select-none group hover:text-wave-600 focus:outline-none focus:text-wave-600">
             <span>Product</span>

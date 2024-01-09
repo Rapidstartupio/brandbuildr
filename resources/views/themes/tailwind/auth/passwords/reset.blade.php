@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="flex flex-col justify-center py-20 sm:px-6 lg:px-8">
+<div class="flex flex-col justify-center py-20 sm:px-6 lg:px-8 reset-blade">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 class="mt-6 text-3xl font-bold leading-none text-center text-gray-900 dark:text-white lg:text-5xl">
             Setup Your New Password

@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div class="sm:mx-auto sm:w-full sm:max-w-md sm:pt-10">
-    <h2 class="text-3xl font-bold leading-9 text-center text-gray-900 dark:text-white sm:mt-6 lg:text-5xl">
-        Sign Up
+<div class="sm:mx-auto sm:w-full sm:max-w-md sm:pt-10 register-blade">
+    <h2 class="text-3xl font-md leading-9 text-center text-gray-900 dark:text-white sm:mt-6 lg:text-5xl">
+        Register
     </h2>
     <p class="mt-4 text-sm leading-5 text-center text-gray-600 dark:text-gray-400 max-w">
         or, you can
