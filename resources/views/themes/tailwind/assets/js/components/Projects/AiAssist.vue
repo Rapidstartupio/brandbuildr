@@ -201,7 +201,7 @@ div.block-item {
                                 <div class="font-medium">{{ question.question }}</div>
                                 <div v-if="question.on_review == false" class="text-sm font-light text-gray-300 whitespace-pre-line" v-html="question.answer"></div>
                                 <div v-else>
-                                    <textarea :ref="'atextarea'+ index" @input="adjustTextareaHeight('atextarea'+index)" class="block w-full text-sm bg-brand-700 border-0 my-3 focus:ring-0 focus:border-wave-500 rounded-md placeholder:text-gray-500"></textarea>
+                                    <textarea :ref="'atextarea'+ index" @input="adjustTextareaHeight('atextarea'+index)" class="block w-full text-sm bg-brand-700 border-0 my-3 focus:ring-0 focus:border-wave-500 rounded-md placeholder:text-gray-500" v-html="question.answer"></textarea>
                                 </div>
                             </div>
                             <div  class="text-gray-400 flex space-x-2">
