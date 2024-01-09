@@ -3,7 +3,7 @@
 @section('content')
 
 <script>
-    window.location.href = "https://brandbuildr.io";
+    window.location.href = "https://brandbuildr.ai";
 </script>
 <div class="relative flex items-center w-full">
     <div class="relative z-20 px-8 mx-auto xl:px-5 max-w-7xl">
