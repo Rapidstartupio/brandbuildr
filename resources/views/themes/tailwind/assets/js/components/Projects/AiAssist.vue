@@ -340,7 +340,7 @@ div.block-item {
                                     A.I. Assist
                                 </button>
                             </li>
-                            <li class="mr-2" role="presentation">
+                            <li class="mr-2 hidden" role="presentation">
                                 <button
                                     class="inline-block p-1 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                                     id="examples-tab"
@@ -366,7 +366,7 @@ div.block-item {
                                     Resources
                                 </button>
                             </li>
-                            <li class="mr-2" role="presentation">
+                            <li class="mr-2 hidden" role="presentation">
                                 <button
                                     class="inline-block p-1 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                                     id="notes-tab"
