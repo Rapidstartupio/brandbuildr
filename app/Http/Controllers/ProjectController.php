@@ -252,7 +252,7 @@ class ProjectController extends Controller
         // return abort(404);
     }
 
-    public function projectAiAssist($id, $sectionId, $blockId)
+    public function projectAiAssist($id, $sectionId, $blockId, $review = null)
     {
         try {
             $user = auth()->user();
@@ -263,7 +263,12 @@ class ProjectController extends Controller
             if (count($block->questions) == 0) {
                 return abort(404);
             }
-            return view('theme::projects.ai-assist', compact('id', 'sectionId', 'blockId'));
+            if ($review == 'review') {
+                $review = true;
+            } else {
+                $review = false;
+            }
+            return view('theme::projects.ai-assist', compact('id', 'sectionId', 'blockId', 'review'));
         } catch (\Illuminate\Support\ItemNotFoundException $e) {
             return abort(404);
         }

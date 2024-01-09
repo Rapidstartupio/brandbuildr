@@ -52,7 +52,7 @@ Route::group(['prefix' => 'projects'], function () {
 
 Route::group(['prefix' => 'project'], function () {
     Route::get('/{id}', 'App\Http\Controllers\ProjectController@project')->name('project.details');
-    Route::get('/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssist')->name('project.ai-assist');
+    Route::get('/{id}/section/{sectionId}/block/{blockId}/ai-assist/{review?}', 'App\Http\Controllers\ProjectController@projectAiAssist')->name('project.ai-assist');
     Route::post('/{id}/section/{sectionId}/block/{blockId}/ai-assist', 'App\Http\Controllers\ProjectController@projectAiAssistData');
     Route::get('/{id}/documents', 'App\Http\Controllers\ProjectController@projectDocuments')->name('project.documents');
 });

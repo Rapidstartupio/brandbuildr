@@ -20,5 +20,5 @@
 </style>
 @endsection
 @section('content')
-<ai-assist project-id="{{$id}}" section-id="{{$sectionId}}" block-id="{{$blockId}}" />
+<ai-assist project-id="{{$id}}" section-id="{{$sectionId}}" block-id="{{$blockId}}" review="{{$review}}" />
 @endsection

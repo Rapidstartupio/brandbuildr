@@ -177,7 +177,7 @@ div.block-item {
                         }"
                         :data-block-id="block.id"
                     >   
-                        <a  :href="'/project/'+this.project.id+'/section/'+this.section.id+'/block/'+block.id+'/ai-assist'">
+                        <a  :href="'/project/'+this.project.id+'/section/'+this.section.id+'/block/'+block.id+'/ai-assist/review'">
                             <div class=" p-2 rounded" :class="{'bg-wave-500': block.order <= this.block.order}" >{{ this.section.order + '-'+ block.order +' '+ block.name }}</div> 
                         </a>
                         <div>
@@ -770,6 +770,9 @@ export default {
     mounted() {
         // Call your function or perform initialization here
         this.getProject();
+        if(this.review){
+            this.step= "review";
+        }
     },
     data() {
         return {
@@ -1075,6 +1078,6 @@ export default {
             this.steps[index].on_review = false;
         }
     },
-    props: ["projectId", "sectionId", "blockId"],
+    props: ["projectId", "sectionId", "blockId","review"],
 };
 </script>
