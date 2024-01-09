@@ -177,7 +177,7 @@ div.block-item {
                         }"
                         :data-block-id="block.id"
                     >   
-                        <a :href="'/project/'+this.project.id+'/section/'+this.section.id+'/block/'+block.id+'/ai-assist'">
+                        <a  :href="'/project/'+this.project.id+'/section/'+this.section.id+'/block/'+block.id+'/ai-assist'">
                             <div class=" p-2 rounded" :class="{'bg-wave-500': block.order <= this.block.order}" >{{ this.section.order + '-'+ block.order +' '+ block.name }}</div> 
                         </a>
                         <div>
@@ -196,9 +196,32 @@ div.block-item {
                 </div>
                 <div  class="">
                     <ul>
-                        <li class="p-4 md:px-10 md-py-8 border-b border-gray-700"  v-for="(question, index) in steps">
-                            <div class="font-medium">{{ question.question }}</div>
-                            <div class="text-sm font-light text-gray-300">{{ question.answer }}</div>
+                        <li class="p-4 md:px-6 md-py-8 border-b border-gray-700 space-y-4 flex justify-between"  v-for="(question, index) in steps" :key="index">
+                            <div class="flex-1">
+                                <div class="font-medium">{{ question.question }}</div>
+                                <div v-if="question.on_review == false" class="text-sm font-light text-gray-300 whitespace-pre-line" v-html="question.answer"></div>
+                                <div v-else>
+                                    <textarea :ref="'atextarea'+ index" @input="adjustTextareaHeight('atextarea'+index)" class="block w-full text-sm bg-brand-700 border-0 my-3 focus:ring-0 focus:border-wave-500 rounded-md placeholder:text-gray-500"></textarea>
+                                </div>
+                            </div>
+                            <div  class="text-gray-400 flex space-x-2">
+                                <a href="javascript:;" v-on:click="viewQuestion(index)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
+                                        <path fill-rule="evenodd" d="M1.38 8.28a.87.87 0 0 1 0-.566 7.003 7.003 0 0 1 13.238.006.87.87 0 0 1 0 .566A7.003 7.003 0 0 1 1.379 8.28ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                                <a v-if="question.on_review == false" href="javascript:;" v-on:click="editAnswer(index)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                                        <path fill-rule="evenodd" d="M11.013 2.513a1.75 1.75 0 0 1 2.475 2.474L6.226 12.25a2.751 2.751 0 0 1-.892.596l-2.047.848a.75.75 0 0 1-.98-.98l.848-2.047a2.75 2.75 0 0 1 .596-.892l7.262-7.261Z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                                <a v-else href="javascript:;" v-on:click="saveAnswer(index)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                        <path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 0 0 2 4.25v11.5A2.25 2.25 0 0 0 4.25 18h11.5A2.25 2.25 0 0 0 18 15.75V4.25A2.25 2.25 0 0 0 15.75 2H4.25ZM6 13.25V3.5h8v9.75a.75.75 0 0 1-1.064.681L10 12.576l-2.936 1.355A.75.75 0 0 1 6 13.25Z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -237,7 +260,10 @@ div.block-item {
                                     cols="30" :rows="answerRows"
                                     :placeholder="steps[step].answerInputPlaceHolder"
                                     v-model="steps[step].answer"
-                                    required></textarea>
+                                    required
+                                    :ref="'qtextarea'+ step"
+                                    @input="adjustTextareaHeight('qtextarea'+ step)"
+                                    ></textarea>
                                 <!--<input
                                     type="text"
                                     class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-xs"
@@ -753,7 +779,7 @@ export default {
             block: null,
             progressBar: 0,
             defaultStep: 0,
-            step: 0,
+            step: "0",
             steps: null,
             answerRows:"2",
             isHiddenSuggestResult: "hidden",
@@ -799,7 +825,10 @@ export default {
                 this.isSuggest = "";
                 this.isHiddenSuggestResult = "hidden";
                 //this.examples = this.steps[this.step].examples;
-            }
+                this.$nextTick(() => {
+                    this.adjustTextareaHeight('qtextarea'+this.step);
+                });
+            }  
         },
         back() {
             var back = this.steps[this.step].back;
@@ -810,6 +839,9 @@ export default {
                 this.isSuggest = "";
                 this.isHiddenSuggestResult = "hidden";
                 //this.examples = this.steps[this.step].examples;
+                this.$nextTick(() => {
+                    this.adjustTextareaHeight('qtextarea'+this.step);
+                });
             }
         },
         unreview(){
@@ -1005,6 +1037,42 @@ export default {
 
             if (rows>maxrows) this.answerRows=maxrows;
             else this.answerRows=rows;
+        },
+        viewQuestion(step){
+             
+            this.step = step;
+            this.progressBar = ((this.step + 1) / this.steps.length) * 100;
+            this.suggestResult = "";
+            this.isSuggest = "";
+            this.isHiddenSuggestResult = "hidden";
+            this.$nextTick(() => {
+                this.adjustTextareaHeight('qtextarea'+this.step);
+            });
+        },
+        adjustTextareaHeight(ref) {
+            var textarea = this.$refs[ref];
+            if (Array.isArray(textarea)) {
+                textarea = textarea[0];
+            }
+            if(textarea){
+                textarea.style.height = "auto";
+                textarea.style.height = textarea.scrollHeight + "px";
+            }
+            
+        },
+        editAnswer(index){
+            this.steps[index].on_review = true;            
+            this.$nextTick(() => {
+                this.adjustTextareaHeight('atextarea'+index);
+            });
+        },
+        saveAnswer(index){
+            var textarea = this.$refs['atextarea'+index];
+            if (Array.isArray(textarea)) {
+                textarea = textarea[0];
+            }
+            this.steps[index].answer = textarea.value;
+            this.steps[index].on_review = false;
         }
     },
     props: ["projectId", "sectionId", "blockId"],

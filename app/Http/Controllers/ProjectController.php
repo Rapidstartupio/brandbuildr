@@ -373,6 +373,7 @@ class ProjectController extends Controller
                 'answer' => (isset($answer->answer) ? $answer->answer : null),
                 'chatbot_previousMessages' => $chatbot_previousMessages,
                 'chatbot_messages' => [],
+                'on_review' => false
             ];
         }
         if (empty($questions)) {
