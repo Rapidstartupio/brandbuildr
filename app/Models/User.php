@@ -342,4 +342,17 @@ class User extends Authenticatable
         ];
         return (object)$return;
     }
+
+    public function canCreateProject()
+    {
+        $userRole = $this->role; // Assuming 'role' is the relationship to the Role model
+
+        $maxProjectsAllowed = $userRole->max_projects;
+        $userProjectsCount = $this->projects()
+            ->whereYear('created_at', Carbon::now()->year)
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->count(); // Assuming 'projects' is the relationship to the Project model
+
+        return $userProjectsCount < $maxProjectsAllowed;
+    }
 }

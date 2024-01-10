@@ -1,3 +1,7 @@
+@php
+$planId = request()->route('plan_id');
+@endphp
+
 <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script>
     window.vendor_id = parseInt('{{ config("wave.paddle.vendor") }}');
@@ -65,7 +69,7 @@
             Paddle.Checkout.open({
                 settings: {
                     displayMode: "overlay",
-                    theme: "dark",
+                    theme: "light",
                     locale: "en"
                 },
                 items: itemsList,
@@ -95,3 +99,10 @@
         });
     }
 </script>
+
+@if($planId)
+<script>
+    console.log('{{$planId}}');
+    waveCheckout('{{$planId}}');
+</script>
+@endif

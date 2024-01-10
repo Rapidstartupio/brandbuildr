@@ -22,6 +22,7 @@ use App\Models\ProjectPrompt;
 use App\Models\ProjectSection;
 use App\Models\ProjectDeadline;
 use Excel;
+use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
 {
@@ -135,7 +136,12 @@ class ProjectController extends Controller
 
     public function getProjectTypes()
     {
-        $projectTypes = ProjectType::where('active', 1)->whereIn('status', array('free', 'disable'))->get();
+        $userRoleId = auth()->user()->role_id;
+        $projectTypes = ProjectType::where('active', 1)->whereIn('status', array('free', 'disable'))
+            ->whereHas('roles', function ($query) use ($userRoleId) {
+                $query->where('roles.id', $userRoleId);
+            })
+            ->get();
         return response()->json([
             'status' => 'success',
             'projectTypes' => $projectTypes
@@ -144,6 +150,14 @@ class ProjectController extends Controller
     public function saveProject(Request $request)
     {
         try {
+            $user = auth()->user();
+            if (!$user->canCreateProject()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You have reached the maximum number of projects allowed for this month.',
+                    'message_type' => 'danger'
+                ], 500);
+            }
             $validatedDate = $request->validate([
                 'type_id' => 'required',
                 'name' => 'required|max:40',
@@ -153,7 +167,17 @@ class ProjectController extends Controller
                 //'start_date' => 'required',
                 //'end_date' => 'required',
             ]);
-
+            $projectType = ProjectType::find($request->get('type_id'));
+            if ($projectType) {
+                $userRoleId = $user->role_id;
+                if (!$projectType->roles->contains('id', $userRoleId)) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'The Project Type ID is not available.',
+                        'message_type' => 'danger'
+                    ], 500);
+                }
+            }
             $data = [
                 'type_id' => $request->get('type_id'),
                 'name' => $request->get('name'),
