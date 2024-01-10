@@ -319,7 +319,7 @@ class ProjectController extends Controller
             $refProjectType = ProjectType::where([
                 'id' => $project->type->ref_project_type_output
             ])->first();
-            if ($refProject && $refProjectType) {
+            if (false && $refProject && $refProjectType) {
                 $projectDocument = ProjectDocument::where(['user_id' => $user->id, 'project_id' => $refProject->id, ['outputs', '!=', null]])->orderByRaw('FIELD(type,"summary") DESC')->first();
                 if ($projectDocument && !empty($projectDocument->outputs)) {
                     $chatbot_initial_user_message = "Here is the output from the $refProjectType->name for your reference: \n";
