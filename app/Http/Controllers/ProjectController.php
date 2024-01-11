@@ -757,6 +757,24 @@ class ProjectController extends Controller
                         'project_prompt_id' => isset($projectPrompt->id) ? $projectPrompt->id : null,
                         'ref' => $row['item'],
                         'strategy_document_output' => ($row['strategy_document_output'] == 'Yes' ? 1 : 0),
+                        'strategy_document_output_string' => (isset($row['strategy_document_output_string']) ?  $row['strategy_document_output_string'] : null),
+                        'section_learning_question' => (isset($row['section_learning_question']) ?  $row['section_learning_question'] : null),
+                        'project_learning_question' => (isset($row['project_learning_question']) ?  $row['project_learning_question'] : null),
+                        'bullet_format' => (isset($row['bullet_format']) ?  $row['bullet_format'] : null),
+                        'pmpt_ans_limit' => (isset($row['pmpt_ans_limit']) ?  $row['pmpt_ans_limit'] : null),
+                    ]);
+                } else {
+                    ProjectQuestion::where('id', $projectQuestion->id)->update([
+                        'question_ai' => $row['question_ai'],
+                        'order' => $row['question_order'],
+                        'project_prompt_id' => isset($projectPrompt->id) ? $projectPrompt->id : null,
+                        'ref' => $row['item'],
+                        'strategy_document_output' => ($row['strategy_document_output'] == 'Yes' ? 1 : 0),
+                        'strategy_document_output_string' => (isset($row['strategy_document_output']) ?  $row['strategy_document_output'] : null),
+                        'section_learning_question' => (isset($row['section_learning_question']) ?  $row['section_learning_question'] : null),
+                        'project_learning_question' => (isset($row['project_learning_question']) ?  $row['project_learning_question'] : null),
+                        'bullet_format' => (isset($row['bullet_format']) ?  $row['bullet_format'] : null),
+                        'pmpt_ans_limit' => (isset($row['pmpt_ans_limit']) ?  $row['pmpt_ans_limit'] : null),
                     ]);
                 }
             }
