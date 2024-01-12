@@ -739,7 +739,7 @@ class ProjectController extends Controller
                             'prompt' => $row['prompt'],
                         ]);
                     } else {
-                        $projectPrompt = ProjectPrompt::where('id', $projectPrompt->id)->update([
+                        ProjectPrompt::where('id', $projectPrompt->id)->update([
                             'prompt' => $row['prompt'],
                         ]);
                     }
