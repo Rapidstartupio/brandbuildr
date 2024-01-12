@@ -156,7 +156,7 @@ div.block-item {
             <div class="w-full">
                 <div class="w-full text-white pt-10 overflow-auto">
                     <ul class="progressbar flex items-baseline">
-                        <li  v-for="(section, index) in this.project.sections" class="text-xl capitalize  h-44 w-44" :class="[ section.order <= this.section.order ? 'active' : '']"><a :href="'/project/'+this.project.id+'/section/'+section.id+'/block/'+section.blocks[0].id+'/ai-assist'">{{ section.name }} </a></li>
+                        <li  v-for="(section, index) in this.project.sections" class="text-xl capitalize  h-44 w-44 section-link" :class="[ section.order <= this.section.order ? 'active' : '']"><a :href="'/project/'+this.project.id+'/section/'+section.id+'/block/'+section.blocks[0].id+'/ai-assist'">{{ section.name }} </a></li>
                     </ul>
                 </div>
             </div>
@@ -861,7 +861,13 @@ export default {
                         if(nextBlock){
                             window.location.replace("/project/" +this.projectId+'/section/'+this.sectionId+'/block/'+nextBlock+'/ai-assist');
                         }else{
-                            window.location.replace("/project/" +this.projectId);
+                            const nextSection = document.querySelector('.section-link:not(.active)');
+                            if(nextSection){
+                                const nextSectionLink = nextSection.querySelector('a').href;
+                                window.location.replace(nextSectionLink);
+                            }else{
+                                window.location.replace("/project/" +this.projectId);
+                            }
                         }
                     }
                 })
