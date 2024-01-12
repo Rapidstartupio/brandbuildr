@@ -747,10 +747,10 @@ class ProjectController extends Controller
 
 
 
-                $projectQuestion = ProjectQuestion::where([
-                    'question' => $row['question_user_facing'],
-                    'project_block_id' => $projectBlock->id
-                ])->first();
+                $projectQuestion = ProjectQuestion::where(function ($query) use ($row) {
+                    $query->where('question', $row['question_user_facing'])
+                        ->orWhere('question_ai', $row['question_ai']);
+                })->where('project_block_id', $projectBlock->id)->first();
 
                 if (!$projectQuestion) {
                     $projectQuestion = ProjectQuestion::create([
@@ -770,6 +770,7 @@ class ProjectController extends Controller
                 } else {
                     ProjectQuestion::where('id', $projectQuestion->id)->update([
                         'question_ai' => $row['question_ai'],
+                        'question' => $row['question_user_facing'],
                         'order' => $row['question_order'],
                         'project_prompt_id' => isset($projectPrompt->id) ? $projectPrompt->id : null,
                         'ref' => $row['item'],
