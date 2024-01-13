@@ -957,6 +957,8 @@ export default {
                 });
         },
         showSuggestion() {
+            this.showSuggestionV2();
+            return;
             this.isLoading = true;
             var prompt = this.steps[this.step].prompt;
 
@@ -998,6 +1000,59 @@ export default {
                     .post("/openai/chat", {
                         model: "gpt-4-1106-preview",
                         messages: this.steps[this.step].chatbot_previousMessages,
+                    })
+                    .then((response) => {
+                        const botResponse =
+                            response.data.choices[0].message.content;
+                        //console.log(botResponse);
+                        if (botResponse) {
+                            this.steps[this.step].chatbot_previousMessages.push({
+                                role: "assistant",
+                                content: botResponse,
+                            });
+                            var suggestion = botResponse;
+                            //suggestion = suggestion.replace(/(\r\n|\n|\r)/gm, "");
+                            this.suggestResult = suggestion;
+                            this.isSuggest = "hidden";
+                            this.isHiddenSuggestResult = "";
+                            this.steps[this.step].suggest_logs.push(suggestion);
+                            //console.log(this.steps[this.step].suggest_logs);
+                            this.isLoading = false;
+                        }
+                    })
+                    .catch((error) => {
+                        this.isLoading = false;
+                        popToast(
+                            'danger',
+                            'Too many requests at once, please wait 30 seconds and try again'
+                        );
+                        //console.log(error);
+                        //console.error("Error fetching bot response:", error);
+                    });
+            // end switch
+        },
+        showSuggestionV2() {
+            this.isLoading = true;
+            var prompt_id = this.steps[this.step].prompt_id;
+            //console.log(prompt);
+            if(!prompt_id) {
+                this.isLoading = false;
+                return false
+            };
+            // switch from completions to chat
+                const exists = this.steps[this.step].chatbot_previousMessages.some(subArray => subArray.prompt_id === prompt_id);
+                if(!exists){
+                    this.steps[this.step].chatbot_previousMessages.push({
+                        role: "user",
+                        prompt_id: prompt_id,
+                    });
+                }
+                axios
+                    .post("/openai/show-suggestion", {
+                        model: "gpt-4-1106-preview",
+                        messages: this.steps[this.step].chatbot_previousMessages,
+                        projectId: this.projectId,
+                        question: this.steps[this.step].question,
                     })
                     .then((response) => {
                         const botResponse =

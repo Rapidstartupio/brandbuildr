@@ -319,17 +319,17 @@ class ProjectController extends Controller
             $refProjectType = ProjectType::where([
                 'id' => $project->type->ref_project_type_output
             ])->first();
-            if (false && $refProject && $refProjectType) {
-                $projectDocument = ProjectDocument::where(['user_id' => $user->id, 'project_id' => $refProject->id, ['outputs', '!=', null]])->orderByRaw('FIELD(type,"summary") DESC')->first();
-                if ($projectDocument && !empty($projectDocument->outputs)) {
-                    $chatbot_initial_user_message = "Here is the output from the $refProjectType->name for your reference: \n";
-                    foreach ($projectDocument->outputs as $output) {
-                        if ($output['answer']) {
-                            $chatbot_initial_user_message .=  $output['question'] . " : " . $output['answer'] . "\n";
-                        }
-                    }
-                }
-            }
+            // if (false && $refProject && $refProjectType) {
+            //     $projectDocument = ProjectDocument::where(['user_id' => $user->id, 'project_id' => $refProject->id, ['outputs', '!=', null]])->orderByRaw('FIELD(type,"summary") DESC')->first();
+            //     if ($projectDocument && !empty($projectDocument->outputs)) {
+            //         $chatbot_initial_user_message = "Here is the output from the $refProjectType->name for your reference: \n";
+            //         foreach ($projectDocument->outputs as $output) {
+            //             if ($output['answer']) {
+            //                 $chatbot_initial_user_message .=  $output['question'] . " : " . $output['answer'] . "\n";
+            //             }
+            //         }
+            //     }
+            // }
         }
 
 
@@ -344,38 +344,38 @@ class ProjectController extends Controller
             }
             $answer = $question->answer($user->id, $id);
             $prompt = null;
-            if (isset($question->prompt->prompt)) {
-                $prompt = $question->prompt->prompt;
-                $updatedPrompt = preg_replace_callback('/\{\{g-question:([\d.]+)\}\}/', function ($matches) use ($user, $id) {
-                    $questionRef = $matches[1];
-                    $res = ProjectQuestion::where('ref', $questionRef)->first();
-                    // Check if  exists 
-                    if (isset($res->question)) {
-                        $answer = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $res->id)->where('project_id', $id)->first();
-                        if (isset($answer->answer)) {
-                            return $res->question;
-                        } else {
-                            return "{{question:$questionRef}}";
-                        }
-                    } else {
-                        return '';
-                    }
-                }, $prompt);
-                $prompt = $updatedPrompt;
-                $updatedPrompt = preg_replace_callback('/\{\{g-answer:([\d.]+)\}\}/', function ($matches) use ($user, $id) {
-                    $questionRef = $matches[1];
-                    $q = ProjectQuestion::where('ref', $questionRef)->first();
-                    if (isset($q->id)) {
-                        $res = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $q->id)->where('project_id', $id)->first();
-                        // Check if exists
-                        if (isset($res->answer)) {
-                            return $res->answer;
-                        }
-                    }
-                    return "{{answer:$questionRef}}";
-                }, $prompt);
-                $prompt = $updatedPrompt;
-            }
+            // if (false && isset($question->prompt->prompt)) {
+            //     $prompt = $question->prompt->prompt;
+            //     $updatedPrompt = preg_replace_callback('/\{\{g-question:([\d.]+)\}\}/', function ($matches) use ($user, $id) {
+            //         $questionRef = $matches[1];
+            //         $res = ProjectQuestion::where('ref', $questionRef)->first();
+            //         // Check if  exists 
+            //         if (isset($res->question)) {
+            //             $answer = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $res->id)->where('project_id', $id)->first();
+            //             if (isset($answer->answer)) {
+            //                 return $res->question;
+            //             } else {
+            //                 return "{{question:$questionRef}}";
+            //             }
+            //         } else {
+            //             return '';
+            //         }
+            //     }, $prompt);
+            //     $prompt = $updatedPrompt;
+            //     $updatedPrompt = preg_replace_callback('/\{\{g-answer:([\d.]+)\}\}/', function ($matches) use ($user, $id) {
+            //         $questionRef = $matches[1];
+            //         $q = ProjectQuestion::where('ref', $questionRef)->first();
+            //         if (isset($q->id)) {
+            //             $res = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $q->id)->where('project_id', $id)->first();
+            //             // Check if exists
+            //             if (isset($res->answer)) {
+            //                 return $res->answer;
+            //             }
+            //         }
+            //         return "{{answer:$questionRef}}";
+            //     }, $prompt);
+            //     $prompt = $updatedPrompt;
+            // }
             $chatbot_previousMessages = [];
             if ($chatbot_system_message) {
                 $chatbot_previousMessages[] = ['role' => 'system', 'content' => $chatbot_system_message];
@@ -397,6 +397,7 @@ class ProjectController extends Controller
                 'examples' => $question->examples,
                 'resources' => $question->resources,
                 'prompt' => $prompt,
+                'prompt_id' => isset($question->prompt->id) ? $question->prompt->id : null,
                 'required' => true,
                 'suggest_logs' => [],
                 'answer' => (isset($answer->answer) ? $answer->answer : null),

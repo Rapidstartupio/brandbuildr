@@ -80,6 +80,8 @@ Route::post('download-project-document', 'App\Http\Controllers\ProjectController
 //openai Routes
 Route::post('openai/completions', '\App\Http\Controllers\OpenAiController@completions');
 Route::post('openai/chat', '\App\Http\Controllers\OpenAiController@chat');
+Route::post('openai/show-suggestion', '\App\Http\Controllers\OpenAiController@showSuggestion');
+
 /***** End BrandBuilder Routes *****/
 
 //override media upload
