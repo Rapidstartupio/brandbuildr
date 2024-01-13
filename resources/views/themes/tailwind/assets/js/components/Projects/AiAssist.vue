@@ -165,7 +165,7 @@ div.block-item {
         <div
             class=" bg-gradient-to-r from-[#1E1E34] via-[#241E44] to-[#1E1E34] rounded-lg"
         >
-            <div class="  p-4 border-b border-gray-700">
+            <div class="  p-4 border-b border-gray-700 flex justify-between">
                 <div
                     class="sm:flex sm:space-x-3"
                 >
@@ -186,6 +186,9 @@ div.block-item {
                             </svg>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <button class="bg-wave-500 hover:bg-wave-700 text-white py-2 px-8 rounded-lg" v-on:click="nextSection()">Skip</button>
                 </div>
             </div>
             <div class=" " v-if="step == 'review'">
@@ -1314,6 +1317,21 @@ export default {
         },
         redirect(link){
             window.location.replace(link);
+        },
+        nextSection(){
+            var nextBlock = (document.querySelector('.active-block').nextSibling.dataset != undefined) ? document.querySelector('.active-block').nextSibling.dataset.blockId : null;
+
+            if(nextBlock){
+                window.location.replace("/project/" +this.projectId+'/section/'+this.sectionId+'/block/'+nextBlock+'/ai-assist');
+            }else{
+                const nextSection = document.querySelector('.section-link:not(.active)');
+                if(nextSection){
+                    const nextSectionLink = nextSection.querySelector('a').href;
+                    window.location.replace(nextSectionLink);
+                }else{
+                    window.location.replace("/project/" +this.projectId);
+                }
+            }
         }
     },
     props: ["projectId", "sectionId", "blockId","review"],
