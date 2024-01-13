@@ -886,25 +886,44 @@ export default {
                 );
                 return false;
             }
-
-            if (next == "register") {
-                setTimeout(function () {
-                    window.location.href = "/register";
-                }, 10);
-            } else if (next == "review") {
-                this.step =  "review";
-            }
-            else if (next) {
-                this.step = next;
-                this.progressBar = ((this.step + 1) / this.steps.length) * 100;
-                this.suggestResult = "";
-                this.isSuggest = "";
-                this.isHiddenSuggestResult = "hidden";
-                //this.examples = this.steps[this.step].examples;
-                this.$nextTick(() => {
-                    this.adjustTextareaHeight('qtextarea'+this.step);
+            //this.addOrUpdateAnswer(this.steps[this.step]);
+            //addOrUpdateAnswer
+            axios
+                .post("/projects/add-update-answer", {
+                    data: this.steps[this.step],
+                    projectId:this.projectId
+                })
+                .then((response) => {
+                    if (next == "register") {
+                        setTimeout(function () {
+                            window.location.href = "/register";
+                        }, 10);
+                    } else if (next == "review") {
+                        this.step =  "review";
+                    }
+                    else if (next) {
+                        this.step = next;
+                        this.progressBar = ((this.step + 1) / this.steps.length) * 100;
+                        this.suggestResult = "";
+                        this.isSuggest = "";
+                        this.isHiddenSuggestResult = "hidden";
+                        //this.examples = this.steps[this.step].examples;
+                        this.$nextTick(() => {
+                            this.adjustTextareaHeight('qtextarea'+this.step);
+                        });
+                    } 
+                })
+                .catch((error) => {
+                    console.log(error);
+                    if (error.response.data.message) {
+                        setTimeout(function () {
+                            popToast(
+                                error.response.data.message_type,
+                                error.response.data.message
+                            );
+                        }, 10);
+                    }
                 });
-            }  
         },
         back() {
             var back = this.steps[this.step].back;

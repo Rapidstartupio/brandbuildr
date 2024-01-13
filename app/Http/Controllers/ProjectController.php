@@ -977,4 +977,47 @@ class ProjectController extends Controller
             ], 500);
         }
     }
+
+    public function addUpdateAnswer(Request $request)
+    {
+        try {
+            $user = auth()->user();
+            $projectAnswer = ProjectAnswer::where([
+                'user_id' => $user->id,
+                'project_question_id' => $request->data['id'],
+                'project_id' => $request->projectId
+            ])->first();
+            if (!$projectAnswer) {
+                $projectAnswer = new ProjectAnswer();
+                $projectAnswer->project_question_id = $request->data['id'];
+                $projectAnswer->user_id = $user->id;
+                $projectAnswer->project_id = $request->projectId;
+            }
+
+            $projectAnswer->answer = $request->data['answer'];
+            $projectAnswer->logs = serialize($request->data['suggest_logs']);
+            $projectAnswer->save();
+
+            if ($projectAnswer) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Successfully updated!',
+                    'message_type' => 'success',
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'An error occurred!',
+                    'message_type' => 'warning',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            log::info($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error!',
+                'message_type' => 'danger'
+            ], 500);
+        }
+    }
 }
