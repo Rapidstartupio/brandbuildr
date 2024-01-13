@@ -22,7 +22,7 @@ use App\Models\ProjectPrompt;
 use App\Models\ProjectSection;
 use App\Models\ProjectDeadline;
 use Excel;
-use Illuminate\Validation\Rule;
+use App\Models\ProjectNote;
 
 class ProjectController extends Controller
 {
@@ -384,7 +384,7 @@ class ProjectController extends Controller
                 $chatbot_previousMessages[] = ['role' => 'user', 'content' => $chatbot_initial_user_message];
             }
 
-
+            $notes = $question->notes($user->id, $id);
             $questions[] = [
                 'id' => $question->id,
                 'ref' => $question->ref,
@@ -402,7 +402,8 @@ class ProjectController extends Controller
                 'answer' => (isset($answer->answer) ? $answer->answer : null),
                 'chatbot_previousMessages' => $chatbot_previousMessages,
                 'chatbot_messages' => [],
-                'on_review' => false
+                'on_review' => false,
+                'notes' => $notes,
             ];
         }
         if (empty($questions)) {
@@ -497,7 +498,7 @@ class ProjectController extends Controller
                     'message_type' => 'warning'
                 ], 200);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             log::info($e->getMessage());
             return response()->json([
                 'status' => 'error',
@@ -869,5 +870,110 @@ class ProjectController extends Controller
             'questions' => $questions,
             'chatbot_system_message' => $chatbot_system_message
         ], 200);
+    }
+
+    public function addQuestionNote(Request $request)
+    {
+        try {
+            $user = auth()->user();
+
+            $note = ProjectNote::create([
+                'user_id' => $user->id,
+                'content' => $request->content,
+                'project_question_id' => $request->project_question_id,
+                'project_id' => $request->project_id
+            ]);
+
+            if ($note) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Successfully Created!',
+                    'message_type' => 'success',
+                    'note_id' => $note->id
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'An error occurred!',
+                    'message_type' => 'warning',
+                    'note_id' => $note->id
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            log::info($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error!',
+                'message_type' => 'danger'
+            ], 500);
+        }
+    }
+
+    public function updateQuestionNote(Request $request)
+    {
+        try {
+            $user = auth()->user();
+
+            $res = ProjectNote::where([
+                'id' => $request->note_id,
+                'user_id' => $user->id,
+            ])->update([
+                'content' => $request->content,
+            ]);
+
+            if ($res) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Successfully updated!',
+                    'message_type' => 'success',
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'An error occurred!',
+                    'message_type' => 'warning',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            log::info($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error!',
+                'message_type' => 'danger'
+            ], 500);
+        }
+    }
+
+    public function deleteQuestionNote(Request $request)
+    {
+        try {
+            $user = auth()->user();
+
+            $res = ProjectNote::where([
+                'id' => $request->note_id,
+                'user_id' => $user->id,
+            ])->delete();
+
+            if ($res) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Successfully updated!',
+                    'message_type' => 'success',
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'An error occurred!',
+                    'message_type' => 'warning',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            log::info($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error!',
+                'message_type' => 'danger'
+            ], 500);
+        }
     }
 }

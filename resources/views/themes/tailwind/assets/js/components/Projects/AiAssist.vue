@@ -366,7 +366,7 @@ div.block-item {
                                     Resources
                                 </button>
                             </li>
-                            <li class="mr-2 hidden" role="presentation">
+                            <li class="mr-2" role="presentation">
                                 <button
                                     class="inline-block p-1 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                                     id="notes-tab"
@@ -749,12 +749,65 @@ div.block-item {
                             </div>
                         </div>
                         <div
-                            class="hidden p-4 rounded-lg group"
+                            class="hidden rounded-lg group"
                             id="notes"
                             role="tabpanel"
                             aria-labelledby="notes-tab"
                         >
-                            test4
+                            <div class="min-h-[250px] justify-center items-center ">
+                                <div v-for="(note, index) in steps[step].notes" class="p-4 border-b border-gray-700 flex justify-between">
+                                    <div class="flex-1 p-2">
+                                        <div v-if="note.on_edit">
+                                            <textarea class="p-4 w-full text-sm bg-brand-700 border-0 my-3 focus:ring-0 focus:border-wave-500 rounded-md placeholder:text-gray-500" v-model="note.content">{{ note.content }}
+                                            </textarea>
+                                        </div>
+                                        <div v-else class="text-base font-light ">{{ note.content }}</div>
+                                    </div>
+                                    <div class="text-sm text-gray-400 space-y-2">
+                                        <div>{{ note.created_at }}</div>
+                                        <div class="flex space-x-1 justify-end">
+                                            <a v-if="note.on_edit" href="javascript:;" v-on:click="saveNote(index)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                                                    <path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 0 0 2 4.25v11.5A2.25 2.25 0 0 0 4.25 18h11.5A2.25 2.25 0 0 0 18 15.75V4.25A2.25 2.25 0 0 0 15.75 2H4.25ZM6 13.25V3.5h8v9.75a.75.75 0 0 1-1.064.681L10 12.576l-2.936 1.355A.75.75 0 0 1 6 13.25Z" clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                            <a v-else href="javascript:;" v-on:click="editNote(index)" >
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                                                    <path fill-rule="evenodd" d="M11.013 2.513a1.75 1.75 0 0 1 2.475 2.474L6.226 12.25a2.751 2.751 0 0 1-.892.596l-2.047.848a.75.75 0 0 1-.98-.98l.848-2.047a2.75 2.75 0 0 1 .596-.892l7.262-7.261Z" clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                            <a href="javascript:;" v-on:click="deleteNote(index)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                                                    <path fill-rule="evenodd" d="M5 3.25V4H2.75a.75.75 0 0 0 0 1.5h.3l.815 8.15A1.5 1.5 0 0 0 5.357 15h5.285a1.5 1.5 0 0 0 1.493-1.35l.815-8.15h.3a.75.75 0 0 0 0-1.5H11v-.75A2.25 2.25 0 0 0 8.75 1h-1.5A2.25 2.25 0 0 0 5 3.25Zm2.25-.75a.75.75 0 0 0-.75.75V4h3v-.75a.75.75 0 0 0-.75-.75h-1.5ZM6.05 6a.75.75 0 0 1 .787.713l.275 5.5a.75.75 0 0 1-1.498.075l-.275-5.5A.75.75 0 0 1 6.05 6Zm3.9 0a.75.75 0 0 1 .712.787l-.275 5.5a.75.75 0 0 1-1.498-.075l.275-5.5a.75.75 0 0 1 .786-.711Z" clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" p-4 ">
+                                <div>
+                                    <div class="relative">
+                                        <input
+                                            type="text"
+                                            id="note-input"
+                                            class="block w-full text-sm bg-brand-700 border-0 my-3 focus:ring-0 focus:border-wave-500 rounded-md placeholder:text-gray-500"
+                                            placeholder="Write notes here..."
+                                            v-model="note.userInput"
+                                            v-on:keyup.enter="addQuestionNote()"
+                                        />
+                                        <button
+                                            type="button"
+                                            class="text-white absolute right-2.5 bottom-2 z-auto bg-brand-700"
+                                            v-on:click="addQuestionNote()"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="24" height="24">
+                                                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -801,6 +854,9 @@ export default {
                 //      content: chatbot_system_message,
                 //  },
             },
+            note:{
+                userInput: "",
+            }
         };
     },
     methods: {
@@ -1082,7 +1138,86 @@ export default {
             }
             this.steps[index].answer = textarea.value;
             this.steps[index].on_review = false;
-        }
+        },
+        addQuestionNote(){
+            const note = this.note.userInput.trim();
+            axios
+                .post("/projects/add-question-note", {
+                    content: note,
+                    project_id: this.projectId,
+                    project_question_id: this.steps[this.step].id,
+                })
+                .then((response) => {
+                    this.note.userInput = "";
+                    console.log(response);
+                    if (response.data.note_id) {
+                        this.steps[this.step].notes.push({
+                            'content':note,
+                            'id':response.data.note_id
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    if (error.response.data.message) {
+                        setTimeout(function () {
+                            popToast(
+                                error.response.data.message_type,
+                                error.response.data.message
+                            );
+                        }, 10);
+                    }
+                });
+        },
+        editNote(index){
+            this.steps[this.step].notes[index].on_edit = true;
+        },
+        saveNote(index){
+            const content = this.steps[this.step].notes[index].content.trim();
+            const note_id = this.steps[this.step].notes[index].id;
+            axios
+                .post("/projects/update-question-note", {
+                    content: content,
+                    note_id: note_id
+                })
+                .then((response) => {
+                    this.steps[this.step].notes[index].on_edit = false;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    if (error.response.data.message) {
+                        setTimeout(function () {
+                            popToast(
+                                error.response.data.message_type,
+                                error.response.data.message
+                            );
+                        }, 10);
+                    }
+                });
+        },
+        deleteNote(index){
+            const note_id = this.steps[this.step].notes[index].id;
+            axios
+                .post("/projects/delete-question-note", {
+                    note_id: note_id
+                })
+                .then((response) => {
+                    if (response.data.status == "success") {
+                        this.steps[this.step].notes.splice(index, 1);
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    if (error.response.data.message) {
+                        setTimeout(function () {
+                            popToast(
+                                error.response.data.message_type,
+                                error.response.data.message
+                            );
+                        }, 10);
+                    }
+                });
+        },
     },
     props: ["projectId", "sectionId", "blockId","review"],
 };

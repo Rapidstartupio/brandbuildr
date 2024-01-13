@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\ProjectPrompt;
 use App\Models\ProjectAnswer;
+use App\Models\ProjectNote;
 
 class ProjectQuestion extends Model
 {
@@ -41,5 +42,14 @@ class ProjectQuestion extends Model
             'project_question_id' => $this->id,
             'project_id' => $project_id
         ])->first();
+    }
+
+    public function notes($user_id, $project_id)
+    {
+        return ProjectNote::where([
+            'user_id' => $user_id,
+            'project_question_id' => $this->id,
+            'project_id' => $project_id
+        ])->get();
     }
 }

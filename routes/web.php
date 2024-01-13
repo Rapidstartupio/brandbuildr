@@ -48,6 +48,9 @@ Route::group(['prefix' => 'projects'], function () {
     Route::get('/project-types', 'App\Http\Controllers\ProjectController@projectTypes')->name('projects.project-types');
     Route::post('/{id}/get', 'App\Http\Controllers\ProjectController@getUserProject')->name('projects.get-user-project');
     Route::get('/deadlines', '\App\Http\Controllers\DashboardController@deadlines')->name('projects.deadlines');
+    Route::post('/add-question-note', 'App\Http\Controllers\ProjectController@addQuestionNote')->name('projects.add-question-note');
+    Route::post('/update-question-note', 'App\Http\Controllers\ProjectController@updateQuestionNote')->name('projects.update-question-note');
+    Route::post('/delete-question-note', 'App\Http\Controllers\ProjectController@deleteQuestionNote')->name('projects.delete-question-note');
 });
 
 Route::group(['prefix' => 'project'], function () {
