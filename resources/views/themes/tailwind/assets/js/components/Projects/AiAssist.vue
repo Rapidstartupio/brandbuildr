@@ -165,7 +165,7 @@ div.block-item {
         <div
             class=" bg-gradient-to-r from-[#1E1E34] via-[#241E44] to-[#1E1E34] rounded-lg"
         >
-            <div class="  p-4 border-b border-gray-700 flex justify-between">
+            <div class="p-4 border-b border-gray-700 sm:flex justify-between">
                 <div
                     class="sm:flex sm:space-x-3"
                 >
@@ -1075,6 +1075,7 @@ export default {
                         messages: this.steps[this.step].chatbot_previousMessages,
                         projectId: this.projectId,
                         question: this.steps[this.step].question,
+                        question_id: this.steps[this.step].id,
                     })
                     .then((response) => {
                         const botResponse =
@@ -1097,10 +1098,20 @@ export default {
                     })
                     .catch((error) => {
                         this.isLoading = false;
-                        popToast(
-                            'danger',
-                            'Too many requests at once, please wait 30 seconds and try again'
-                        );
+                        if (error.response.data.message) {
+                            setTimeout(function () {
+                                popToast(
+                                    error.response.data.message_type,
+                                    error.response.data.message
+                                );
+                            }, 5);
+                        } else{
+                            popToast(
+                                'danger',
+                                'Too many requests at once, please wait 30 seconds and try again'
+                            );
+                        }
+                        
                         //console.log(error);
                         //console.error("Error fetching bot response:", error);
                     });

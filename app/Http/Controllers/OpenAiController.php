@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\ProjectAnswer;
 use App\Models\ProjectQuestion;
 use App\Models\ProjectPrompt;
+use App\Models\ProjectAiUsage;
 
 class OpenAiController extends Controller
 {
@@ -48,6 +50,13 @@ class OpenAiController extends Controller
                 $messages = $request->messages;
                 $projectId = $request->projectId;
                 $user = auth()->user();
+                if (!$user->canUseAiSuggest($projectId)) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'You have reached the maximum number of AI usage allowed for this month in this project.',
+                        'message_type' => 'warning'
+                    ], 400);
+                }
                 foreach ($messages as $key => $message) {
                     if (isset($message['prompt_id'])) {
                         $prompt_id = $message['prompt_id'];
@@ -97,6 +106,13 @@ class OpenAiController extends Controller
                 'model' => "gpt-4-1106-preview"
             ];
             $response = Http::withToken(env('OPENAI_API_KEY'))->post($url, $data);
+            if ($response->ok()) {
+                ProjectAiUsage::create([
+                    'project_question_id' => $request->question_id,
+                    'project_id' => $projectId,
+                    'user_id' => $user->id
+                ]);
+            }
             return response()->json($response->object(),  $response->status());
         } catch (\Exception $e) {
             return response()->json([

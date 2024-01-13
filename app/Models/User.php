@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Wave\User as Authenticatable;
 use App\Models\Project;
 use Carbon\Carbon;
+use App\Models\ProjectAiUsage;
 
 class User extends Authenticatable
 {
@@ -354,5 +355,18 @@ class User extends Authenticatable
             ->count(); // Assuming 'projects' is the relationship to the Project model
 
         return $userProjectsCount < $maxProjectsAllowed;
+    }
+
+    public function canUseAiSuggest($projectId)
+    {
+        $userRole = $this->role; // Assuming 'role' is the relationship to the Role model
+
+        $maxAiSuggestUssageAllowed = $userRole->max_ai_suggest_usage;
+        $userAiSuggestUssageCount = ProjectAiUsage::where('project_id', $projectId)
+            ->where('user_id', $this->id)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->count(); // Assuming 'projects' is the relationship to the Project model
+        return $userAiSuggestUssageCount < $maxAiSuggestUssageAllowed;
     }
 }
