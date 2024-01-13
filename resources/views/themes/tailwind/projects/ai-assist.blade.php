@@ -21,20 +21,6 @@
 @endsection
 @section('content')
 
-<div class="hidden">
-    <div>
-        <ul id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
-            <li role="presentation">
-                <button id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"></button>
-            </li>
-        </ul>
-    </div>
-    <div id="default-tab-content">
-        <div class="hidden" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        </div>
-    </div>
-</div>
-
 <ai-assist project-id="{{$id}}" section-id="{{$sectionId}}" block-id="{{$blockId}}" review="{{$review}}" />
 
 @endsection

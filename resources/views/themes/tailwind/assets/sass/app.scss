@@ -209,3 +209,7 @@ svg {
     .datepicker-picker .focused{
        background-color: #570AFF !important ;
     }
+
+    #myTab button:not(.active){
+        @apply  border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300;
+    }

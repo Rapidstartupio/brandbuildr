@@ -321,60 +321,73 @@ div.block-item {
                     <div
                         class="h-16 pl-6 border-b border-gray-700 text-base font-medium flex items-center"
                     >
+                    <!--                             data-tabs-toggle="#myTabContent"
+                            role="tablist" -->
                         <ul
                             class="flex flex-wrap -mb-px text-sm font-medium justify-center md:space-x-2 lg:space-x-6"
                             id="myTab"
-                            data-tabs-toggle="#myTabContent"
-                            role="tablist"
+
                         >
                             <li class="mr-2" role="presentation">
+                                <!-- data-tabs-target="#ai-assist"
+                                role="tab"
+                                aria-controls="ai-assist"
+                                aria-selected="false" -->
                                 <button
                                     class="inline-block p-1 border-b-2"
                                     id="ai-assist-tab"
-                                    data-tabs-target="#ai-assist"
                                     type="button"
-                                    role="tab"
-                                    aria-controls="ai-assist"
-                                    aria-selected="false"
+                                    @click="selectTab('ai-assist')" :class="{ 'active': selectedTab === 'ai-assist' }"
                                 >
                                     A.I. Assist
                                 </button>
                             </li>
                             <li class="mr-2 hidden" role="presentation">
-                                <button
-                                    class="inline-block p-1 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                                    id="examples-tab"
-                                    data-tabs-target="#examples"
-                                    type="button"
-                                    role="tab"
+                                <!-- data-tabs-target="#examples"
+                                     role="tab"
                                     aria-controls="examples"
                                     aria-selected="false"
+                                -->
+                                <button
+                                    class="inline-block p-1 border-b-2 "
+                                    id="examples-tab"
+                                    
+                                    type="button"
+                                    
                                 >
                                     Examples
                                 </button>
                             </li>
                             <li class="mr-2" role="presentation">
-                                <button
-                                    class="inline-block p-1 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                                    id="resources-tab"
+                                <!-- 
                                     data-tabs-target="#resources"
-                                    type="button"
                                     role="tab"
                                     aria-controls="resources"
                                     aria-selected="false"
+                                 -->
+                                <button
+                                    class="inline-block p-1 border-b-2 "
+                                    id="resources-tab"
+                                    
+                                    type="button"
+                                    @click="selectTab('resources')" :class="{ 'active': selectedTab === 'resources' }"
                                 >
                                     Resources
                                 </button>
                             </li>
                             <li class="mr-2" role="presentation">
-                                <button
-                                    class="inline-block p-1 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                                    id="notes-tab"
+                                <!-- 
                                     data-tabs-target="#notes"
-                                    type="button"
                                     role="tab"
                                     aria-controls="notes"
                                     aria-selected="false"
+                                 -->
+                                <button
+                                    class="inline-block p-1 border-b-2 "
+                                    id="notes-tab"
+                                    
+                                    type="button"
+                                    @click="selectTab('notes')" :class="{ 'active': selectedTab === 'notes' }"
                                 >
                                     Notes
                                 </button>
@@ -382,11 +395,12 @@ div.block-item {
                         </ul>
                     </div>
                     <div id="myTabContent" class=" ">
+                        <!-- role="tabpanel"
+                            aria-labelledby="ai-assist-tab" -->
                         <div
                             class="p-4 rounded-lg group"
                             id="ai-assist"
-                            role="tabpanel"
-                            aria-labelledby="ai-assist-tab"
+                            v-if="selectedTab === 'ai-assist'"
                         >
                             <div
                                 class="m-4 min-h-[250px] justify-center items-center" :class="{'loading-card': isLoading}"
@@ -719,11 +733,12 @@ div.block-item {
                                 </div>
                             </div>
                         </div>
+                        <!-- role="tabpanel"
+                            aria-labelledby="resources-tab" -->
                         <div
-                            class="hidden p-4 rounded-lg group"
+                            class="p-4 rounded-lg group"
                             id="resources"
-                            role="tabpanel"
-                            aria-labelledby="resources-tab"
+                            v-if="selectedTab === 'resources'"
                         >
                             <div v-for="(resource, index) in steps[step].resources">
                                 <div
@@ -748,11 +763,12 @@ div.block-item {
                                 </div>
                             </div>
                         </div>
+                            <!-- role="tabpanel"
+                            aria-labelledby="notes-tab" -->
                         <div
-                            class="hidden rounded-lg group"
+                            class="rounded-lg group"
                             id="notes"
-                            role="tabpanel"
-                            aria-labelledby="notes-tab"
+                            v-if="selectedTab === 'notes'"
                         >
                             <div class="min-h-[250px] justify-center items-center ">
                                 <div v-for="(note, index) in steps[step].notes" class="p-4 border-b border-gray-700 flex justify-between">
@@ -818,7 +834,7 @@ div.block-item {
 
 <script>
 import axios from "axios";
-import { Tabs } from 'flowbite';
+
 export default {
     mounted() {
         // Call your function or perform initialization here
@@ -856,7 +872,8 @@ export default {
             },
             note:{
                 userInput: "",
-            }
+            },
+            selectedTab: 'ai-assist'
         };
     },
     methods: {
@@ -1218,6 +1235,9 @@ export default {
                     }
                 });
         },
+        selectTab(tab) {
+            this.selectedTab = tab;
+        }
     },
     props: ["projectId", "sectionId", "blockId","review"],
 };
