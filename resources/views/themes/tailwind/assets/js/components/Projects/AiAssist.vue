@@ -156,7 +156,7 @@ div.block-item {
             <div class="w-full">
                 <div class="w-full text-white pt-10 overflow-auto">
                     <ul class="progressbar flex items-baseline">
-                        <li  v-for="(section, index) in this.project.sections" class="text-xl capitalize  h-44 w-44 section-link" :class="[ section.order <= this.section.order ? 'active' : '']"><a :href="'/project/'+this.project.id+'/section/'+section.id+'/block/'+section.blocks[0].id+'/ai-assist'">{{ section.name }} </a></li>
+                        <li  v-for="(section, index) in this.project.sections" class="text-xl capitalize  h-44 w-44 section-link" :class="[ section.order <= this.section.order ? 'active' : '']" v-on:click="redirect('/project/'+this.project.id+'/section/'+section.id+'/block/'+section.blocks[0].id+'/ai-assist')"><a :href="'/project/'+this.project.id+'/section/'+section.id+'/block/'+section.blocks[0].id+'/ai-assist'">{{ section.name }} </a></li>
                     </ul>
                 </div>
             </div>
@@ -1292,6 +1292,9 @@ export default {
         },
         selectTab(tab) {
             this.selectedTab = tab;
+        },
+        redirect(link){
+            window.location.replace(link);
         }
     },
     props: ["projectId", "sectionId", "blockId","review"],
