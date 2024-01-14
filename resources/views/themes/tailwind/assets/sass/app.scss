@@ -77,8 +77,7 @@ svg {
     @apply border-[#5634fe] border-l-8 ;
 }
 .active-dash-nav-item .dash-nav-link {
-    @apply bg-gradient-to-r p-4 from-[#e3daff] to-[#f9faff];
-    @apply dark:from-[#2c196f] dark:via-[#2c196f];
+    @apply bg-gradient-to-r p-4 from-[#e3daff] via-[#f9faff] dark:from-[#2c196f] dark:via-[#2c196f];
 }
 
 .active-dash-nav-item a {
