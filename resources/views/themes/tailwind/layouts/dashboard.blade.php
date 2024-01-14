@@ -84,6 +84,8 @@
                 background: #07072D!important;
             }
 
+            html:not(.dark) .bg-black {background: #F6FBFF!important;}
+
             /* Dark mode styles */
             html.dark .brandDark2 {
               background-color: rgba(255, 255, 255, 0.10)!important; /* Dark mode background color */
@@ -91,7 +93,7 @@
 
             /* Light mode styles */
             html:not(.dark) .brandDark2 {
-              background-color: #F6FBFF!important; /* Light mode background color */
+              background-color: #FFFFFF!important; /* Light mode background color */
             }
 
             [type='text']:focus,
