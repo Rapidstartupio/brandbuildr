@@ -73,7 +73,7 @@
         </script>
 
         <!-- Styles -->
-        <link href="{{ asset('themes/' . $theme->folder . '/css/app.css') }}?60" rel="stylesheet">
+        <link href="{{ asset('themes/' . $theme->folder . '/css/app.css') }}?61" rel="stylesheet">
         <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         @yield('custom_header_code')
         {!! str_replace(array('<p>','</p>'),'',html_entity_decode(setting('site.custom_header_code'))) !!}
@@ -81,25 +81,31 @@
             .dark .bg-black,
             .bg-black,
             :is(.dark .dark\:bg-black) {
-                background: #07072D!important;
+                background: #07072D !important;
             }
 
-            html:not(.dark) .bg-black {background: #F6FBFF!important;}
+            html:not(.dark) .bg-black {
+                background: #F6FBFF !important;
+            }
 
             /* Dark mode styles */
             html.dark .brandDark2 {
-              background-color: rgba(255, 255, 255, 0.10)!important; /* Dark mode background color */
+                background-color: rgba(255, 255, 255, 0.10) !important;
+                /* Dark mode background color */
             }
 
             /* Light mode styles */
             html:not(.dark) .brandDark2 {
-              background-color: #FFFFFF!important; /* Light mode background color */
+                background-color: #FFFFFF !important;
+                /* Light mode background color */
             }
+
             html:not(.dark) .text-black {
-                color:#04041B!important;
+                color: #04041B !important;
             }
+
             html:not(.dark) .border-black {
-                border-color:#04041B!important;
+                border-color: #04041B !important;
             }
 
             [type='text']:focus,
