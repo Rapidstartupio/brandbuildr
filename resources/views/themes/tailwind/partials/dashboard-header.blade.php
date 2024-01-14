@@ -10,7 +10,8 @@
                 </a>
                 <a href="{{ route('wave.home') }}" class="flex items-center justify-center space-x-3 transition-all duration-1000 ease-out transform text-wave-500">
                     @if(Voyager::image(theme('logo')))
-                    <img class="h-9" src="{{ Voyager::image(theme('logo')) }}" alt="Company name">
+                    <img class="h-9 light-logo" src="{{ Voyager::image(theme('logo')) }}" alt="Company name">
+                    <!--<img class="h-9 dark-logo hidden" src="{{ Voyager::image(theme('logo-dark')) }}" alt="Company name">-->
                     @else
                     <svg class="w-9 h-9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208 206">
                         <defs />
