@@ -76,15 +76,23 @@ svg {
 .active-dash-nav-item{
     @apply border-[#5634fe] border-l-8 ;
 }
-.active-dash-nav-item .dash-nav-link{
-    @apply bg-gradient-to-r p-4 from-[#2c196f] via-[#2c196f] ;
+.active-dash-nav-item .dash-nav-link {
+    @apply bg-gradient-to-r p-4 from-[#e3daff] to-[#f9faff];
+    @apply dark:from-[#2c196f] dark:via-[#2c196f];
 }
-.active-dash-nav-item a{
-    @apply text-gray-900  dark:text-white hover:text-white
+
+.active-dash-nav-item a {
+    @apply text-wave-500 dark:text-white hover:text-white;
 }
-.active-dash-nav-item path{
-    fill: white;
+
+.active-dash-nav-item path {
+    @apply fill-current; /* This applies the text color to the SVG fill */
+    fill: #5634fe; /* Replace with the default fill color for light mode */
+    .dark & {
+        fill: white; /* This sets the fill color to white in dark mode */
+    }
 }
+
 .dash-nav-item{
     @apply p-4 p-4 hover:bg-[#262445] hover:scale-110 transition-all ease-in-out
 }
