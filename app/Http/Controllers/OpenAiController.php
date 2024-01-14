@@ -9,6 +9,7 @@ use App\Models\ProjectAnswer;
 use App\Models\ProjectQuestion;
 use App\Models\ProjectPrompt;
 use App\Models\ProjectAiUsage;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class OpenAiController extends Controller
 {
@@ -50,11 +51,13 @@ class OpenAiController extends Controller
                 $messages = $request->messages;
                 $projectId = $request->projectId;
                 $user = auth()->user();
-                if (!$user->canUseAiSuggest($projectId)) {
+                $aiSuggest = $user->canUseAiSuggest($projectId);
+                if (!$aiSuggest->result) {
                     return response()->json([
                         'status' => 'error',
                         'message' => 'You have reached the maximum number of AI usage allowed for this month in this project.',
-                        'message_type' => 'warning'
+                        'message_type' => 'warning',
+                        'ai_ussage' => $aiSuggest
                     ], 400);
                 }
                 foreach ($messages as $key => $message) {
@@ -113,7 +116,8 @@ class OpenAiController extends Controller
                     'user_id' => $user->id
                 ]);
             }
-            return response()->json($response->object(),  $response->status());
+            $return = (object) array_merge((array)$response->object(), array('ai_ussage' => $aiSuggest));
+            return response()->json($return,  $response->status());
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',

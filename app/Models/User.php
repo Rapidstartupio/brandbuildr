@@ -367,6 +367,11 @@ class User extends Authenticatable
             ->whereYear('created_at', Carbon::now()->year)
             ->whereMonth('created_at', Carbon::now()->month)
             ->count(); // Assuming 'projects' is the relationship to the Project model
-        return $userAiSuggestUssageCount < $maxAiSuggestUssageAllowed;
+        $res = $userAiSuggestUssageCount < $maxAiSuggestUssageAllowed;
+        return (object) [
+            'userAiSuggestUssageCount' => $userAiSuggestUssageCount,
+            'maxAiSuggestUssageAllowed' => $maxAiSuggestUssageAllowed,
+            'result' => $res
+        ];
     }
 }
