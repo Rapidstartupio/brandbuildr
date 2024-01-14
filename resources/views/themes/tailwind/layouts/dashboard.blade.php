@@ -89,6 +89,16 @@
                 background-color: #202043 !important;
             }
 
+            /* Dark mode styles */
+            html.dark .brandDark2 {
+              background-color: rgba(255, 255, 255, 0.15); /* Dark mode background color */
+            }
+
+            /* Light mode styles */
+            html:not(.dark) .brandDark2 {
+              background-color: #FEF5F5; /* Light mode background color */
+            }
+
             [type='text']:focus,
             [type='email']:focus,
             [type='url']:focus,

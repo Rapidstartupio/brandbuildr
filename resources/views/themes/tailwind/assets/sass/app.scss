@@ -80,7 +80,7 @@ svg {
     @apply bg-gradient-to-r p-4 from-[#2c196f] via-[#2c196f] ;
 }
 .active-dash-nav-item a{
-    @apply text-gray-900  dark:text-white hover:text-white 
+    @apply text-gray-900  dark:text-white hover:text-white
 }
 .active-dash-nav-item path{
     fill: white;
@@ -105,14 +105,28 @@ svg {
     pointer-events: none;
 }
 
-.strategy-hun-nav .active{
-    @apply text-white;
-}
-.strategy-hun-nav .active svg{
-    @apply bg-wave-500;
-}
+// Light mode (default)
+.strategy-hun-nav .active {
+    @apply text-black; // This will apply when there is no 'dark' class on the html tag
+  }
+
+  .strategy-hun-nav .active svg {
+    // Define SVG styles for light mode here
+  }
+
+  // Dark mode
+  html.dark {
+    .strategy-hun-nav .active {
+      @apply text-white;
+    }
+
+    .strategy-hun-nav .active svg {
+      @apply bg-wave-500;
+    }
+  }
+
 //step progress bar by css
-  
+
   .progressbar {
     counter-reset: step;
     @apply space-y-6;
@@ -163,7 +177,7 @@ svg {
   .progressbar li.active:before {
     //border-color: green;
     @apply border-wave-500 bg-wave-500 text-white;
-  } 
+  }
   .progressbar li.active:after {
     @apply border-wave-500 sm:bg-wave-500;
   }
