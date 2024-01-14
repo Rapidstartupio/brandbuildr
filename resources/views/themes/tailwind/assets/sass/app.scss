@@ -77,11 +77,20 @@ svg {
     @apply border-[#5634fe] border-l-8 ;
 }
 .active-dash-nav-item .dash-nav-link {
-    @apply bg-gradient-to-r p-4 from-[#e3daff] via-[#f9faff] dark:from-[#2c196f] dark:via-[#2c196f];
+    @apply bg-gradient-to-r p-4 from-[#e3daff] to-[#f9faff];
+}
+html.dark {
+    .active-dash-nav-item .dash-nav-link {
+        @apply bg-gradient-to-r p-4 from-[#2c196f] via-[#2c196f];
+    }
+    .active-dash-nav-item a {
+        @apply text-white hover:text-white;
+    }
+
 }
 
 .active-dash-nav-item a {
-    @apply text-wave-500 dark:text-white hover:text-white;
+    @apply text-wave-500 hover:text-white;
 }
 
 .active-dash-nav-item path {
