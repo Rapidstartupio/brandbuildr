@@ -163,7 +163,7 @@
             <div class="brandDark2">
                 @include('theme::partials.dashboard-nav')
             </div>
-            <div class="flex-1 overflow-auto">
+            <div class="flex-1 overflow-auto dark:bg-black bg-black">
                 <!--  w-full -->
                 <main class="flex-grow overflow-x-hidden m-3 md:m-6">
                     @yield('content')
