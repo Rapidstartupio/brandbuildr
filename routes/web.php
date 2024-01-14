@@ -52,6 +52,8 @@ Route::group(['prefix' => 'projects'], function () {
     Route::post('/update-question-note', 'App\Http\Controllers\ProjectController@updateQuestionNote')->name('projects.update-question-note');
     Route::post('/delete-question-note', 'App\Http\Controllers\ProjectController@deleteQuestionNote')->name('projects.delete-question-note');
     Route::post('/add-update-answer', 'App\Http\Controllers\ProjectController@addUpdateAnswer')->name('projects.add-update-answer');
+    Route::get('/clients/{id}/edit', 'App\Http\Controllers\ClientController@edit')->name('clients.edit');
+    Route::post('/clients/update', 'App\Http\Controllers\ClientController@update')->name('clients.update');
 });
 
 Route::group(['prefix' => 'project'], function () {

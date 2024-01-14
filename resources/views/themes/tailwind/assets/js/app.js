@@ -292,10 +292,12 @@ import CreateProject from "./components/Projects/Create.vue";
 import Onboarding from "./components/Onboarding/Index.vue";
 import AiAssist from "./components/Projects/AiAssist.vue";
 import CreateClient from "./components/Clients/Create.vue";
+import EditClient from "./components/Clients/Edit.vue";
 const app = createApp({});
 
 app.component("create-project", CreateProject);
 app.component("onboarding", Onboarding);
 app.component("ai-assist", AiAssist);
 app.component("create-client", CreateClient);
+app.component("edit-client", EditClient);
 app.mount("#app");
