@@ -81,22 +81,17 @@
             .dark .bg-black,
             .bg-black,
             :is(.dark .dark\:bg-black) {
-                background: #07072D !important;
-            }
-
-            .brandDark2 {
-                /* background: rgba(255, 255, 255, 0.15) !important; */
-                background-color: #202043 !important;
+                background: #07072D!important;
             }
 
             /* Dark mode styles */
             html.dark .brandDark2 {
-              background-color: rgba(255, 255, 255, 0.15); /* Dark mode background color */
+              background-color: rgba(255, 255, 255, 0.10)!important; /* Dark mode background color */
             }
 
             /* Light mode styles */
             html:not(.dark) .brandDark2 {
-              background-color: #FEF5F5; /* Light mode background color */
+              background-color: #F6FBFF!important; /* Light mode background color */
             }
 
             [type='text']:focus,
