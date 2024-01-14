@@ -95,6 +95,12 @@
             html:not(.dark) .brandDark2 {
               background-color: #FFFFFF!important; /* Light mode background color */
             }
+            html:not(.dark) .text-black {
+                color:#04041B!important;
+            }
+            html:not(.dark) .border-black {
+                border-color:#04041B!important;
+            }
 
             [type='text']:focus,
             [type='email']:focus,
