@@ -3,8 +3,8 @@
 
 @section('content')
 
-<h3 class="dark:color-white color-black" style="font-size: 24px; fontmy-family: Helvetica Neue; font-weight: 500; word-wrap: break-word">Projects</h3>
-<div class="dark:text-white color-black my-6">
+<h3 class="dark:text-white text-black" style="font-size: 24px; fontmy-family: Helvetica Neue; font-weight: 500; word-wrap: break-word">Projects</h3>
+<div class="dark:text-white text-black my-6">
     <div class="text-sm font-medium text-center text-gray-500 dark:text-gray-400 md:flex">
         @include('theme::projects.partials.projects-menu')
         <div class="text-left md:flex-auto mt-5 md:mt-0">
