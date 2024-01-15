@@ -192,7 +192,20 @@
     @endforeach
     @endif
     @endforeach
+    <div class="page-break"></div>
+    <div class="page section-gard-page">
+        <div class="">
 
+        </div>
+        <div class="footer">
+            <div class="footer-left">
+                <b>{{$project->type}} Document</b> @if($user->company_name)Prepared by <b>{{$user->company_name}}</b>@endif<br>
+                {{-- <!--   <b>DATE</b>: {{$documentDate}} --> --}}
+            </div>
+            <div class="footer-right"><b>{{$user->website}}</b></div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
 </body>
 
 </html>
