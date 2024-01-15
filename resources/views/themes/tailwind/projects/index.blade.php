@@ -135,7 +135,7 @@
                         </svg>
                     </a>
                 </div> -->
-                <div class="w-full bg-black rounded-full h-5 dark:bg-gray-600 relative text-center">
+                <div class="w-full bg-blue-50 rounded-full h-5 dark:bg-gray-600 relative text-center">
                     <p class="dark:text-white absolute w-full left-0 top-1/2 -translate-y-1/2 flex justify-center items-center">{{$project->progress}}%</p>
                     <div class="bg-wave-500 h-5 rounded-full" style="width: {{$project->progress}}%"></div>
                 </div>
