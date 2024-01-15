@@ -545,17 +545,24 @@ class ProjectController extends Controller
             if (!count((array)$project)) {
                 abort(404);
             }
+            $page = 2;
             foreach ($project->sections as $section) {
                 if ($documentType == 'summary' || $section->strategy_output) {
+                    $page++;
                     $tableOfContents[] = (object)[
                         'title' => $section->name,
-                        'class' => 'section-title'
+                        'id' => "section" . $section->id,
+                        'class' => 'section-title',
+                        'page' => $page
                     ];
                     foreach ($section->blocks as $block) {
                         if ($documentType == 'summary' || $block->strategy_output) {
+                            $page++;
                             $tableOfContents[] = (object)[
                                 'title' => $block->name,
-                                'class' => ''
+                                'id' => "block" . $block->id,
+                                'class' => '',
+                                'page' => $page
                             ];
                             foreach ($block->questions as $question) {
                                 if ($documentType == 'summary' || $question->strategy_document_output) {

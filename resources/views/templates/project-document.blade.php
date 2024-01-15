@@ -21,19 +21,21 @@
                 <h1>{{$project->type}}<br>Document</h1>
                 <h2>{{$user->name}}</h2>
             </div>
-            <div class="logo">
-                <img src="{{public_path($user->avatar())}}" alt="user" />
-            </div>
-            <div class="clearfix"></div>
+
+            {{-- <!-- <div class="logo">
+                    <img src="{{public_path($user->avatar())}}" alt="user" />
+        </div> --> --}}
+
+        <div class="clearfix"></div>
+    </div>
+    <div class="footer">
+        <div class="footer-left">
+            <b>{{$project->type}} Document</b> @if($user->company_name)Prepared by <b>{{$user->company_name}}</b>@endif<br>
+            {{-- <!--  <b>DATE</b>: {{$documentDate}} --> --}}
         </div>
-        <div class="footer">
-            <div class="footer-left">
-                <b>{{$project->type}} Document</b> @if($user->company_name)Prepared by <b>{{$user->company_name}}</b>@endif<br>
-                <b>DATE</b>: {{$documentDate}}
-            </div>
-            <div class="footer-right"><b>{{$user->website}}</b></div>
-            <div class="clearfix"></div>
-        </div>
+        <div class="footer-right"><b>{{$user->website}}</b></div>
+        <div class="clearfix"></div>
+    </div>
     </div>
     @foreach(array_chunk(array_chunk($tableOfContents,17),2) as $pageContent)
     <div class="page-break"></div>
@@ -47,15 +49,16 @@
                 </div>
                 <div class="container">
                     <div class="content summary">
-
                         @foreach($pageContent as $columnContent)
                         <div class="column">
                             <ul class="leaders" style="overflow-x: hidden;">
                                 @foreach($columnContent as $item)
-                                <li class="{{$item->class}}">
-                                    <span class="title leader-title">{{$item->title}}</span>
-                                    <span class="">1</span>
-                                </li>
+                                <a href="#{{$item->id}}">
+                                    <li class="{{$item->class}}">
+                                        <span class="title leader-title">{{$item->title}}</span>
+                                        <span class="">{{$item->page}}</span>
+                                    </li>
+                                </a>
                                 @endforeach
                             </ul>
                         </div>
@@ -64,8 +67,11 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="footer">
-                    <div class="">
+                    <div class="footer-left">
                         <b>{{$project->type}} Document</b> @if($user->company_name)Prepared by <b>{{$user->company_name}}</b>@endif
+                    </div>
+                    <div class="footer-right">
+                        <b><span class="pagenum"></span></b>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -77,7 +83,7 @@
     @foreach($project->sections as $section)
     @if($documentType == 'summary' || $section->strategy_output)
     <div class="page-break"></div>
-    <div class="page section-gard-page">
+    <div class="page section-gard-page" id="section{{$section->id}}">
         <div class="">
             <div class="head">
                 <h1>{{$section->name}}</h1>
@@ -86,7 +92,7 @@
         <div class="footer">
             <div class="footer-left">
                 <b>{{$project->type}} Document</b> @if($user->company_name)Prepared by <b>{{$user->company_name}}</b>@endif<br>
-                <b>DATE</b>: {{$documentDate}}
+                {{-- <!--   <b>DATE</b>: {{$documentDate}} --> --}}
             </div>
             <div class="footer-right"><b>{{$user->website}}</b></div>
             <div class="clearfix"></div>
@@ -96,7 +102,7 @@
     @if($documentType == 'summary' || $block->strategy_output)
     <div class="page-break"></div>
     <div style="page-break-inside: avoid">
-        <div class="page block-page">
+        <div class="page block-page" id="block{{$block->id}}">
             <div style="padding: 2%;height:97%">
                 <div class="inner" style="height:100%">
                     <div class="top-page">
@@ -170,8 +176,11 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="footer">
-                        <div class="">
+                        <div class="footer-left">
                             <b>{{$project->type}} Document</b> @if($user->company_name)Prepared by <b>{{$user->company_name}}</b>@endif
+                        </div>
+                        <div class="footer-right">
+                            <span class="pagenum"></span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
