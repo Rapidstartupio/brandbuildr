@@ -68,7 +68,7 @@
                 <div class="md:flex justify-between space-y-2 md:space-y-0 space-x-2">
                     <div class="text-xl capitalize">{{$project->name}} | {{$project->type}}</div>
                     <div class="">
-                        <div class="dark:text-wave-500  border-4 border-wave-500 rounded-lg w-min">
+                        <div class="dark:text-wave-500 text-wave-500 border-4 border-wave-500 rounded-lg w-min">
                             <a class="bg-wave-500" href="{{route('project.details',$project->id )}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 m-1">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
@@ -107,7 +107,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="text-white bg-gray-600 font-light rounded-lg text-base px-2">{{$project->formattedDeadline ? $project->formattedDeadline : '--'}}</span>
+                                <span class="dark:text-white dark:bg-gray-600 font-light rounded-lg text-base px-2">{{$project->formattedDeadline ? $project->formattedDeadline : '--'}}</span>
                             </div>
                         </li>
                         <li>
@@ -115,7 +115,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                     <path d="M10 3.75a2 2 0 1 0-4 0 2 2 0 0 0 4 0ZM17.25 4.5a.75.75 0 0 0 0-1.5h-5.5a.75.75 0 0 0 0 1.5h5.5ZM5 3.75a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 .75.75ZM4.25 17a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5h1.5ZM17.25 17a.75.75 0 0 0 0-1.5h-5.5a.75.75 0 0 0 0 1.5h5.5ZM9 10a.75.75 0 0 1-.75.75h-5.5a.75.75 0 0 1 0-1.5h5.5A.75.75 0 0 1 9 10ZM17.25 10.75a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5h1.5ZM14 10a2 2 0 1 0-4 0 2 2 0 0 0 4 0ZM10 16.25a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z" />
                                 </svg>
-                                <span class="text-white bg-gray-600 font-light rounded-lg text-base px-2">{{($project->progress==100) ? 'Completed' : 'Active'}}</span>
+                                <span class="dark:text-white dark:bg-gray-600 font-light rounded-lg text-base px-2">{{($project->progress==100) ? 'Completed' : 'Active'}}</span>
                             </div>
                         </li>
                     </ol>
@@ -135,8 +135,8 @@
                         </svg>
                     </a>
                 </div> -->
-                <div class="w-full bg-[#838396] rounded-full h-5 dark:bg-gray-600 relative text-center">
-                    <p class="dark:text-white absolute w-full">{{$project->progress}}%</p>
+                <div class="w-full bg-black rounded-full h-5 dark:bg-gray-600 relative text-center">
+                    <p class="dark:text-white absolute w-full left-0 top-1/2 -translate-y-1/2 flex justify-center items-center">{{$project->progress}}%</p>
                     <div class="bg-wave-500 h-5 rounded-full" style="width: {{$project->progress}}%"></div>
                 </div>
             </div>
@@ -177,7 +177,7 @@
         <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">To get started, simply click the button below. In just a few simple steps, you'll be able to create your first project and customize it to meet your needs.</p>
         <div class="">
             <a href="{{route('projects.create')}}">
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800   font-medium rounded-lg text-lg px-10 py-4 dark:bg-brandPrimary dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800">Create New Project</button>
+                <button type="button" class="text-white bg-wave-500 hover:bg-wave-600 font-medium rounded-lg text-lg px-10 py-4 dark:bg-brandPrimary dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800">Create New Project</button>
             </a>
         </div>
     </div>

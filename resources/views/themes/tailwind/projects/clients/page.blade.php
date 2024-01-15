@@ -187,7 +187,7 @@
                                     </svg>
                                 </a>
                             </div>
-                            <div class="w-full bg-[#838396] rounded-full h-2 dark:bg-[#838396]">
+                            <div class="w-full bg-black rounded-full h-2 dark:bg-[#838396]">
                                 <div class="bg-wave-500 h-2 rounded-full" style="width: {{$project->progress}}%"></div>
                             </div>
                         </div>
