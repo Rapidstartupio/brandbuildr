@@ -149,49 +149,7 @@
             <div id="projects-list">
                 <div class="grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 dark:text-white my-5">
                     @foreach($projects as $project)
-                    <div class="brandDark2 p-4 rounded space-y-3">
-                        <div class="md:flex justify-between items-center ">
-                            <div class="text-lg capitalize">{{$project->name}}</div>
-                            <div class="dark:text-gray-400 text-sm" style="width: 48px;height: 48px;">
-                                @if($project->type_svg)
-                                {!! $project->type_svg !!}
-                                @else
-                                <svg class="w-auto" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
-                                    <path d="{{$project->type_icon_svg_path_d}}" fill="white" />
-                                </svg>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="space-x-2">
-                                @if(isset($project->client))
-                                <button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-light rounded-lg text-base px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800">{{$project->client->company_name}}</button>
-                                @endif
-                                <button type="button" class="focus:outline-none rounded-lg text-white bg-wave-500 hover:bg-wave-700 focus:ring-4 focus:ring-wave-700 font-light rounded-lg text-base px-2  dark:hover:bg-wave-700 dark:focus:ring-wave-700">{{$project->type}}</button>
-                            </div>
-                            <div class="dark:text-white flex items-center space-x-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class=" w-fit" viewBox="0 0 20 20" fill="none">
-                                    <path d="M15.8333 2.49967H15V0.833008H13.3333V2.49967H6.66667V0.833008H5V2.49967H4.16667C3.72464 2.49967 3.30072 2.67527 2.98816 2.98783C2.67559 3.30039 2.5 3.72431 2.5 4.16634V15.833C2.5 16.275 2.67559 16.699 2.98816 17.0115C3.30072 17.3241 3.72464 17.4997 4.16667 17.4997H15.8333C16.7583 17.4997 17.5 16.758 17.5 15.833V4.16634C17.5 3.72431 17.3244 3.30039 17.0118 2.98783C16.6993 2.67527 16.2754 2.49967 15.8333 2.49967ZM15.8333 15.833H4.16667V7.49967H15.8333V15.833ZM15.8333 5.83301H4.16667V4.16634H15.8333V5.83301Z" fill="#ffffff" />
-                                </svg>
-                                <span>{{$project->created_at->format('d M')}}</span>
-                            </div>
-                        </div>
-                        <div class="space-y-2 pt-20">
-                            <div class="flex justify-between">
-                                <div>
-                                    <p class="dark:text-gray-400">{{$project->progress}}%</p>
-                                </div>
-                                <a class="bg-wave-500" href="{{route('project.details',$project->id )}}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 m-1">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
-                                    </svg>
-                                </a>
-                            </div>
-                            <div class="w-full bg-black rounded-full h-2 dark:bg-[#838396]">
-                                <div class="bg-wave-500 h-2 rounded-full" style="width: {{$project->progress}}%"></div>
-                            </div>
-                        </div>
-                    </div>
+                    @include('theme::projects.partials.project-item')
                     @endforeach
                 </div>
             </div>
