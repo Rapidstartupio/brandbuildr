@@ -18,7 +18,7 @@ button[aria-selected="true"] {
 .section-title:has(+ .active-section),
 .active-section {
     display: block;
-} 
+}
 .active-section + .section-title + .section-title {
     background: linear-gradient(
         90deg,
@@ -137,7 +137,7 @@ div.block-item {
                     "
                 >
                     <a :href="'/project/'+this.project.id" class="capitalize">{{ this.project.name }}</a>
-                    <span>|</span> 
+                    <span>|</span>
                     <span class="capitalize">{{ this.project.type }}</span>
                     <span>|</span>
                     <span>
@@ -152,7 +152,7 @@ div.block-item {
                     </a>
                 </div>
             </div>
-            
+
             <div class="w-full">
                 <div class="w-full text-white pt-10 overflow-auto">
                     <ul class="progressbar flex items-baseline">
@@ -176,9 +176,9 @@ div.block-item {
                             'active-block': block.id == this.blockId,
                         }"
                         :data-block-id="block.id"
-                    >   
+                    >
                         <a  :href="'/project/'+this.project.id+'/section/'+this.section.id+'/block/'+block.id+'/ai-assist/review'">
-                            <div class=" p-2 rounded" :class="{'bg-wave-500': block.order <= this.block.order}" >{{ this.section.order + '-'+ block.order +' '+ block.name }}</div> 
+                            <div class=" p-2 rounded" :class="{'bg-wave-500': block.order <= this.block.order}" >{{ this.section.order + '-'+ block.order +' '+ block.name }}</div>
                         </a>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-3 h-3">
@@ -259,7 +259,7 @@ div.block-item {
                         <div class="pt-12 md:px-6">
                             <div v-if="steps[step].answerInputType == 'text'">
                                 <textarea
-                                    class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-xs"
+                                    class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-s"
                                     cols="30" :rows="answerRows"
                                     :placeholder="steps[step].answerInputPlaceHolder"
                                     v-model="steps[step].answer"
@@ -269,7 +269,7 @@ div.block-item {
                                     ></textarea>
                                 <!--<input
                                     type="text"
-                                    class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-xs"
+                                    class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-s"
                                     :placeholder="
                                         steps[step].answerInputPlaceHolder
                                     "
@@ -323,7 +323,7 @@ div.block-item {
                                     <button class="bg-brand-900 hover:bg-wave-500 text-gray-400 hover:text-white py-2 px-4 rounded-lg text-xs" v-on:click="nextQuestion()">Skip Question</button>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -361,15 +361,15 @@ div.block-item {
                                 <button
                                     class="inline-block p-1 border-b-2 "
                                     id="examples-tab"
-                                    
+
                                     type="button"
-                                    
+
                                 >
                                     Examples
                                 </button>
                             </li>
                             <li class="mr-2" role="presentation">
-                                <!-- 
+                                <!--
                                     data-tabs-target="#resources"
                                     role="tab"
                                     aria-controls="resources"
@@ -378,7 +378,7 @@ div.block-item {
                                 <button
                                     class="inline-block p-1 border-b-2 "
                                     id="resources-tab"
-                                    
+
                                     type="button"
                                     @click="selectTab('resources')" :class="{ 'active': selectedTab === 'resources' }"
                                 >
@@ -386,7 +386,7 @@ div.block-item {
                                 </button>
                             </li>
                             <li class="mr-2" role="presentation">
-                                <!-- 
+                                <!--
                                     data-tabs-target="#notes"
                                     role="tab"
                                     aria-controls="notes"
@@ -395,7 +395,7 @@ div.block-item {
                                 <button
                                     class="inline-block p-1 border-b-2 "
                                     id="notes-tab"
-                                    
+
                                     type="button"
                                     @click="selectTab('notes')" :class="{ 'active': selectedTab === 'notes' }"
                                 >
@@ -865,14 +865,14 @@ export default {
             defaultStep: 0,
             step: "0",
             steps: null,
-            answerRows:"2",
+            answerRows:"6",
             isHiddenSuggestResult: "hidden",
             isSuggest: "",
             isLoading:false,
             suggestResult: "",
             chatbot_system_message:"",
             chatbot_initial_user_message:"",
-            chatbot: 
+            chatbot:
             {
                 userInput: "",
                 messages: [],
@@ -927,7 +927,7 @@ export default {
                         this.$nextTick(() => {
                             this.adjustTextareaHeight('qtextarea'+this.step);
                         });
-                    } 
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
@@ -1229,7 +1229,7 @@ export default {
             else this.answerRows=rows;
         },
         viewQuestion(step){
-             
+
             this.step = step;
             this.progressBar = ((this.step + 1) / this.steps.length) * 100;
             this.suggestResult = "";
@@ -1248,10 +1248,10 @@ export default {
                 textarea.style.height = "auto";
                 textarea.style.height = textarea.scrollHeight + "px";
             }
-            
+
         },
         editAnswer(index){
-            this.steps[index].on_review = true;            
+            this.steps[index].on_review = true;
             this.$nextTick(() => {
                 this.adjustTextareaHeight('atextarea'+index);
             });
@@ -1379,7 +1379,7 @@ export default {
                 this.$nextTick(() => {
                     this.adjustTextareaHeight('qtextarea'+this.step);
                 });
-            } 
+            }
         }
     },
     props: ["projectId", "sectionId", "blockId","review"],

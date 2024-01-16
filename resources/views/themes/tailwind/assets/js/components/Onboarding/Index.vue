@@ -126,7 +126,7 @@ div.block-item {
                         <div class="pt-12 md:px-6">
                             <div v-if="steps[step].answerInputType == 'text'">
                                 <textarea
-                                    class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-xs"
+                                    class="w-full bg-transparent border-0 border-b border-white placeholder:text-gray-200 my-3 focus:ring-0 focus:border-wave-500 text-s"
                                     cols="30" :rows="answerRows"
                                     :placeholder="steps[step].answerInputPlaceHolder"
                                     v-model="steps[step].answer"
@@ -631,14 +631,14 @@ export default {
             defaultStep: 0,
             step: 0,
             steps: null,
-            answerRows:"2",
+            answerRows:"6",
             isHiddenSuggestResult: "hidden",
             isSuggest: "",
             isLoading:false,
             suggestResult: "",
             chatbot_system_message:"",
             chatbot_initial_user_message:"",
-            chatbot: 
+            chatbot:
             {
                 userInput: "",
                 messages: [],
@@ -822,7 +822,7 @@ export default {
         },
         initOnboarding(){
             axios
-                .get( "/init-onboarding") 
+                .get( "/init-onboarding")
                 .then((response) => {
                     if (response.data) {
                         this.block = response.data.block;
