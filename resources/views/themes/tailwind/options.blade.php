@@ -65,7 +65,16 @@
  */
 
 ?>
-<style>.tab-pane{ display:none; }, .tab-pane.active{ display:block; }</style>
+<style>
+	.tab-pane {
+		display: none;
+	}
+
+	,
+	.tab-pane.active {
+		display: block;
+	}
+</style>
 
 <div class="theme-settings">
 
@@ -82,6 +91,12 @@
 			{!! theme_field('image', 'logo', 'Site Logo') !!}
 
 			{!! theme_field('image', 'footer_logo', 'Footer Logo') !!}
+
+			{!! theme_field('text', 'theme', 'Theme','dark') !!}
+
+			{!! theme_field('image', 'light_logo', 'Site Light Logo') !!}
+			<!-- 
+			{!! theme_field('image', 'footer_light_logo', 'Footer Light Logo') !!} -->
 
 		</div>
 
