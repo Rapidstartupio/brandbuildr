@@ -631,12 +631,12 @@ class ProjectController extends Controller
             ];
             //dd($project);
             // dd(array_chunk(array_chunk($tableOfContents, 15), 2));
-            // if (isset($request->view)) {
-            //     return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents', 'documentType'));
-            // }
+            if (isset($request->view)) {
+                return view('templates.project-document', compact('project', 'user', 'documentDate', 'tableOfContents', 'documentType'));
+            }
             $pdf = Pdf::loadView('templates.project-document', $data);
 
-            //return $pdf->stream();
+            return $pdf->stream();
             $name = uniqid() . "_" . $projectId . "_" . $documentType;
             $path =  public_path("storage/project-documents/") . "$name.pdf";
             $pdf->save($path);

@@ -187,9 +187,6 @@ div.block-item {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <button class="bg-wave-500 hover:bg-wave-700 text-white py-2 px-8 rounded-lg" v-on:click="nextSection()">Skip</button>
-                </div>
             </div>
             <div class=" " v-if="step == 'review'">
                 <div
@@ -239,8 +236,11 @@ div.block-item {
                         class="h-16 pl-6 border-b border-gray-700 text-base font-medium flex items-center"
                     >
                         <div class="flex-auto">{{ this.section.name }}</div>
-                        <div class="flex-end pr-4">
-                            {{ step + 1 }}/{{ steps.length }}
+                        <div class="items-center  pr-4 flex space-x-2">
+                            <div class="">
+                                <button class="bg-brand-900 hover:bg-wave-500 text-gray-400 hover:text-white py-2 px-4 rounded-lg text-xs" v-on:click="nextSection()">Skip Section</button>
+                            </div>
+                            <div>{{ step + 1 }}/{{ steps.length }}</div>
                         </div>
                     </div>
                     <div
@@ -303,20 +303,27 @@ div.block-item {
                                     </option>
                                 </select>
                             </div>
-
-                            <button
-                                class="bg-wave-500 hover:bg-wave-700 text-white py-2 px-8 rounded-lg"
-                                v-on:click="next()"
-                            >
-                                Next
-                            </button>
-                            <button
-                                v-if="steps[step].back !== null"
-                                class="py-2 px-8 rounded-lg underline text-gray-300"
-                                v-on:click="back()"
-                            >
-                                Back
-                            </button>
+                            <div class="flex justify-between">
+                                <div>
+                                    <button
+                                        class="bg-wave-500 hover:bg-wave-700 text-white py-2 px-8 rounded-lg"
+                                        v-on:click="next()"
+                                    >
+                                        Next
+                                    </button>
+                                    <button
+                                        v-if="steps[step].back !== null"
+                                        class="py-2 px-8 rounded-lg underline text-gray-300"
+                                        v-on:click="back()"
+                                    >
+                                        Back
+                                    </button>
+                                </div>
+                                <div>
+                                    <button class="bg-brand-900 hover:bg-wave-500 text-gray-400 hover:text-white py-2 px-4 rounded-lg text-xs" v-on:click="nextQuestion()">Skip Question</button>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -1356,6 +1363,23 @@ export default {
                     window.location.replace("/project/" +this.projectId);
                 }
             }
+        },
+        nextQuestion(){
+            var next = this.steps[this.step].next;
+            if (next == "review") {
+                this.step =  "review";
+            }
+            else if (next) {
+                this.step = next;
+                this.progressBar = ((this.step + 1) / this.steps.length) * 100;
+                this.suggestResult = "";
+                this.isSuggest = "";
+                this.isHiddenSuggestResult = "hidden";
+                //this.examples = this.steps[this.step].examples;
+                this.$nextTick(() => {
+                    this.adjustTextareaHeight('qtextarea'+this.step);
+                });
+            } 
         }
     },
     props: ["projectId", "sectionId", "blockId","review"],
