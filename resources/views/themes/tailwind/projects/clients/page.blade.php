@@ -14,7 +14,7 @@
         <div class="sm:border-r border-gray-600 pr-3 col-span-2 lg:col-span-1">
             <div class="flex space-x-4 items-center pb-6">
                 @if($client->company_logo)
-                <div>
+                <div style="min-width: 64px;">
                     <img src="{{asset('storage/upload/projects/clients/'.$client->company_logo)}}" alt="{{$client->company_name}}" class="w-16 h-16">
                 </div>
                 @endif
