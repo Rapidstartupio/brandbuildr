@@ -9,7 +9,9 @@
                     </svg>
                 </a>
                 <a href="{{ route('wave.home') }}" class="flex items-center justify-center space-x-3 transition-all duration-1000 ease-out transform text-wave-500">
-                    @if(Voyager::image(theme('logo')))
+                    @if(auth()->user()->logo())
+                    <img class="h-9" src="{{ auth()->user()->logo() }}" alt="Company name">
+                    @elseif(Voyager::image(theme('logo')))
                     <img class="h-9 light-logo" src="{{ Voyager::image(theme('logo')) }}" alt="Company name">
                     <!--<img class="h-9 dark-logo hidden" src="{{ Voyager::image(theme('logo-dark')) }}" alt="Company name">-->
                     @else

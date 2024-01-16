@@ -374,4 +374,15 @@ class User extends Authenticatable
             'result' => $res
         ];
     }
+
+    public function logo()
+    {
+        $logo = null;
+        if ($this->theme_dark_logo && $this->theme == "dark") {
+            $logo = asset("/storage/logos/$this->theme_dark_logo");
+        } else if ($this->theme_light_logo && $this->theme == "light") {
+            $logo = asset("/storage/logos/$this->theme_light_logo");
+        }
+        return $logo;
+    }
 }
