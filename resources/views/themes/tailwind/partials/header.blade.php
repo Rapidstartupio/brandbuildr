@@ -4,10 +4,10 @@
             <div class="inline-flex">
                 <!-- data-replace='{ "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }' -->
                 <a href="{{ route('wave.home') }}" class="flex items-center justify-center space-x-3 transition-all duration-1000 ease-out transform text-wave-500">
-                    @if(theme('theme') == 'dark' && Voyager::image(theme('logo')))
-                    <img class="h-9 logo" src="{{ Voyager::image(theme('logo')) }}" alt="Company name">
-                    @elseif(theme('theme') == 'light' && Voyager::image(theme('light_logo')))
+                    @if(theme('theme') == 'light' && Voyager::image(theme('light_logo')))
                     <img class="h-9 light-logo" src="{{ Voyager::image(theme('light_logo')) }}" alt="Company name">
+                    @elseif(Voyager::image(theme('logo')))
+                    <img class="h-9 logo" src="{{ Voyager::image(theme('logo')) }}" alt="Company name">
                     @else
                     <svg class="w-9 h-9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208 206">
                         <defs />
