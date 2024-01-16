@@ -151,6 +151,24 @@
                     @foreach($projects as $project)
                     @include('theme::projects.partials.project-item')
                     @endforeach
+                    <div class=" p-4 rounded space-y-3 border-2 border-wave-500 border-dashed flex text-center justify-center items-center">
+                        <div>
+                            <div class="">
+                                <a href="/projects/create" class="">
+                                    <div class="bg-wave-500 w-min p-3  rounded-lg inline-flex flex-col items-center">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
+                                            <path stroke-linecap=" round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                        </svg>
+
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <span class="text-xl">Strategy</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             @endif
