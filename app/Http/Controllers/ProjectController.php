@@ -757,7 +757,7 @@ class ProjectController extends Controller
 
 
                 $projectQuestion = ProjectQuestion::where(function ($query) use ($row) {
-                    $query->where('question', $row['question_user_facing'])
+                    $query->where('question', $row['question_user_facing']);
                        // ->orWhere('question_ai', $row['question_ai']);
                 })->where('project_block_id', $projectBlock->id)->first();
 
