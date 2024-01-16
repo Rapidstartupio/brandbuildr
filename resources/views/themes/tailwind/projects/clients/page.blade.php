@@ -11,7 +11,7 @@
         <div class="dark:text-gray-400 text-sm">Search</div>
     </div>
     <div class="grid sm:grid-cols-6 pt-6">
-        <div class="sm:border-r border-gray-600 pr-3 col-span-2 lg:col-span-1">
+        <div class="sm:border-r border-gray-600 pr-3 col-span-2 lg:col-span-1 break-all">
             <div class="flex space-x-4 items-center pb-6">
                 @if($client->company_logo)
                 <div style="min-width: 64px;">
