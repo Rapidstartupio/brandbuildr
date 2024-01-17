@@ -636,7 +636,7 @@ class ProjectController extends Controller
             }
             $pdf = Pdf::loadView('templates.project-document', $data);
 
-            return $pdf->stream();
+            //return $pdf->stream();
             $name = uniqid() . "_" . $projectId . "_" . $documentType;
             $path =  public_path("storage/project-documents/") . "$name.pdf";
             $pdf->save($path);
