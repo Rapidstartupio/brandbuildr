@@ -775,7 +775,11 @@ export default {
             // end switch
         },
         copySuggestionToAnswer() {
-            this.steps[this.step].answer = this.suggestResult;
+            if(this.steps[this.step].answer){
+                this.steps[this.step].answer += '\n' + this.suggestResult;
+            }else{
+                this.steps[this.step].answer = this.suggestResult;
+            }
             this.$nextTick(() => {
                 this.adjustTextareaHeight();
             });
