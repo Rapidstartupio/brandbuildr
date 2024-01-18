@@ -219,9 +219,12 @@ class SubscriptionController extends Controller
 
                     // And, update the subscription with the updated plan.
                     $request->user()->subscription()->update([
-                        'plan_id' => $request->plan_id
+                        'plan_id' => $request->plan_id,
+                        'last_payment_at' => Carbon::parse($body['data']['items'][0]['previously_billed_at'])->toDateTimeString(),
+                        'next_payment_at' => Carbon::parse($body['data']['items'][0]['next_billed_at'])->toDateTimeString(),
+                        'cancel_url' => $body['data']['management_urls']['cancel'],
+                        'update_url' => $body['data']['management_urls']['update_payment_method'],
                     ]);
-
                     return back()->with(['message' => 'Successfully switched to the ' . $plan->name . ' plan.', 'message_type' => 'success']);
                 }
             }

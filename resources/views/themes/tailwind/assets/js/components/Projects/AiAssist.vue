@@ -178,7 +178,7 @@ div.block-item {
                         :data-block-id="block.id"
                     >
                         <a  :href="'/project/'+this.project.id+'/section/'+this.section.id+'/block/'+block.id+'/ai-assist/review'">
-                            <div class=" p-2 rounded" :class="{'bg-wave-500': block.order <= this.block.order}" >{{ this.section.order + '-'+ block.order +' '+ block.name }}</div>
+                            <div class=" p-2 rounded" :class="{'bg-wave-500': block.order <= this.block.order}" >{{ block.name }}</div>
                         </a>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-3 h-3">

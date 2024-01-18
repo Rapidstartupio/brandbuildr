@@ -80,13 +80,11 @@ class User extends Authenticatable implements JWTSubject
 
     public function subscribed($plan)
     {
-
         $plan = Plan::where('slug', $plan)->first();
 
         // if the user is an admin they automatically have access to the default plan
         if (isset($plan->default) && $plan->default && $this->hasRole('admin')) return true;
-
-        if (isset($plan->slug) && $this->hasRole($plan->slug)) {
+        if (isset($plan->plan_id) && isset($this->subscription->plan_id) && $this->subscription->plan_id == $plan->plan_id) {
             return true;
         }
 
