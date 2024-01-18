@@ -25,3 +25,8 @@ yarn-error.log
 /wave/vendor/
 /public/wave/docs
 storage/app/public/project-documents/
+
+storage/app/public/
+public/logos/
+public/upload/
+storage/app/projects-files/
