@@ -76,9 +76,10 @@ div.block-item {
     <div
         class="py-12 mx-auto px-2 md:px-12 xl:px-28 text-white max-w-screen-2xl onboard-page"
     >
-        <!-- <div class="text-center text-white text-2xl font-medium my-8">
-            Create Your Brand Strategy
-        </div> -->
+        <img class="mx-auto mb-12 h-9" src="https://app.brandbuildr.ai/storage/logos/1696024122-dark.png" alt="BrandBuildr.ai">
+        <div class="text-center text-white text-5xl font-md my-8">
+            Start Building
+        </div>
 
         <div class=" bg-gradient-to-r from-[#1E1E34] via-[#241E44] to-[#1E1E34] rounded-lg" v-if="this.section">
             <div class=" " v-if="step == 'review'">
