@@ -1143,6 +1143,9 @@ export default {
             }else{
                 this.steps[this.step].answer = this.suggestResult;
             }
+            this.$nextTick(() => {
+                this.adjustTextareaHeight('qtextarea'+this.step);
+            });
         },
         sendChatbotMessage() {
             const userMessage = this.chatbot.userInput.trim();
