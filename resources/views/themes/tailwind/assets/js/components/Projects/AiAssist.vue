@@ -192,7 +192,7 @@ div.block-item {
                 <div
                     class="h-16 pl-6 border-b border-gray-700 text-base font-medium flex items-center"
                 >
-                    <div class="flex-auto">{{ this.section.name }} Review</div>
+                    <div class="flex-auto">{{ this.block.name }} Review</div>
                 </div>
                 <div  class="">
                     <ul>
@@ -235,10 +235,10 @@ div.block-item {
                     <div
                         class="h-16 pl-6 border-b border-gray-700 text-base font-medium flex items-center"
                     >
-                        <div class="flex-auto">{{ this.section.name }}</div>
+                        <div class="flex-auto">{{ this.block.name }}</div>
                         <div class="items-center  pr-4 flex space-x-2">
                             <div class="">
-                                <button class="bg-brand-900 hover:bg-wave-500 text-gray-400 hover:text-white py-2 px-4 rounded-lg text-xs" v-on:click="nextSection()">Skip Section</button>
+                                <button class="bg-brand-900 hover:bg-wave-500 text-gray-400 hover:text-white py-2 px-4 rounded-lg" v-on:click="nextSection()">Skip Section</button>
                             </div>
                             <div>{{ step + 1 }}/{{ steps.length }}</div>
                         </div>
@@ -320,7 +320,7 @@ div.block-item {
                                     </button>
                                 </div>
                                 <div>
-                                    <button class="bg-brand-900 hover:bg-wave-500 text-gray-400 hover:text-white py-2 px-4 rounded-lg text-xs" v-on:click="nextQuestion()">Skip Question</button>
+                                    <button class="bg-brand-900 hover:bg-wave-500 text-gray-400 hover:text-white py-2 px-4 rounded-lg" v-on:click="nextQuestion()">Skip Question</button>
                                 </div>
                             </div>
 
