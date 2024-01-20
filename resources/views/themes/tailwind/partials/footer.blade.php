@@ -242,7 +242,7 @@
 @endif
 
 <!-- Scripts -->
-<script src="{{ asset('themes/' . $theme->folder . '/js/app.js') }}?101"></script>
+<script src="{{ mix('js/app.js','themes/' . $theme->folder) }}"></script>
 
 @yield('javascript')
 {!! html_entity_decode(setting('site.custom_footer_code')) !!}

@@ -19,6 +19,7 @@ mix.setPublicPath("../../../../public/themes/tailwind/")
     .sass("assets/sass/app.scss", "css")
     .js("assets/js/app.js", "js")
     .tailwind("./tailwind.config.js")
-    .vue();
+    .vue()
+    .version();
 
 //mix.browserSync('127.0.0.1:8000');
