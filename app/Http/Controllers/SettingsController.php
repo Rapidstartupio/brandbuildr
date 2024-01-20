@@ -54,4 +54,10 @@ class SettingsController extends Controller
         $section = 'profile';
         return view('theme::dashboard.settings.index', compact('section'));
     }
+
+    public function security()
+    {
+        $section = 'security';
+        return view('theme::dashboard.settings.index', compact('section'));
+    }
 }
