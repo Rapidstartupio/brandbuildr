@@ -1,11 +1,11 @@
 <form action="{{ route('wave.settings.security.put') }}" method="POST" enctype="multipart/form-data">
     <h3 class="text-xl" style="">
-        White Label
+        Security
     </h3>
-    <p class="text-gray-400 py-4 text-sm">Give your clients a seamless branded experience</p>
+    <p class="text-gray-400 py-4 text-sm">Create or update your security questions</p>
     <hr class="my-6 h-0.5 border-t-0 bg-[#504A6A] opacity-100 dark:opacity-50" />
     <h3 class="my-5 text-xl" style="">
-        Your Company Logo
+        Password
     </h3>
     <div class="relative flex flex-col py-8">
 
