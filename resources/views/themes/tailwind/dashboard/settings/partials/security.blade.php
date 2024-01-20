@@ -2,7 +2,7 @@
     <h3 class="text-xl" style="">
         Security
     </h3>
-    <p class="text-gray-400 py-4 text-sm">Create or update your security questions</p>
+    <p class="text-gray-400 py-4 text-sm">Create or update your security settings</p>
     <hr class="my-6 h-0.5 border-t-0 bg-[#504A6A] opacity-100 dark:opacity-50" />
     <h3 class="my-5 text-xl" style="">
         Password
