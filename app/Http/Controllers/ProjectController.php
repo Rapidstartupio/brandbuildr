@@ -32,11 +32,23 @@ class ProjectController extends Controller
         $this->middleware('auth', ['except' => ['initOnboarding']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
-        $projects = $user->getProjects();
-        return view('theme::projects.index', compact('projects'));
+        $filter = (object)[
+            'client' => null,
+            'type' => null,
+        ];
+        $client = is_numeric($request->query('client')) ? $request->query('client') : null;
+        $type = is_numeric($request->query('type')) ? $request->query('type') : null;
+
+        $filter->client = $client;
+        $filter->type = $type;
+
+        $projectTypes = ProjectType::where('active', 1)->whereIn('status', array('free', 'disable'))->get();
+        $projects = $user->getProjects($client, $type);
+
+        return view('theme::projects.index', compact('projects', 'projectTypes', 'filter'));
     }
 
     public function storeType(Request $request)
@@ -758,7 +770,7 @@ class ProjectController extends Controller
 
                 $projectQuestion = ProjectQuestion::where(function ($query) use ($row) {
                     $query->where('question', $row['question_user_facing']);
-                       // ->orWhere('question_ai', $row['question_ai']);
+                    // ->orWhere('question_ai', $row['question_ai']);
                 })->where('project_block_id', $projectBlock->id)->first();
 
                 if (!$projectQuestion) {

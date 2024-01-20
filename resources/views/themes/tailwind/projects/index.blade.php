@@ -24,7 +24,15 @@
                     <path d="M9.99992 3.33301C10.884 3.33301 11.7318 3.6842 12.3569 4.30932C12.9821 4.93444 13.3333 5.78229 13.3333 6.66634C13.3333 7.5504 12.9821 8.39824 12.3569 9.02336C11.7318 9.64849 10.884 9.99967 9.99992 9.99967C9.11586 9.99967 8.26802 9.64849 7.6429 9.02336C7.01777 8.39824 6.66659 7.5504 6.66659 6.66634C6.66659 5.78229 7.01777 4.93444 7.6429 4.30932C8.26802 3.6842 9.11586 3.33301 9.99992 3.33301ZM9.99992 4.99967C9.55789 4.99967 9.13397 5.17527 8.82141 5.48783C8.50885 5.80039 8.33325 6.22431 8.33325 6.66634C8.33325 7.10837 8.50885 7.53229 8.82141 7.84485C9.13397 8.15741 9.55789 8.33301 9.99992 8.33301C10.4419 8.33301 10.8659 8.15741 11.1784 7.84485C11.491 7.53229 11.6666 7.10837 11.6666 6.66634C11.6666 6.22431 11.491 5.80039 11.1784 5.48783C10.8659 5.17527 10.4419 4.99967 9.99992 4.99967ZM9.99992 10.833C12.2249 10.833 16.6666 11.9413 16.6666 14.1663V16.6663H3.33325V14.1663C3.33325 11.9413 7.77492 10.833 9.99992 10.833ZM9.99992 12.4163C7.52492 12.4163 4.91659 13.633 4.91659 14.1663V15.083H15.0833V14.1663C15.0833 13.633 12.4749 12.4163 9.99992 12.4163Z" fill="#B6B6B8" />
                 </svg>
             </div>
-            <input type="text" class="  text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" placeholder="Client">
+            <select id="project-client" class="text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" onchange="filterAndNavigate()">
+                <option selected value="">Client</option>
+                @if(auth()->user()->clients)
+                @foreach(auth()->user()->clients as $clt)
+                <option value="{{$clt->id}}" @if($clt->id == $filter->client) selected @endif>{{$clt->company_name}}</option>
+                @endforeach
+                @endif
+            </select>
+            <!-- <input type="text" class="  text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" placeholder="Client">-->
         </div>
     </div>
     <div class="project-type mr-4">
@@ -34,7 +42,16 @@
                     <path d="M4.99992 1.66699C4.55789 1.66699 4.13397 1.84259 3.82141 2.15515C3.50885 2.46771 3.33325 2.89163 3.33325 3.33366V16.667C3.33325 17.109 3.50885 17.5329 3.82141 17.8455C4.13397 18.1581 4.55789 18.3337 4.99992 18.3337H14.9999C15.4419 18.3337 15.8659 18.1581 16.1784 17.8455C16.491 17.5329 16.6666 17.109 16.6666 16.667V6.66699L11.6666 1.66699H4.99992ZM4.99992 3.33366H10.8333V7.50033H14.9999V16.667H4.99992V3.33366ZM6.66659 10.0003V11.667H13.3333V10.0003H6.66659ZM6.66659 13.3337V15.0003H10.8333V13.3337H6.66659Z" fill="#B6B6B8" />
                 </svg>
             </div>
-            <input type="text" class="  text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" placeholder="Project Type">
+            <!-- <input type="text" class="  text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" placeholder="Project Type">
+         -->
+            <select id="project-type" class="text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" onchange="filterAndNavigate()">
+                <option selected value="">Project Type</option>
+                @if($projectTypes)
+                @foreach($projectTypes as $type)
+                <option value="{{$type->id}}" @if($type->id == $filter->type) selected @endif>{{$type->name}}</option>
+                @endforeach
+                @endif
+            </select>
         </div>
     </div>
     <div class="dates mr-4">
@@ -107,3 +124,31 @@
 @endif
 
 @endsection
+
+<script>
+    function filterAndNavigate() {
+        // Get the selected value
+        var projectClient = document.getElementById("project-client").value;
+        var projectType = document.getElementById("project-type").value;
+
+        var params = "";
+        var url = "/projects"
+        if (projectClient) {
+            var params = "client=" + encodeURIComponent(projectClient);
+        }
+
+        if (projectType) {
+            if (projectClient) {
+                params += "&";
+            }
+            params += "type=" + encodeURIComponent(projectType);
+        }
+
+        if (params) {
+            url += "?" + params;
+        }
+
+        // Navigate to the constructed URL
+        window.location.href = url;
+    }
+</script>

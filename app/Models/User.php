@@ -74,10 +74,20 @@ class User extends Authenticatable
     {
         return $this->hasMany('\App\Models\Project')->orderBy('created_at', 'DESC');
     }
-    public function getProjects($clientId = null)
+    public function getProjects($clientId = null, $type = null)
     {
+        $conditions = [];
+
         if ($clientId) {
-            $projects = Project::where('user_id', $this->id)->where('client_id', $clientId)->get();
+            $conditions['client_id'] = $clientId;
+        }
+
+        if ($type) {
+            $conditions['type_id'] = $type;
+        }
+
+        if ($conditions) {
+            $projects = Project::where('user_id', $this->id)->where($conditions)->get();
         } else {
             $projects = $this->projects->all();
         }
