@@ -29,7 +29,17 @@ class User extends Authenticatable
         'theme_dark_logo',
         'theme_light_logo',
         'theme_text_color',
-        'theme_line_color'
+        'theme_line_color',
+        'phone_number',
+        'position',
+        'company_name',
+        'owner',
+        'address',
+        'website',
+        'country',
+        'city',
+        'street',
+        'zip_code'
     ];
 
     /**

@@ -243,3 +243,10 @@ html.dark {
     #myTab button:not(.active){
         @apply  border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300;
     }
+
+    .settings-nav a.active{
+        @apply text-white;
+    }
+    .settings-nav a.active svg{
+        @apply bg-wave-500;
+    }

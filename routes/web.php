@@ -100,6 +100,7 @@ Route::post('openai/show-suggestion', '\App\Http\Controllers\OpenAiController@sh
 Route::group(['prefix' => 'settings'], function () {
     Route::get('/white-label', '\App\Http\Controllers\SettingsController@whiteLabel')->name('settings.white-label');
     Route::post('/white-label', '\App\Http\Controllers\SettingsController@saveWhiteLabel');
+    Route::get('/profile2', '\App\Http\Controllers\SettingsController@profile')->name('settings.profile2');
 });
 
 // Wave routes

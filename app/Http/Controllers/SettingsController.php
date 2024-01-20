@@ -13,7 +13,8 @@ class SettingsController extends Controller
 
     public function whiteLabel()
     {
-        return view('theme::dashboard.settings.white-label');
+        $section = 'white-label';
+        return view('theme::dashboard.settings.index', compact('section'));
     }
 
     public function saveWhiteLabel(Request $request)
@@ -46,5 +47,11 @@ class SettingsController extends Controller
         } catch (\Exception $e) {
             return back()->with(['message' => $e->getMessage(), 'message_type' => 'danger']);
         }
+    }
+
+    public function profile()
+    {
+        $section = 'profile';
+        return view('theme::dashboard.settings.index', compact('section'));
     }
 }
