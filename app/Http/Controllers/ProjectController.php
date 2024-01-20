@@ -34,21 +34,28 @@ class ProjectController extends Controller
 
     public function index(Request $request)
     {
+        // Record the start time
+        $start_time = microtime(true);
+
         $user = auth()->user();
         $filter = (object)[
-            'client' => null,
-            'type' => null,
+            'client' => is_numeric($request->query('client')) ? $request->query('client') : null,
+            'type' => is_numeric($request->query('type')) ? $request->query('type') : null,
+            'status' => $request->query('status'),
+            'deadline' => $request->query('deadline'),
         ];
-        $client = is_numeric($request->query('client')) ? $request->query('client') : null;
-        $type = is_numeric($request->query('type')) ? $request->query('type') : null;
-
-        $filter->client = $client;
-        $filter->type = $type;
 
         $projectTypes = ProjectType::where('active', 1)->whereIn('status', array('free', 'disable'))->get();
-        $projects = $user->getProjects($client, $type);
+        $projects = $user->getProjects($filter->client, $filter->type, $filter->status, $filter->deadline);
 
-        return view('theme::projects.index', compact('projects', 'projectTypes', 'filter'));
+        // Record the end time
+        $end_time = microtime(true);
+        // Calculate the execution time
+        $execution_time = ($end_time - $start_time);
+        //echo 'Execution Time: ' . $execution_time . ' seconds';
+        $projectStatus = (object)['Completed', 'In Progress'];
+
+        return view('theme::projects.index', compact('projects', 'projectTypes', 'filter', 'projectStatus'));
     }
 
     public function storeType(Request $request)

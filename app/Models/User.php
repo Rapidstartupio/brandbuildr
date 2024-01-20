@@ -7,6 +7,7 @@ use Wave\User as Authenticatable;
 use App\Models\Project;
 use Carbon\Carbon;
 use App\Models\ProjectAiUsage;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -74,7 +75,21 @@ class User extends Authenticatable
     {
         return $this->hasMany('\App\Models\Project')->orderBy('created_at', 'DESC');
     }
-    public function getProjects($clientId = null, $type = null)
+
+    function projectsList()
+    {
+        $projects = $this->hasMany('\App\Models\Project')
+            ->join('clients', 'projects.client_id', '=', 'clients.id')
+            ->join('project_types', 'projects.type_id', '=', 'project_types.id')
+            ->join('project_sections', 'project_sections.project_type_id', '=', 'project_types.id')
+            ->join('project_blocks', 'project_blocks.project_section_id', '=', 'project_sections.id')
+            ->join('project_questions', 'project_questions.project_block_id', '=', 'project_blocks.id')
+            ->orderBy('projects.created_at', 'DESC')
+            ->select('projects.*');
+        return $projects;
+    }
+
+    public function getProjects($clientId = null, $type = null, $status = null, $deadline = null)
     {
         $conditions = [];
 
@@ -96,7 +111,15 @@ class User extends Authenticatable
         if ($projects) {
             foreach ($projects as $project) {
                 $tmp = $this->getProject($project->id);
+
                 if ($tmp) {
+                    if ($status) {
+                        $projectStatus = ($tmp->progress == 100) ? 'Completed' : 'In Progress';
+                        if ($status != $projectStatus) continue;
+                    }
+                    if ($deadline) {
+                        if ($tmp->deadline != $deadline) continue;
+                    }
                     $p[] = $tmp;
                 }
             }
@@ -149,16 +172,20 @@ class User extends Authenticatable
             $p['start_date'] = $project->start_date;
             $p['end_date'] = $project->end_date;
             $p['formattedDeadline'] = "";
-            if ($project->end_date) {
-                $end = Carbon::parse($project->end_date);
+            $p['deadline'] = "";
+            $deadline = $project->deadlines()->first();
+
+            if ($deadline) {
+                $end = Carbon::parse($deadline->end_date);
+                $p['deadline'] = $deadline->end_date;
                 $p['formattedDeadline'] = $end->format('d-M-y');
-            } else {
-                $deadline = $project->deadlines()->first();
-                if ($deadline) {
-                    $end = Carbon::parse($deadline->end_date);
-                    $p['formattedDeadline'] = $end->format('d-M-y');
-                }
             }
+            // if ($project->end_date) {
+            //     $end = Carbon::parse($project->end_date);
+            //     $p['formattedDeadline'] = $end->format('d-M-y');
+            // } else {
+
+            // }
             //$p['formattedDeadline'] = $this->formatDeadline($p['start_date'], $p['end_date']);
             //Add Sections
             //$p['sections'] = [];
