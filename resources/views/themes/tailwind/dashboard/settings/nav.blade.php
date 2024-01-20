@@ -1,5 +1,5 @@
 <div class="dark:text-gray-400 text-xl">
-    <a href="{{route('settings.profile2')}}" class="border-b border-gray-500 pt-6 pb-2 flex justify-between @if(Request::is('settings/profile2')) active @endif">
+    <a href="{{route('settings.profile')}}" class="border-b border-gray-500 pt-6 pb-2 flex justify-between @if(Request::is('settings/profile')) active @endif">
         <span>Profile</span>
         <span class="">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
