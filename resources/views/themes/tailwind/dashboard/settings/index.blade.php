@@ -7,7 +7,7 @@
     <div class="settings-nav md:border-r md:border-gray-500 md:pr-8">
         @include('theme::dashboard.settings.nav')
     </div>
-    <div class="settings-content md:col-span-3 dark:text-white md:px-8">
+    <div class="settings-content md:col-span-3 dark:text-white md:px-8 sm:pt-10 md:pt-0">
         @include("theme::dashboard.settings.partials.$section")
     </div>
 </div>
