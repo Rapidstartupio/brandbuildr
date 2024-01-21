@@ -150,7 +150,7 @@ class OpenAiController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => $e->getMessage(),
+                'message' => 'Internal server error!',
                 'message_type' => 'danger'
             ], 500);
         }
