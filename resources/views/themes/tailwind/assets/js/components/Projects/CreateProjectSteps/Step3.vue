@@ -5,7 +5,7 @@
             >Project Deadlines</div
         >
         <div class="space-y-8 deadline-step">
-            <div class="grid md:grid-cols-2 md:gap-6" v-for="(deadline, index) in project.deadlines">
+            <div class="grid  space-y-2 md:space-y-0 md:grid-cols-2 md:gap-6" v-for="(deadline, index) in project.deadlines">
                 <div>
                     <div class="relative">
                         <!--  datepicker datepicker-format="dd/mm/yyyy" -->

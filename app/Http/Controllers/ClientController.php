@@ -37,8 +37,13 @@ class ClientController extends Controller
         $projectStatus = (object)['Completed', 'In Progress'];
 
         $projects = $user->getProjects($id, $filter->type, $filter->status, $filter->deadline);
-
-        return view('theme::projects.clients.page', compact('client', 'projects', 'filter', 'projectTypes', 'projectStatus'));
+        $completedProjectsCount = $client->projects->filter(function ($project) {
+            return $project->status() == 1;
+        })->count();
+        $inProgressProjectsCount = $client->projects->filter(function ($project) {
+            return $project->status() == 0;
+        })->count();
+        return view('theme::projects.clients.page', compact('client', 'projects', 'filter', 'projectTypes', 'projectStatus', 'completedProjectsCount', 'inProgressProjectsCount'));
     }
 
     public function create()

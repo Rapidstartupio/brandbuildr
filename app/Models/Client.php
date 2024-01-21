@@ -15,4 +15,9 @@ class Client extends Model
     {
         return Project::where('client_id', $this->id)->count();
     }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
