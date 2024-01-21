@@ -46,6 +46,8 @@ class ProjectController extends Controller
         ];
 
         $projectTypes = ProjectType::where('active', 1)->whereIn('status', array('free', 'disable'))->get();
+        $projectStatus = (object)['Completed', 'In Progress'];
+
         $projects = $user->getProjects($filter->client, $filter->type, $filter->status, $filter->deadline);
 
         // Record the end time
@@ -53,7 +55,7 @@ class ProjectController extends Controller
         // Calculate the execution time
         $execution_time = ($end_time - $start_time);
         //echo 'Execution Time: ' . $execution_time . ' seconds';
-        $projectStatus = (object)['Completed', 'In Progress'];
+
 
         return view('theme::projects.index', compact('projects', 'projectTypes', 'filter', 'projectStatus'));
     }

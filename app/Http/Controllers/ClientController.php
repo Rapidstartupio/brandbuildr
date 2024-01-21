@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use Illuminate\Support\Facades\Session;
+use App\Models\ProjectType;
 
 class ClientController extends Controller
 {
@@ -20,12 +21,24 @@ class ClientController extends Controller
         return view('theme::projects.clients.index', compact('clients'));
     }
 
-    public function client($id)
+    public function client(Request $request, $id)
     {
         $user = auth()->user();
         $client = Client::where('user_id', $user->id)->where('id', $id)->firstOrFail();
-        $projects = $user->getProjects($id);
-        return view('theme::projects.clients.page', compact('client', 'projects'));
+
+
+        $filter = (object)[
+            'type' => is_numeric($request->query('type')) ? $request->query('type') : null,
+            'status' => $request->query('status'),
+            'deadline' => $request->query('deadline'),
+        ];
+
+        $projectTypes = ProjectType::where('active', 1)->whereIn('status', array('free', 'disable'))->get();
+        $projectStatus = (object)['Completed', 'In Progress'];
+
+        $projects = $user->getProjects($id, $filter->type, $filter->status, $filter->deadline);
+
+        return view('theme::projects.clients.page', compact('client', 'projects', 'filter', 'projectTypes', 'projectStatus'));
     }
 
     public function create()

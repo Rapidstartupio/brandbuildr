@@ -35,9 +35,9 @@
         <h3 class="my-5 text-xl">Modify Payment Information</h3>
         <p>Click the button below to update your default payment method</p>
         <button data-url="" class="inline-flex self-start justify-center w-auto px-4 py-2 mt-5 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md  bg-wave-600 hover:bg-wave-500 focus:outline-none focus:border-wave-700 focus:shadow-outline-wave active:bg-wave-700" onclick="updateUserCheckout()">Update Payment Info</button>
-    </div> -->
+    </div>
 
-    <hr class="my-6 h-0.5 border-t-0 bg-[#504A6A] opacity-100 dark:opacity-50" />
+    <hr class="my-6 h-0.5 border-t-0 bg-[#504A6A] opacity-100 dark:opacity-50" /> -->
 
     <div class="flex flex-col">
         <h3 class="my-5 text-xl">Danger Zone</h3>

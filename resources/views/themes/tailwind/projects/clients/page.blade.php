@@ -121,7 +121,14 @@
                                 <path d="M4.99992 1.66699C4.55789 1.66699 4.13397 1.84259 3.82141 2.15515C3.50885 2.46771 3.33325 2.89163 3.33325 3.33366V16.667C3.33325 17.109 3.50885 17.5329 3.82141 17.8455C4.13397 18.1581 4.55789 18.3337 4.99992 18.3337H14.9999C15.4419 18.3337 15.8659 18.1581 16.1784 17.8455C16.491 17.5329 16.6666 17.109 16.6666 16.667V6.66699L11.6666 1.66699H4.99992ZM4.99992 3.33366H10.8333V7.50033H14.9999V16.667H4.99992V3.33366ZM6.66659 10.0003V11.667H13.3333V10.0003H6.66659ZM6.66659 13.3337V15.0003H10.8333V13.3337H6.66659Z" fill="#B6B6B8" />
                             </svg>
                         </div>
-                        <input type="text" class="  text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" placeholder="Project Type">
+                        <select id="project-type" class="text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" onchange="filterAndNavigate()">
+                            <option selected value="">Project Type</option>
+                            @if($projectTypes)
+                            @foreach($projectTypes as $type)
+                            <option value="{{$type->id}}" @if($type->id == $filter->type) selected @endif>{{$type->name}}</option>
+                            @endforeach
+                            @endif
+                        </select>
                     </div>
                 </div>
                 <div class="dates mr-4">
@@ -131,17 +138,24 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
                             </svg>
                         </div>
-                        <input datepicker type="text" class="  text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" placeholder="Status">
+                        <select id="project-status" class="text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" onchange="filterAndNavigate()">
+                            <option selected value="">Status</option>
+                            @if($projectStatus)
+                            @foreach($projectStatus as $status)
+                            <option value="{{$status}}" @if($status==$filter->status) selected @endif>{{$status}}</option>
+                            @endforeach
+                            @endif
+                        </select>
                     </div>
                 </div>
                 <div class="dates mr-4">
                     <div class="relative max-w-sm">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                        <div class="absolute inset-y-0 end-2 flex items-center pl-3.5 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                             </svg>
                         </div>
-                        <input datepicker type="text" class="  text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" placeholder="Date">
+                        <input datepicker id="project-deadline" value="{{$filter->deadline}}" onchange="filterAndNavigate()" type="date" class="  text-gray-900 text-sm rounded  block  pl-4 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" placeholder="Date">
                     </div>
                 </div>
             </div>
@@ -175,4 +189,46 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+<script>
+    function filterAndNavigate() {
+        // Get the selected value+
+        var projectType = document.getElementById("project-type").value;
+        var projectStatus = document.getElementById("project-status").value;
+        var projectDeadline = document.getElementById("project-deadline").value;
+
+        var params = "";
+        var url = "/projects/clients/{{$client->id}}/"
+
+        if (projectType) {
+            if (params != "") {
+                params += "&";
+            }
+            params += "type=" + encodeURIComponent(projectType);
+        }
+
+        if (projectStatus) {
+            if (params != "") {
+                params += "&";
+            }
+            params += "status=" + encodeURIComponent(projectStatus);
+        }
+
+        if (projectDeadline) {
+            if (params != "") {
+                params += "&";
+            }
+            params += "deadline=" + encodeURIComponent(projectDeadline);
+        }
+
+        if (params) {
+            url += "?" + params;
+        }
+
+        // Navigate to the constructed URL
+        window.location.href = url;
+    }
+</script>
 @endsection
