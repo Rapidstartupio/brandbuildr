@@ -105,7 +105,7 @@ class OpenAiController extends Controller
                 }
                 $chatbot_initial_user_message = "";
                 $project = Project::where(['user_id' => $user->id, 'id' => $projectId])->first();
-                if (false && $project && $project->type->ref_project_type_output && $project->client_id) {
+                if ($project && $project->type->ref_project_type_output && $project->client_id) {
                     $refProject = Project::where([
                         'user_id' => $user->id,
                         'client_id' => $project->client_id,
