@@ -102,6 +102,7 @@ Route::group(['prefix' => 'settings'], function () {
     Route::post('/white-label', '\App\Http\Controllers\SettingsController@saveWhiteLabel');
     Route::get('/profile', '\App\Http\Controllers\SettingsController@profile')->name('settings.profile');
     Route::get('/security', '\App\Http\Controllers\SettingsController@security')->name('settings.security');
+    Route::get('/billing', '\App\Http\Controllers\SettingsController@billing')->name('settings.billing');
 });
 
 // Wave routes

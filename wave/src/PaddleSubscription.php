@@ -22,6 +22,7 @@ class PaddleSubscription extends Model
         'cancelled_at',
         'last_payment_at',
         'next_payment_at',
+        'transaction_id',
     ];
 
     /**

@@ -73,7 +73,9 @@ $planId = request()->route('plan_id');
                     locale: "en"
                 },
                 items: itemsList,
-                customer: '@if(!auth()->guest()){{ auth()->user()->email }}@endif'
+                customer: {
+                    email: "@if(!auth()->guest()){{ auth()->user()->email }}@endif",
+                }
             });
             // Paddle.Checkout.open({
             //     product: product,
@@ -104,5 +106,18 @@ $planId = request()->route('plan_id');
 <script>
     console.log('{{$planId}}');
     waveCheckout('{{$planId}}');
+</script>
+@endif
+@if(isset(auth()->user()->subscription->transaction_id))
+<script>
+    function updateUserCheckout() {
+        console.log("{{auth()->user()->paddle_customer_id}}");
+        Paddle.Checkout.open({
+            transactionId: "{{auth()->user()->subscription->transaction_id}}",
+            customer: {
+                id: "{{auth()->user()->paddle_customer_id}}"
+            }
+        });
+    }
 </script>
 @endif

@@ -135,6 +135,7 @@ class SubscriptionController extends Controller
 
                         // add associated role to user
                         $user->role_id = $plan->role_id;
+                        $user->paddle_customer_id = $customer->id;
                         $user->save();
 
                         $subscription = PaddleSubscription::create([
@@ -145,7 +146,8 @@ class SubscriptionController extends Controller
                             'last_payment_at' => $subscription->data->items[0]->previously_billed_at,
                             'next_payment_at' => $subscription->data->items[0]->next_billed_at,
                             'cancel_url' => $subscription->data->management_urls->cancel,
-                            'update_url' => $subscription->data->management_urls->update_payment_method
+                            'update_url' => $subscription->data->management_urls->update_payment_method,
+                            'transaction_id' => $transaction_id,
                         ]);
 
                         $status = 1;
