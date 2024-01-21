@@ -459,7 +459,7 @@ div.block-item {
                                             v-on:click="copySuggestionToAnswer()"
                                             :class="{isDisabled : isLoading}"
                                         >
-                                            Copy to Answer
+                                            Add To Answer
                                         </button>
                                         <button
                                             class="text-base font-medium leading-6 text-gray-500 whitespace-no-wrap border border-white px-8 py-1 text-white rounded-lg hover:text-black hover:bg-white mr-2 mt-2"
@@ -605,7 +605,7 @@ div.block-item {
                                                         )
                                                     "
                                                 >
-                                                    Copy to Answer
+                                                    Add To Answer
                                                 </button>
                                             </div>
                                         </div>
@@ -667,7 +667,7 @@ div.block-item {
                                                                 )
                                                             "
                                                         >
-                                                            Copy to Answer
+                                                            Add To Answer
                                                         </button>
                                                     </div>
                                                 </div>
@@ -1212,7 +1212,14 @@ export default {
                 .catch((err) => console.error(err));
         },
         copyExampleToAnswer(content) {
-            this.steps[this.step].answer = content;
+            if (this.steps[this.step].answer) {
+                this.steps[this.step].answer += '\n' + content;
+            }else{
+                this.steps[this.step].answer = content;
+            }
+            this.$nextTick(() => {
+                this.adjustTextareaHeight('qtextarea'+this.step);
+            });
         },
         getStepById(id) {
             return this.steps.find(item => item.id === id);
