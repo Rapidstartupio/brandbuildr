@@ -16,7 +16,7 @@
 </div>
 
 @if($clients)
-<div id="filters" class="lg:flex space-y-2 lg:space-y-0 project-clients">
+<!-- <div id="filters" class="lg:flex space-y-2 lg:space-y-0 project-clients">
     <div class="project-type mr-4">
         <div class="relative max-w-sm">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
@@ -47,8 +47,9 @@
             <input datepicker type="text" class="  text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" placeholder="Date">
         </div>
     </div>
-</div>
-<div id="clients-list">
+</div> -->
+
+<div id="clients-list" class=" pt-1">
     <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 dark:text-white my-5">
         @foreach($clients as $client)
         <a href="{{route('clients.page',$client->id)}}">
