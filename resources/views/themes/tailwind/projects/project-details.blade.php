@@ -8,7 +8,7 @@
     <div class="flex space-x-4 items-center">
         <h3 class="text-white text-base">{{$project->type}}</h3>
         @if(isset($project->client))
-        <button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-base px-2     dark:bg-[#9BDAB4] dark:hover:bg-green-700 dark:focus:ring-green-800" style="color: {{$project->client->tag_color}};background-color: {{$project->client->tag_bg_color}}">{{$project->client->tag}}</button>
+        <button type="button" class="focus:outline-none rounded-lg text-gray-900 bg-[#9BDAB4] hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-base px-2     dark:bg-[#4d5562] dark:hover:bg-green-700 dark:focus:ring-green-800" style="color: {{$project->client->tag_color}};background-color: {{$project->client->tag_bg_color}}">{{$project->client->tag}}</button>
         @endif
     </div>
 </div>
