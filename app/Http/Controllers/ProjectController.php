@@ -114,7 +114,7 @@ class ProjectController extends Controller
                 'email' => $request->get('email'),
                 'tag' => $request->get('tag'),
                 'tag_color' => $request->get('tag_color') ?? '#000000',
-                'tag_bg_color' => $request->get('tag_bg_color') ?? '#9BDAB4',
+                'tag_bg_color' => $request->get('tag_bg_color') ?? '#4d5562',
                 'company_logo' => $imageName,
                 'user_id' => auth()->user()->id
             ];
@@ -368,7 +368,7 @@ class ProjectController extends Controller
             //     $updatedPrompt = preg_replace_callback('/\{\{g-question:([\d.]+)\}\}/', function ($matches) use ($user, $id) {
             //         $questionRef = $matches[1];
             //         $res = ProjectQuestion::where('ref', $questionRef)->first();
-            //         // Check if  exists 
+            //         // Check if  exists
             //         if (isset($res->question)) {
             //             $answer = ProjectAnswer::where('user_id', $user->id)->where('project_question_id', $res->id)->where('project_id', $id)->first();
             //             if (isset($answer->answer)) {

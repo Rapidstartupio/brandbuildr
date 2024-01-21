@@ -16,7 +16,7 @@
 </div>
 
 @if($clients)
-<div id="filters" class="lg:flex space-y-2 lg:space-y-0">
+<div id="filters" class="lg:flex space-y-2 lg:space-y-0 project-clients">
     <div class="project-type mr-4">
         <div class="relative max-w-sm">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">

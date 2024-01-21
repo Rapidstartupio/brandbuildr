@@ -57,7 +57,7 @@ class ClientController extends Controller
                 'email' => $request->get('email'),
                 'tag' => $request->get('tag'),
                 'tag_color' => $request->get('tag_color') ?? '#000000',
-                'tag_bg_color' => $request->get('tag_bg_color') ?? '#9BDAB4',
+                'tag_bg_color' => $request->get('tag_bg_color') ?? '#4d5562',
                 'user_id' => auth()->user()->id
             ];
             if ($request->file('company_logo')) {

@@ -171,7 +171,7 @@ export default {
                 company_logo: "",
                 tag:"",
                 tag_color:"#000000",
-                tag_bg_color:"#9BDAB4"
+                tag_bg_color:"#4d5562"
             },
             company_logo_preview: null,
             clientFormSubmitted:false,
