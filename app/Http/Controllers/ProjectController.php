@@ -331,27 +331,7 @@ class ProjectController extends Controller
 
         $chatbot_system_message = setting('openai.chatbot_system_message', 'You are a helpful Brand Builder assistant from who helps companies and entreprenuers build their businesse.');
         $chatbot_initial_user_message = "";
-        if ($project->type->ref_project_type_output && $project->client_id) {
-            $refProject = Project::where([
-                'user_id' => $user->id,
-                'client_id' => $project->client_id,
-                'type_id' => $project->type->ref_project_type_output
-            ])->first();
-            $refProjectType = ProjectType::where([
-                'id' => $project->type->ref_project_type_output
-            ])->first();
-            // if (false && $refProject && $refProjectType) {
-            //     $projectDocument = ProjectDocument::where(['user_id' => $user->id, 'project_id' => $refProject->id, ['outputs', '!=', null]])->orderByRaw('FIELD(type,"summary") DESC')->first();
-            //     if ($projectDocument && !empty($projectDocument->outputs)) {
-            //         $chatbot_initial_user_message = "Here is the output from the $refProjectType->name for your reference: \n";
-            //         foreach ($projectDocument->outputs as $output) {
-            //             if ($output['answer']) {
-            //                 $chatbot_initial_user_message .=  $output['question'] . " : " . $output['answer'] . "\n";
-            //             }
-            //         }
-            //     }
-            // }
-        }
+
 
 
         foreach ($block->questions as $key => $question) {
@@ -400,9 +380,6 @@ class ProjectController extends Controller
             $chatbot_previousMessages = [];
             if ($chatbot_system_message) {
                 $chatbot_previousMessages[] = ['role' => 'system', 'content' => $chatbot_system_message];
-            }
-            if ($chatbot_initial_user_message) {
-                $chatbot_previousMessages[] = ['role' => 'user', 'content' => $chatbot_initial_user_message];
             }
 
             $notes = $question->notes($user->id, $id);
