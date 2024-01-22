@@ -184,7 +184,7 @@ class ProjectController extends Controller
                 'name' => 'required|max:40',
                 'client_id' => 'required',
                 'description' => 'required',
-                //'deadline' => 'required',
+                'deadline' => 'required',
                 //'start_date' => 'required',
                 //'end_date' => 'required',
             ]);
@@ -204,7 +204,7 @@ class ProjectController extends Controller
                 'name' => $request->get('name'),
                 'client_id' => $request->get('client_id'),
                 'description' => $request->get('description'),
-                //'deadline' => $request->get('deadline'),
+                'deadline' => $request->get('deadline'),
                 // 'start_date' => $request->get('start_date'),
                 // 'end_date' => $request->get('end_date'),
                 'user_id' => auth()->user()->id

@@ -102,6 +102,10 @@ class User extends Authenticatable
             $conditions['type_id'] = $type;
         }
 
+        if ($deadline) {
+            $conditions['deadline'] = $deadline;
+        }
+
         if ($conditions) {
             $projects = Project::where('user_id', $this->id)->where($conditions)->get();
         } else {
@@ -117,9 +121,6 @@ class User extends Authenticatable
                     if ($status) {
                         $projectStatus = ($tmp->progress == 100) ? 'Completed' : 'In Progress';
                         if ($status != $projectStatus) continue;
-                    }
-                    if ($deadline) {
-                        if ($tmp->deadline != $deadline) continue;
                     }
                     $p[] = $tmp;
                 }
@@ -172,15 +173,24 @@ class User extends Authenticatable
             //$p['end_date'] = $project->end_date ? date('d-m-Y', strtotime($project->end_date)) : "";
             $p['start_date'] = $project->start_date;
             $p['end_date'] = $project->end_date;
+            $p['deadline'] = $project->deadline;
             $p['formattedDeadline'] = "";
-            $p['deadline'] = "";
-            $deadline = $project->deadlines()->first();
-
-            if ($deadline) {
-                $end = Carbon::parse($deadline->end_date);
-                $p['deadline'] = $deadline->end_date;
+            if ($project->deadline) {
+                $end = Carbon::parse($project->deadline);
                 $p['formattedDeadline'] = $end->format('d-M-y');
             }
+
+
+
+
+
+            // $deadline = $project->deadlines()->first();
+
+            // if ($deadline) {
+            //     $end = Carbon::parse($deadline->end_date);
+            //     $p['deadline'] = $deadline->end_date;
+            //     $p['formattedDeadline'] = $end->format('d-M-y');
+            // }
             // if ($project->end_date) {
             //     $end = Carbon::parse($project->end_date);
             //     $p['formattedDeadline'] = $end->format('d-M-y');

@@ -1,9 +1,23 @@
 <template>
-    <form action="#" @submit.prevent="saveProject()">
+    <form action="#" @submit.prevent="saveProject()" class="text-white">
         <div
             class="block text-xl font-medium text-gray-900 dark:text-white my-5"
             >Project Deadlines</div
         >
+        <div class="my-3">Final Deadline </div>
+        <div class="grid  space-y-2 md:space-y-0 md:grid-cols-2 md:gap-6">
+            <div class="relative">
+                <!--  datepicker datepicker-format="dd/mm/yyyy" -->
+                <input name="deadline" v-model="project.deadline" required="" type="date" class="bg-brand-700 border-0 text-gray-900 text-sm rounded focus:ring-primary-500 focus:border-primary-500 block w-full ps-4 p-2.5 dark:bg-brand-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Deadline">
+                <div class="absolute inset-y-0 end-2 flex items-center ps-3.5 pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                    </svg>
+
+                </div>    
+            </div>
+        </div>
+        <div class="my-3">Milestones</div>
         <div class="space-y-8 deadline-step">
             <div class="grid  space-y-2 md:space-y-0 md:grid-cols-2 md:gap-6" v-for="(deadline, index) in project.deadlines">
                 <div>

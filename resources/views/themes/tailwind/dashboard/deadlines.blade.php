@@ -5,7 +5,7 @@
 
 <link href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
 
-<h3  class="dark:text-white text-black" style="font-size: 24px; fontmy-family: Helvetica Neue; font-weight: 500; word-wrap: break-word">Projects</h3>
+<h3 class="dark:text-white text-black" style="font-size: 24px; fontmy-family: Helvetica Neue; font-weight: 500; word-wrap: break-word">Projects</h3>
 <div class="dark:text-white text-black my-6">
     <div class="text-sm font-medium text-center text-gray-500 dark:text-gray-400 md:flex">
         @include('theme::projects.partials.projects-menu')
@@ -38,7 +38,7 @@
                     {{$project->type}}
                 </td>
                 <td>
-                    {{ $project->end_date ? date('d-m-Y', strtotime($project->end_date)) : '' }}
+                    {{ $project->deadline ? date('d-M-y', strtotime($project->deadline)) : '' }}
                 </td>
                 <td>
                     <a href="/project/{{$project->id}}">
@@ -65,10 +65,17 @@
         $('#deadlines').DataTable({
             "paging": false,
             "searching": false,
+            "order": [
+                [3, "desc"]
+            ],
             "columnDefs": [{
                     "orderable": false,
                     "targets": -1
-                } // -1 refers to the last column
+                }, // -1 refers to the last column
+                {
+                    type: 'date',
+                    'targets': [3]
+                }
             ]
         });
     });
