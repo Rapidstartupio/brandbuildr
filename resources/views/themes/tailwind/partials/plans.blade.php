@@ -2,7 +2,7 @@
     @foreach(Wave\Plan::all() as $plan)
     @php $features = explode(',', $plan->features); @endphp
 
-    <div class="w-full max-w-md px-0 mx-auto mb-6 lg:w-1/4 lg:px-3 lg:mb-0">
+    <div class="w-full max-w-md px-0 mx-auto mb-6 lg:w-1/4 lg:px-3 lg:mb-0 pricing-table">
         <div class="relative flex flex-col h-full mb-10 bg-white dark:bg-gray-800 bg-opacity-15 border @if($plan->default){{ 'border-indigo-700' }}@else{{ 'border-none' }}@endif rounded-lg shadow-xl border-b-none sm:mb-0">
             <div class="px-4 pt-7">
                 <div class="absolute right-0 inline-block transform">
@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-
+    <div class="checkout-container"></div>
     @endforeach
 </div>
 
