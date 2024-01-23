@@ -62,7 +62,7 @@
     </div>
 
     <div class="border-t border-gray-500 py-6">
-        <h3 class="text-xl">Adress</h3>
+        <h3 class="text-xl">Address</h3>
         <div class="grid grid-cols-2 gap-10 pt-4">
             <div>
                 <input type="text" name="country" value="{{ Auth::user()->country }}" class="bg-gray-50 border-0 text-gray-900 text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 brandDark3" placeholder="Country" />
