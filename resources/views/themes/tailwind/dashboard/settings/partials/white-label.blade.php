@@ -62,7 +62,8 @@
 
     <div class="md:flex md:space-x-4 justify-between">
         <div>
-            <h3 class="text-xl">
+            <!-- Hide the custom colors for now -->
+            <h3 class="text-xl hidden">
                 Custom Colors
             </h3>
         </div>
@@ -72,7 +73,8 @@
             </button>
         </div>
     </div>
-    <div class="grid grid-cols-3">
+    <!-- Hide the custom colors for now -->
+    <div class="grid grid-cols-3 hidden">
         <div>
             <label for="button-color">Button Color</label>
             <div class="space-x-2">
