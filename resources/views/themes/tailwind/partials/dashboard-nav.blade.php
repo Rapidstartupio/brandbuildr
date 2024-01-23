@@ -21,7 +21,7 @@
                </a>
             </div>
          </li>
-         <li class="dash-nav-item">
+          <li class="@if(Request::is('settings/profile')) dash-nav-item @elseif(Request::is('settings/*')) active-dash-nav-item @else dash-nav-item @endif">
             <div class="dash-nav-link">
                <!--<a href="#" class="items-center   text-gray-500 rounded-lg dark:text-gray-400 hover:text-white  group">-->
                <a href="{{ route('settings.profile') }}" class="items-center  rounded-lg  group">
