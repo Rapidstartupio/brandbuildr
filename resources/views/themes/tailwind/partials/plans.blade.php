@@ -59,10 +59,9 @@
             </div>
         </div>
     </div>
-    <div class="checkout-container hidden"></div>
     @endforeach
 </div>
-
+<div class="checkout-container hidden"></div>
 @if(config('wave.paddle.env') == 'sandbox')
 <div class="px-2 mx-auto mt-12 max-w-7xl">
     <div class="w-full p-10 text-gray-600 bg-blue-50 rounded-xl">
