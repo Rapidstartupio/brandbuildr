@@ -1,5 +1,5 @@
 <header x-data="{ mobileMenuOpen: false }" class="relative z-30 @if(Request::is('/')){{ 'bg-white' }}@else{{ 'bg-gray-50' }}@endif bg-white dark:bg-black" style="background: rgba(255, 255, 255, 0.10) !important;height: 88px;">
-    <div class="px-8 mx-auto xl:px-16">
+    <div class="px-8 mx-auto xl:pr-16">
         <div class="flex items-center justify-between h-24 border-b-2 border-gray-100 md:justify-start md:space-x-6 dark:border-b-0">
             <div class="inline-flex items-center">
                 <!-- data-replace='{ "translate-y-12": "translate-y-0", "scale-110": "scale-100", "opacity-0": "opacity-100" }' -->
