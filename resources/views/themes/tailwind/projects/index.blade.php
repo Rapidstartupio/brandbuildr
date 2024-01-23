@@ -25,10 +25,10 @@
                 </svg>
             </div>
             <select id="project-client" class="w-full text-gray-900 text-sm rounded  block  pl-10 p-2.5   dark:placeholder-gray-400 dark:text-white  border-0 brandDark2" onchange="filterAndNavigate()">
-                <option selected value="">Client</option>
+                <option class="text-black" selected value="">Client</option>
                 @if(auth()->user()->clients)
                 @foreach(auth()->user()->clients as $clt)
-                <option value="{{$clt->id}}" @if($clt->id == $filter->client) selected @endif>{{$clt->company_name}}</option>
+                <option class="text-black" value="{{$clt->id}}" @if($clt->id == $filter->client) selected @endif>{{$clt->company_name}}</option>
                 @endforeach
                 @endif
             </select>
@@ -48,7 +48,7 @@
                 <option selected value="">Project Type</option>
                 @if($projectTypes)
                 @foreach($projectTypes as $type)
-                <option value="{{$type->id}}" @if($type->id == $filter->type) selected @endif>{{$type->name}}</option>
+                <option class="text-black" value="{{$type->id}}" @if($type->id == $filter->type) selected @endif>{{$type->name}}</option>
                 @endforeach
                 @endif
             </select>
@@ -65,7 +65,7 @@
                 <option selected value="">Status</option>
                 @if($projectStatus)
                 @foreach($projectStatus as $status)
-                <option value="{{$status}}" @if($status==$filter->status) selected @endif>{{$status}}</option>
+                <option class="text-black" value="{{$status}}" @if($status==$filter->status) selected @endif>{{$status}}</option>
                 @endforeach
                 @endif
             </select>
