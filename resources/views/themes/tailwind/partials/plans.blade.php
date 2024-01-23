@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div class="checkout-container"></div>
+    <div class="checkout-container hidden"></div>
     @endforeach
 </div>
 
