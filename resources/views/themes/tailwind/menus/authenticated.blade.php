@@ -72,7 +72,8 @@
             <div x-show="open" x-transition:enter="duration-100 ease-out scale-95" x-transition:enter-start="opacity-50 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition duration-50 ease-in scale-100" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute top-0 right-0 w-56 mt-20 origin-top-right transform rounded-xl" x-cloak>
 
                 <div class="bg-white border border-gray-100 shadow-md rounded-xl" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                    <a href="{{ route('wave.profile', auth()->user()->username) }}" class="block px-4 py-3 text-gray-700 hover:text-gray-800">
+                <!--<a href="{{ route('wave.profile', auth()->user()->username) }}" class="block px-4 py-3 text-gray-700 hover:text-gray-800">-->
+                <a href="{{ route('settings.profile') }}" class="block px-4 py-3 text-gray-700 hover:text-gray-800">
 
                         <span class="block text-sm font-medium leading-tight truncate">
                             {{ auth()->user()->name }}
