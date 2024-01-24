@@ -107,3 +107,6 @@ Route::group(['prefix' => 'settings'], function () {
 
 // Wave routes
 Wave::routes();
+
+/***** Custom Paddle Checkout *****/
+Route::view('checkout/plan/{plan_id}', 'theme::checkout.index')->name('plan.checkout')->middleware('guest');

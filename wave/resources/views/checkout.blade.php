@@ -1,7 +1,3 @@
-@php
-$planId = request()->route('plan_id');
-@endphp
-
 <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script>
     window.vendor_id = parseInt('{{ config("wave.paddle.vendor") }}');
@@ -73,9 +69,9 @@ $planId = request()->route('plan_id');
                     locale: "en"
                 },
                 items: itemsList,
-                customer: {
-                    email: "@if(!auth()->guest()){{ auth()->user()->email }}@endif",
-                }
+                // customer: {
+                //     email: "@if(!auth()->guest()){{ auth()->user()->email }}@endif",
+                // }
             });
             // Paddle.Checkout.open({
             //     product: product,
@@ -101,13 +97,6 @@ $planId = request()->route('plan_id');
         });
     }
 </script>
-
-@if($planId)
-<script>
-    console.log('{{$planId}}');
-    waveCheckout('{{$planId}}');
-</script>
-@endif
 @if(isset(auth()->user()->subscription->transaction_id))
 <script>
     function updateUserCheckout() {
