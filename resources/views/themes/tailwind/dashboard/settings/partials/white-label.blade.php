@@ -67,7 +67,7 @@
                 Custom Colors
             </h3>
         </div>
-        <div class="">
+        <div class="wl-reset">
             <button type="button" class="inline-flex items-center p-2 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400 whitespace-nowrap">
                 Reset
             </button>
@@ -110,3 +110,28 @@
         </button>
     </div>
 </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Object to store the default values
+    var defaultValues = {};
+
+    // Function to store the default values
+    function storeDefaultValues() {
+        document.querySelectorAll('[type="color"]').forEach(input => {
+            defaultValues[input.id] = input.value;
+        });
+    }
+
+    // Store the default values on page load
+    storeDefaultValues();
+
+    // Add click event listener to the reset button
+    document.querySelector('.wl-reset button').addEventListener('click', function() {
+        for (const id in defaultValues) {
+            document.getElementById(id).value = defaultValues[id];
+        }
+    });
+});
+
+</script>
