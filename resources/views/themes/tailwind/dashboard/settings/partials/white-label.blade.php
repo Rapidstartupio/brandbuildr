@@ -72,7 +72,7 @@
                 Reset
             </button>
         </div>
-
+    </div?
         <div class="grid grid-cols-3 hidden">
             <div>
                 <label for="button-color">Button Color</label>
@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
     <div class="flex justify-end space-x-3">
         <button type="button" class="inline-flex items-center px-8 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400">
             Cancel
