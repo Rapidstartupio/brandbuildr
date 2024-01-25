@@ -72,7 +72,7 @@
                 Reset
             </button>
         </div>
-    </div?
+    </div>
         <div class="grid grid-cols-3 hidden">
             <div>
                 <label for="button-color">Button Color</label>
