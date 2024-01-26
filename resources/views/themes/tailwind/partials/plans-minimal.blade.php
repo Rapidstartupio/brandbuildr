@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="px-10 mt-5">
-                    <span class="font-mono text-5xl font-bold">${{ $plan->price }}</span>
+                    <span class="font-hairline text-5xl font-bold">${{ $plan->price }}</span>
                     <span class="text-lg font-bold text-gray-500">per month</span>
                 </div>
 
@@ -77,13 +77,13 @@
                 </div>
             </div>
             <div class="pt-2 text-sm font-bold text-gray-500">
-                Credit Card Number: <span class="ml-2 font-mono text-green-500">4242 4242 4242 4242</span>
+                Credit Card Number: <span class="ml-2 font-hairline text-green-500">4242 4242 4242 4242</span>
             </div>
             <div class="pt-2 text-sm font-bold text-gray-500">
-                Expiration Date: <span class="ml-2 font-mono text-green-500">Any future date</span>
+                Expiration Date: <span class="ml-2 font-hairline text-green-500">Any future date</span>
             </div>
             <div class="pt-2 text-sm font-bold text-gray-500">
-                Security Code: <span class="ml-2 font-mono text-green-500">Any 3 digits</span>
+                Security Code: <span class="ml-2 font-hairline text-green-500">Any 3 digits</span>
             </div>
         </div>
     </div>
