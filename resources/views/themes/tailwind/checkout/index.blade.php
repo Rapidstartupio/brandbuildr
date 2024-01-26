@@ -1,16 +1,58 @@
-@php
-$planId = request()->route('plan_id');
-@endphp
-
 @extends('theme::layouts.app')
 
 @section('content')
 
 <div class="py-20 text-white">
-    <div class="sm:mx-auto sm:w-full sm:max-w-5xl">
-        <div class="checkout_paddle bg-brand-800 my-8 md:w-2/3 rounded-xl" style="min-height: 600px;margin: 0 auto;"></div>
-    </div>
+    <div class="px-8 mx-auto xl:px-5 max-w-7xl">
+        <div class="grid md:grid-cols-2 gap-6 bg-brand-800 p-8 rounded-xl">
 
+            <div class="w-full px-0 mx-auto mb-6  lg:px-3 lg:mb-0 ">
+                <div class="relative flex flex-col h-full mb-10   bg-opacity-15 border @if($plan->default){{ 'border-indigo-700' }}@else{{ 'border-none' }}@endif rounded-2xl shadow-xl border-b-none sm:mb-0">
+                    <div class="@if($plan->default){{ 'border-indigo-700' }}@else{{ 'px-4 pt-7' }}@endif">
+                        <div> <!-- class="absolute right-0 inline-block transform">-->
+                            <h2 class="relative z-20 w-full h-full px-2 py-1 text-xs leading-tight tracking-wide text-center uppercase border-2 @if($plan->default){{ 'border-none dark:text-white bg-indigo-700' }}@else{{ 'hidden border-gray-900 text-gray-800' }}@endif rounded-t">Best value</h2>
+                            <!--<span class="absolute -top-7 left-1 w-4 h-4 bg-indigo-700 transform p-2" style="z-index: -1;"></span>
+                        <span class="absolute -bottom-7 right-1 w-5 h-4 bg-indigo-700 transform" style="z-index: -1;"></span>-->
+                        </div>
+                    </div>
+
+                    <div class="px-5 mt-1">
+                        <span class="plan-name font-hairline dark:text-white text-2xl font-bold">{{ $plan->name }}</span>
+                    </div>
+
+                    <div class="px-5 mt-2 pb-7" style="min-height:110px">
+                        <p class="plan-description text-md leading-7 text-gray-300">{!! $plan->description !!}</p>
+                    </div>
+
+                    <div class="px-5">
+                        <span class="plan-price font-hairline dark:text-white text-4xl font-bold">${{ $plan->price }}</span>
+                        <span class="per-month text-md font-bold text-gray-500"></span>
+                    </div>
+
+                    <div class="relative mt-6 px-4 pt-0 pb-12 text-gray-700 rounded-b-lg">
+
+                        <ul class="flex flex-col space-y-4">
+                            @foreach($features as $feature)
+                            <li class="relative">
+                                <span class="flex items-center">
+                                    <svg class="w-5 h-5 mr-3 dark:text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"></path>
+                                        <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" transform="translate(6, -1)"></path>
+                                    </svg>
+                                    <span class="text-md dark:text-gray-300">
+                                        {{ $feature }}
+                                    </span>
+                                </span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="checkout-details w-full" style="min-height: 600px;margin: 0 auto;"></div>
+        </div>
+    </div>
+</div>
 </div>
 
 
@@ -37,7 +79,7 @@ $planId = request()->route('plan_id');
             },
             checkout: {
                 settings: {
-                    frameTarget: 'checkout_paddle',
+                    frameTarget: 'checkout-details',
                     frameInitialHeight: 500,
                     frameStyle: "position:inherit;width:100%;padding-top: 30px;padding-bottom: 30px;height: 700px;"
                 },
@@ -83,9 +125,9 @@ $planId = request()->route('plan_id');
     }
 </script>
 
-@if($planId)
+@if($plan->plan_id)
 <script>
-    waveCheckout('{{$planId}}');
+    waveCheckout('{{$plan->plan_id}}');
 </script>
 @endif
 @endsection

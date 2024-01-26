@@ -15,4 +15,12 @@ class RegisterController extends AuthRegisterController
     {
         return view("theme::onboarding.$step");
     }
+
+    public function checkout($plan_id)
+    {
+        $planId = request()->route('plan_id');
+        $plan = \Wave\Plan::where('plan_id', $planId)->firstOrFail();
+        $features = explode(',', $plan->features);
+        return view('theme::checkout.index', compact('plan', 'features'));
+    }
 }
