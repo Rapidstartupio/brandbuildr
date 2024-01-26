@@ -3,7 +3,7 @@
     @php $features = explode(',', $plan->features); @endphp
 
     <div class="w-full max-w-md px-0 mx-auto mb-6 lg:w-1/4 lg:px-3 lg:mb-0 pricing-table">
-        <div class="relative flex flex-col h-full mb-10 bg-white dark:bg-indigo-950 bg-opacity-15 border @if($plan->default){{ 'border-indigo-700' }}@else{{ 'border-none' }}@endif rounded-lg shadow-xl border-b-none sm:mb-0">
+        <div class="relative flex flex-col h-full mb-10 bg-white dark:bg-indigo-950 bg-opacity-15 border @if($plan->default){{ 'border-indigo-700' }}@else{{ 'border-none' }}@endif rounded-2xl shadow-xl border-b-none sm:mb-0">
             <div class="@if($plan->default){{ 'border-indigo-700' }}@else{{ 'px-4 pt-7' }}@endif">
                 <div> <!-- class="absolute right-0 inline-block transform">-->
                     <h2 class="relative z-20 w-full h-full px-2 py-1 text-xs leading-tight tracking-wide text-center uppercase border-2 @if($plan->default){{ 'border-none dark:text-white bg-indigo-700' }}@else{{ 'hidden border-gray-900 text-gray-800' }}@endif rounded-t">Best value</h2>
@@ -17,7 +17,7 @@
             </div>
 
             <div class="px-5 mt-2 pb-7" style="min-height:110px">
-                <p class="plan-description text-sm leading-7 text-gray-300">{!! $plan->description !!}</p>
+                <p class="plan-description text-md leading-7 text-gray-300">{!! $plan->description !!}</p>
             </div>
 
             <div class="px-5">
@@ -41,13 +41,13 @@
 
             <div class="relative mt-6 px-4 pt-0 pb-12 text-gray-700 rounded-b-lg">
 
-                <ul class="flex flex-col space-y-2.5">
+                <ul class="flex flex-col space-y-4">
                     @foreach($features as $feature)
                     <li class="relative">
                         <span class="flex items-center">
-                            <svg class="w-4 h-4 mr-3 dark:text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <svg class="w-5 h-5 mr-3 dark:text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"></path>
-                                <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" transform="translate(4, 0)"></path>
+                                <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" transform="translate(6, -1)"></path>
                             </svg>
                             <span class="text-md dark:text-gray-300">
                                 {{ $feature }}
