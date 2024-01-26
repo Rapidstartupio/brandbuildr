@@ -1,4 +1,4 @@
-<div class="flex flex-wrap mx-auto mt-12 max-w-7xl">
+<div class="flex flex-wrap mx-auto mt-12 px-32 max-w-8xl">
     @foreach(Wave\Plan::all() as $plan)
     @php $features = explode(',', $plan->features); @endphp
 
@@ -12,15 +12,15 @@
                 </div>
             </div>
 
-            <div class="px-4 mt-1">
+            <div class="px-5 mt-1">
                 <span class="plan-name font-hairline dark:text-white text-2xl font-bold">{{ $plan->name }}</span>
             </div>
 
-            <div class="px-4 mt-2 pb-7" style="min-height:110px">
-                <p class="plan-description text-sm leading-7 text-gray-500">{!! $plan->description !!}</p>
+            <div class="px-5 mt-2 pb-7" style="min-height:110px">
+                <p class="plan-description text-sm leading-7 text-gray-300">{!! $plan->description !!}</p>
             </div>
 
-            <div class="px-4">
+            <div class="px-5">
                 <span class="plan-price font-hairline dark:text-white text-4xl font-bold">${{ $plan->price }}</span>
                 <span class="per-month text-md font-bold text-gray-500"></span>
             </div>
@@ -45,11 +45,11 @@
                     @foreach($features as $feature)
                     <li class="relative">
                         <span class="flex items-center">
-                            <svg class="w-4 h-4 mr-3 dark:text-gray-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4 mr-3 dark:text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"></path>
                                 <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" transform="translate(4, 0)"></path>
                             </svg>
-                            <span class="text-md dark:text-gray-500">
+                            <span class="text-md dark:text-gray-300">
                                 {{ $feature }}
                             </span>
                         </span>
