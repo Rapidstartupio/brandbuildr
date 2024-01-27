@@ -4,9 +4,8 @@
 
 <div class="py-20 text-white">
     <div class="px-8 mx-auto xl:px-5 max-w-7xl">
-        <div class="grid md:grid-cols-2 gap-6 bg-brand-800 sm:p-8 rounded-xl">
-
-            <div class="w-full px-0 mx-auto mb-6  lg:px-3 lg:mb-0 ">
+        <div class="grid md:grid-cols-2 gap-6 rounded-xl  bg-brand-700">
+            <div class="w-full px-0 mx-auto  lg:px-3 lg:mb-0 sm:p-8  bg-brand-700">
                 <div class="">
                     <div class="@if($plan->default){{ 'border-indigo-700' }}@else{{ 'px-4 pt-7' }}@endif">
                         <div> <!-- class="absolute right-0 inline-block transform">-->
@@ -50,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            <div class="checkout-details w-full px-4 " style="margin: 0 auto;"></div>
+            <div class="checkout-details w-full px-4 sm:p-8  bg-brand-500 pt-7" style="margin: 0 auto;"></div>
             <!-- min-height: 600px; -->
         </div>
     </div>
