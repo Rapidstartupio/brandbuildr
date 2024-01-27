@@ -47,7 +47,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="order-summary space-y-3">
+                    <div class="order-summary space-y-3 px-4">
                         <h1 class="text-2xl py-4">Order summary</h1>
                         <div class="sub-totals flex justify-between">
                             <div class="text-gray-300">Subtotal</div>
