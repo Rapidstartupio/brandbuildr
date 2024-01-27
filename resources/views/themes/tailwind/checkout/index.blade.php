@@ -7,7 +7,7 @@
         <div class="grid md:grid-cols-2 gap-6 bg-brand-800 p-8 rounded-xl">
 
             <div class="w-full px-0 mx-auto mb-6  lg:px-3 lg:mb-0 ">
-                <div class="relative flex flex-col h-full mb-10   bg-opacity-15 border @if($plan->default){{ 'border-indigo-700' }}@else{{ 'border-none' }}@endif rounded-2xl shadow-xl border-b-none sm:mb-0">
+                <div class="">
                     <div class="@if($plan->default){{ 'border-indigo-700' }}@else{{ 'px-4 pt-7' }}@endif">
                         <div> <!-- class="absolute right-0 inline-block transform">-->
                             <h2 class="relative z-20 w-full h-full px-2 py-1 text-xs leading-tight tracking-wide text-center uppercase border-2 @if($plan->default){{ 'border-none dark:text-white bg-indigo-700' }}@else{{ 'hidden border-gray-900 text-gray-800' }}@endif rounded-t">Best value</h2>
