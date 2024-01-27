@@ -4,7 +4,7 @@
 
 <div class="py-20 text-white">
     <div class="px-8 mx-auto xl:px-5 max-w-7xl">
-        <div class="grid md:grid-cols-2 gap-6 bg-brand-800 p-8 rounded-xl">
+        <div class="grid md:grid-cols-2 gap-6 bg-brand-800 sm:p-8 rounded-xl">
 
             <div class="w-full px-0 mx-auto mb-6  lg:px-3 lg:mb-0 ">
                 <div class="">
@@ -20,7 +20,8 @@
                         <span class="plan-name font-hairline dark:text-white text-2xl font-bold">{{ $plan->name }}</span>
                     </div>
 
-                    <div class="px-5 mt-2 pb-7" style="min-height:110px">
+                    <div class="px-5 mt-2 pb-7">
+                        <!-- style="min-height:110px" -->
                         <p class="plan-description text-md leading-7 text-gray-300">{!! $plan->description !!}</p>
                     </div>
 
@@ -49,7 +50,8 @@
                     </div>
                 </div>
             </div>
-            <div class="checkout-details w-full" style="min-height: 600px;margin: 0 auto;"></div>
+            <div class="checkout-details w-full px-4 " style="margin: 0 auto;"></div>
+            <!-- min-height: 600px; -->
         </div>
     </div>
 </div>
@@ -80,8 +82,10 @@
             checkout: {
                 settings: {
                     frameTarget: 'checkout-details',
-                    frameInitialHeight: 500,
-                    frameStyle: "position:inherit;width:100%;padding-top: 30px;padding-bottom: 30px;height: 700px;"
+                    //frameInitialHeight: 500,
+                    //frameStyle: "position:inherit;width:100%;padding-top: 30px;padding-bottom: 30px;height: 100vh;display: block;border:0;"
+                    frameInitialHeight: "450",
+                    frameStyle: "width: 100%;   background-color: transparent; border: none;"
                 },
             },
             eventCallback: function(res) {
