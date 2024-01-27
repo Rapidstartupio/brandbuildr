@@ -58,7 +58,7 @@
                             <div class="font-bold"><span id="summary-discount"></span> <span class="currency"></span></div>
                         </div>
                         <div>
-                            <a href="javascript:;" class="underline text-wave-500" onclick="openDiscountPanel();">Add discount</a>
+                            <a href="javascript:;" class="underline text-wave-800" onclick="openDiscountPanel();">Add discount</a>
                             <div class="pt-2 pl-2 w-full flex justify-between space-x-2 hidden" id="add-discount-panel">
                                 <input type="text" class="w-full dark:text-gray-400" id="discount-value" placeholder="Enter your coupon code">
                                 <button class="btn bg-wave-500 rounded p-2" onclick="applyDiscount();">Apply</button>
