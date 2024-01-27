@@ -47,6 +47,28 @@
                             @endforeach
                         </ul>
                     </div>
+                    <div class="order-summary space-y-3">
+                        <h1 class="text-2xl py-4">Order summary</h1>
+                        <div class="sub-totals flex justify-between">
+                            <div class="text-gray-300">Subtotal</div>
+                            <div class="font-bold"><span id="summary-subtotal"></span> <span class="currency"></span></div>
+                        </div>
+                        <div class="sub-totals flex justify-between">
+                            <div class="text-gray-300">Discount</div>
+                            <div class="font-bold"><span id="summary-discount"></span> <span class="currency"></span></div>
+                        </div>
+                        <div>
+                            <a href="javascript:;" class="underline text-wave-500" onclick="openDiscountPanel();">Add discount</a>
+                            <div class="pt-2 pl-2 w-full flex justify-between space-x-2 hidden" id="add-discount-panel">
+                                <input type="text" class="w-full dark:text-gray-400" id="discount-value" placeholder="Enter your coupon code">
+                                <button class="btn bg-wave-500 rounded p-2" onclick="applyDiscount();">Apply</button>
+                            </div>
+                        </div>
+                        <div class="sub-totals flex justify-between">
+                            <div class="text-gray-300">Total</div>
+                            <div class="font-bold"><span id="summary-total"></span> <span class="currency"></span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="checkout-details w-full px-4 sm:p-8  bg-brand-500 pt-7" style="margin: 0 auto;"></div>
@@ -91,6 +113,7 @@
                 switch (res.name) {
                     case "checkout.loaded":
                         console.log("Checkout opened");
+                        initCheckoutSummary(res);
                         break;
                     case "checkout.customer.created":
                         console.log("Customer created");
@@ -99,8 +122,20 @@
                         console.log("Checkout completed");
                         checkoutComplete(res);
                         break;
+                    case "checkout.updated":
+                        checkoutUpdated(res);
+                        break;
                     default:
+                        if (res.type && res.type == "checkout.error") {
+                            setTimeout(function() {
+                                popToast("danger", res.detail);
+                            }, 10);
+                        }
                         console.log(res);
+                        if (res.data) {
+                            initCheckoutSummary(res);
+                        }
+                        break;
                 }
             }
         });
@@ -113,7 +148,6 @@
                 priceId: plan_id,
                 quantity: 1
             }];
-            console.log(itemsList);
             Paddle.Checkout.open({
                 settings: {
                     displayMode: "inline",
@@ -125,6 +159,54 @@
         } else {
             alert('Paddle Vendor ID is not set, please see the docs and learn how to setup billing.');
         }
+    }
+
+    function initCheckoutSummary(res) {
+        console.log(res);
+        var summarySubtotal = document.getElementById('summary-subtotal');
+        var summaryTotal = document.getElementById('summary-total');
+        var summaryDiscount = document.getElementById('summary-discount');
+        var currencies = document.querySelectorAll('.currency');
+
+
+        if (res.data) {
+            var data = res.data;
+            if (data.totals) {
+                summarySubtotal.textContent = data.totals.subtotal;
+                summaryTotal.textContent = data.totals.total;
+                summaryDiscount.textContent = data.totals.discount;
+                currencies.forEach(function(currency) {
+                    currency.textContent = data.currency_code;
+                });
+            }
+        }
+
+    }
+
+    function openDiscountPanel() {
+        var discountPanel = document.querySelector('#add-discount-panel');
+        discountPanel.classList.remove('hidden');
+    }
+
+    function closeDiscountPanel() {
+        var discountPanel = document.querySelector('#add-discount-panel');
+        discountPanel.classList.add('hidden');
+    }
+
+    function applyDiscount() {
+        var discountValue = document.querySelector('#discount-value').value;
+        if (discountValue) {
+            Paddle.Checkout.updateCheckout({
+                discountCode: discountValue
+            });
+        }
+        console.log(discountValue);
+
+    }
+
+    function checkoutUpdated(res) {
+        initCheckoutSummary(res);
+        closeDiscountPanel();
     }
 </script>
 
