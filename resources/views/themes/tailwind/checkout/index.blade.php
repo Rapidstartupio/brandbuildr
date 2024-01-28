@@ -53,7 +53,7 @@
                             <div class="text-gray-300">Subtotal</div>
                             <div class="font-bold"><span id="summary-subtotal"></span> <span class="currency"></span></div>
                         </div>
-                        <div class="sub-totals flex justify-between">
+                        <div class="flex justify-between hidden" id="discount">
                             <div class="text-gray-300">Discount</div>
                             <div class="font-bold"><span id="summary-discount"></span> <span class="currency"></span></div>
                         </div>
@@ -64,7 +64,7 @@
                                 <button class="btn bg-wave-500 rounded p-2" onclick="applyDiscount();">Apply</button>
                             </div>
                         </div>
-                        <div class="sub-totals flex justify-between">
+                        <div class="flex justify-between">
                             <div class="text-gray-300">Total</div>
                             <div class="font-bold"><span id="summary-total"></span> <span class="currency"></span></div>
                         </div>
@@ -167,14 +167,20 @@
         var summaryTotal = document.getElementById('summary-total');
         var summaryDiscount = document.getElementById('summary-discount');
         var currencies = document.querySelectorAll('.currency');
+        var discount = document.getElementById('discount');
 
 
         if (res.data) {
             var data = res.data;
             if (data.totals) {
-                summarySubtotal.textContent = data.totals.subtotal;
-                summaryTotal.textContent = data.totals.total;
-                summaryDiscount.textContent = data.totals.discount;
+                summarySubtotal.textContent = data.totals.subtotal.toFixed(2);
+                summaryTotal.textContent = data.totals.total.toFixed(2);
+                if (data.totals.discount) {
+                    summaryDiscount.textContent = "- " + data.totals.discount.toFixed(2);
+                    discount.classList.remove('hidden');
+                } else {
+                    discount.classList.add('hidden');
+                }
                 currencies.forEach(function(currency) {
                     currency.textContent = data.currency_code;
                 });
