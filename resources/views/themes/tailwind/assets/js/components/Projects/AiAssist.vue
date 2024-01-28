@@ -163,7 +163,7 @@ div.block-item {
         </div>
 
         <div
-            class=" bg-gradient-to-r from-[#1E1E34] via-[#241E44] to-[#1E1E34] rounded-lg"
+            class=" bg-gradient-to-r from-gradient-from via-gradient-via to-gradient-to rounded-lg"
         >
             <div class="p-4 border-b border-gray-700 sm:flex justify-between">
                 <div
@@ -1165,6 +1165,9 @@ export default {
                     .post("/openai/chat", {
                         model: "gpt-4-1106-preview",
                         messages: this.steps[this.step].chatbot_previousMessages,
+                        projectId: this.projectId,
+                        question: this.steps[this.step].question,
+                        question_id: this.steps[this.step].id,
                     })
                     .then((response) => {
                         const botResponse =

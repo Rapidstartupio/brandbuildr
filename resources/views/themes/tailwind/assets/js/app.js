@@ -210,7 +210,6 @@ window.popToast = function (type, message) {
 /***** Payment Success Functionality */
 
 window.checkoutComplete = function (res) {
-    console.log(res);
     axios
         .post("/checkout", {
             _token: csrf,

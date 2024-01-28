@@ -63,8 +63,8 @@
     <div class="md:flex md:space-x-4 justify-between">
         <div>
             <!-- Hide the custom colors for now -->
-            <h3 class="text-xl hidden">
-                Custom Colors
+            <h3 class="text-xl">
+                Custom Colors (Dark)
             </h3>
         </div>
         <div class="wl-reset">
@@ -73,29 +73,29 @@
             </button>
         </div>
     </div>
-        <div class="grid grid-cols-3 hidden">
-            <div>
-                <label for="button-color">Button Color</label>
-                <div class="space-x-2">
-                    <input id="button-color" type="color" value="{{ auth()->user()->theme_button_color ?? '#5000FF' }}" data-defaulthex="#5000FF" width="42" name="button_color" />
-                    <input type="text" value="{{ auth()->user()->theme_button_color ?? '#5000FF' }}" readonly class="dark:bg-gray-500" style="width: 120px;">
-                </div>
-            </div>
-            <div>
-                <label for="text-color">Text Color</label>
-                <div class="space-x-2">
-                    <input id="text-color" type="color" value="{{ auth()->user()->theme_text_color ?? '#FFFFFF' }}" data-defaulthex="#FFFFFF" width="42" name="text_color" />
-                    <input type="text" value="{{ auth()->user()->theme_text_color ?? '#FFFFFF' }}" readonly class="dark:bg-gray-500" style="width: 120px;">
-                </div>
-            </div>
-            <div>
-                <label for="line-color">Line Color</label>
-                <div class="space-x-2">
-                    <input id="line-color" type="color" value="{{ auth()->user()->theme_line_color ?? '#B6B6B8' }}" data-defaulthex="#B6B6B8" width="42" name="line_color" />
-                    <input type="text" value="{{ auth()->user()->theme_line_color ?? '#B6B6B8' }}" readonly class="dark:bg-gray-500" style="width: 120px;">
-                </div>
+    <div class="grid grid-cols-3">
+        <div>
+            <label for="button-color">Button Color</label>
+            <div class="space-x-2">
+                <input id="button-color" type="color" value="{{ auth()->user()->theme_button_color ?? '#5000FF' }}" data-defaulthex="#5000FF" width="42" name="button_color" />
+                <input type="text" value="{{ auth()->user()->theme_button_color ?? '#570AFF' }}" readonly class="dark:bg-gray-500" style="width: 120px;">
             </div>
         </div>
+        <div>
+            <label for="text-color">Text Color</label>
+            <div class="space-x-2">
+                <input id="text-color" type="color" value="{{ auth()->user()->theme_text_color ?? '#FFFFFF' }}" data-defaulthex="#FFFFFF" width="42" name="text_color" />
+                <input type="text" value="{{ auth()->user()->theme_text_color ?? '#FFFFFF' }}" readonly class="dark:bg-gray-500" style="width: 120px;">
+            </div>
+        </div>
+        <div>
+            <label for="line-color">Line Color</label>
+            <div class="space-x-2">
+                <input id="line-color" type="color" value="{{ auth()->user()->theme_line_color ?? '#07072d' }}" data-defaulthex="#B6B6B8" width="42" name="line_color" />
+                <input type="text" value="{{ auth()->user()->theme_line_color ?? '#B6B6B8' }}" readonly class="dark:bg-gray-500" style="width: 120px;">
+            </div>
+        </div>
+    </div>
 
     <div class="flex justify-end space-x-3">
         <button type="button" class="inline-flex items-center px-8 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded dark:border-2 dark:border-gray-400">
@@ -108,14 +108,14 @@
 </form>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Add click event listener to the reset button
-    document.querySelector('.wl-reset button').addEventListener('click', function() {
-        // Select all color inputs and reset their values to the data-defaulthex attribute
-        document.querySelectorAll('[type="color"]').forEach(input => {
-            const defaultHex = input.getAttribute('data-defaulthex');
-            input.value = defaultHex;
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add click event listener to the reset button
+        document.querySelector('.wl-reset button').addEventListener('click', function() {
+            // Select all color inputs and reset their values to the data-defaulthex attribute
+            document.querySelectorAll('[type="color"]').forEach(input => {
+                const defaultHex = input.getAttribute('data-defaulthex');
+                input.value = defaultHex;
+            });
         });
     });
-});
 </script>

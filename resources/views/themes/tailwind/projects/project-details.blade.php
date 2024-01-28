@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="w-full  rounded-full h-1.5  @if($section->progress == 100) dark:bg-brandPrimary @else bg-[#838396] dark:bg-[#838396] @endif">
-                    <div class="bg-[#570AFF] h-1.5 rounded-full dark:bg-[#570AFF]" style="width: {{$section->progress}}%"></div>
+                    <div class="bg-wave-500 h-1.5 rounded-full dark:bg-wave-500" style="width: {{$section->progress}}%"></div>
                 </div>
             </div>
         </a>
@@ -65,7 +65,7 @@
 @if($project->cSection && $project->cBlock)
 <div class="text-center">
     <a href="{{route('project.ai-assist',[$project->id,$project->cSection,$project->cBlock])}}">
-        <button type="button" class="text-white bg-wave-500 hover:bg-wave-600 font-medium rounded-lg text-lg px-16 py-3 dark:bg-brandPrimary dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800">Let`s Build</button>
+        <button type="button" class="text-white bg-wave-500 hover:bg-wave-600 font-medium rounded-lg text-lg px-16 py-3 dark:bg-brandPrimary dark:hover:bg-wave-700 focus:outline-none dark:focus:ring-blue-800">Let`s Build</button>
     </a>
 </div>
 @endif

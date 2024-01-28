@@ -3,10 +3,10 @@
     @php $features = explode(',', $plan->features); @endphp
 
     <div class="w-full max-w-md px-0 mx-auto mb-6 lg:w-1/4 lg:px-3 lg:mb-0 pricing-table">
-        <div class="relative flex flex-col h-full mb-10 bg-white dark:bg-indigo-950 bg-opacity-15 border @if($plan->default){{ 'border-indigo-700' }}@else{{ 'border-none' }}@endif rounded-2xl shadow-xl border-b-none sm:mb-0">
-            <div class="@if($plan->default){{ 'border-indigo-700' }}@else{{ 'px-4 pt-7' }}@endif">
+        <div class="relative flex flex-col h-full mb-10 bg-white dark:bg-brand-950 bg-opacity-15 border @if($plan->default){{ 'border-wave-700' }}@else{{ 'border-none' }}@endif rounded-2xl shadow-xl border-b-none sm:mb-0">
+            <div class="@if($plan->default){{ 'border-wave-700' }}@else{{ 'px-4 pt-7' }}@endif">
                 <div> <!-- class="absolute right-0 inline-block transform">-->
-                    <h2 class="relative z-20 w-full h-full px-2 py-1 text-xs leading-tight tracking-wide text-center uppercase border-2 @if($plan->default){{ 'border-none dark:text-white bg-indigo-700' }}@else{{ 'hidden border-gray-900 text-gray-800' }}@endif rounded-t">Best value</h2>
+                    <h2 class="relative z-20 w-full h-full px-2 py-1 text-xs leading-tight tracking-wide text-center uppercase border-2 @if($plan->default){{ 'border-none dark:text-white bg-wave-700' }}@else{{ 'hidden border-gray-900 text-gray-800' }}@endif rounded-t">Best value</h2>
                     <!--<span class="absolute -top-7 left-1 w-4 h-4 bg-indigo-700 transform p-2" style="z-index: -1;"></span>
                         <span class="absolute -bottom-7 right-1 w-5 h-4 bg-indigo-700 transform" style="z-index: -1;"></span>-->
                 </div>
@@ -26,7 +26,7 @@
             </div>
 
             <div class="relative inline-flex">
-                <div data-plan="{{ $plan->plan_id }}" class="mt-6 inline-flex items-center justify-center mx-auto w-3/4 px-4 py-2 text-base font-semibold dark:text-white transition duration-150 ease-in-out @if($plan->default){{ ' bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400' }}@else{{ 'bg-none hover:bg-indigo-600 active:bg-none border-indigo-700 focus:border-none focus:shadow-outline-gray' }}@endif border cursor-pointer rounded-md checkout focus:outline-none disabled:opacity-25">
+                <div data-plan="{{ $plan->plan_id }}" class="mt-6 inline-flex items-center justify-center mx-auto w-3/4 px-4 py-2 text-base font-semibold dark:text-white transition duration-150 ease-in-out @if($plan->default){{ ' bg-gradient-to-r from-wave-600 to-wave-500 hover:from-wave-500 hover:to-wave-500' }}@else{{ 'bg-none hover:bg-wave-600 active:bg-none border-wave-700 focus:border-none focus:shadow-outline-gray' }}@endif border cursor-pointer rounded-md checkout focus:outline-none disabled:opacity-25">
                     @subscribed($plan->slug)
                     You are subscribed to this plan
                     @notsubscribed

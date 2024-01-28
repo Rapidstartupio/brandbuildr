@@ -74,7 +74,7 @@
 
         <!-- Styles -->
         <link href="{{ mix('css/app.css','themes/' . $theme->folder ) }}" rel="stylesheet">
-        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         @yield('custom_header_code')
         {!! str_replace(array('<p>','</p>'),'',html_entity_decode(setting('site.custom_header_code'))) !!}
     </head>
@@ -124,13 +124,17 @@
             }, 10);
         </script>
         @endif
+
+        @if(!Request::is('checkout/plan/*'))
         @waveCheckout
+        @endif
+
         <!-- Scripts -->
         <script>
             //enable dark mode
-            tailwind.config = {
-                darkMode: 'class'
-            }
+            // tailwind.config = {
+            //     darkMode: 'class'
+            // }
 
             var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
             var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');

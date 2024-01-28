@@ -4,6 +4,46 @@
 
 @tailwind utilities;
 
+@layer base{
+    :root {
+        --color-wave-50-400 : #E9F6FF;
+        --color-wave-500-600 : #570AFF;
+        --color-wave-700-800 : #4E09E6;
+        --color-wave-850 : #2c196f;
+        --color-wave-900 : #04041B;
+        --color-brand-500:#1A134B;
+        --color-brand-600:#4d4d68;
+        --color-brand-700:#393957;
+        --color-brand-750:#262445;
+        --color-brand-800:#202043;
+        --color-brand-900:#07072D;
+        --color-brand-950:#1e1b4b;
+        --color-card-completed:#271B5D;
+        --color-brand-gradient-from:#1E1E34;
+        --color-brand-gradient-via:#241E44;
+        --color-brand-gradient-to:#1E1E34;
+    }
+
+    // :root {
+    //     --color-wave-50-400 : #E9F6FF;
+    //     --color-wave-500-600 : #ff0a0e;
+    //     --color-wave-700-800 : #d40f0f;
+    //     --color-wave-850 : #6f1919;
+    //     --color-wave-900 : #280a0f;
+    //     --color-brand-500:#4b1313;
+    //     --color-brand-600:#684d4d;
+    //     --color-brand-700:#57393a;
+    //     --color-brand-750:#452424;
+    //     --color-brand-800:#432020;
+    //     --color-brand-900:#2d0707;
+    //     --color-brand-950:#4b1b1b;
+    //     --color-card-completed:#5d1b1c;
+    //     --color-brand-gradient-from:#341e1e;
+    //     --color-brand-gradient-via:#441e1e;
+    //     --color-brand-gradient-to:#341e1e;
+    // }
+}
+
 [x-cloak] {
     display: none;
 }
@@ -74,14 +114,14 @@ svg {
     background-repeat: no-repeat;
 }
 .active-dash-nav-item{
-    @apply border-[#5634fe] border-l-8 ;
+    @apply border-wave-500 border-l-8 ;
 }
 .active-dash-nav-item .dash-nav-link {
     @apply bg-gradient-to-r p-4 from-[#e3daff] to-[#f9faff];
 }
 html.dark {
     .active-dash-nav-item .dash-nav-link {
-        @apply bg-gradient-to-r p-4 from-[#2c196f] via-[#2c196f];
+        @apply bg-gradient-to-r p-4 from-wave-850 via-wave-850;
     }
     .active-dash-nav-item a {
         @apply text-white hover:text-white;
@@ -102,7 +142,7 @@ html.dark {
 }
 
 .dash-nav-item{
-    @apply p-4 p-4 hover:bg-[#262445] hover:scale-110 transition-all ease-in-out
+    @apply p-4 p-4 hover:bg-brand-750 hover:scale-110 transition-all ease-in-out
 }
 .dash-nav-item a{
     @apply dark:text-gray-400
@@ -171,7 +211,7 @@ html.dark {
     margin: 0 auto 10px auto;
     //color: #fff;
     @apply text-gray-400;
-    background: #07072D;
+    background: var(--color-brand-900);
   }
   .progressbar li:after {
     content: "";
@@ -234,10 +274,10 @@ html.dark {
         @apply p-4 border-b border-brand-600;
     }
     .datepicker-picker, .datepicker-picker button{
-        background-color: #393957 !important ;
+        background-color: var(--color-brand-700) !important ;
     }
     .datepicker-picker .focused{
-       background-color: #570AFF !important ;
+       background-color: var(--color-wave-500-600) !important ;
     }
 
     #myTab button:not(.active){
@@ -255,7 +295,7 @@ html.dark {
     .dark .bg-black,
     .bg-black,
     :is(.dark .dark\:bg-black) {
-        background: #07072D !important;
+        background: var(--color-brand-900) !important;
     }
 
     html:not(.dark) .bg-black {
@@ -264,7 +304,8 @@ html.dark {
 
     /* Dark mode styles */
     html.dark .brandDark2 {
-        background-color: rgba(255, 255, 255, 0.10) !important;
+        //background-color: rgba(255, 255, 255, 0.10) !important;
+         background-color: var(--color-brand-800) !important;
         /* Dark mode background color */
     }
 
@@ -275,11 +316,11 @@ html.dark {
     }
 
     html:not(.dark) .text-black {
-        color: #04041B !important;
+        color: var(--color-wave-900) !important;
     }
 
     html:not(.dark) .border-black {
-        border-color: #04041B !important;
+        border-color: var(--color-wave-900) !important;
     }
 
     [type='text']:focus,
@@ -297,21 +338,21 @@ html.dark {
     [multiple]:focus,
     textarea:focus,
     select:focus {
-        --tw-ring-color: #570AFF;
+        --tw-ring-color: var(--color-wave-500-600);
     }
 
     .text-brandPrimary {
-        color: #570AFF;
+        color: var(--color-wave-500-600);
     }
 
     .bg-brandPrimary,
     :is(.dark\:bg-brandPrimary) {
-        background-color: #570AFF !important;
+        background-color: var(--color-wave-500-600) !important;
     }
 
     .border-brandPrimary,
     .peer-checked\:border-brandPrimary {
-        border-color: #570AFF;
+        border-color: var(--color-wave-500-600);
     }
 
     [modal-backdrop] {
@@ -322,10 +363,10 @@ html.dark {
     }
 
     .brandDark3 {
-        background: #393957 !important;
+        background: var(--color-brand-700) !important;
     }
 
     .brandDark4 {
-        background: #4d4d68 !important;
+        background: var(--color-brand-600) !important;
     }
     // .end custom dark style

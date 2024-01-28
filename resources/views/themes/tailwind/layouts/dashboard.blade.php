@@ -80,6 +80,13 @@
     </head>
 
     <body class="flex flex-col min-h-screen @if(Request::is('/')){{ 'bg-white' }}@else{{ 'bg-gray-50' }}@endif @if(config('wave.dev_bar')){{ 'pb-10' }}@endif bg-white dark:bg-black">
+
+        <script>
+            let root = document.querySelector(":root")
+            "@if(auth()->user()->theme_button_color)"
+            root.style.setProperty('--color-wave-500-600', "{{auth()->user()->theme_button_color}}");
+            "@endif"
+        </script>
         <style type="text/css">
             .language-markup {
 
@@ -94,7 +101,7 @@
         @include('theme::partials.dashboard-header')
 
         <div class="flex" id="app">
-            <div class="brandDark2">
+            <div class="bg-brand-800">
                 @include('theme::partials.dashboard-nav')
             </div>
             <div class="flex-1 overflow-auto dark:bg-black bg-black">

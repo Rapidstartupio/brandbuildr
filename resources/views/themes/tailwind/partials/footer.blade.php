@@ -177,7 +177,7 @@
 
                                             <div class="my-auto">
                                                 <span class="block rounded-md shadow-sm">
-                                                    <button type="submit" class="flex justify-center px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-wave active:bg-indigo-700">
+                                                    <button type="submit" class="flex justify-center px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-wave-600 hover:bg-wave-500 focus:outline-none focus:border-wave-700 focus:shadow-outline-wave active:bg-wave-700">
                                                         Subscribe
                                                     </button>
                                                 </span>

@@ -18,7 +18,7 @@
 
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="px-4 py-8 bg-white dark:bg-gray-800 border shadow border-gray-50 dark:border-gray-700 sm:rounded-lg sm:px-10">
+        <div class="px-4 py-8 bg-white dark:bg-brand-800 border shadow border-wave-50 dark:border-wave-700 sm:rounded-lg sm:px-10">
             <form role="form" method="POST" action="@if(setting('billing.card_upfront')){{ route('wave.register-subscribe') }}@else{{ route('register') }}@endif">
                 @csrf
                 <!-- If we want the user to purchase before they can create an account -->
@@ -118,7 +118,7 @@
                 <div class="flex flex-col items-center justify-center text-sm leading-5">
                     <span class="block w-full mt-5 rounded-md shadow-sm">
                         <!-- bg-indigo-600 hover:bg-wave-500 focus:border-wave-700  active:bg-indigo-700-->
-                        <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-gray-400  focus:outline-none focus:shadow-outline-wave" @if(setting('admin.terms_checkbox_on_checkout')) disabled="" @endif>
+                        <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-wave-500  focus:outline-none focus:shadow-outline-wave" @if(setting('admin.terms_checkbox_on_checkout')) disabled="" @endif>
                             Sign Up
                         </button>
                     </span>

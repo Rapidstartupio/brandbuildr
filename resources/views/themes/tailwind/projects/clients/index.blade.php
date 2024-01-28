@@ -9,7 +9,7 @@
         @include('theme::projects.partials.projects-menu')
         <div class="text-left md:flex-auto mt-5 md:mt-0">
             <a href="{{route('clients.create')}}">
-                <button type="button" class=" md:float-right text-white bg-blue-700  hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-[#570AFF] dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800"><span class="md:px-4 font-bold">+</span> New Client</button>
+                <button type="button" class=" md:float-right text-white bg-blue-700  hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-wave-500 dark:hover:bg-wave-700 focus:outline-none dark:focus:ring-blue-800"><span class="md:px-4 font-bold">+</span> New Client</button>
             </a>
         </div>
     </div>
@@ -132,7 +132,7 @@
         <div class="max-w-xl space-y-2 md:space-y-8">
             <div class="">
                 <a href="{{route('clients.create')}}">
-                    <button type="button" class="text-white bg-wave-500 hover:bg-wave-600 font-medium rounded-lg text-lg px-10 py-4 dark:bg-brandPrimary dark:hover:bg-[#4E09E6] focus:outline-none dark:focus:ring-blue-800">Create New Client</button>
+                    <button type="button" class="text-white bg-wave-500 hover:bg-wave-600 font-medium rounded-lg text-lg px-10 py-4 dark:bg-brandPrimary dark:hover:bg-wave-700 focus:outline-none dark:focus:ring-blue-800">Create New Client</button>
                 </a>
             </div>
         </div>

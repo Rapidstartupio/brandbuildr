@@ -74,7 +74,7 @@
     {!! str_replace(array('<p>','</p>'),'',html_entity_decode(setting('site.custom_header_code'))) !!}
 </head>
 
-<body class="flex flex-col min-h-screen @if(config('wave.dev_bar')){{ 'pb-10' }}@endif bg-gradient-to-r from-[#04041B] via-[#05051D] to-[#04041B] ">
+<body class="flex flex-col min-h-screen @if(config('wave.dev_bar')){{ 'pb-10' }}@endif bg-white dark:bg-black ">
     <style type="text/css">
         .language-markup {
 
