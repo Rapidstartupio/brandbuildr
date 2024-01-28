@@ -11,7 +11,7 @@
     </div>
     <div class="md:col-span-3 md:border-l border-gray-400 pl-6 md:pl-12">
         <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400">
-            <li class="pb-10 border-l border-wave-500 text-white">
+            <li class="pb-10 border-l border-wave-500 dark:text-white">
                 <div class="ms-6 md:ms-10">
                     <span class="absolute flex items-center justify-center w-8 h-8 bg-wave-500 -start-4 ring-white dark:ring-wave-600 dark:bg-wave-500">
                         <svg class="w-3.5 h-3.5 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
@@ -30,9 +30,9 @@
                     @endif
                 </div>
             </li>
-            <li class="pb-10 border-l border-white text-white">
+            <li class="pb-10 border-l border-white dark:text-white">
                 <div class="ms-6 md:ms-10">
-                    <span class="absolute flex items-center justify-center w-8 h-8 -start-4 border border-white bg-black">
+                    <span class="absolute flex items-center justify-center w-8 h-8 -start-4 border dark:border-white bg-black">
 
                     </span>
                     <div class="flex space-x-6">
@@ -43,7 +43,7 @@
                         <div>
                             @if(setting('onboard.step2_cta'))
                             <a href="{{setting('onboard.step2_cta')}}">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 bg-wave-500 p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white bg-wave-500 p-1">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                                 </svg>
                             </a>
