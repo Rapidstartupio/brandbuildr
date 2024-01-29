@@ -16,7 +16,7 @@
 <div class="bg-wave-500 flex justify-between items-center py-8 px-6 rounded-lg ">
     <div>
         <h1 class="text-2xl">{{$plan->name}}</h1>
-        <h3 class="text-base">{{$plan->description}}</h3>
+        <h3 class="text-base">{!! $plan->description !!}</h3>
     </div>
     <div class="text-xl">
         <h1><span class="text-6xl">$<span>{{$plan->price}}</span></span>/per month</h1>
