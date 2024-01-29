@@ -1,4 +1,4 @@
-<div class="flex flex-wrap mx-auto mt-12 px-4 lg:px-32 max-w-8xl prices-block">
+<div class="flex flex-wrap mx-auto mt-12 px-4 px-32 max-w-8xl prices-block">
     @foreach(Wave\Plan::all() as $plan)
     @php $features = explode(',', $plan->features); @endphp
 
