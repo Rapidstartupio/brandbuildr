@@ -13,6 +13,9 @@ class SettingsController extends Controller
 
     public function whiteLabel()
     {
+        if (!in_array(auth()->user()->role->name, ['Pro', 'Elite'])) {
+            return redirect(route('settings.profile'));
+        }
         $section = 'white-label';
         return view('theme::dashboard.settings.index', compact('section'));
     }

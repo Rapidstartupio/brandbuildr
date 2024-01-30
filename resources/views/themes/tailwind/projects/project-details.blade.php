@@ -12,6 +12,7 @@
         @endif
     </div>
 </div>
+@if (!in_array(auth()->user()->role->name, ['trial', 'Insight']))
 <div class="flex justify-end items-center">
     <div class="">
         <button type="button" data-modal-target="download-document-modal" data-modal-toggle="download-document-modal" class="px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-wave-500 hover:bg-wave-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 brandDark2">
@@ -22,8 +23,8 @@
             &nbsp;Download
         </button>
     </div>
-
 </div>
+@endif
 
 <div id="sections-list">
     <div class="grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 dark:text-white my-5">

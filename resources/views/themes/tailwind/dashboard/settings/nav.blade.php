@@ -14,6 +14,7 @@
             </svg>
         </span>
     </a>
+    @if(in_array(auth()->user()->role->name,['Pro','Elite']))
     <a href="{{route('settings.white-label')}}" class="border-b border-gray-500 pt-6 pb-2 flex items-center justify-between @if(Request::is('settings/white-label')) active @endif">
         <span>White Label</span>
         <span class="">
@@ -22,6 +23,7 @@
             </svg>
         </span>
     </a>
+    @endif
     <a href="#" class="border-b border-gray-500 pt-6 pb-2 flex justify-between hidden">Notifications
         <span class="">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">

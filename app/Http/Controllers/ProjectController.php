@@ -531,6 +531,9 @@ class ProjectController extends Controller
     {
         try {
             $user = auth()->user();
+            if (in_array($user->role->name, ['trial', 'Insight'])) {
+                abort(404);
+            }
             $outputs = [];
             $projectId = $request->projectId;
             $documentType = $request->documentType;
@@ -800,6 +803,9 @@ class ProjectController extends Controller
     public function projectDocuments($projectId)
     {
         $user = auth()->user();
+        if (in_array($user->role->name, ['trial', 'Insight'])) {
+            abort(404);
+        }
         $project = Project::where(['user_id' => $user->id, 'id' => $projectId])->firstorFail();
         return view('theme::projects.project-documents', compact('projectId'));
     }
