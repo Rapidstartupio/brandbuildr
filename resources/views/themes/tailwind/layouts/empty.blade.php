@@ -86,9 +86,9 @@
     @include('theme::partials.demo-header')
     @endif
 
-    {{--
+
     @include('theme::partials.base-header')
-    --}}
+
     <main class="flex-grow overflow-x-hidden" id="app">
         @yield('content')
     </main>
