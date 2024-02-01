@@ -1,4 +1,4 @@
-<header x-data="{ mobileMenuOpen: false }" class="relative z-30 " style="height: 88px;">
+<header x-data="{ mobileMenuOpen: false }" class="relative z-30 @if(Request::is('onboarding')) hidden @endif" style="height: 88px;">
     <div class="px-8 mx-auto xl:pr-16 max-w-screen-2xl">
         <div class="flex items-center justify-between h-24 border-b-2 border-gray-100 md:justify-start md:space-x-6 dark:border-b-0">
             <div class="inline-flex items-center">
