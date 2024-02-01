@@ -32,8 +32,9 @@ class OpenAiController extends Controller
     public function chat(Request $request)
     {
         try {
-            if ($request->messages) {
-                $messages = $request->messages;
+            $messages = $request->messages;
+            if ($request->projectId && $messages) {
+
                 $projectId = $request->projectId;
                 $user = auth()->user();
 
