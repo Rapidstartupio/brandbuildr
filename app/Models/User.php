@@ -8,10 +8,12 @@ use App\Models\Project;
 use Carbon\Carbon;
 use App\Models\ProjectAiUsage;
 use Illuminate\Support\Facades\DB;
+use Spatie\Onboard\Concerns\GetsOnboarded;
 
-class User extends Authenticatable
+class User extends Authenticatable implements \Spatie\Onboard\Concerns\Onboardable
 {
     use Notifiable;
+    use GetsOnboarded;
 
     /**
      * The attributes that are mass assignable.

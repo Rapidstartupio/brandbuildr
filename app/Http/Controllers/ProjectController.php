@@ -34,6 +34,11 @@ class ProjectController extends Controller
 
     public function index(Request $request)
     {
+        $onboarding = auth()->user()->onboarding();
+        if(!$onboarding->finished()){
+            return redirect('/checkout/welcome?complete=true');
+        }
+        
         // Record the start time
         $start_time = microtime(true);
 

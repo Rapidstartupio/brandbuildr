@@ -21,11 +21,12 @@
                         console.log("Checkout opened");
                         break;
                     case "checkout.customer.created":
+                        console.log(res);
                         console.log("Customer created");
                         break;
                     case "checkout.completed":
                         console.log("Checkout completed");
-                        checkoutComplete(res);
+                        //checkoutComplete(res);
                         break;
                     default:
                         console.log(res);
@@ -69,9 +70,9 @@
                     locale: "en"
                 },
                 items: itemsList,
-                // customer: {
-                //     email: "@if(!auth()->guest()){{ auth()->user()->email }}@endif",
-                // }
+                customer: {
+                    email: "@if(!auth()->guest()){{ auth()->user()->email }}@endif",
+                }
             });
             // Paddle.Checkout.open({
             //     product: product,

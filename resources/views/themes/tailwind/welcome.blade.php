@@ -1,4 +1,4 @@
-@extends('theme::layouts.dashboard')
+@extends('theme::layouts.empty')
 
 @section('content')
 

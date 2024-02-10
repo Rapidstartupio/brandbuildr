@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Spatie\Onboard\Facades\Onboard;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +27,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Onboard::addStep('Complete Profile')
+            ->link('/checkout/welcome?complete=true')
+            ->cta('Complete')
+            /**
+             * The completeIf will pass the class that you've added the
+             * interface & trait to. You can use Laravel's dependency
+             * injection here to inject anything else as well.
+             */
+            ->completeIf(function (User $model) {
+                return (!empty($model->name));
+            });
+
         if ($this->app->environment() == 'production') {
             $this->app['request']->server->set('HTTPS', true);
         }

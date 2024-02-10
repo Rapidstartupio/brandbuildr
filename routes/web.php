@@ -110,3 +110,4 @@ Wave::routes();
 
 /***** Custom Paddle Checkout *****/
 Route::get('checkout/plan/{plan_id}', '\App\Http\Controllers\Auth\RegisterController@checkout')->name('plan.checkout')->middleware('guest');
+//Route::get('checkout/welcome', '\App\Http\Controllers\DashboardController@welcome')->name('checkout.welcome');

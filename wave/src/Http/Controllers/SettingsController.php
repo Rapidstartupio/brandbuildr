@@ -27,6 +27,11 @@ class SettingsController extends Controller
         if ($section == 'project-types') {
             $card_header = false;
         }
+
+        if ($section == 'plans') {
+            return redirect(route('settings.billing'));
+        }
+
         return view('theme::settings.index', compact('section', 'card_header'));
     }
 
